@@ -32,7 +32,9 @@ Shader "Ultraloud/First Person/Sprite Volume HDRP"
         [Header(Shading)]
         _NormalScale("Detail Normal Strength", Range(0.0, 2.0)) = 1.0
         _MacroNormalScale("Macro Normal Strength", Range(0.0, 2.0)) = 1.0
-        _AlphaCutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.2
+        _AlphaCutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.08
+        [ToggleUI] _PreserveBaseCoverage("Preserve Base Coverage", Float) = 1
+        _CoverageThreshold("Coverage Threshold", Range(0.0, 0.2)) = 0.02
         _SelfShadowStrength("Self Shadow Strength", Range(0.0, 1.0)) = 0.6
         _TransmissionStrength("Transmission Strength", Range(0.0, 4.0)) = 0.35
         _AmbientOcclusionStrength("Ambient Occlusion Strength", Range(0.0, 4.0)) = 1.0
@@ -129,6 +131,8 @@ Shader "Ultraloud/First Person/Sprite Volume HDRP"
     float _NormalScale;
     float _MacroNormalScale;
     float _AlphaCutoff;
+    float _PreserveBaseCoverage;
+    float _CoverageThreshold;
     float _SelfShadowStrength;
     float _TransmissionStrength;
     float _AmbientOcclusionStrength;
@@ -174,6 +178,16 @@ Shader "Ultraloud/First Person/Sprite Volume HDRP"
         blended.xy = baseNormal.xy + detailNormal.xy;
         blended.z = baseNormal.z * detailNormal.z;
         return normalize(blended);
+    }
+
+    float4 SampleBaseColor(float2 uv)
+    {
+        return SAMPLE_TEXTURE2D(_BaseColorMap, sampler_BaseColorMap, TRANSFORM_TEX(uv, _BaseColorMap));
+    }
+
+    float SampleBaseCoverage(float2 uv)
+    {
+        return SampleBaseColor(uv).a * _BaseColor.a;
     }
 
     float2 ComputeParallaxDirection(float3 directionTS)
@@ -286,6 +300,11 @@ Shader "Ultraloud/First Person/Sprite Volume HDRP"
     float EvaluateOccupancy(float2 uv, float depthValue)
     {
         if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0)
+        {
+            return 0.0;
+        }
+
+        if (SampleBaseCoverage(uv) <= _CoverageThreshold)
         {
             return 0.0;
         }
@@ -585,10 +604,41 @@ Shader "Ultraloud/First Person/Sprite Volume HDRP"
         viewDirectionTS.y = dot(viewDirectionWS, tangentToWorld[1]);
         viewDirectionTS.z = dot(viewDirectionWS, tangentToWorld[2]);
 
+        float4 flatBaseSample = SampleBaseColor(baseUv);
+        float flatAlpha = ComputeAlpha(baseUv, flatBaseSample.a * _BaseColor.a);
+
         SpriteHit hit = RaymarchSpriteVolume(baseUv, viewDirectionTS);
         float2 hitUv = hit.uv;
-        float4 baseSample = SAMPLE_TEXTURE2D(_BaseColorMap, sampler_BaseColorMap, TRANSFORM_TEX(hitUv, _BaseColorMap));
-        float alpha = hit.found * ComputeAlpha(hitUv, baseSample.a * _BaseColor.a);
+        float4 baseSample = flatBaseSample;
+        float hitAlpha = 0.0;
+
+        if (hit.found > 0.5)
+        {
+            baseSample = SampleBaseColor(hitUv);
+            hitAlpha = ComputeAlpha(hitUv, baseSample.a * _BaseColor.a);
+
+            if (_PreserveBaseCoverage > 0.5 && hitAlpha <= _CoverageThreshold && flatAlpha > hitAlpha)
+            {
+                hitUv = baseUv;
+                hit.depth = 0.0;
+                baseSample = flatBaseSample;
+                hitAlpha = flatAlpha;
+            }
+        }
+        else if (flatAlpha > _CoverageThreshold)
+        {
+            hit.found = 1.0;
+            hitUv = baseUv;
+            hit.depth = 0.0;
+            baseSample = flatBaseSample;
+            hitAlpha = flatAlpha;
+        }
+
+        float alpha = hit.found * hitAlpha;
+        if (_PreserveBaseCoverage > 0.5)
+        {
+            alpha = max(alpha, flatAlpha);
+        }
 
         ZERO_BUILTIN_INITIALIZE(builtinData);
         builtinData.opacity = alpha;

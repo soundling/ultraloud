@@ -34,6 +34,8 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
     private static readonly int DetailNormalScaleId = Shader.PropertyToID("_NormalScale");
     private static readonly int MacroNormalScaleId = Shader.PropertyToID("_MacroNormalScale");
     private static readonly int AlphaCutoffId = Shader.PropertyToID("_AlphaCutoff");
+    private static readonly int PreserveBaseCoverageId = Shader.PropertyToID("_PreserveBaseCoverage");
+    private static readonly int CoverageThresholdId = Shader.PropertyToID("_CoverageThreshold");
     private static readonly int SelfShadowStrengthId = Shader.PropertyToID("_SelfShadowStrength");
     private static readonly int TransmissionStrengthId = Shader.PropertyToID("_TransmissionStrength");
     private static readonly int AoStrengthId = Shader.PropertyToID("_AmbientOcclusionStrength");
@@ -212,7 +214,9 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
         propertyBlock.SetFloat(MinimumDepthSeparationId, mapSet != null ? mapSet.minimumDepthSeparation : 0.01f);
         propertyBlock.SetFloat(DetailNormalScaleId, mapSet != null ? mapSet.detailNormalScale : 1f);
         propertyBlock.SetFloat(MacroNormalScaleId, mapSet != null ? mapSet.macroNormalScale : 1f);
-        propertyBlock.SetFloat(AlphaCutoffId, mapSet != null ? mapSet.alphaCutoff : ResolveFloat(sourceMaterial, AlphaCutoffId, 0.2f));
+        propertyBlock.SetFloat(AlphaCutoffId, mapSet != null ? mapSet.alphaCutoff : ResolveFloat(sourceMaterial, AlphaCutoffId, 0.08f));
+        propertyBlock.SetFloat(PreserveBaseCoverageId, mapSet == null || mapSet.preserveBaseCoverage ? 1f : 0f);
+        propertyBlock.SetFloat(CoverageThresholdId, mapSet != null ? mapSet.coverageThreshold : 0.02f);
         propertyBlock.SetFloat(SelfShadowStrengthId, mapSet != null ? mapSet.selfShadowStrength : 0.6f);
         propertyBlock.SetFloat(TransmissionStrengthId, mapSet != null ? mapSet.transmissionStrength : 0.35f);
         propertyBlock.SetFloat(AoStrengthId, mapSet != null ? mapSet.ambientOcclusionStrength : 1f);

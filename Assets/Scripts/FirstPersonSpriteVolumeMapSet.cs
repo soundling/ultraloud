@@ -34,7 +34,9 @@ public sealed class FirstPersonSpriteVolumeMapSet : ScriptableObject
     public Color emissiveColor = Color.black;
     [Range(0f, 2f)] public float detailNormalScale = 1f;
     [Range(0f, 2f)] public float macroNormalScale = 1f;
-    [Range(0f, 1f)] public float alphaCutoff = 0.2f;
+    [Range(0f, 1f)] public float alphaCutoff = 0.08f;
+    public bool preserveBaseCoverage = true;
+    [Range(0f, 0.2f)] public float coverageThreshold = 0.02f;
     [Range(0f, 1f)] public float selfShadowStrength = 0.6f;
     [Range(0f, 4f)] public float transmissionStrength = 0.35f;
     [Range(0f, 4f)] public float ambientOcclusionStrength = 1f;

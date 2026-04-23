@@ -18,27 +18,29 @@ MonoBehaviour:
   frontDepth: {fileID: 2800000, guid: 7758dfaaf25548f4e8e70f90d8aa17ac, type: 3}
   backDepth: {fileID: 2800000, guid: 952f7077e186e51488d9646a6480dfb3, type: 3}
   thickness: {fileID: 2800000, guid: da18dd7d9b817674591122c6861e42e9, type: 3}
-  packedMasks: {fileID: 0}
-  shellOccupancyAtlas: {fileID: 0}
-  sdf: {fileID: 0}
+  packedMasks: {fileID: 2800000, guid: 6efcdf4d024494a4ba1cec32a9bfe746, type: 3}
+  shellOccupancyAtlas: {fileID: 2800000, guid: 7a38d6f92c3b23848a49a7fd4f081e77, type: 3}
+  sdf: {fileID: 2800000, guid: 2a3079fccc95fe046a9d6855b2ecfbcd, type: 3}
   emissive: {fileID: 0}
-  volumeThickness: 0
-  parallaxScale: 0.08
-  raymarchSteps: 24
-  shadowSteps: 12
-  shellSliceCount: 16
+  volumeThickness: 1.32
+  parallaxScale: 0
+  raymarchSteps: 52
+  shadowSteps: 48
+  shellSliceCount: 1
   shellAtlasGrid: {x: 4, y: 4}
   invertFrontDepth: 0
   invertBackDepth: 0
   autoCorrectDualDepth: 1
-  minimumDepthSeparation: 0.0132
+  minimumDepthSeparation: 0.0184
   baseColorTint: {r: 1, g: 1, b: 1, a: 1}
   emissiveColor: {r: 0, g: 0, b: 0, a: 1}
-  detailNormalScale: 1
-  macroNormalScale: 1
-  alphaCutoff: 0.138
-  selfShadowStrength: 0.6
-  transmissionStrength: 0.35
-  ambientOcclusionStrength: 1
-  specularStrength: 1
-  sdfSoftness: 0.08
+  detailNormalScale: 0.541
+  macroNormalScale: 1.233
+  alphaCutoff: 0
+  preserveBaseCoverage: 1
+  coverageThreshold: 0.02
+  selfShadowStrength: 0.098
+  transmissionStrength: 0.64
+  ambientOcclusionStrength: 0.65
+  specularStrength: 3.94
+  sdfSoftness: 0.125

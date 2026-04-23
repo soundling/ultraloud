@@ -25,6 +25,8 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
 
         [HideInInspector] _SpriteFlipX("Sprite Flip X", Float) = 1
         [HideInInspector] _UseNormalMap("Use Normal Map", Float) = 0
+        [HideInInspector] _TwoSidedLighting("Two Sided Lighting", Float) = 1
+        [HideInInspector] _FlipBackfacingNormals("Flip Backfacing Normals", Float) = 1
         [HideInInspector] _UseCustomLightingBasis("Use Custom Lighting Basis", Float) = 0
     }
 
@@ -79,6 +81,8 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
     float _RimPower;
     float _SpriteFlipX;
     float _UseNormalMap;
+    float _TwoSidedLighting;
+    float _FlipBackfacingNormals;
     float _UseCustomLightingBasis;
     CBUFFER_END
 
@@ -91,6 +95,16 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
     float4 _LightingRightWS;
     float4 _LightingUpWS;
     float4 _LightingForwardWS;
+
+    float2 ResolveSpriteUV(float2 uv)
+    {
+        if (_SpriteFlipX < 0.0)
+        {
+            uv.x = 1.0 - uv.x;
+        }
+
+        return uv;
+    }
 
     float4 SampleBase(float2 uv)
     {
@@ -115,7 +129,8 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
 
     float3 BuildSurfaceNormalTS(float2 uv)
     {
-        float macroX = (uv.x * 2.0 - 1.0) * _MacroNormalBend * _SpriteFlipX;
+        float2 spriteUv = ResolveSpriteUV(uv);
+        float macroX = (spriteUv.x * 2.0 - 1.0) * _MacroNormalBend * _SpriteFlipX;
         float3 macroNormal = normalize(float3(macroX, 0.0, 1.0));
         if (_UseNormalMap < 0.5)
         {
@@ -123,7 +138,7 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
         }
 
         float3 detailNormal = UnpackSpriteNormal(
-            SAMPLE_TEXTURE2D(_NormalMap, sampler_NormalMap, TRANSFORM_TEX(uv, _NormalMap)),
+            SAMPLE_TEXTURE2D(_NormalMap, sampler_NormalMap, TRANSFORM_TEX(spriteUv, _NormalMap)),
             _NormalScale);
         detailNormal.x *= _SpriteFlipX;
 
@@ -201,17 +216,27 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
                 }
             }
 
-            float nDotL = saturate(dot(normalWS, lightDirectionWS));
-            if (nDotL <= 0.0 || attenuation <= 0.0)
+            if (attenuation <= 0.0)
             {
                 continue;
             }
 
-            float wrappedDiffuse = saturate((nDotL + _WrapDiffuse) / (1.0 + _WrapDiffuse));
+            float signedNDotL = dot(normalWS, lightDirectionWS);
+            float lightingNDotL = _TwoSidedLighting > 0.5 ? abs(signedNDotL) : signedNDotL;
+            float wrappedDiffuse = saturate((lightingNDotL + _WrapDiffuse) / (1.0 + _WrapDiffuse));
+            float specularNdotL = saturate(lightingNDotL);
+            float3 specularNormalWS = signedNDotL >= 0.0 || _TwoSidedLighting <= 0.5
+                ? normalWS
+                : -normalWS;
             float3 halfwayDirection = normalize(lightDirectionWS + viewWS);
-            float nDotH = saturate(dot(normalWS, halfwayDirection));
+            float nDotH = saturate(dot(specularNormalWS, halfwayDirection));
             float specularPower = lerp(_MaxSpecularPower, _MinSpecularPower, roughness);
-            float specular = pow(nDotH, specularPower) * nDotL * _SpecularStrength;
+            float specular = pow(nDotH, specularPower) * specularNdotL * _SpecularStrength;
+            if (wrappedDiffuse <= 0.0 && specular <= 0.0)
+            {
+                continue;
+            }
+
             lighting += lightColor * attenuation * (albedo * wrappedDiffuse + specular);
         }
 
@@ -228,7 +253,8 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
         out BuiltinData builtinData)
     {
         float2 uv = input.texCoord0.xy;
-        float4 baseSample = SampleBase(uv);
+        float2 spriteUv = ResolveSpriteUV(uv);
+        float4 baseSample = SampleBase(spriteUv);
         float alpha = ComputeAlpha(baseSample.a * _BaseColor.a);
 
         ZERO_BUILTIN_INITIALIZE(builtinData);
@@ -242,6 +268,11 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
             normalTS.x * tangentToWorld[0]
             + normalTS.y * tangentToWorld[1]
             + normalTS.z * tangentToWorld[2]);
+
+        if (_FlipBackfacingNormals > 0.5 && dot(normalWS, viewDirectionWS) < 0.0)
+        {
+            normalWS = -normalWS;
+        }
 
         float3 hitPositionWS = GetAbsolutePositionWS(input.positionRWS);
         surfaceData.normalWS = normalWS;

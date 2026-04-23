@@ -46,6 +46,8 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
     private static readonly int RimPowerId = Shader.PropertyToID("_RimPower");
     private static readonly int SpriteFlipXId = Shader.PropertyToID("_SpriteFlipX");
     private static readonly int UseNormalMapId = Shader.PropertyToID("_UseNormalMap");
+    private static readonly int TwoSidedLightingId = Shader.PropertyToID("_TwoSidedLighting");
+    private static readonly int FlipBackfacingNormalsId = Shader.PropertyToID("_FlipBackfacingNormals");
     private static readonly int UseCustomLightingBasisId = Shader.PropertyToID("_UseCustomLightingBasis");
     private static readonly int LightingRightWsId = Shader.PropertyToID("_LightingRightWS");
     private static readonly int LightingUpWsId = Shader.PropertyToID("_LightingUpWS");
@@ -77,6 +79,9 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
     [SerializeField, Range(0f, 2f)] private float normalScale = 1f;
     [SerializeField, Range(0f, 1f)] private float detailNormalInfluence = 0.55f;
     [SerializeField, Range(0f, 2f)] private float macroNormalBend = 0.75f;
+    [SerializeField, Range(0f, 1f)] private float spriteAngleLightingInfluence = 0.35f;
+    [SerializeField] private bool twoSidedLighting = true;
+    [SerializeField] private bool flipBackfacingNormals = true;
     [SerializeField, Range(0f, 1f)] private float wrapDiffuse = 0.35f;
     [SerializeField] private Color ambientTopColor = new(0.52f, 0.56f, 0.62f, 1f);
     [SerializeField] private Color ambientBottomColor = new(0.14f, 0.12f, 0.10f, 1f);
@@ -143,6 +148,7 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
         specularStrength = Mathf.Max(0f, specularStrength);
         minSpecularPower = Mathf.Max(1f, minSpecularPower);
         maxSpecularPower = Mathf.Max(minSpecularPower, maxSpecularPower);
+        spriteAngleLightingInfluence = Mathf.Clamp01(spriteAngleLightingInfluence);
         rimStrength = Mathf.Max(0f, rimStrength);
         rimPower = Mathf.Max(0.5f, rimPower);
 
@@ -228,6 +234,8 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
         propertyBlock.SetFloat(RimPowerId, rimPower);
         propertyBlock.SetFloat(SpriteFlipXId, animator.CurrentFlipX ? -1f : 1f);
         propertyBlock.SetFloat(UseNormalMapId, normalTexture != null ? 1f : 0f);
+        propertyBlock.SetFloat(TwoSidedLightingId, twoSidedLighting ? 1f : 0f);
+        propertyBlock.SetFloat(FlipBackfacingNormalsId, flipBackfacingNormals ? 1f : 0f);
 
         if (TryBuildLightingBasis(out Vector3 lightingRight, out Vector3 lightingUp, out Vector3 lightingForward))
         {
@@ -397,7 +405,7 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
         float yaw = 0f;
         if (lightingBasisMode == BillboardLightingBasisMode.SpriteAngle && animator != null && animator.CurrentAngle != null)
         {
-            yaw = ResolveVisualAngleYaw(animator.CurrentAngle, animator.CurrentFlipX);
+            yaw = ResolveVisualAngleYaw(animator.CurrentAngle, animator.CurrentFlipX) * spriteAngleLightingInfluence;
         }
 
         forward = Quaternion.AngleAxis(yaw, up) * baseForward;

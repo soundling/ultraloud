@@ -638,7 +638,7 @@ MonoBehaviour:
     m_Value: 1
   enabled:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   colorMode:
     m_OverrideState: 1
     m_Value: 1
@@ -988,10 +988,10 @@ MonoBehaviour:
   m_Version: 1
   skyType:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 4
   cloudType:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   skyAmbientMode:
     m_OverrideState: 1
     m_Value: 1
@@ -1280,7 +1280,7 @@ MonoBehaviour:
     m_Value: 0
   top:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 1, a: 1}
+    m_Value: {r: 1, g: 0.12422942, b: 0.0990566, a: 1}
   middle:
     m_OverrideState: 1
     m_Value: {r: 0.3, g: 0.7, b: 1, a: 1}
@@ -2545,7 +2545,7 @@ MonoBehaviour:
     m_Value: 1
   layers:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   resolution:
     m_OverrideState: 1
     m_Value: 1024
@@ -2570,13 +2570,13 @@ MonoBehaviour:
       m_Value: 1
     opacityG:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 0.441
     opacityB:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 0.361
     opacityA:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 0.348
     altitude:
       m_OverrideState: 1
       m_Value: 2000
@@ -2617,13 +2617,13 @@ MonoBehaviour:
       m_Value: 6
     thickness:
       m_OverrideState: 1
-      m_Value: 0.5
+      m_Value: 0.856
     ambientProbeDimmer:
       m_OverrideState: 1
       m_Value: 1
     castShadows:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 1
   layerB:
     cloudMap:
       m_OverrideState: 1

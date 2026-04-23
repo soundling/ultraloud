@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2312013197728204632, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.71519697
+      value: -0.8792303
       objectReference: {fileID: 0}
     - target: {fileID: 2312013197728204632, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalRotation.x
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2312013197728204632, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.698923
+      value: 0.4763971
       objectReference: {fileID: 0}
     - target: {fileID: 2312013197728204632, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalRotation.z
@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4264032858440099102, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8400938
+      value: 0.9624553
       objectReference: {fileID: 0}
     - target: {fileID: 4264032858440099102, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalRotation.x
@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4264032858440099102, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5424412
+      value: 0.27144036
       objectReference: {fileID: 0}
     - target: {fileID: 4264032858440099102, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalRotation.z
@@ -197,19 +197,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4264032858440099102, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 2945.7
+      value: 31.5
       objectReference: {fileID: 0}
     - target: {fileID: 4264032858440099102, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: rimPower
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: maxLights
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: alphaCutoff
+      value: 0.448
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: lightAnchor
       value: 
-      objectReference: {fileID: 1806549388}
+      objectReference: {fileID: 1504261367}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: normalScale
-      value: 0.245
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: rimStrength
@@ -221,7 +233,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: macroNormalBend
-      value: 0.462
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: ambientIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: maxSpecularPower
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: minSpecularPower
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: specularStrength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: surfaceRoughness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: twoSidedLighting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: ambientTopColor.b
+      value: 0.6037736
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: ambientTopColor.g
+      value: 0.6037736
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: ambientTopColor.r
+      value: 0.6037736
       objectReference: {fileID: 0}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: punctualLightScale
@@ -229,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: detailNormalInfluence
-      value: 0.671
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: directionalLightScale
@@ -240,8 +288,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: renderSettingsAmbientScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: maxNormalizedLightIntensity
-      value: 0.69
+      value: 1.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
+      propertyPath: includeRenderSettingsAmbient
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5605959067095793699, guid: 580865d498405f747a81304521197491, type: 3}
       propertyPath: spriteAngleLightingInfluence
@@ -426,8 +482,8 @@ Light:
   serializedVersion: 13
   m_Type: 2
   m_Color: {r: 1, g: 0, b: 0.14010859, a: 1}
-  m_Intensity: 3183.0989
-  m_Range: 210.6
+  m_Intensity: 1.1488998
+  m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -489,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 1010682440}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.176, z: 2.289}
+  m_LocalPosition: {x: 0.62, y: 2.176, z: 2.289}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -896,6 +952,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1504261367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4264032858440099102, guid: 580865d498405f747a81304521197491, type: 3}
+  m_PrefabInstance: {fileID: 494530832}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1519972863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,11 +1145,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1806549388 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2312013197728204632, guid: 580865d498405f747a81304521197491, type: 3}
-  m_PrefabInstance: {fileID: 494530832}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1818853024
 GameObject:
   m_ObjectHideFlags: 1
@@ -1308,7 +1364,7 @@ Light:
   serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 70708.484
+  m_Intensity: 0.6514659
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1351,7 +1407,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
+  m_ColorTemperature: 20000
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 2.71886e-20, y: 1.05e-43, z: 1.014e-41, w: 5.1594153e+36}
   m_UseBoundingSphereOverride: 0
@@ -1467,7 +1523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6321439201146958842, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
       propertyPath: ambientIntensity
-      value: 8.91
+      value: 4.24
       objectReference: {fileID: 0}
     - target: {fileID: 6321439201146958842, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
       propertyPath: lightRefreshInterval
@@ -1479,7 +1535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6321439201146958842, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
       propertyPath: renderSettingsAmbientScale
-      value: 1.78
+      value: 1.63
       objectReference: {fileID: 0}
     - target: {fileID: 6321439201146958842, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
       propertyPath: maxNormalizedLightIntensity

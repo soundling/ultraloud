@@ -764,13 +764,13 @@ internal static class DirectionalSpriteFrameBuilder
         switch (key)
         {
             case "front": yawDegrees = 0f; symmetry = DirectionalSpriteSymmetry.Unique; return;
-            case "frontright": yawDegrees = 45f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
-            case "right": yawDegrees = 90f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
-            case "backright": yawDegrees = 135f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
+            case "frontright": yawDegrees = -45f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
+            case "right": yawDegrees = -90f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
+            case "backright": yawDegrees = -135f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
             case "back": yawDegrees = 180f; symmetry = DirectionalSpriteSymmetry.Unique; return;
-            case "backleft": yawDegrees = -135f; symmetry = DirectionalSpriteSymmetry.Unique; return;
-            case "left": yawDegrees = -90f; symmetry = DirectionalSpriteSymmetry.Unique; return;
-            case "frontleft": yawDegrees = -45f; symmetry = DirectionalSpriteSymmetry.Unique; return;
+            case "backleft": yawDegrees = 135f; symmetry = DirectionalSpriteSymmetry.Unique; return;
+            case "left": yawDegrees = 90f; symmetry = DirectionalSpriteSymmetry.Unique; return;
+            case "frontleft": yawDegrees = 45f; symmetry = DirectionalSpriteSymmetry.Unique; return;
         }
 
         throw new InvalidOperationException($"Unsupported angle label '{rawAngleLabel}'. Use Front, FrontRight, Right, BackRight, Back, BackLeft, Left, or FrontLeft.");

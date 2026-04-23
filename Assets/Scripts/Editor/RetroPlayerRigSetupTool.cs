@@ -13,6 +13,7 @@ public static class RetroPlayerRigSetupTool
     private const string InputActionsPath = "Assets/InputSystem_Actions.inputactions";
     private const string NoFrictionMaterialPath = "Assets/Settings/PlayerNoFriction.physicMaterial";
     private const string GunMaterialPath = "Assets/Sprites/Gun.mat";
+    private const string GunVolumeMapSetPath = "Assets/Datas/GunVolumeMapSet.asset";
 
     [MenuItem("Tools/Ultraloud/Player/Setup Selected Or Scene Player")]
     private static void SetupSelectedOrScenePlayer()
@@ -220,6 +221,9 @@ public static class RetroPlayerRigSetupTool
             }
         }
 
+        FirstPersonSpriteVolumeRenderer spriteVolumeRenderer = GetOrAddComponent<FirstPersonSpriteVolumeRenderer>(quadObject);
+        AssignSpriteVolumeMapSet(spriteVolumeRenderer);
+
         if (quadObject.TryGetComponent(out Collider quadCollider))
         {
             Undo.DestroyObjectImmediate(quadCollider);
@@ -295,6 +299,25 @@ public static class RetroPlayerRigSetupTool
         serializedController.FindProperty("hideBodyRenderer").boolValue = true;
         serializedController.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(controller);
+    }
+
+    private static void AssignSpriteVolumeMapSet(FirstPersonSpriteVolumeRenderer spriteVolumeRenderer)
+    {
+        if (spriteVolumeRenderer == null)
+        {
+            return;
+        }
+
+        FirstPersonSpriteVolumeMapSet mapSet = AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(GunVolumeMapSetPath);
+        if (mapSet == null)
+        {
+            return;
+        }
+
+        SerializedObject serializedRenderer = new SerializedObject(spriteVolumeRenderer);
+        serializedRenderer.FindProperty("mapSet").objectReferenceValue = mapSet;
+        serializedRenderer.ApplyModifiedPropertiesWithoutUndo();
+        EditorUtility.SetDirty(spriteVolumeRenderer);
     }
 
     private static UnityEngine.Object GetOrCreateNoFrictionMaterialAsset()

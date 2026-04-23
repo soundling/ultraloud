@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0d5c6e5ad24bf1ab2e44a9fc8b7123, type: 3}
+  m_Name: GunVolumeMapSet
+  m_EditorClassIdentifier: Assembly-CSharp::FirstPersonSpriteVolumeMapSet
+  baseColor: {fileID: 2800000, guid: 5cdd63f397650fd4ab26308955d347f6, type: 3}
+  detailNormal: {fileID: 2800000, guid: 162ba32df1c20274fbffbf89677c6e8f, type: 3}
+  macroNormal: {fileID: 2800000, guid: 7a142736674a1a842b8ace0ae7429224, type: 3}
+  frontDepth: {fileID: 2800000, guid: 7758dfaaf25548f4e8e70f90d8aa17ac, type: 3}
+  backDepth: {fileID: 2800000, guid: 952f7077e186e51488d9646a6480dfb3, type: 3}
+  thickness: {fileID: 2800000, guid: da18dd7d9b817674591122c6861e42e9, type: 3}
+  packedMasks: {fileID: 0}
+  shellOccupancyAtlas: {fileID: 0}
+  sdf: {fileID: 0}
+  emissive: {fileID: 0}
+  volumeThickness: 0
+  parallaxScale: 0.08
+  raymarchSteps: 24
+  shadowSteps: 12
+  shellSliceCount: 16
+  shellAtlasGrid: {x: 4, y: 4}
+  invertFrontDepth: 0
+  invertBackDepth: 0
+  autoCorrectDualDepth: 1
+  minimumDepthSeparation: 0.0132
+  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
+  emissiveColor: {r: 0, g: 0, b: 0, a: 1}
+  detailNormalScale: 1
+  macroNormalScale: 1
+  alphaCutoff: 0.138
+  selfShadowStrength: 0.6
+  transmissionStrength: 0.35
+  ambientOcclusionStrength: 1
+  specularStrength: 1
+  sdfSoftness: 0.08

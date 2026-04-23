@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 2127129800736999059}
   - component: {fileID: 770003230812808054}
   - component: {fileID: 7861669197003454037}
+  - component: {fileID: 6321439201146958842}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -272,6 +273,26 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6321439201146958842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5340286003930773182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0efc4c0fe83a47f9ad612e6b070f97fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FirstPersonSpriteVolumeRenderer
+  targetRenderer: {fileID: 7861669197003454037}
+  mapSet: {fileID: 11400000, guid: 4df6d820be9549d0a1b6d3806918e8ae, type: 2}
+  lightAnchor: {fileID: 4630751468585377716}
+  refreshLightsInEditor: 1
+  maxLights: 4
+  lightRefreshInterval: 0.15
+  ambientColor: {r: 0.48, g: 0.52, b: 0.58, a: 1}
+  ambientIntensity: 1
 --- !u!1 &5361503338494198736
 GameObject:
   m_ObjectHideFlags: 0

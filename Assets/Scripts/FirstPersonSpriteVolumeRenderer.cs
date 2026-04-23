@@ -5,6 +5,14 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
 {
+    private enum LightReferenceMode
+    {
+        HierarchyCamera = 0,
+        ExplicitTransform = 1,
+        RendererBoundsCenter = 2,
+        MainCamera = 3
+    }
+
     private const string ShaderName = "Ultraloud/First Person/Sprite Volume HDRP";
     private const int MaxShaderLights = 4;
 
@@ -61,6 +69,7 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
 
     [SerializeField] private MeshRenderer targetRenderer;
     [SerializeField] private FirstPersonSpriteVolumeMapSet mapSet;
+    [SerializeField] private LightReferenceMode lightReferenceMode = LightReferenceMode.HierarchyCamera;
     [SerializeField] private Transform lightAnchor;
     [Header("Scene Lights")]
     [SerializeField] private bool refreshLightsInEditor = true;
@@ -268,24 +277,6 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
         {
             targetRenderer = GetComponentInChildren<MeshRenderer>(true);
         }
-
-        if (lightAnchor == null)
-        {
-            Transform root = transform.root;
-            if (root != null)
-            {
-                Camera rootCamera = root.GetComponentInChildren<Camera>(true);
-                if (rootCamera != null)
-                {
-                    lightAnchor = rootCamera.transform;
-                }
-            }
-        }
-
-        if (lightAnchor == null && Camera.main != null)
-        {
-            lightAnchor = Camera.main.transform;
-        }
     }
 
     private bool EnsureRuntimeMaterial()
@@ -452,9 +443,46 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
 
     private Vector3 ResolveLightReferencePosition()
     {
-        if (lightAnchor != null)
+        switch (lightReferenceMode)
         {
-            return lightAnchor.position;
+            case LightReferenceMode.HierarchyCamera:
+            {
+                Transform hierarchyCamera = ResolveHierarchyCameraAnchor();
+                if (hierarchyCamera != null)
+                {
+                    return hierarchyCamera.position;
+                }
+
+                if (lightAnchor != null)
+                {
+                    return lightAnchor.position;
+                }
+
+                break;
+            }
+
+            case LightReferenceMode.ExplicitTransform:
+                if (lightAnchor != null)
+                {
+                    return lightAnchor.position;
+                }
+                break;
+
+            case LightReferenceMode.MainCamera:
+                if (Camera.main != null)
+                {
+                    return Camera.main.transform.position;
+                }
+
+                if (lightAnchor != null)
+                {
+                    return lightAnchor.position;
+                }
+
+                break;
+
+            case LightReferenceMode.RendererBoundsCenter:
+                break;
         }
 
         if (targetRenderer != null)
@@ -463,6 +491,18 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
         }
 
         return transform.position;
+    }
+
+    private Transform ResolveHierarchyCameraAnchor()
+    {
+        Transform root = transform.root;
+        if (root == null)
+        {
+            return null;
+        }
+
+        Camera rootCamera = root.GetComponentInChildren<Camera>(true);
+        return rootCamera != null ? rootCamera.transform : null;
     }
 
     private void RefreshManualLights(Vector3 referencePosition)
@@ -486,7 +526,7 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
             return;
         }
 
-        Light[] sceneLights = UnityEngine.Object.FindObjectsByType<Light>(FindObjectsSortMode.None);
+        Light[] sceneLights = UnityEngine.Object.FindObjectsByType<Light>(FindObjectsInactive.Exclude);
         if (sceneLights == null || sceneLights.Length == 0)
         {
             return;

@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c8137b09a08584bb168b89f4e74552, type: 3}
+  m_Name: PigDirectionalSpriteImportProfile
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteImportProfile
+  cellSize: {x: 128, y: 128}
+  cellPadding: {x: 0, y: 0}
+  sheetMargin: {x: 0, y: 0}
+  sheetOrigin: 0
+  pixelsPerUnit: 100
+  filterMode: 0
+  pivot: {x: 0.5, y: 0}
+  outputFolderSuffix: _PigDirectional
+  defaultFramesPerSecond: 8
+  overwriteGeneratedFiles: 1
+  clips:
+  - clipId: Idle
+    loop: 1
+    framesPerSecond: 4
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      startCell: {x: 0, y: 0}
+      frameStep: {x: 1, y: 0}
+      frameCount: 2
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      startCell: {x: 0, y: 1}
+      frameStep: {x: 1, y: 0}
+      frameCount: 2
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      startCell: {x: 0, y: 2}
+      frameStep: {x: 1, y: 0}
+      frameCount: 2
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      startCell: {x: 0, y: 3}
+      frameStep: {x: 1, y: 0}
+      frameCount: 2
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      startCell: {x: 0, y: 4}
+      frameStep: {x: 1, y: 0}
+      frameCount: 2
+  - clipId: Walk
+    loop: 1
+    framesPerSecond: 8
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      startCell: {x: 0, y: 5}
+      frameStep: {x: 1, y: 0}
+      frameCount: 4
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      startCell: {x: 0, y: 6}
+      frameStep: {x: 1, y: 0}
+      frameCount: 4
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      startCell: {x: 0, y: 7}
+      frameStep: {x: 1, y: 0}
+      frameCount: 4
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      startCell: {x: 0, y: 8}
+      frameStep: {x: 1, y: 0}
+      frameCount: 4
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      startCell: {x: 0, y: 9}
+      frameStep: {x: 1, y: 0}
+      frameCount: 4

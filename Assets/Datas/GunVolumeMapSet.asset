@@ -21,26 +21,26 @@ MonoBehaviour:
   packedMasks: {fileID: 2800000, guid: 6efcdf4d024494a4ba1cec32a9bfe746, type: 3}
   shellOccupancyAtlas: {fileID: 2800000, guid: 7a38d6f92c3b23848a49a7fd4f081e77, type: 3}
   sdf: {fileID: 2800000, guid: 2a3079fccc95fe046a9d6855b2ecfbcd, type: 3}
-  emissive: {fileID: 0}
-  volumeThickness: 1.32
+  emissive: {fileID: 2800000, guid: 4aa28e79d6135d14799c992205d0e281, type: 3}
+  volumeThickness: 1.08
   parallaxScale: 0
-  raymarchSteps: 52
-  shadowSteps: 48
+  raymarchSteps: 29
+  shadowSteps: 26
   shellSliceCount: 1
   shellAtlasGrid: {x: 4, y: 4}
   invertFrontDepth: 0
   invertBackDepth: 0
   autoCorrectDualDepth: 1
-  minimumDepthSeparation: 0.0184
+  minimumDepthSeparation: 0.0076
   baseColorTint: {r: 1, g: 1, b: 1, a: 1}
-  emissiveColor: {r: 0, g: 0, b: 0, a: 1}
-  detailNormalScale: 0.541
-  macroNormalScale: 1.233
+  emissiveColor: {r: 1, g: 1, b: 1, a: 1}
+  detailNormalScale: 0.7
+  macroNormalScale: 0.686
   alphaCutoff: 0
   preserveBaseCoverage: 1
-  coverageThreshold: 0.02
-  selfShadowStrength: 0.098
-  transmissionStrength: 0.64
-  ambientOcclusionStrength: 0.65
-  specularStrength: 3.94
-  sdfSoftness: 0.125
+  coverageThreshold: 0.0116
+  selfShadowStrength: 0.397
+  transmissionStrength: 0
+  ambientOcclusionStrength: 0.56
+  specularStrength: 4
+  sdfSoftness: 0.065

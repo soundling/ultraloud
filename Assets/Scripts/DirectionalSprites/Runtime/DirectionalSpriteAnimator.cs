@@ -1,3 +1,6 @@
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 public enum DirectionalBillboardMode
@@ -7,6 +10,13 @@ public enum DirectionalBillboardMode
     Full = 2
 }
 
+public enum DirectionalSpriteViewAngleSource
+{
+    CameraPosition = 0,
+    CameraForward = 1
+}
+
+[ExecuteAlways]
 [DisallowMultipleComponent]
 public sealed class DirectionalSpriteAnimator : MonoBehaviour
 {
@@ -24,13 +34,22 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     [SerializeField] private Camera targetCamera;
 
     [Header("Facing")]
+    [SerializeField] private DirectionalSpriteViewAngleSource viewAngleSource = DirectionalSpriteViewAngleSource.CameraPosition;
     [SerializeField] private DirectionalBillboardMode billboardMode = DirectionalBillboardMode.YAxis;
     [SerializeField] private Vector3 billboardEulerOffset;
     [SerializeField] private float logicalFacingOffset;
 
     private DirectionalSpriteClip currentClip;
+    private DirectionalSpriteAngleSet currentAngle;
+    private Sprite currentSprite;
+    private Texture2D currentNormalMap;
+    private int currentFrameIndex;
+    private bool currentFlipX;
     private float clipTime;
     private bool isPlaying;
+#if UNITY_EDITOR
+    private bool editorSceneCallbacksRegistered;
+#endif
 
     public DirectionalSpriteDefinition Definition
     {
@@ -43,6 +62,12 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     }
 
     public string CurrentClipId => currentClip != null ? currentClip.clipId : string.Empty;
+    public DirectionalSpriteAngleSet CurrentAngle => currentAngle;
+    public Sprite CurrentSprite => currentSprite;
+    public Texture2D CurrentNormalMap => currentNormalMap;
+    public int CurrentFrameIndex => currentFrameIndex;
+    public bool CurrentFlipX => currentFlipX;
+    public Transform FacingReferenceTransform => facingReference != null ? facingReference : transform;
 
     private void Reset()
     {
@@ -56,6 +81,9 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
 
     private void OnEnable()
     {
+#if UNITY_EDITOR
+        RegisterEditorCallbacks();
+#endif
         if (playOnEnable)
         {
             Play(initialClipId, false);
@@ -67,6 +95,24 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     private void OnValidate()
     {
         AutoAssignReferences();
+        if (isActiveAndEnabled)
+        {
+            RefreshVisual();
+        }
+    }
+
+    private void OnDisable()
+    {
+#if UNITY_EDITOR
+        UnregisterEditorCallbacks();
+#endif
+    }
+
+    private void OnDestroy()
+    {
+#if UNITY_EDITOR
+        UnregisterEditorCallbacks();
+#endif
     }
 
     private void Update()
@@ -120,6 +166,11 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
         }
     }
 
+    public void RefreshNow()
+    {
+        RefreshVisual();
+    }
+
     private void AutoAssignReferences()
     {
         if (facingReference == null)
@@ -137,7 +188,12 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
             billboardRoot = spriteRenderer.transform;
         }
 
-        if (targetCamera == null)
+        if (billboardRoot == null)
+        {
+            billboardRoot = transform;
+        }
+
+        if (targetCamera == null && Application.isPlaying)
         {
             Camera mainCamera = Camera.main;
             if (mainCamera != null)
@@ -181,11 +237,6 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
 
     private void RefreshVisual()
     {
-        if (spriteRenderer == null)
-        {
-            return;
-        }
-
         Camera cameraToUse = ResolveCamera();
         if (cameraToUse == null)
         {
@@ -201,7 +252,12 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
 
         if (currentClip == null)
         {
-            spriteRenderer.sprite = null;
+            ClearCurrentSelection();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = null;
+            }
+
             return;
         }
 
@@ -209,16 +265,41 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
         AngleSelection selection = FindBestAngle(currentClip, relativeYaw);
         if (selection.angle == null)
         {
-            spriteRenderer.sprite = null;
+            ClearCurrentSelection();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = null;
+            }
+
             return;
         }
 
-        spriteRenderer.sprite = GetCurrentFrame(selection.angle);
-        spriteRenderer.flipX = selection.flipX;
+        currentAngle = selection.angle;
+        currentFlipX = selection.flipX;
+        currentFrameIndex = GetCurrentFrameIndex(selection.angle);
+        currentSprite = selection.angle.GetFrame(currentFrameIndex);
+        currentNormalMap = selection.angle.GetNormalFrame(currentFrameIndex);
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = currentSprite;
+            spriteRenderer.flipX = currentFlipX;
+        }
     }
 
     private Camera ResolveCamera()
     {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+        {
+            SceneView sceneView = SceneView.currentDrawingSceneView ?? SceneView.lastActiveSceneView;
+            if (sceneView != null && sceneView.camera != null)
+            {
+                return sceneView.camera;
+            }
+        }
+#endif
+
         if (targetCamera != null && targetCamera.isActiveAndEnabled)
         {
             return targetCamera;
@@ -227,11 +308,50 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
         {
-            targetCamera = mainCamera;
+            if (Application.isPlaying)
+            {
+                targetCamera = mainCamera;
+            }
+
+            return mainCamera;
         }
 
         return targetCamera;
     }
+
+#if UNITY_EDITOR
+    private void RegisterEditorCallbacks()
+    {
+        if (editorSceneCallbacksRegistered)
+        {
+            return;
+        }
+
+        SceneView.duringSceneGui += OnEditorSceneGui;
+        editorSceneCallbacksRegistered = true;
+    }
+
+    private void UnregisterEditorCallbacks()
+    {
+        if (!editorSceneCallbacksRegistered)
+        {
+            return;
+        }
+
+        SceneView.duringSceneGui -= OnEditorSceneGui;
+        editorSceneCallbacksRegistered = false;
+    }
+
+    private void OnEditorSceneGui(SceneView sceneView)
+    {
+        if (Application.isPlaying || !isActiveAndEnabled || sceneView == null || sceneView.camera == null)
+        {
+            return;
+        }
+
+        RefreshVisual();
+    }
+#endif
 
     private void UpdateBillboard(Transform cameraTransform)
     {
@@ -257,29 +377,31 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     private float GetRelativeYaw(Transform cameraTransform)
     {
         Transform reference = facingReference != null ? facingReference : transform;
-        Vector3 directionToCamera = cameraTransform.position - reference.position;
-        directionToCamera = Vector3.ProjectOnPlane(directionToCamera, Vector3.up);
+        Vector3 directionToViewer = viewAngleSource == DirectionalSpriteViewAngleSource.CameraPosition
+            ? cameraTransform.position - reference.position
+            : -cameraTransform.forward;
+        directionToViewer = Vector3.ProjectOnPlane(directionToViewer, Vector3.up);
 
-        if (directionToCamera.sqrMagnitude < 0.0001f)
+        if (directionToViewer.sqrMagnitude < 0.0001f)
         {
             return 0f;
         }
 
-        float rawYaw = Vector3.SignedAngle(reference.forward, directionToCamera.normalized, Vector3.up);
+        float rawYaw = Vector3.SignedAngle(reference.forward, directionToViewer.normalized, Vector3.up);
         return Mathf.DeltaAngle(0f, rawYaw - logicalFacingOffset);
     }
 
-    private Sprite GetCurrentFrame(DirectionalSpriteAngleSet angle)
+    private int GetCurrentFrameIndex(DirectionalSpriteAngleSet angle)
     {
         int frameCount = angle.FrameCount;
         if (frameCount <= 0)
         {
-            return null;
+            return 0;
         }
 
         if (frameCount == 1)
         {
-            return angle.GetFrame(0);
+            return 0;
         }
 
         float framesPerSecond = currentClip != null && currentClip.framesPerSecond > 0f
@@ -292,7 +414,16 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
             frameIndex %= frameCount;
         }
 
-        return angle.GetFrame(frameIndex);
+        return Mathf.Clamp(frameIndex, 0, frameCount - 1);
+    }
+
+    private void ClearCurrentSelection()
+    {
+        currentAngle = null;
+        currentSprite = null;
+        currentNormalMap = null;
+        currentFrameIndex = 0;
+        currentFlipX = false;
     }
 
     private static AngleSelection FindBestAngle(DirectionalSpriteClip clip, float relativeYaw)

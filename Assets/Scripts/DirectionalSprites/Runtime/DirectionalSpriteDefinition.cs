@@ -129,6 +129,7 @@ public sealed class DirectionalSpriteAngleSet
     public DirectionalSpriteSymmetry symmetry = DirectionalSpriteSymmetry.Unique;
     public bool flipX;
     public List<Sprite> frames = new();
+    public List<Texture2D> normalFrames = new();
 
     public int FrameCount => frames != null ? frames.Count : 0;
 
@@ -149,5 +150,29 @@ public sealed class DirectionalSpriteAngleSet
         }
 
         return frames[index];
+    }
+
+    public Texture2D GetNormalFrame(int index)
+    {
+        return GetTextureFrame(normalFrames, index);
+    }
+
+    private static Texture2D GetTextureFrame(List<Texture2D> source, int index)
+    {
+        if (source == null || source.Count == 0)
+        {
+            return null;
+        }
+
+        if (index < 0)
+        {
+            index = 0;
+        }
+        else if (index >= source.Count)
+        {
+            index = source.Count - 1;
+        }
+
+        return source[index];
     }
 }

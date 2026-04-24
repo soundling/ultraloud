@@ -4,6 +4,11 @@ using UnityEngine.Rendering;
 [DisallowMultipleComponent]
 public sealed class RetroVfxService : MonoBehaviour
 {
+    [Header("Bullet Trails")]
+    [SerializeField, Min(0.001f)] private float bulletTrailWidthMultiplier = 2.25f;
+    [SerializeField, Min(0.001f)] private float bulletTrailMinimumVisibleWidth = 0.035f;
+    [SerializeField, Min(0.01f)] private float bulletTrailMinimumVisibleDuration = 0.09f;
+
     private RetroComponentPool<PooledBulletTrail> bulletTrailPool;
     private RetroComponentPool<PooledFlash> flashPool;
 
@@ -21,7 +26,9 @@ public sealed class RetroVfxService : MonoBehaviour
             return;
         }
 
-        trail.Play(label, start, end, color, width, duration);
+        float resolvedWidth = Mathf.Max(width * bulletTrailWidthMultiplier, bulletTrailMinimumVisibleWidth);
+        float resolvedDuration = Mathf.Max(duration, bulletTrailMinimumVisibleDuration);
+        trail.Play(label, start, end, color, resolvedWidth, resolvedDuration);
     }
 
     public void SpawnImpactFlash(Vector3 position, Vector3 normal, Color color, float scale = 0.06f, float duration = 0.08f)
@@ -82,11 +89,47 @@ public sealed class RetroVfxService : MonoBehaviour
     {
         GameObject trailObject = new GameObject("PooledBulletTrail");
         trailObject.transform.SetParent(parent, false);
-        LineRenderer glow = trailObject.AddComponent<LineRenderer>();
-        LineRenderer core = trailObject.AddComponent<LineRenderer>();
+
+        LineRenderer glow = CreateTrailLineChild(trailObject.transform, "Glow");
+        LineRenderer core = CreateTrailLineChild(trailObject.transform, "Core");
+        Renderer fallbackRenderer = CreateTrailRibbonChild(trailObject.transform);
+
         PooledBulletTrail trail = trailObject.AddComponent<PooledBulletTrail>();
-        trail.Configure(core, glow);
+        trail.Configure(core, glow, fallbackRenderer);
         return trail;
+    }
+
+    private static LineRenderer CreateTrailLineChild(Transform parent, string suffix)
+    {
+        GameObject lineObject = new GameObject($"BulletTrail{suffix}");
+        lineObject.transform.SetParent(parent, false);
+        return lineObject.AddComponent<LineRenderer>();
+    }
+
+    private static Renderer CreateTrailRibbonChild(Transform parent)
+    {
+        GameObject ribbonObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        ribbonObject.name = "BulletTrailRibbon";
+        ribbonObject.transform.SetParent(parent, false);
+        ribbonObject.transform.localPosition = Vector3.zero;
+        ribbonObject.transform.localRotation = Quaternion.identity;
+
+        Collider collider = ribbonObject.GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+            Destroy(collider);
+        }
+
+        Renderer renderer = ribbonObject.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.shadowCastingMode = ShadowCastingMode.Off;
+            renderer.receiveShadows = false;
+            renderer.enabled = false;
+        }
+
+        return renderer;
     }
 
     private static PooledFlash CreateFlash(Transform parent)
@@ -121,30 +164,50 @@ public sealed class RetroVfxService : MonoBehaviour
         private RetroPooledObject pooledObject;
         private LineRenderer coreLine;
         private LineRenderer glowLine;
+        private Renderer fallbackRenderer;
         private Material coreMaterial;
         private Material glowMaterial;
+        private Material fallbackMaterial;
         private Color color;
         private float duration;
         private float age;
         private float baseWidth;
+        private float baseLength;
+        private Vector3 fallbackBaseScale;
 
-        public void Configure(LineRenderer core, LineRenderer glow)
+        public void Configure(LineRenderer core, LineRenderer glow, Renderer fallback)
         {
             coreLine = core;
             glowLine = glow;
+            fallbackRenderer = fallback;
             coreMaterial = CreateTransparentMaterial("Bullet Trail Core", additive: true);
             glowMaterial = CreateTransparentMaterial("Bullet Trail Glow", additive: true);
+            fallbackMaterial = CreateTransparentMaterial("Bullet Trail Ribbon", additive: true);
             ConfigureLine(coreLine, coreMaterial);
             ConfigureLine(glowLine, glowMaterial);
+            ConfigureFallbackRenderer();
         }
 
         public void Play(string label, Vector3 start, Vector3 end, Color tint, float width, float lifetime)
         {
             gameObject.name = string.IsNullOrWhiteSpace(label) ? "BulletTrail" : $"{label} BulletTrail";
+            Vector3 delta = end - start;
+            baseLength = delta.magnitude;
+            if (baseLength <= 0.001f)
+            {
+                pooledObject?.ReturnToPool();
+                return;
+            }
+
             color = tint;
             duration = Mathf.Max(0.01f, lifetime);
             age = 0f;
             baseWidth = Mathf.Max(0.001f, width);
+
+            transform.position = (start + end) * 0.5f;
+            transform.rotation = Quaternion.LookRotation(delta / baseLength, Vector3.up);
+            fallbackBaseScale = new Vector3(baseWidth * 1.25f, baseWidth * 1.25f, baseLength);
+
             ApplyEndpoints(coreLine, start, end);
             ApplyEndpoints(glowLine, start, end);
             Apply(0f);
@@ -155,20 +218,24 @@ public sealed class RetroVfxService : MonoBehaviour
             this.pooledObject = pooledObject;
             age = 0f;
             SetLinesEnabled(true);
+            SetFallbackEnabled(true);
         }
 
         public void OnPoolReturn(RetroPooledObject pooledObject)
         {
             age = 0f;
             SetLinesEnabled(false);
+            SetFallbackEnabled(false);
         }
 
         public void OnPoolDestroy(RetroPooledObject pooledObject)
         {
             DestroyRuntimeMaterial(coreMaterial);
             DestroyRuntimeMaterial(glowMaterial);
+            DestroyRuntimeMaterial(fallbackMaterial);
             coreMaterial = null;
             glowMaterial = null;
+            fallbackMaterial = null;
             this.pooledObject = null;
         }
 
@@ -189,12 +256,38 @@ public sealed class RetroVfxService : MonoBehaviour
             float shrink = Mathf.Lerp(1f, 0.16f, normalizedAge);
             ApplyLine(glowLine, glowMaterial, color, fade, shrink, baseWidth * 2.8f, 0.24f);
             ApplyLine(coreLine, coreMaterial, color, fade, shrink, baseWidth, 1f);
+            ApplyFallback(fade, shrink);
         }
 
         private void SetLinesEnabled(bool enabled)
         {
             if (coreLine != null) coreLine.enabled = enabled;
             if (glowLine != null) glowLine.enabled = enabled;
+        }
+
+        private void SetFallbackEnabled(bool enabled)
+        {
+            if (fallbackRenderer != null)
+            {
+                fallbackRenderer.enabled = enabled;
+            }
+        }
+
+        private void ConfigureFallbackRenderer()
+        {
+            if (fallbackRenderer == null)
+            {
+                return;
+            }
+
+            if (fallbackMaterial != null)
+            {
+                fallbackRenderer.sharedMaterial = fallbackMaterial;
+            }
+
+            fallbackRenderer.shadowCastingMode = ShadowCastingMode.Off;
+            fallbackRenderer.receiveShadows = false;
+            fallbackRenderer.enabled = false;
         }
 
         private static void ConfigureLine(LineRenderer line, Material material)
@@ -247,6 +340,25 @@ public sealed class RetroVfxService : MonoBehaviour
             line.endColor = end;
             line.widthMultiplier = Mathf.Max(0.001f, width * shrink);
             ApplyMaterialColor(material, start);
+        }
+
+        private void ApplyFallback(float fade, float shrink)
+        {
+            if (fallbackRenderer == null || baseLength <= 0.001f)
+            {
+                return;
+            }
+
+            Color ribbonColor = color;
+            ribbonColor.a *= fade * 0.34f;
+            fallbackRenderer.enabled = ribbonColor.a > 0.001f;
+            fallbackRenderer.transform.localPosition = Vector3.zero;
+            fallbackRenderer.transform.localRotation = Quaternion.identity;
+            fallbackRenderer.transform.localScale = new Vector3(
+                Mathf.Max(0.001f, fallbackBaseScale.x * shrink),
+                Mathf.Max(0.001f, fallbackBaseScale.y * shrink),
+                Mathf.Max(0.001f, fallbackBaseScale.z));
+            ApplyMaterialColor(fallbackMaterial, ribbonColor);
         }
     }
 

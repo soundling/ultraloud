@@ -1234,6 +1234,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: ambientColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: ambientColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: ambientColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: ambientIntensity
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: punctualLightScale
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: directionalLightScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: refreshLightsInEditor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: renderSettingsAmbientScale
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: maxNormalizedLightIntensity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9006146410676730140, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

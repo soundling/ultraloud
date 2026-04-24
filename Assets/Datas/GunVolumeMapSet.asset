@@ -13,34 +13,23 @@ MonoBehaviour:
   m_Name: GunVolumeMapSet
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonSpriteVolumeMapSet
   baseColor: {fileID: 2800000, guid: 5cdd63f397650fd4ab26308955d347f6, type: 3}
-  detailNormal: {fileID: 2800000, guid: 162ba32df1c20274fbffbf89677c6e8f, type: 3}
-  macroNormal: {fileID: 2800000, guid: 7a142736674a1a842b8ace0ae7429224, type: 3}
+  normal: {fileID: 2800000, guid: 162ba32df1c20274fbffbf89677c6e8f, type: 3}
   frontDepth: {fileID: 2800000, guid: 7758dfaaf25548f4e8e70f90d8aa17ac, type: 3}
-  backDepth: {fileID: 2800000, guid: 952f7077e186e51488d9646a6480dfb3, type: 3}
-  thickness: {fileID: 2800000, guid: da18dd7d9b817674591122c6861e42e9, type: 3}
-  packedMasks: {fileID: 2800000, guid: 6efcdf4d024494a4ba1cec32a9bfe746, type: 3}
-  shellOccupancyAtlas: {fileID: 2800000, guid: 7a38d6f92c3b23848a49a7fd4f081e77, type: 3}
-  sdf: {fileID: 2800000, guid: 2a3079fccc95fe046a9d6855b2ecfbcd, type: 3}
   emissive: {fileID: 2800000, guid: 4aa28e79d6135d14799c992205d0e281, type: 3}
-  volumeThickness: 0.86
-  parallaxScale: 0
-  raymarchSteps: 29
-  shadowSteps: 26
-  shellSliceCount: 19
-  shellAtlasGrid: {x: 4, y: 4}
+  volumeThickness: 0.055
+  parallaxScale: 0.012
   invertFrontDepth: 0
-  invertBackDepth: 0
-  autoCorrectDualDepth: 1
-  minimumDepthSeparation: 0.0076
   baseColorTint: {r: 1, g: 1, b: 1, a: 1}
   emissiveColor: {r: 1, g: 1, b: 1, a: 1}
-  detailNormalScale: 2
-  macroNormalScale: 2
+  normalScale: 1.15
   alphaCutoff: 0
   preserveBaseCoverage: 1
-  coverageThreshold: 0.0116
-  selfShadowStrength: 0
-  transmissionStrength: 0
-  ambientOcclusionStrength: 0
-  specularStrength: 4
-  sdfSoftness: 0.065
+  coverageThreshold: 0.025
+  selfShadowStrength: 0.25
+  transmissionStrength: 0.12
+  ambientOcclusionStrength: 1
+  specularStrength: 1.35
+  ambientOcclusion: 1
+  roughness: 0.58
+  metallic: 0.18
+  materialThickness: 0.65

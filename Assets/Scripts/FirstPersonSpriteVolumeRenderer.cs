@@ -19,28 +19,14 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
     private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
     private static readonly int BaseColorMapId = Shader.PropertyToID("_BaseColorMap");
     private static readonly int MainTexId = Shader.PropertyToID("_MainTex");
-    private static readonly int DetailNormalMapId = Shader.PropertyToID("_NormalMap");
-    private static readonly int MacroNormalMapId = Shader.PropertyToID("_MacroNormalMap");
+    private static readonly int NormalMapId = Shader.PropertyToID("_NormalMap");
     private static readonly int FrontDepthMapId = Shader.PropertyToID("_HeightMap");
-    private static readonly int BackDepthMapId = Shader.PropertyToID("_BackDepthMap");
-    private static readonly int ThicknessMapId = Shader.PropertyToID("_ThicknessMap");
-    private static readonly int PackedMaskMapId = Shader.PropertyToID("_MaskMap");
-    private static readonly int ShellAtlasId = Shader.PropertyToID("_ShellOccupancyAtlas");
-    private static readonly int SdfMapId = Shader.PropertyToID("_SdfMap");
     private static readonly int EmissiveMapId = Shader.PropertyToID("_EmissiveColorMap");
     private static readonly int EmissiveColorId = Shader.PropertyToID("_EmissiveColor");
     private static readonly int VolumeThicknessId = Shader.PropertyToID("_VolumeThickness");
     private static readonly int ParallaxScaleId = Shader.PropertyToID("_ParallaxScale");
-    private static readonly int RaymarchStepsId = Shader.PropertyToID("_RaymarchSteps");
-    private static readonly int ShadowStepsId = Shader.PropertyToID("_ShadowSteps");
-    private static readonly int ShellSliceCountId = Shader.PropertyToID("_ShellSliceCount");
-    private static readonly int ShellAtlasGridId = Shader.PropertyToID("_ShellAtlasGrid");
     private static readonly int InvertFrontDepthId = Shader.PropertyToID("_InvertFrontDepth");
-    private static readonly int InvertBackDepthId = Shader.PropertyToID("_InvertBackDepth");
-    private static readonly int AutoCorrectDualDepthId = Shader.PropertyToID("_AutoCorrectDualDepth");
-    private static readonly int MinimumDepthSeparationId = Shader.PropertyToID("_MinimumDepthSeparation");
-    private static readonly int DetailNormalScaleId = Shader.PropertyToID("_NormalScale");
-    private static readonly int MacroNormalScaleId = Shader.PropertyToID("_MacroNormalScale");
+    private static readonly int NormalScaleId = Shader.PropertyToID("_NormalScale");
     private static readonly int AlphaCutoffId = Shader.PropertyToID("_AlphaCutoff");
     private static readonly int PreserveBaseCoverageId = Shader.PropertyToID("_PreserveBaseCoverage");
     private static readonly int CoverageThresholdId = Shader.PropertyToID("_CoverageThreshold");
@@ -48,17 +34,14 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
     private static readonly int TransmissionStrengthId = Shader.PropertyToID("_TransmissionStrength");
     private static readonly int AoStrengthId = Shader.PropertyToID("_AmbientOcclusionStrength");
     private static readonly int SpecularStrengthId = Shader.PropertyToID("_SpecularStrength");
-    private static readonly int SdfSoftnessId = Shader.PropertyToID("_SdfSoftness");
+    private static readonly int MaterialAmbientOcclusionId = Shader.PropertyToID("_MaterialAmbientOcclusion");
+    private static readonly int MaterialRoughnessId = Shader.PropertyToID("_MaterialRoughness");
+    private static readonly int MaterialMetallicId = Shader.PropertyToID("_MaterialMetallic");
+    private static readonly int MaterialThicknessId = Shader.PropertyToID("_MaterialThickness");
     private static readonly int AmbientColorId = Shader.PropertyToID("_AmbientColor");
     private static readonly int AmbientIntensityId = Shader.PropertyToID("_AmbientIntensity");
     private static readonly int UseFrontDepthId = Shader.PropertyToID("_UseFrontDepth");
-    private static readonly int UseBackDepthId = Shader.PropertyToID("_UseBackDepth");
-    private static readonly int UseThicknessId = Shader.PropertyToID("_UseThicknessMap");
-    private static readonly int UseMaskMapId = Shader.PropertyToID("_UseMaskMap");
-    private static readonly int UseShellAtlasId = Shader.PropertyToID("_UseShellAtlas");
-    private static readonly int UseSdfId = Shader.PropertyToID("_UseSdf");
-    private static readonly int UseDetailNormalId = Shader.PropertyToID("_UseDetailNormal");
-    private static readonly int UseMacroNormalId = Shader.PropertyToID("_UseMacroNormal");
+    private static readonly int UseNormalMapId = Shader.PropertyToID("_UseNormalMap");
     private static readonly int UseEmissiveMapId = Shader.PropertyToID("_UseEmissiveMap");
     private static readonly int ManualLightCountId = Shader.PropertyToID("_ManualLightCount");
     private static readonly int ManualLightPositionsId = Shader.PropertyToID("_ManualLightPositionWS");
@@ -190,48 +173,24 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
 
         Material sourceMaterial = originalSharedMaterial != null ? originalSharedMaterial : targetRenderer.sharedMaterial;
         Texture baseColor = ResolveTexture(mapSet != null ? mapSet.baseColor : null, sourceMaterial, BaseColorMapId, MainTexId);
-        Texture detailNormal = ResolveTexture(mapSet != null ? mapSet.detailNormal : null, sourceMaterial, DetailNormalMapId);
-        Texture macroNormal = ResolveTexture(mapSet != null ? mapSet.macroNormal : null, sourceMaterial, MacroNormalMapId);
+        Texture normal = ResolveTexture(mapSet != null ? mapSet.normal : null, sourceMaterial, NormalMapId);
         Texture frontDepth = ResolveTexture(mapSet != null ? mapSet.frontDepth : null, sourceMaterial, FrontDepthMapId);
-        Texture backDepth = ResolveTexture(mapSet != null ? mapSet.backDepth : null, sourceMaterial, BackDepthMapId);
-        Texture thickness = ResolveTexture(mapSet != null ? mapSet.thickness : null, sourceMaterial, ThicknessMapId);
-        Texture packedMasks = ResolveTexture(mapSet != null ? mapSet.packedMasks : null, sourceMaterial, PackedMaskMapId);
-        Texture shellAtlas = ResolveTexture(mapSet != null ? mapSet.shellOccupancyAtlas : null, sourceMaterial, ShellAtlasId);
-        Texture sdf = ResolveTexture(mapSet != null ? mapSet.sdf : null, sourceMaterial, SdfMapId);
         Texture emissive = ResolveTexture(mapSet != null ? mapSet.emissive : null, sourceMaterial, EmissiveMapId);
 
         Color baseTint = (mapSet != null ? mapSet.baseColorTint : ResolveColor(sourceMaterial, BaseColorId, Color.white)) * baseColorTintMultiplier;
         Color emissiveTint = (mapSet != null ? mapSet.emissiveColor : ResolveColor(sourceMaterial, EmissiveColorId, Color.black)) * emissiveColorMultiplier;
 
         SetTextureIfPresent(propertyBlock, BaseColorMapId, baseColor);
-        SetTextureIfPresent(propertyBlock, DetailNormalMapId, detailNormal);
-        SetTextureIfPresent(propertyBlock, MacroNormalMapId, macroNormal);
+        SetTextureIfPresent(propertyBlock, NormalMapId, normal);
         SetTextureIfPresent(propertyBlock, FrontDepthMapId, frontDepth);
-        SetTextureIfPresent(propertyBlock, BackDepthMapId, backDepth);
-        SetTextureIfPresent(propertyBlock, ThicknessMapId, thickness);
-        SetTextureIfPresent(propertyBlock, PackedMaskMapId, packedMasks);
-        SetTextureIfPresent(propertyBlock, ShellAtlasId, shellAtlas);
-        SetTextureIfPresent(propertyBlock, SdfMapId, sdf);
         SetTextureIfPresent(propertyBlock, EmissiveMapId, emissive);
 
         propertyBlock.SetColor(BaseColorId, baseTint);
         propertyBlock.SetColor(EmissiveColorId, emissiveTint);
-        propertyBlock.SetFloat(VolumeThicknessId, mapSet != null ? mapSet.volumeThickness : 0.12f);
-        propertyBlock.SetFloat(ParallaxScaleId, mapSet != null ? mapSet.parallaxScale : 0.08f);
-        propertyBlock.SetFloat(RaymarchStepsId, mapSet != null ? Mathf.Max(1, mapSet.raymarchSteps) : 24f);
-        propertyBlock.SetFloat(ShadowStepsId, mapSet != null ? Mathf.Max(1, mapSet.shadowSteps) : 12f);
-        propertyBlock.SetFloat(ShellSliceCountId, mapSet != null ? Mathf.Max(1, mapSet.shellSliceCount) : 16f);
-        propertyBlock.SetVector(ShellAtlasGridId, mapSet != null ? new Vector4(
-            Mathf.Max(1, mapSet.shellAtlasGrid.x),
-            Mathf.Max(1, mapSet.shellAtlasGrid.y),
-            0f,
-            0f) : new Vector4(4f, 4f, 0f, 0f));
+        propertyBlock.SetFloat(VolumeThicknessId, mapSet != null ? mapSet.volumeThickness : 0.06f);
+        propertyBlock.SetFloat(ParallaxScaleId, mapSet != null ? mapSet.parallaxScale : 0.012f);
         propertyBlock.SetFloat(InvertFrontDepthId, mapSet != null && mapSet.invertFrontDepth ? 1f : 0f);
-        propertyBlock.SetFloat(InvertBackDepthId, mapSet != null && mapSet.invertBackDepth ? 1f : 0f);
-        propertyBlock.SetFloat(AutoCorrectDualDepthId, mapSet == null || mapSet.autoCorrectDualDepth ? 1f : 0f);
-        propertyBlock.SetFloat(MinimumDepthSeparationId, mapSet != null ? mapSet.minimumDepthSeparation : 0.01f);
-        propertyBlock.SetFloat(DetailNormalScaleId, mapSet != null ? mapSet.detailNormalScale : 1f);
-        propertyBlock.SetFloat(MacroNormalScaleId, mapSet != null ? mapSet.macroNormalScale : 1f);
+        propertyBlock.SetFloat(NormalScaleId, mapSet != null ? mapSet.normalScale : 1f);
         propertyBlock.SetFloat(AlphaCutoffId, mapSet != null ? mapSet.alphaCutoff : ResolveFloat(sourceMaterial, AlphaCutoffId, 0.08f));
         propertyBlock.SetFloat(PreserveBaseCoverageId, mapSet == null || mapSet.preserveBaseCoverage ? 1f : 0f);
         propertyBlock.SetFloat(CoverageThresholdId, mapSet != null ? mapSet.coverageThreshold : 0.02f);
@@ -239,15 +198,12 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
         propertyBlock.SetFloat(TransmissionStrengthId, mapSet != null ? mapSet.transmissionStrength : 0.35f);
         propertyBlock.SetFloat(AoStrengthId, mapSet != null ? mapSet.ambientOcclusionStrength : 1f);
         propertyBlock.SetFloat(SpecularStrengthId, mapSet != null ? mapSet.specularStrength : 1f);
-        propertyBlock.SetFloat(SdfSoftnessId, mapSet != null ? mapSet.sdfSoftness : 0.08f);
+        propertyBlock.SetFloat(MaterialAmbientOcclusionId, mapSet != null ? mapSet.ambientOcclusion : 1f);
+        propertyBlock.SetFloat(MaterialRoughnessId, mapSet != null ? mapSet.roughness : 0.55f);
+        propertyBlock.SetFloat(MaterialMetallicId, mapSet != null ? mapSet.metallic : 0f);
+        propertyBlock.SetFloat(MaterialThicknessId, mapSet != null ? mapSet.materialThickness : 1f);
         propertyBlock.SetFloat(UseFrontDepthId, frontDepth != null ? 1f : 0f);
-        propertyBlock.SetFloat(UseBackDepthId, backDepth != null ? 1f : 0f);
-        propertyBlock.SetFloat(UseThicknessId, thickness != null ? 1f : 0f);
-        propertyBlock.SetFloat(UseMaskMapId, packedMasks != null ? 1f : 0f);
-        propertyBlock.SetFloat(UseShellAtlasId, shellAtlas != null ? 1f : 0f);
-        propertyBlock.SetFloat(UseSdfId, sdf != null ? 1f : 0f);
-        propertyBlock.SetFloat(UseDetailNormalId, detailNormal != null ? 1f : 0f);
-        propertyBlock.SetFloat(UseMacroNormalId, macroNormal != null ? 1f : 0f);
+        propertyBlock.SetFloat(UseNormalMapId, normal != null ? 1f : 0f);
         propertyBlock.SetFloat(UseEmissiveMapId, emissive != null ? 1f : 0f);
 
         Color combinedAmbient = ambientColor.linear;
@@ -401,24 +357,14 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
                 destinationMaterial.SetColor(EmissiveColorId, sourceMaterial.GetColor(EmissiveColorId));
             }
 
-            if (sourceMaterial.HasProperty(DetailNormalMapId))
-            {
-                destinationMaterial.SetTexture(DetailNormalMapId, sourceMaterial.GetTexture(DetailNormalMapId));
-            }
-
-            if (sourceMaterial.HasProperty(PackedMaskMapId))
-            {
-                destinationMaterial.SetTexture(PackedMaskMapId, sourceMaterial.GetTexture(PackedMaskMapId));
-            }
-
-            if (sourceMaterial.HasProperty(ThicknessMapId))
-            {
-                destinationMaterial.SetTexture(ThicknessMapId, sourceMaterial.GetTexture(ThicknessMapId));
-            }
-
             if (sourceMaterial.HasProperty(FrontDepthMapId))
             {
                 destinationMaterial.SetTexture(FrontDepthMapId, sourceMaterial.GetTexture(FrontDepthMapId));
+            }
+
+            if (sourceMaterial.HasProperty(NormalMapId))
+            {
+                destinationMaterial.SetTexture(NormalMapId, sourceMaterial.GetTexture(NormalMapId));
             }
 
             if (sourceMaterial.HasProperty(AlphaCutoffId))

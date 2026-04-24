@@ -1,45 +1,52 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "FirstPersonSpriteVolumeMapSet", menuName = "Ultraloud/First Person Sprite/Volume Map Set")]
 public sealed class FirstPersonSpriteVolumeMapSet : ScriptableObject
 {
     [Header("Textures")]
     public Texture2D baseColor;
-    public Texture2D detailNormal;
-    public Texture2D macroNormal;
+    [FormerlySerializedAs("detailNormal")] public Texture2D normal;
     public Texture2D frontDepth;
-    public Texture2D backDepth;
-    public Texture2D thickness;
-    public Texture2D packedMasks;
-    public Texture2D shellOccupancyAtlas;
-    public Texture2D sdf;
     public Texture2D emissive;
 
-    [Header("Volume")]
-    [Min(0f)] public float volumeThickness = 0.12f;
-    [Min(0f)] public float parallaxScale = 0.08f;
-    [Min(1)] public int raymarchSteps = 24;
-    [Min(1)] public int shadowSteps = 12;
-    [Min(1)] public int shellSliceCount = 16;
-    public Vector2Int shellAtlasGrid = new(4, 4);
-
-    [Header("Depth Decoding")]
+    [Header("Shape Tricks")]
+    [Range(0f, 0.2f)] public float volumeThickness = 0.06f;
+    [Range(0f, 0.08f)] public float parallaxScale = 0.012f;
     public bool invertFrontDepth;
-    public bool invertBackDepth;
-    public bool autoCorrectDualDepth = true;
-    [Range(0f, 0.05f)] public float minimumDepthSeparation = 0.01f;
 
     [Header("Material")]
     public Color baseColorTint = Color.white;
     public Color emissiveColor = Color.black;
-    [Range(0f, 2f)] public float detailNormalScale = 1f;
-    [Range(0f, 2f)] public float macroNormalScale = 1f;
+    [Range(0f, 2f)] public float normalScale = 1f;
     [Range(0f, 1f)] public float alphaCutoff = 0.08f;
     public bool preserveBaseCoverage = true;
     [Range(0f, 0.2f)] public float coverageThreshold = 0.02f;
-    [Range(0f, 1f)] public float selfShadowStrength = 0.6f;
-    [Range(0f, 4f)] public float transmissionStrength = 0.35f;
+    [Range(0f, 1f)] public float selfShadowStrength = 0.25f;
+    [Range(0f, 4f)] public float transmissionStrength = 0.2f;
     [Range(0f, 4f)] public float ambientOcclusionStrength = 1f;
-    [Range(0f, 4f)] public float specularStrength = 1f;
-    [Range(0f, 1f)] public float sdfSoftness = 0.08f;
+    [Range(0f, 4f)] public float specularStrength = 1.2f;
+
+    [Header("Material Fallbacks")]
+    [Range(0f, 1f)] public float ambientOcclusion = 1f;
+    [Range(0f, 1f)] public float roughness = 0.55f;
+    [Range(0f, 1f)] public float metallic;
+    [Range(0f, 1f)] public float materialThickness = 0.65f;
+
+    private void OnValidate()
+    {
+        volumeThickness = Mathf.Clamp(volumeThickness, 0f, 0.2f);
+        parallaxScale = Mathf.Clamp(parallaxScale, 0f, 0.08f);
+        normalScale = Mathf.Clamp(normalScale, 0f, 2f);
+        alphaCutoff = Mathf.Clamp01(alphaCutoff);
+        coverageThreshold = Mathf.Clamp(coverageThreshold, 0f, 0.2f);
+        selfShadowStrength = Mathf.Clamp01(selfShadowStrength);
+        transmissionStrength = Mathf.Clamp(transmissionStrength, 0f, 4f);
+        ambientOcclusionStrength = Mathf.Clamp(ambientOcclusionStrength, 0f, 4f);
+        specularStrength = Mathf.Clamp(specularStrength, 0f, 4f);
+        ambientOcclusion = Mathf.Clamp01(ambientOcclusion);
+        roughness = Mathf.Clamp01(roughness);
+        metallic = Mathf.Clamp01(metallic);
+        materialThickness = Mathf.Clamp01(materialThickness);
+    }
 }

@@ -57,6 +57,7 @@ public sealed class RetroFpsController : MonoBehaviour
     [SerializeField, Min(0f)] private float headBobSideAmplitude = 0.03f;
     [SerializeField, Min(0f)] private float landingDip = 0.08f;
     [SerializeField, Min(0f)] private float landingRecoverSpeed = 10f;
+    [SerializeField] private bool driveViewModelPresentation = true;
     [SerializeField, Min(0f)] private float viewModelBobMultiplier = 1.4f;
     [SerializeField, Min(0f)] private float viewModelSwayPosition = 0.025f;
     [SerializeField, Min(0f)] private float viewModelSwayRotation = 4.5f;
@@ -91,6 +92,15 @@ public sealed class RetroFpsController : MonoBehaviour
     private Quaternion cameraBaseLocalRotation = Quaternion.identity;
     private Vector3 viewModelBaseCameraLocalPosition;
     private Quaternion viewModelBaseCameraLocalRotation = Quaternion.identity;
+
+    public Camera ViewCamera => viewCamera;
+    public Transform ViewModelRoot => viewModelRoot;
+    public InputActionAsset InputActionsAsset => inputActions;
+
+    public void SetViewModelPresentationEnabled(bool isEnabled)
+    {
+        driveViewModelPresentation = isEnabled;
+    }
 
     private void Reset()
     {
@@ -449,7 +459,7 @@ public sealed class RetroFpsController : MonoBehaviour
         float targetFov = baseFieldOfView + sprintFovBoost * sprintAlpha;
         viewCamera.fieldOfView = Mathf.Lerp(viewCamera.fieldOfView, targetFov, 1f - Mathf.Exp(-fovBlendSpeed * deltaTime));
 
-        if (viewModelRoot == null)
+        if (!driveViewModelPresentation || viewModelRoot == null)
         {
             return;
         }

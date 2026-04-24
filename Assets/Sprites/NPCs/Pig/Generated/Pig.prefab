@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5189782632158167029
+--- !u!1 &2979429319908061950
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,241 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2312013197728204632}
-  - component: {fileID: 1190953586053308616}
-  - component: {fileID: 1111193898822891076}
+  - component: {fileID: 2161894292670962521}
+  - component: {fileID: 3826471596501218221}
+  - component: {fileID: 5609674908130844124}
+  - component: {fileID: 1634411413869349658}
+  - component: {fileID: 9066546874688981827}
+  - component: {fileID: 2329832245787383114}
+  - component: {fileID: 7312467192231948501}
+  m_Layer: 0
+  m_Name: Pig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2161894292670962521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5630841822586472345}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &3826471596501218221
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.8
+  m_Height: 13.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5609674908130844124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
+  definition: {fileID: 11400000, guid: ac29913787d9b734dbc2a3e8e3ad736d, type: 2}
+  initialClipId: Idle
+  playOnEnable: 1
+  useUnscaledTime: 0
+  animationSpeed: 1
+  spriteRenderer: {fileID: 0}
+  billboardRoot: {fileID: 5630841822586472345}
+  facingReference: {fileID: 2161894292670962521}
+  targetCamera: {fileID: 0}
+  viewAngleSource: 0
+  billboardMode: 1
+  billboardEulerOffset: {x: 0, y: 0, z: 0}
+  logicalFacingOffset: 0
+--- !u!114 &1634411413869349658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
+  animator: {fileID: 5609674908130844124}
+  targetRenderer: {fileID: 6447873005006890028}
+  lightReferenceMode: 0
+  lightAnchor: {fileID: 0}
+  refreshLightsInEditor: 1
+  maxLights: 4
+  lightRefreshInterval: 0.15
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.5
+  lightingBasisMode: 2
+  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
+  alphaCutoff: 0.08
+  normalScale: 1
+  detailNormalInfluence: 0.55
+  macroNormalBend: 0.75
+  spriteAngleLightingInfluence: 0.35
+  twoSidedLighting: 1
+  flipBackfacingNormals: 1
+  wrapDiffuse: 0.35
+  ambientTopColor: {r: 0.52, g: 0.56, b: 0.62, a: 1}
+  ambientBottomColor: {r: 0.14, g: 0.12, b: 0.1, a: 1}
+  ambientIntensity: 1
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.25
+  surfaceRoughness: 0.7
+  specularStrength: 0.45
+  minSpecularPower: 6
+  maxSpecularPower: 24
+  rimColor: {r: 1, g: 1, b: 1, a: 1}
+  rimStrength: 0.18
+  rimPower: 3
+--- !u!114 &9066546874688981827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13199b9dc2b44059ae420f6b8f0a6b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteLocomotion
+  animator: {fileID: 5609674908130844124}
+  movementBody: {fileID: 0}
+  movementReference: {fileID: 2161894292670962521}
+  idleClipId: Idle
+  walkClipId: Walk
+  horizontalOnly: 1
+  walkThreshold: 0.05
+  speedSmoothing: 12
+--- !u!114 &2329832245787383114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 100
+  destroyOnDeath: 1
+  disableRenderersOnDeath: 1
+  disableCollidersOnDeath: 1
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 21300000, guid: d8ef5cda1b3a4fbd9ac17a7c48c72059, type: 3}
+  bloodSpraySprite: {fileID: 21300000, guid: a7f1c37d9e644f08b26891a75bc8d6ef, type: 3}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 1
+  spawnBloodOnDeath: 1
+  bloodSplatterScaleRange: {x: 0.62, y: 1.05}
+  bloodDecalCount: 5
+  bloodSprayParticleCount: 14
+  bloodSprayScaleRange: {x: 0.14, y: 0.3}
+  bloodSpraySpeedRange: {x: 1.6, y: 4.8}
+  deathBloodScaleMultiplier: 2.5
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.36
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.6
+--- !u!114 &7312467192231948501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6146816490b742aeb0d1ce80d4677be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroNpcAgent
+  behaviorMode: 1
+  idleMode: 1
+  startProvoked: 0
+  provokeOnDamage: 1
+  calmAfterLosingTarget: 1
+  target: {fileID: 0}
+  preferFpsControllerTarget: 1
+  targetTag: Player
+  awarenessRadius: 14
+  loseTargetRadius: 24
+  fieldOfView: 170
+  requireLineOfSight: 0
+  lineOfSightMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  targetSearchInterval: 0.35
+  eyeHeight: 0.8
+  targetAimHeight: 1
+  navigationMode: 1
+  navMeshAgent: {fileID: 0}
+  movementBody: {fileID: 0}
+  moveSpeed: 2.2
+  acceleration: 12
+  turnSpeed: 540
+  stoppingDistance: 1.25
+  repathInterval: 0.18
+  horizontalOnly: 1
+  attackRange: 1.65
+  attackDamage: 8
+  attackCooldown: 1.15
+  fleeDistance: 6
+  patrolPoints: []
+  loopPatrol: 1
+  patrolPointTolerance: 0.45
+  wanderRadius: 3.5
+  wanderPointTolerance: 0.45
+  idleWaitRange: {x: 0.75, y: 2}
+  damageable: {fileID: 2329832245787383114}
+--- !u!1 &8019504517728950326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5630841822586472345}
+  - component: {fileID: 7661925896849316374}
+  - component: {fileID: 6447873005006890028}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -18,36 +250,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2312013197728204632
+--- !u!4 &5630841822586472345
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5189782632158167029}
+  m_GameObject: {fileID: 8019504517728950326}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10.24, y: 15.36, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4264032858440099102}
+  m_Father: {fileID: 2161894292670962521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1190953586053308616
+--- !u!33 &7661925896849316374
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5189782632158167029}
+  m_GameObject: {fileID: 8019504517728950326}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1111193898822891076
+--- !u!23 &6447873005006890028
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5189782632158167029}
+  m_GameObject: {fileID: 8019504517728950326}
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -90,127 +322,3 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5933643961301759906
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4264032858440099102}
-  - component: {fileID: 7775770850680560092}
-  - component: {fileID: 5605959067095793699}
-  - component: {fileID: 4636860459861289451}
-  m_Layer: 0
-  m_Name: Pig
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4264032858440099102
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5933643961301759906}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.07237391, z: 0, w: 0.9973776}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2312013197728204632}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7775770850680560092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5933643961301759906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
-  definition: {fileID: 11400000, guid: ac29913787d9b734dbc2a3e8e3ad736d, type: 2}
-  initialClipId: Idle
-  playOnEnable: 1
-  useUnscaledTime: 0
-  animationSpeed: 1
-  spriteRenderer: {fileID: 0}
-  billboardRoot: {fileID: 2312013197728204632}
-  facingReference: {fileID: 4264032858440099102}
-  targetCamera: {fileID: 0}
-  viewAngleSource: 0
-  billboardMode: 1
-  billboardEulerOffset: {x: 0, y: 0, z: 0}
-  logicalFacingOffset: 0
---- !u!114 &5605959067095793699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5933643961301759906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
-  animator: {fileID: 7775770850680560092}
-  targetRenderer: {fileID: 1111193898822891076}
-  lightReferenceMode: 0
-  lightAnchor: {fileID: 0}
-  refreshLightsInEditor: 1
-  maxLights: 4
-  lightRefreshInterval: 0.15
-  directionalLightScale: 0.00001
-  punctualLightScale: 0.01
-  maxNormalizedLightIntensity: 1.5
-  lightingBasisMode: 2
-  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
-  alphaCutoff: 0.08
-  normalScale: 1
-  detailNormalInfluence: 0.55
-  macroNormalBend: 0.75
-  spriteAngleLightingInfluence: 0.35
-  twoSidedLighting: 1
-  flipBackfacingNormals: 1
-  wrapDiffuse: 0.35
-  ambientTopColor: {r: 0.52, g: 0.56, b: 0.62, a: 1}
-  ambientBottomColor: {r: 0.14, g: 0.12, b: 0.1, a: 1}
-  ambientIntensity: 1
-  includeRenderSettingsAmbient: 1
-  renderSettingsAmbientScale: 0.25
-  surfaceRoughness: 0.7
-  specularStrength: 0.45
-  minSpecularPower: 6
-  maxSpecularPower: 24
-  rimColor: {r: 1, g: 1, b: 1, a: 1}
-  rimStrength: 0.18
-  rimPower: 3
---- !u!114 &4636860459861289451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5933643961301759906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13199b9dc2b44059ae420f6b8f0a6b13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteLocomotion
-  animator: {fileID: 7775770850680560092}
-  movementBody: {fileID: 0}
-  movementReference: {fileID: 4264032858440099102}
-  idleClipId: Idle
-  walkClipId: Idle
-  horizontalOnly: 1
-  walkThreshold: 0.05
-  speedSmoothing: 12

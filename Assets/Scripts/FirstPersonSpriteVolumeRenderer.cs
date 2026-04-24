@@ -69,6 +69,8 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
 
     [SerializeField] private MeshRenderer targetRenderer;
     [SerializeField] private FirstPersonSpriteVolumeMapSet mapSet;
+    [SerializeField] private Color baseColorTintMultiplier = Color.white;
+    [SerializeField] private Color emissiveColorMultiplier = Color.white;
     [SerializeField] private LightReferenceMode lightReferenceMode = LightReferenceMode.HierarchyCamera;
     [SerializeField] private Transform lightAnchor;
     [Header("Scene Lights")]
@@ -106,6 +108,13 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
             mapSet = value;
             ApplyNow(forceLightRefresh: true);
         }
+    }
+
+    public void SetTintMultipliers(Color baseColorMultiplier, Color emissiveMultiplier)
+    {
+        baseColorTintMultiplier = baseColorMultiplier;
+        emissiveColorMultiplier = emissiveMultiplier;
+        ApplyNow(forceLightRefresh: true);
     }
 
     private void Reset()
@@ -191,8 +200,8 @@ public sealed class FirstPersonSpriteVolumeRenderer : MonoBehaviour
         Texture sdf = ResolveTexture(mapSet != null ? mapSet.sdf : null, sourceMaterial, SdfMapId);
         Texture emissive = ResolveTexture(mapSet != null ? mapSet.emissive : null, sourceMaterial, EmissiveMapId);
 
-        Color baseTint = mapSet != null ? mapSet.baseColorTint : ResolveColor(sourceMaterial, BaseColorId, Color.white);
-        Color emissiveTint = mapSet != null ? mapSet.emissiveColor : ResolveColor(sourceMaterial, EmissiveColorId, Color.black);
+        Color baseTint = (mapSet != null ? mapSet.baseColorTint : ResolveColor(sourceMaterial, BaseColorId, Color.white)) * baseColorTintMultiplier;
+        Color emissiveTint = (mapSet != null ? mapSet.emissiveColor : ResolveColor(sourceMaterial, EmissiveColorId, Color.black)) * emissiveColorMultiplier;
 
         SetTextureIfPresent(propertyBlock, BaseColorMapId, baseColor);
         SetTextureIfPresent(propertyBlock, DetailNormalMapId, detailNormal);

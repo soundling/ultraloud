@@ -14,6 +14,37 @@ public static class RetroPlayerRigSetupTool
     private const string NoFrictionMaterialPath = "Assets/Settings/PlayerNoFriction.physicMaterial";
     private const string GunMaterialPath = "Assets/Sprites/Gun.mat";
     private const string GunVolumeMapSetPath = "Assets/Datas/GunVolumeMapSet.asset";
+    private static readonly string[] WeaponDefinitionPaths =
+    {
+        "Assets/Weapons/Definitions/Pistol.asset",
+        "Assets/Weapons/Definitions/Rifle.asset",
+        "Assets/Weapons/Definitions/Shotgun.asset",
+        "Assets/Weapons/Definitions/GrenadeLauncher.asset"
+    };
+
+    private static readonly string[] MuzzleFlashSpritePaths =
+    {
+        "Assets/Sprites/Weapons/MuzzleFlash_Pistol.png",
+        "Assets/Sprites/Weapons/MuzzleFlash_Rifle.png",
+        "Assets/Sprites/Weapons/MuzzleFlash_Shotgun.png",
+        "Assets/Sprites/Weapons/MuzzleFlash_GrenadeLauncher.png"
+    };
+
+    private static readonly Vector2[] MuzzleFlashSpriteSizes =
+    {
+        new(0.38f, 0.28f),
+        new(0.62f, 0.24f),
+        new(0.82f, 0.48f),
+        new(0.78f, 0.56f)
+    };
+
+    private static readonly Vector3[] SpriteMuzzleLocalOffsets =
+    {
+        new(0.055f, 0f, 0f),
+        new(0.055f, 0f, 0f),
+        new(0.055f, 0f, 0f),
+        new(0.055f, 0f, 0f)
+    };
 
     [MenuItem("Tools/Ultraloud/Player/Setup Selected Or Scene Player")]
     private static void SetupSelectedOrScenePlayer()
@@ -159,6 +190,8 @@ public static class RetroPlayerRigSetupTool
 
         RetroFpsController controller = GetOrAddComponent<RetroFpsController>(root);
         ApplyControllerReferences(controller, viewCamera, quadObject.transform, capsuleVisual.GetComponent<Renderer>(), inputActions);
+        RetroWeaponSystem weaponSystem = GetOrAddComponent<RetroWeaponSystem>(root);
+        ApplyWeaponReferences(weaponSystem, viewCamera, quadObject.GetComponent<Renderer>(), quadObject.GetComponent<FirstPersonSpriteVolumeRenderer>(), inputActions);
 
         MeshRenderer capsuleRenderer = capsuleVisual.GetComponent<MeshRenderer>();
         if (capsuleRenderer != null)
@@ -211,7 +244,7 @@ public static class RetroPlayerRigSetupTool
         MeshRenderer renderer = quadObject.GetComponent<MeshRenderer>();
         if (renderer != null)
         {
-            renderer.shadowCastingMode = ShadowCastingMode.Off;
+            renderer.shadowCastingMode = ShadowCastingMode.On;
             renderer.receiveShadows = false;
 
             Material gunMaterial = AssetDatabase.LoadAssetAtPath<Material>(GunMaterialPath);
@@ -297,8 +330,79 @@ public static class RetroPlayerRigSetupTool
         serializedController.FindProperty("crouchActionName").stringValue = "Crouch";
         serializedController.FindProperty("lockCursorOnEnable").boolValue = true;
         serializedController.FindProperty("hideBodyRenderer").boolValue = true;
+        serializedController.FindProperty("driveViewModelPresentation").boolValue = false;
         serializedController.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(controller);
+    }
+
+    private static void ApplyWeaponReferences(
+        RetroWeaponSystem weaponSystem,
+        Camera viewCamera,
+        Renderer legacyViewModelRenderer,
+        FirstPersonSpriteVolumeRenderer spriteVolumeRenderer,
+        InputActionAsset inputActions)
+    {
+        SerializedObject serializedWeaponSystem = new SerializedObject(weaponSystem);
+        serializedWeaponSystem.FindProperty("viewCamera").objectReferenceValue = viewCamera;
+        serializedWeaponSystem.FindProperty("legacyViewModelRenderer").objectReferenceValue = legacyViewModelRenderer;
+        serializedWeaponSystem.FindProperty("legacySpriteVolumeRenderer").objectReferenceValue = spriteVolumeRenderer;
+        serializedWeaponSystem.FindProperty("inputActions").objectReferenceValue = inputActions;
+        serializedWeaponSystem.FindProperty("actionMapName").stringValue = "Player";
+        serializedWeaponSystem.FindProperty("attackActionName").stringValue = "Attack";
+        serializedWeaponSystem.FindProperty("lookActionName").stringValue = "Look";
+        serializedWeaponSystem.FindProperty("previousWeaponActionName").stringValue = "Previous";
+        serializedWeaponSystem.FindProperty("nextWeaponActionName").stringValue = "Next";
+        serializedWeaponSystem.FindProperty("useSpriteVolumeViewModel").boolValue = true;
+        serializedWeaponSystem.FindProperty("disableLegacyViewModel").boolValue = false;
+        serializedWeaponSystem.FindProperty("showDebugHud").boolValue = true;
+        serializedWeaponSystem.FindProperty("showCrosshair").boolValue = true;
+        AssignMuzzleFlashSprites(serializedWeaponSystem);
+        serializedWeaponSystem.ApplyModifiedPropertiesWithoutUndo();
+        EditorUtility.SetDirty(weaponSystem);
+    }
+
+    private static void AssignMuzzleFlashSprites(SerializedObject serializedWeaponSystem)
+    {
+        SerializedProperty definitionProperty = serializedWeaponSystem.FindProperty("weaponDefinitions");
+        SerializedProperty spriteProperty = serializedWeaponSystem.FindProperty("muzzleFlashSprites");
+        SerializedProperty sizeProperty = serializedWeaponSystem.FindProperty("muzzleFlashSpriteSizes");
+        SerializedProperty muzzleOffsetProperty = serializedWeaponSystem.FindProperty("spriteMuzzleLocalOffsets");
+
+        if (definitionProperty != null)
+        {
+            definitionProperty.arraySize = WeaponDefinitionPaths.Length;
+            for (int i = 0; i < WeaponDefinitionPaths.Length; i++)
+            {
+                definitionProperty.GetArrayElementAtIndex(i).objectReferenceValue =
+                    AssetDatabase.LoadAssetAtPath<RetroWeaponDefinition>(WeaponDefinitionPaths[i]);
+            }
+        }
+
+        if (spriteProperty == null || sizeProperty == null || muzzleOffsetProperty == null)
+        {
+            return;
+        }
+
+        spriteProperty.arraySize = MuzzleFlashSpritePaths.Length;
+        sizeProperty.arraySize = MuzzleFlashSpriteSizes.Length;
+        muzzleOffsetProperty.arraySize = SpriteMuzzleLocalOffsets.Length;
+
+        for (int i = 0; i < MuzzleFlashSpritePaths.Length; i++)
+        {
+            spriteProperty.GetArrayElementAtIndex(i).objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(MuzzleFlashSpritePaths[i]);
+        }
+
+        for (int i = 0; i < MuzzleFlashSpriteSizes.Length; i++)
+        {
+            sizeProperty.GetArrayElementAtIndex(i).vector2Value = MuzzleFlashSpriteSizes[i];
+        }
+
+        for (int i = 0; i < SpriteMuzzleLocalOffsets.Length; i++)
+        {
+            muzzleOffsetProperty.GetArrayElementAtIndex(i).vector3Value = SpriteMuzzleLocalOffsets[i];
+        }
+
+        serializedWeaponSystem.FindProperty("spriteMuzzleFlashDuration").floatValue = 0.055f;
     }
 
     private static void AssignSpriteVolumeMapSet(FirstPersonSpriteVolumeRenderer spriteVolumeRenderer)

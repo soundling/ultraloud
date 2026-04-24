@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd0d541012349b5b21c21bd0b6a8c5e, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: Assembly-CSharp::RetroWeaponDefinition
+  displayName: Pistol
+  kind: 0
+  fireMode: 0
+  magazineSize: 12
+  startingReserveAmmo: 72
+  maxReserveAmmo: 72
+  reloadDuration: 1.2
+  fireInterval: 0.28
+  autoReloadWhenEmpty: 1
+  dryFireCooldown: 0.16
+  dryFireKickPosition: {x: 0, y: 0.001, z: -0.012}
+  dryFireKickEuler: {x: 1.2, y: 0.25, z: 0.35}
+  spreadBloomPerShot: 0.18
+  maxSpreadAngle: 1.4
+  spreadRecoverySpeed: 6
+  movementSpreadPenalty: 0.25
+  damage: 28
+  range: 110
+  pellets: 1
+  spreadAngle: 0.45
+  impactForce: 18
+  projectileSpeed: 28
+  explosionRadius: 0
+  explosionForce: 0
+  fuseTime: 0
+  localPosition: {x: 0.02, y: -0.01, z: 0}
+  localEuler: {x: 0, y: 0, z: 0}
+  recoilPosition: {x: 0, y: 0.006, z: -0.06}
+  recoilEuler: {x: 4.5, y: 1.2, z: 1.6}
+  bodyColor: {r: 0.13, g: 0.13, b: 0.15, a: 1}
+  accentColor: {r: 0.72, g: 0.68, b: 0.58, a: 1}
+  primitiveMuzzleFlashScale: 0.18
+  bulletTrailEnabled: 1
+  bulletTrailColor: {r: 1, g: 0.82, b: 0.35, a: 0.78}
+  bulletTrailWidth: 0.018
+  bulletTrailDuration: 0.065
+  bulletTrailStartOffset: 0.08
+  bulletTrailEndOffset: 0.08
+  bulletTrailMaxSegmentsPerShot: 1
+  spriteMapSet: {fileID: 11400000, guid: 4df6d820be9549d0a1b6d3806918e8ae, type: 2}
+  spriteVisualLocalPosition: {x: -0.02, y: -0.02, z: 0}
+  spriteVisualLocalEuler: {x: 0, y: 0, z: 0}
+  spriteVisualSize: {x: 0.95, y: 0.72}
+  spriteMuzzleLocalPosition: {x: 0, y: 0.02, z: 0.34}
+  spriteMuzzleLocalOffset: {x: 0.055, y: 0, z: 0}
+  muzzleFlashSprite: {fileID: 21300000, guid: 871bc7d0c2fd4c70970dd1caee115c04, type: 3}
+  muzzleFlashSpriteSize: {x: 0.38, y: 0.28}
+  baseTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+  emissiveTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+  weaponBodyTint: 0.18
+  weaponAccentTint: 0.7

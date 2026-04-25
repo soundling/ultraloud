@@ -376,17 +376,19 @@ public sealed class RetroHybridTree : MonoBehaviour
 
     private void DestroyGeneratedRoot()
     {
-        Transform existing = transform.Find(GeneratedRootName);
-        if (existing == null)
+        GameObject rootToDestroy = generatedRoot;
+        if (rootToDestroy == null)
         {
-            return;
+            Transform existing = transform.Find(GeneratedRootName);
+            rootToDestroy = existing != null ? existing.gameObject : null;
         }
 
-        DestroyUnityObject(existing.gameObject);
-        if (generatedRoot == existing.gameObject)
+        if (rootToDestroy != null)
         {
-            generatedRoot = null;
+            DestroyUnityObject(rootToDestroy);
         }
+
+        generatedRoot = null;
     }
 
     private static void DestroyUnityObject(Object target)

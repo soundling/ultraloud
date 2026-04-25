@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d44b2cc5faa4b07a3257eb15cce74eb, type: 3}
+  m_Name: PigGoreProfile
+  m_EditorClassIdentifier: Assembly-CSharp::RetroGoreProfile
+  baseAtlas: {fileID: 2800000, guid: 486f369214974871b9e43575894b524c, type: 3}
+  normalAtlas: {fileID: 2800000, guid: 2ece9889ac97439cb6397833be908ff2, type: 3}
+  packedMasksAtlas: {fileID: 2800000, guid: 5c6efa4801e941a386a856df180c6bf1, type: 3}
+  emissionAtlas: {fileID: 2800000, guid: 7ce58ec627d0430f8bba4a230837996f, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  frameCount: 16
+  damageWindow: 0.95
+  clusterWindow: 0.18
+  minimumRecentDamage: 72
+  minimumClusterDamage: 48
+  minimumClusterHits: 4
+  highSingleHitDamage: 80
+  gibCooldown: 0.05
+  bloodPuffCount: 20
+  streakCount: 16
+  spriteChunkCount: 16
+  boneSpriteCount: 9
+  decalCount: 12
+  puffSizeRange: {x: 0.48, y: 1.25}
+  streakSizeRange: {x: 0.4, y: 1.35}
+  chunkSizeRange: {x: 0.3, y: 0.78}
+  decalSizeRange: {x: 1.05, y: 3.25}
+  spriteLifetimeRange: {x: 0.55, y: 1.55}
+  decalLifetimeRange: {x: 6, y: 14}
+  meshChunkCount: 18
+  meshChunkSizeRange: {x: 0.08, y: 0.26}
+  meshChunkLifetimeRange: {x: 2.6, y: 5.8}
+  meatChunkColor: {r: 0.45, g: 0.015, b: 0.018, a: 1}
+  skinChunkColor: {r: 0.95, g: 0.48, b: 0.42, a: 1}
+  boneChunkColor: {r: 0.92, g: 0.78, b: 0.55, a: 1}
+  radialSpeedRange: {x: 4.2, y: 13.5}
+  upwardSpeedRange: {x: 1.2, y: 6.8}
+  gravityRange: {x: 6, y: 14.5}
+  forwardBias: 0.68
+  intensityScale: 1.1
+  spawnRadius: 0.42
+  screenFlashRadius: 1.5

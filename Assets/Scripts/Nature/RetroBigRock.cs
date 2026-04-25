@@ -491,18 +491,20 @@ public sealed class RetroBigRock : MonoBehaviour
 
     private void DestroyGeneratedRoot()
     {
-        Transform existing = transform.Find(GeneratedRootName);
-        if (existing == null)
+        GameObject rootToDestroy = generatedRoot;
+        if (rootToDestroy == null)
         {
-            return;
+            Transform existing = transform.Find(GeneratedRootName);
+            rootToDestroy = existing != null ? existing.gameObject : null;
         }
 
-        DestroyUnityObject(existing.gameObject);
-        if (generatedRoot == existing.gameObject)
+        if (rootToDestroy != null)
         {
-            generatedRoot = null;
+            DestroyUnityObject(rootToDestroy);
         }
 
+        generatedRoot = null;
+        DestroyUnityObject(rockMesh);
         rockMesh = null;
         rockRenderer = null;
         rockCollider = null;

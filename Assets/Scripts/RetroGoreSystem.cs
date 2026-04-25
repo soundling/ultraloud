@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
@@ -24,6 +25,30 @@ public static class RetroGoreSystem
     private static RetroComponentPool<GoreMeshChunk> meshPool;
     private static Mesh chunkMesh;
 
+    private readonly struct GoreCollisionIgnore
+    {
+        public static readonly GoreCollisionIgnore None = new(null, null);
+
+        private readonly Transform victimRoot;
+        private readonly Transform sourceRoot;
+
+        public GoreCollisionIgnore(Transform victimRoot, Transform sourceRoot)
+        {
+            this.victimRoot = victimRoot;
+            this.sourceRoot = sourceRoot;
+        }
+
+        public bool Contains(Transform candidate)
+        {
+            return IsRootOrChild(candidate, victimRoot) || IsRootOrChild(candidate, sourceRoot);
+        }
+
+        private static bool IsRootOrChild(Transform candidate, Transform root)
+        {
+            return candidate != null && root != null && (candidate == root || candidate.IsChildOf(root));
+        }
+    }
+
     public static void SpawnGoreBurst(
         RetroGoreProfile profile,
         Vector3 center,
@@ -41,6 +66,7 @@ public static class RetroGoreSystem
         intensity = Mathf.Clamp(intensity * Mathf.Max(0.01f, profile.IntensityScale), 0.35f, 3f);
         Vector3 safeNormal = hitNormal.sqrMagnitude > 0.0001f ? hitNormal.normalized : Vector3.up;
         BuildSurfaceBasis(safeNormal, out Vector3 tangent, out Vector3 bitangent);
+        GoreCollisionIgnore ignored = new(victim, ResolveSourceRoot(source));
 
         RetroGameContext.Vfx.SpawnExplosionFlash(
             center,
@@ -48,14 +74,14 @@ public static class RetroGoreSystem
             profile.ScreenFlashRadius * Mathf.Sqrt(intensity),
             0.14f);
 
-        SpawnPuffs(profile, center, safeNormal, tangent, bitangent, victim, intensity);
-        SpawnStreaks(profile, center, safeNormal, tangent, bitangent, victim, intensity);
-        SpawnSpriteChunks(profile, center, safeNormal, tangent, bitangent, victim, intensity);
-        SpawnMeshChunks(profile, center, safeNormal, tangent, bitangent, victim, intensity);
-        SpawnDecals(profile, center, hitPoint, safeNormal, tangent, bitangent, victim, intensity);
+        SpawnPuffs(profile, center, safeNormal, tangent, bitangent, ignored, intensity);
+        SpawnStreaks(profile, center, safeNormal, tangent, bitangent, ignored, intensity);
+        SpawnSpriteChunks(profile, center, safeNormal, tangent, bitangent, ignored, intensity);
+        SpawnMeshChunks(profile, center, safeNormal, tangent, bitangent, ignored, intensity);
+        SpawnDecals(profile, center, hitPoint, safeNormal, tangent, bitangent, ignored, intensity);
     }
 
-    private static void SpawnPuffs(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
+    private static void SpawnPuffs(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, GoreCollisionIgnore ignored, float intensity)
     {
         int count = Mathf.RoundToInt(profile.BloodPuffCount * intensity);
         for (int i = 0; i < count; i++)
@@ -81,11 +107,11 @@ public static class RetroGoreSystem
                 billboard: true,
                 shrink: true,
                 collideAndStick: false,
-                ignoredRoot: victim);
+                ignored);
         }
     }
 
-    private static void SpawnStreaks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
+    private static void SpawnStreaks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, GoreCollisionIgnore ignored, float intensity)
     {
         int count = Mathf.RoundToInt(profile.StreakCount * intensity);
         for (int i = 0; i < count; i++)
@@ -111,26 +137,26 @@ public static class RetroGoreSystem
                 billboard: true,
                 shrink: true,
                 collideAndStick: false,
-                ignoredRoot: victim);
+                ignored);
         }
     }
 
-    private static void SpawnSpriteChunks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
+    private static void SpawnSpriteChunks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, GoreCollisionIgnore ignored, float intensity)
     {
         int meatCount = Mathf.RoundToInt(profile.SpriteChunkCount * intensity);
         for (int i = 0; i < meatCount; i++)
         {
-            SpawnChunkSprite(profile, center, normal, tangent, bitangent, victim, profile.RandomMeatFrame(), Random.value < 0.18f);
+            SpawnChunkSprite(profile, center, normal, tangent, bitangent, ignored, profile.RandomMeatFrame(), Random.value < 0.18f);
         }
 
         int boneCount = Mathf.RoundToInt(profile.BoneSpriteCount * intensity);
         for (int i = 0; i < boneCount; i++)
         {
-            SpawnChunkSprite(profile, center, normal, tangent, bitangent, victim, profile.RandomBoneFrame(), true);
+            SpawnChunkSprite(profile, center, normal, tangent, bitangent, ignored, profile.RandomBoneFrame(), true);
         }
     }
 
-    private static void SpawnChunkSprite(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, int frame, bool brighter)
+    private static void SpawnChunkSprite(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, GoreCollisionIgnore ignored, int frame, bool brighter)
     {
         Vector3 direction = RandomBurstDirection(normal, tangent, bitangent, profile.ForwardBias);
         float size = RandomRange(profile.ChunkSizeRange) * Random.Range(0.78f, 1.35f);
@@ -156,10 +182,10 @@ public static class RetroGoreSystem
             billboard: true,
             shrink: false,
             collideAndStick: true,
-            ignoredRoot: victim);
+            ignored);
     }
 
-    private static void SpawnMeshChunks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
+    private static void SpawnMeshChunks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, GoreCollisionIgnore ignored, float intensity)
     {
         int count = Mathf.RoundToInt(profile.MeshChunkCount * intensity);
         for (int i = 0; i < count; i++)
@@ -191,11 +217,11 @@ public static class RetroGoreSystem
                 RandomRange(profile.GravityRange),
                 Random.rotationUniform.eulerAngles * Random.Range(2.5f, 7.5f),
                 RandomRange(profile.MeshChunkLifetimeRange),
-                victim);
+                ignored);
         }
     }
 
-    private static void SpawnDecals(RetroGoreProfile profile, Vector3 center, Vector3 hitPoint, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
+    private static void SpawnDecals(RetroGoreProfile profile, Vector3 center, Vector3 hitPoint, Vector3 normal, Vector3 tangent, Vector3 bitangent, GoreCollisionIgnore ignored, float intensity)
     {
         int count = Mathf.RoundToInt(profile.DecalCount * Mathf.Lerp(0.8f, 1.35f, intensity - 0.75f));
         BuildHorizontalBasis(normal, out Vector3 groundTangent, out Vector3 groundBitangent);
@@ -211,7 +237,7 @@ public static class RetroGoreSystem
                 ? Vector3.down
                 : RandomBurstDirection(normal, tangent, bitangent, 0.25f);
 
-            if (!TryResolveStainSurface(origin, castDirection, victim, out Vector3 decalPosition, out Vector3 decalNormal))
+            if (!TryResolveStainSurface(origin, castDirection, ignored, out Vector3 decalPosition, out Vector3 decalNormal))
             {
                 continue;
             }
@@ -232,7 +258,7 @@ public static class RetroGoreSystem
                 billboard: false,
                 shrink: false,
                 collideAndStick: false,
-                ignoredRoot: victim);
+                ignored);
         }
     }
 
@@ -259,7 +285,7 @@ public static class RetroGoreSystem
             billboard: false,
             shrink: false,
             collideAndStick: false,
-            ignoredRoot: null);
+            GoreCollisionIgnore.None);
     }
 
     private static void PlaySprite(
@@ -277,7 +303,7 @@ public static class RetroGoreSystem
         bool billboard,
         bool shrink,
         bool collideAndStick,
-        Transform ignoredRoot)
+        GoreCollisionIgnore ignored)
     {
         if (profile.BaseAtlas == null)
         {
@@ -290,7 +316,7 @@ public static class RetroGoreSystem
             return;
         }
 
-        particle.Play(profile, frame, label, tint, size, velocity, gravity, angularSpeed, lifetime, billboard, shrink, collideAndStick, ignoredRoot);
+        particle.Play(profile, frame, label, tint, size, velocity, gravity, angularSpeed, lifetime, billboard, shrink, collideAndStick, ignored);
     }
 
     private static RetroComponentPool<GoreSpriteParticle> SpritePool
@@ -459,10 +485,10 @@ public static class RetroGoreSystem
         tangent = Vector3.Cross(Vector3.up, bitangent).normalized;
     }
 
-    private static bool TryResolveStainSurface(Vector3 origin, Vector3 preferredDirection, Transform ignoredRoot, out Vector3 position, out Vector3 normal)
+    private static bool TryResolveStainSurface(Vector3 origin, Vector3 preferredDirection, GoreCollisionIgnore ignored, out Vector3 position, out Vector3 normal)
     {
         Vector3 safeDirection = preferredDirection.sqrMagnitude > 0.0001f ? preferredDirection.normalized : Vector3.down;
-        if (TryRaycastSurface(origin, safeDirection, StainProbeDistance, ignoredRoot, out RaycastHit hit))
+        if (TryRaycastSurface(origin, safeDirection, StainProbeDistance, ignored, out RaycastHit hit))
         {
             position = hit.point + hit.normal * StainSurfaceOffset;
             normal = hit.normal;
@@ -470,7 +496,7 @@ public static class RetroGoreSystem
         }
 
         Vector3 overheadOrigin = origin + Vector3.up * StainProbeHeight;
-        if (TryRaycastSurface(overheadOrigin, Vector3.down, StainProbeDistance + StainProbeHeight, ignoredRoot, out hit))
+        if (TryRaycastSurface(overheadOrigin, Vector3.down, StainProbeDistance + StainProbeHeight, ignored, out hit))
         {
             position = hit.point + hit.normal * StainSurfaceOffset;
             normal = hit.normal;
@@ -478,7 +504,7 @@ public static class RetroGoreSystem
         }
 
         Vector3 backstopOrigin = origin - safeDirection * 0.35f + Vector3.up * (StainProbeHeight * 0.65f);
-        if (TryRaycastSurface(backstopOrigin, Vector3.down, StainProbeDistance, ignoredRoot, out hit))
+        if (TryRaycastSurface(backstopOrigin, Vector3.down, StainProbeDistance, ignored, out hit))
         {
             position = hit.point + hit.normal * StainSurfaceOffset;
             normal = hit.normal;
@@ -490,7 +516,7 @@ public static class RetroGoreSystem
         return false;
     }
 
-    private static bool TryRaycastSurface(Vector3 origin, Vector3 direction, float distance, Transform ignoredRoot, out RaycastHit bestHit)
+    private static bool TryRaycastSurface(Vector3 origin, Vector3 direction, float distance, GoreCollisionIgnore ignored, out RaycastHit bestHit)
     {
         bestHit = default;
         if (direction.sqrMagnitude < 0.0001f || distance <= 0f)
@@ -504,7 +530,7 @@ public static class RetroGoreSystem
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
-            if (hit.collider == null || IsIgnoredCollider(hit.collider, ignoredRoot) || hit.distance >= bestDistance)
+            if (hit.collider == null || IsIgnoredCollider(hit.collider, ignored) || hit.distance >= bestDistance)
             {
                 continue;
             }
@@ -517,7 +543,7 @@ public static class RetroGoreSystem
         return found;
     }
 
-    private static bool TryLinecastSurface(Vector3 start, Vector3 end, Transform ignoredRoot, out RaycastHit hit)
+    private static bool TryLinecastSurface(Vector3 start, Vector3 end, GoreCollisionIgnore ignored, out RaycastHit hit)
     {
         Vector3 delta = end - start;
         float distance = delta.magnitude;
@@ -527,18 +553,26 @@ public static class RetroGoreSystem
             return false;
         }
 
-        return TryRaycastSurface(start, delta / distance, distance, ignoredRoot, out hit);
+        return TryRaycastSurface(start, delta / distance, distance, ignored, out hit);
     }
 
-    private static bool IsIgnoredCollider(Collider collider, Transform ignoredRoot)
+    private static bool IsIgnoredCollider(Collider collider, GoreCollisionIgnore ignored)
     {
-        if (collider == null || ignoredRoot == null)
+        if (collider == null)
         {
-            return false;
+            return true;
         }
 
         Transform hitTransform = collider.transform;
-        return hitTransform == ignoredRoot || hitTransform.IsChildOf(ignoredRoot);
+        if (ignored.Contains(hitTransform))
+        {
+            return true;
+        }
+
+        return collider.GetComponentInParent<RetroFpsController>() != null
+            || collider.GetComponentInParent<RetroWeaponSystem>() != null
+            || collider.GetComponentInParent<PlayerInput>() != null
+            || collider.CompareTag("Player");
     }
 
     private static Quaternion ResolveSurfaceRotation(Vector3 normal)
@@ -546,6 +580,34 @@ public static class RetroGoreSystem
         Vector3 safeNormal = normal.sqrMagnitude > 0.0001f ? normal.normalized : Vector3.up;
         Vector3 up = Mathf.Abs(Vector3.Dot(safeNormal, Vector3.up)) > 0.98f ? Vector3.forward : Vector3.up;
         return Quaternion.LookRotation(safeNormal, up);
+    }
+
+    private static Transform ResolveSourceRoot(GameObject source)
+    {
+        if (source == null)
+        {
+            return null;
+        }
+
+        RetroFpsController controller = source.GetComponentInParent<RetroFpsController>();
+        if (controller != null)
+        {
+            return controller.transform;
+        }
+
+        RetroWeaponSystem weaponSystem = source.GetComponentInParent<RetroWeaponSystem>();
+        if (weaponSystem != null)
+        {
+            return weaponSystem.transform;
+        }
+
+        PlayerInput playerInput = source.GetComponentInParent<PlayerInput>();
+        if (playerInput != null)
+        {
+            return playerInput.transform;
+        }
+
+        return source.transform;
     }
 
     private static float RandomRange(Vector2 range)
@@ -720,7 +782,7 @@ public static class RetroGoreSystem
         private bool shrink;
         private bool collideAndStick;
         private bool stuck;
-        private Transform ignoredRoot;
+        private GoreCollisionIgnore ignored;
 
         public void Configure(Renderer renderer)
         {
@@ -732,7 +794,7 @@ public static class RetroGoreSystem
             }
         }
 
-        public void Play(RetroGoreProfile goreProfile, int frame, string label, Color tint, Vector2 size, Vector3 initialVelocity, float gravityStrength, float spinDegrees, float lifeSeconds, bool faceCamera, bool shrinkOverLife, bool stickOnCollision, Transform collisionIgnoredRoot)
+        public void Play(RetroGoreProfile goreProfile, int frame, string label, Color tint, Vector2 size, Vector3 initialVelocity, float gravityStrength, float spinDegrees, float lifeSeconds, bool faceCamera, bool shrinkOverLife, bool stickOnCollision, GoreCollisionIgnore collisionIgnore)
         {
             profile = goreProfile;
             gameObject.name = label;
@@ -751,7 +813,7 @@ public static class RetroGoreSystem
             shrink = shrinkOverLife;
             collideAndStick = stickOnCollision;
             stuck = false;
-            ignoredRoot = collisionIgnoredRoot;
+            ignored = collisionIgnore;
             initialTint = tint;
             SetVisible(true);
         }
@@ -761,14 +823,27 @@ public static class RetroGoreSystem
             this.pooledObject = pooledObject;
             age = 0f;
             stuck = false;
-            SetVisible(true);
+            ignored = GoreCollisionIgnore.None;
+            SetVisible(false);
         }
 
         public void OnPoolReturn(RetroPooledObject pooledObject)
         {
             profile = null;
             velocity = Vector3.zero;
-            ignoredRoot = null;
+            gravity = 0f;
+            angularSpeed = 0f;
+            lifetime = 0f;
+            age = 0f;
+            billboard = false;
+            shrink = false;
+            collideAndStick = false;
+            stuck = false;
+            ignored = GoreCollisionIgnore.None;
+            transform.localScale = Vector3.one;
+            Color hiddenTint = initialTint;
+            hiddenTint.a = 0f;
+            SetColorIfPresent(material, hiddenTint, "_BaseColor", "_UnlitColor", "_Color");
             SetVisible(false);
         }
 
@@ -796,7 +871,7 @@ public static class RetroGoreSystem
                 velocity *= Mathf.Exp(-1.15f * deltaTime);
                 Vector3 next = previous + velocity * deltaTime;
 
-                if (collideAndStick && velocity.sqrMagnitude > 0.01f && TryLinecastSurface(previous, next, ignoredRoot, out RaycastHit hit))
+                if (collideAndStick && velocity.sqrMagnitude > 0.01f && TryLinecastSurface(previous, next, ignored, out RaycastHit hit))
                 {
                     transform.position = hit.point + hit.normal * 0.018f;
                     transform.rotation = ResolveSurfaceRotation(hit.normal) * Quaternion.Euler(0f, 0f, roll);
@@ -941,7 +1016,7 @@ public static class RetroGoreSystem
         private int bounces;
         private bool spawnedImpactDecal;
         private bool hasWetSprite;
-        private Transform ignoredRoot;
+        private GoreCollisionIgnore ignored;
 
         public void Configure(Renderer renderer, Renderer spriteRenderer)
         {
@@ -961,7 +1036,7 @@ public static class RetroGoreSystem
             }
         }
 
-        public void Play(RetroGoreProfile goreProfile, Color color, int wetSpriteFrame, Color spriteTint, Vector2 spriteSize, float size, Vector3 initialVelocity, float gravityStrength, Vector3 spinDegrees, float lifeSeconds, Transform collisionIgnoredRoot)
+        public void Play(RetroGoreProfile goreProfile, Color color, int wetSpriteFrame, Color spriteTint, Vector2 spriteSize, float size, Vector3 initialVelocity, float gravityStrength, Vector3 spinDegrees, float lifeSeconds, GoreCollisionIgnore collisionIgnore)
         {
             profile = goreProfile;
             gameObject.name = "GoreMeshChunk";
@@ -981,7 +1056,7 @@ public static class RetroGoreSystem
             age = 0f;
             bounces = 0;
             spawnedImpactDecal = false;
-            ignoredRoot = collisionIgnoredRoot;
+            ignored = collisionIgnore;
             ConfigureWetSprite(wetSpriteFrame, spriteTint, spriteSize);
             SetVisible(true);
         }
@@ -990,16 +1065,33 @@ public static class RetroGoreSystem
         {
             this.pooledObject = pooledObject;
             age = 0f;
-            SetVisible(true);
+            SetVisible(false);
         }
 
         public void OnPoolReturn(RetroPooledObject pooledObject)
         {
             velocity = Vector3.zero;
             angularVelocity = Vector3.zero;
+            gravity = 0f;
+            lifetime = 0f;
+            age = 0f;
+            bounces = 0;
+            spawnedImpactDecal = false;
             profile = null;
             hasWetSprite = false;
-            ignoredRoot = null;
+            ignored = GoreCollisionIgnore.None;
+            transform.localScale = Vector3.one;
+            if (wetSpriteRenderer != null)
+            {
+                Transform spriteTransform = wetSpriteRenderer.transform;
+                spriteTransform.localPosition = Vector3.zero;
+                spriteTransform.localRotation = Quaternion.identity;
+                spriteTransform.localScale = Vector3.one;
+            }
+
+            Color hiddenTint = wetSpriteTint;
+            hiddenTint.a = 0f;
+            SetColorIfPresent(wetSpriteMaterial, hiddenTint, "_BaseColor", "_UnlitColor", "_Color");
             SetVisible(false);
         }
 
@@ -1027,7 +1119,7 @@ public static class RetroGoreSystem
             velocity *= Mathf.Exp(-0.42f * deltaTime);
             Vector3 next = previous + velocity * deltaTime;
 
-            if (velocity.sqrMagnitude > 0.01f && TryLinecastSurface(previous, next, ignoredRoot, out RaycastHit hit))
+            if (velocity.sqrMagnitude > 0.01f && TryLinecastSurface(previous, next, ignored, out RaycastHit hit))
             {
                 transform.position = hit.point + hit.normal * 0.025f;
                 if (!spawnedImpactDecal)

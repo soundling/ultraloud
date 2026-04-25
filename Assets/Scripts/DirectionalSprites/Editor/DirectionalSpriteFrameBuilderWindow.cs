@@ -765,7 +765,9 @@ internal static class DirectionalSpriteFrameBuilder
         {
             case "front": yawDegrees = 0f; symmetry = DirectionalSpriteSymmetry.Unique; return;
             case "frontright": yawDegrees = -45f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
+            case "frontsideright": yawDegrees = -67.5f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
             case "right": yawDegrees = -90f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
+            case "backsideright": yawDegrees = -112.5f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
             case "backright": yawDegrees = -135f; symmetry = DirectionalSpriteSymmetry.MirrorToOppositeSide; return;
             case "back": yawDegrees = 180f; symmetry = DirectionalSpriteSymmetry.Unique; return;
             case "backleft": yawDegrees = 135f; symmetry = DirectionalSpriteSymmetry.Unique; return;
@@ -773,7 +775,7 @@ internal static class DirectionalSpriteFrameBuilder
             case "frontleft": yawDegrees = 45f; symmetry = DirectionalSpriteSymmetry.Unique; return;
         }
 
-        throw new InvalidOperationException($"Unsupported angle label '{rawAngleLabel}'. Use Front, FrontRight, Right, BackRight, Back, BackLeft, Left, or FrontLeft.");
+        throw new InvalidOperationException($"Unsupported angle label '{rawAngleLabel}'. Use Front, FrontRight, FrontSideRight, Right, BackSideRight, BackRight, Back, BackLeft, Left, or FrontLeft.");
     }
 
     private static bool TryParseFramePath(string relativePath, out string clipId, out string angleLabel, out string frameKey, out DiscoveredLayerKind layerKind)

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2329832245787383114}
   - component: {fileID: 4826505066613901847}
   - component: {fileID: 7312467192231948501}
+  - component: {fileID: 8123456701234567890}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Untagged
@@ -282,6 +283,40 @@ MonoBehaviour:
   wanderPointTolerance: 0.45
   idleWaitRange: {x: 0.75, y: 2}
   damageable: {fileID: 2329832245787383114}
+--- !u!114 &8123456701234567890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ad02a35555486587dbd43c8f43c0cb, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroPetInteractable
+  interactionEnabled: 1
+  interactionName: Pig
+  interactionVerb: Pet
+  interactionMaxDistance: 3.2
+  interactionPriority: 0
+  interactionCue: {fileID: 0}
+  interactionMessage:
+  interactionMessageDuration: 1.6
+  onFocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnfocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  petCue: {fileID: 0}
+  playGeneratedSnort: 1
+  calmNpcOnPet: 1
+  cooldown: 0.45
+  petMessage: The pig snorts happily.
 --- !u!1 &8019504517728950326
 GameObject:
   m_ObjectHideFlags: 0

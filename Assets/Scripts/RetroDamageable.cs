@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
@@ -34,11 +35,13 @@ public sealed class RetroDamageable : MonoBehaviour
     private float currentHealth;
     private bool initialized;
     private bool dead;
+    private GameObject lastDamageSource;
     private static RetroComponentPool<BloodSpriteEffect> bloodEffectPool;
 
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
     public bool IsDead => dead;
+    public GameObject LastDamageSource => lastDamageSource;
 
     public event Action<RetroDamageable, float, Vector3, Vector3> Damaged;
     public event Action<RetroDamageable> Died;
@@ -51,6 +54,7 @@ public sealed class RetroDamageable : MonoBehaviour
     private void OnEnable()
     {
         InitializeHealth();
+        lastDamageSource = null;
     }
 
     private void OnValidate()
@@ -93,6 +97,7 @@ public sealed class RetroDamageable : MonoBehaviour
         }
 
         InitializeHealth();
+        lastDamageSource = source;
         bool lethal = currentHealth - damage <= 0f;
         if ((lethal && spawnBloodOnDeath) || (!lethal && spawnBloodOnHit))
         {
@@ -106,6 +111,30 @@ public sealed class RetroDamageable : MonoBehaviour
         {
             HandleDeath(source);
         }
+    }
+
+    public float Heal(float amount, GameObject source = null)
+    {
+        if (dead || amount <= 0f)
+        {
+            return 0f;
+        }
+
+        InitializeHealth();
+        float previousHealth = currentHealth;
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        float healed = currentHealth - previousHealth;
+        if (healed > 0f)
+        {
+            RetroGameContext.Events.Publish(new RetroHealEvent(source, this, healed, currentHealth));
+        }
+
+        return healed;
+    }
+
+    public float RestoreHealth(GameObject source = null)
+    {
+        return Heal(maxHealth, source);
     }
 
     private void InitializeHealth()
@@ -421,13 +450,21 @@ public sealed class RetroDamageable : MonoBehaviour
 
     private static bool IsIgnoredBloodCollider(Collider collider, Transform ignoredRoot)
     {
-        if (collider == null || ignoredRoot == null)
+        if (collider == null)
         {
-            return false;
+            return true;
         }
 
         Transform hitTransform = collider.transform;
-        return hitTransform == ignoredRoot || hitTransform.IsChildOf(ignoredRoot);
+        if (ignoredRoot != null && (hitTransform == ignoredRoot || hitTransform.IsChildOf(ignoredRoot)))
+        {
+            return true;
+        }
+
+        return collider.GetComponentInParent<RetroFpsController>() != null
+            || collider.GetComponentInParent<RetroWeaponSystem>() != null
+            || collider.GetComponentInParent<PlayerInput>() != null
+            || collider.CompareTag("Player");
     }
 
     private static Material CreateTransparentTextureMaterial(string materialName, Texture texture, Color tint)
@@ -585,20 +622,27 @@ public sealed class RetroDamageable : MonoBehaviour
 
             if (effectRenderer != null)
             {
-                effectRenderer.enabled = true;
+                effectRenderer.enabled = false;
             }
         }
 
         public void OnPoolReturn(RetroPooledObject pooledObject)
         {
             velocity = Vector3.zero;
+            lifetime = 0f;
             gravity = 0f;
             angularSpeed = 0f;
+            billboard = false;
+            shrinkOverLife = false;
             collideAndStick = false;
             stuck = false;
             ignoredRoot = null;
             surfaceOffset = 0.018f;
             age = 0f;
+            transform.localScale = Vector3.one;
+            Color hiddenTint = initialTint;
+            hiddenTint.a = 0f;
+            ApplyTint(hiddenTint);
             if (effectRenderer != null)
             {
                 effectRenderer.enabled = false;

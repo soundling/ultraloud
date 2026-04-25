@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2559790541101066739}
   - component: {fileID: 6250879708717319167}
   - component: {fileID: 7584147684641392264}
+  - component: {fileID: 9123456701234567890}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -218,6 +219,35 @@ MonoBehaviour:
   reloadTilt: 24
   switchDrop: 0.09
   switchYaw: 14
+--- !u!114 &9123456701234567890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49508971552978660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abc0d1f3ab94c0fb6a395bfba806173, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroInteractor
+  viewCamera: {fileID: 7054228522200109693}
+  inputActions: {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
+  actionMapName: Player
+  interactActionName: Interact
+  maxDistance: 3.2
+  probeRadius: 0.26
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 2
+  fallbackKeyboardKey: 20
+  promptKeyLabel: F
+  drawPrompt: 1
+  promptBackgroundColor: {r: 0, g: 0, b: 0, a: 0.58}
+  promptTextColor: {r: 1, g: 1, b: 1, a: 0.92}
+  keyBackgroundColor: {r: 1, g: 1, b: 1, a: 0.92}
+  keyTextColor: {r: 0, g: 0, b: 0, a: 0.92}
 --- !u!1 &3742490610285423131
 GameObject:
   m_ObjectHideFlags: 0

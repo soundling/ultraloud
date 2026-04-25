@@ -42,6 +42,22 @@ public readonly struct RetroDeathEvent
     }
 }
 
+public readonly struct RetroHealEvent
+{
+    public readonly GameObject Source;
+    public readonly RetroDamageable Target;
+    public readonly float Amount;
+    public readonly float CurrentHealth;
+
+    public RetroHealEvent(GameObject source, RetroDamageable target, float amount, float currentHealth)
+    {
+        Source = source;
+        Target = target;
+        Amount = amount;
+        CurrentHealth = currentHealth;
+    }
+}
+
 public readonly struct RetroWeaponFiredEvent
 {
     public readonly GameObject Owner;

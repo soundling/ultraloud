@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d85f9634ac49bc48bc3ef4b8c219b92, type: 3}
+  m_Name: LifeFountain
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteDefinition
+  defaultClipId: Idle
+  clips:
+  - clipId: Idle
+    loop: 1
+    framesPerSecond: 6
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: c63648faaba8cdba5cf1358157c488e5, type: 3}
+      - {fileID: 21300000, guid: 88775e64103a95327de292b81794cb6f, type: 3}
+      - {fileID: 21300000, guid: e568a2208c9b7003a1a7551d0279151d, type: 3}
+      - {fileID: 21300000, guid: b98eab53fb828f246ac0b93f901d5609, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: eef95d66ddb943beb490bf2ef70e1390, type: 3}
+      - {fileID: 2800000, guid: 9b6a4f8bbdd6fe51c4e81d39645d855d, type: 3}
+      - {fileID: 2800000, guid: 3330ef77b3914de288c12de9bf6fe051, type: 3}
+      - {fileID: 2800000, guid: 3c8f76501796028093606e98ec91e9dd, type: 3}
+    - label: FrontRight
+      yawDegrees: -45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: b622ba8fb6d3744c6850339d2ed7b36e, type: 3}
+      - {fileID: 21300000, guid: e28ed1856fcd430a8f51f56766a86f03, type: 3}
+      - {fileID: 21300000, guid: 5f4d96e571ce28a27eee351a522a6a18, type: 3}
+      - {fileID: 21300000, guid: fb2f6fc61a84016358a856b1543eda62, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 7f10cc339e5cc5b7c5f692fdd8f3f14c, type: 3}
+      - {fileID: 2800000, guid: 09caef74bcb5715f218fa3e7a97bded3, type: 3}
+      - {fileID: 2800000, guid: 60fc92be5a249071dd0615c536c81984, type: 3}
+      - {fileID: 2800000, guid: 00b5b86afdf3f3841c28f86660bca809, type: 3}
+    - label: FrontSideRight
+      yawDegrees: -67.5
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: edac32d522ebf551fb26df9558c10f28, type: 3}
+      - {fileID: 21300000, guid: dabec64a1267745fbbc4a9ccb2d7161e, type: 3}
+      - {fileID: 21300000, guid: d12270b1bf48bb310496d3f3b2eae11b, type: 3}
+      - {fileID: 21300000, guid: fd131d5c3a81c58f248163975284d475, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 2d5adcb7df0dffafcd74ce5f4d1e35a6, type: 3}
+      - {fileID: 2800000, guid: 219d96af0948b7576cc721e0b4813a9e, type: 3}
+      - {fileID: 2800000, guid: f18a511c28bd956865bb4286007a178b, type: 3}
+      - {fileID: 2800000, guid: e3ab55646049a25646eac3fc08b9f3b0, type: 3}
+    - label: Right
+      yawDegrees: -90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: ab634c32beaf2f9feb7e23638f97b8ea, type: 3}
+      - {fileID: 21300000, guid: 052e22bdca7d3acf883fe41212d56b36, type: 3}
+      - {fileID: 21300000, guid: d5a04962cc03844c890cb258067a7eaf, type: 3}
+      - {fileID: 21300000, guid: b8a3cfe727edfe702a5db6a06c54ef0b, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: db26daee685cf9a8b6ef8ff345f124a4, type: 3}
+      - {fileID: 2800000, guid: 9779e0f01706206a489d7dd3348eb212, type: 3}
+      - {fileID: 2800000, guid: ac80b5ba04e7ceddf1212935ca5aef9d, type: 3}
+      - {fileID: 2800000, guid: 6058a5741abc67c94f9cccfebccebacc, type: 3}
+    - label: BackSideRight
+      yawDegrees: -112.5
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 41e5756aa611d7d905ce65d2ce61e223, type: 3}
+      - {fileID: 21300000, guid: f7eb88f426cde391759c47dbfd1df7fa, type: 3}
+      - {fileID: 21300000, guid: a876e076aafb44df87426089a790f250, type: 3}
+      - {fileID: 21300000, guid: 22094978348ec1fb3b72c474120f11e7, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: e02804d237ccd98cd7140d4f2ed813ad, type: 3}
+      - {fileID: 2800000, guid: 531cc2cbf83e316cde1cf605cc36b409, type: 3}
+      - {fileID: 2800000, guid: 90fb38923bcbb017b1052a3899c490f1, type: 3}
+      - {fileID: 2800000, guid: d917921cf3343d71e4425f6185ad6516, type: 3}
+    - label: BackRight
+      yawDegrees: -135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: c01550508070c303eca10fc62acb9849, type: 3}
+      - {fileID: 21300000, guid: 34e4f4a6f43f67f507aae954c6653a99, type: 3}
+      - {fileID: 21300000, guid: 1c795ec03704d5377201eb5ce06c89dd, type: 3}
+      - {fileID: 21300000, guid: 23862be68969f9a6141a2efdf7805efd, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 446229eae7f0a9161961df14f8ac8d15, type: 3}
+      - {fileID: 2800000, guid: a42c42ad00b408e8f6fc2a4906cda592, type: 3}
+      - {fileID: 2800000, guid: cfffd8a35c900e39ac0aaa881e032cd1, type: 3}
+      - {fileID: 2800000, guid: 8071bc0369deaab1ae5427909c96085a, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: d98a9c1db66a2de48f09c3136c368978, type: 3}
+      - {fileID: 21300000, guid: 2c815e974bd50f7f35bb09b063780a59, type: 3}
+      - {fileID: 21300000, guid: 147d6207602dd3a3806dcbbf5f31f8a4, type: 3}
+      - {fileID: 21300000, guid: 2c55d97764fb8c2cdca131c7017c4970, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: e43c72793d98ea2569d458b41fd11f7e, type: 3}
+      - {fileID: 2800000, guid: f0bde063525ecc1a4e315ced99260c2c, type: 3}
+      - {fileID: 2800000, guid: 0135408c92f198d37892a79bf6e8182c, type: 3}
+      - {fileID: 2800000, guid: 9253365c6597f83cd3f05fb704f4e376, type: 3}

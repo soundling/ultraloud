@@ -168,7 +168,8 @@ public sealed class RetroGibOnDeath : MonoBehaviour
         }
 
         lastGibTime = Time.time;
-        RetroGoreSystem.SpawnGoreBurst(goreProfile, spawnCenter, hitPoint, hitNormal, transform, intensity * intensityMultiplier, source != null ? source.gameObject : null);
+        GameObject damageSource = damageable != null ? damageable.LastDamageSource : null;
+        RetroGoreSystem.SpawnGoreBurst(goreProfile, spawnCenter, hitPoint, hitNormal, transform, intensity * intensityMultiplier, damageSource);
     }
 
     private void AddSample(DamageSample sample)

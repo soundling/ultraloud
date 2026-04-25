@@ -82,18 +82,18 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float spriteAngleLightingInfluence = 0.35f;
     [SerializeField] private bool twoSidedLighting = true;
     [SerializeField] private bool flipBackfacingNormals = true;
-    [SerializeField, Range(0f, 1f)] private float wrapDiffuse = 0.35f;
+    [SerializeField, Range(0f, 1f)] private float wrapDiffuse = 0.18f;
     [SerializeField] private Color ambientTopColor = new(0.52f, 0.56f, 0.62f, 1f);
     [SerializeField] private Color ambientBottomColor = new(0.14f, 0.12f, 0.10f, 1f);
     [SerializeField, Min(0f)] private float ambientIntensity = 1f;
     [SerializeField] private bool includeRenderSettingsAmbient = true;
     [SerializeField, Min(0f)] private float renderSettingsAmbientScale = 0.25f;
-    [SerializeField, Range(0f, 1f)] private float surfaceRoughness = 0.7f;
-    [SerializeField, Range(0f, 4f)] private float specularStrength = 0.45f;
+    [SerializeField, Range(0f, 1f)] private float surfaceRoughness = 0.86f;
+    [SerializeField, Range(0f, 4f)] private float specularStrength = 0f;
     [SerializeField, Range(1f, 32f)] private float minSpecularPower = 6f;
-    [SerializeField, Range(1f, 128f)] private float maxSpecularPower = 24f;
+    [SerializeField, Range(1f, 128f)] private float maxSpecularPower = 18f;
     [SerializeField] private Color rimColor = Color.white;
-    [SerializeField, Range(0f, 4f)] private float rimStrength = 0.18f;
+    [SerializeField, Range(0f, 4f)] private float rimStrength = 0f;
     [SerializeField, Range(0.5f, 8f)] private float rimPower = 3f;
 
     private readonly Vector4[] manualLightPositions = new Vector4[MaxShaderLights];

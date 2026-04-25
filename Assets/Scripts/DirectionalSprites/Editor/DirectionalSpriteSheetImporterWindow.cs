@@ -572,8 +572,30 @@ internal static class DirectionalSpriteSheetImporter
         serializedRenderer.FindProperty("animator").objectReferenceValue = animator;
         serializedRenderer.FindProperty("targetRenderer").objectReferenceValue = quadRenderer;
         serializedRenderer.FindProperty("lightAnchor").objectReferenceValue = null;
+        SetFloatIfFound(serializedRenderer, "alphaCutoff", 0.1f);
+        SetFloatIfFound(serializedRenderer, "normalScale", 1.25f);
+        SetFloatIfFound(serializedRenderer, "detailNormalInfluence", 0.78f);
+        SetFloatIfFound(serializedRenderer, "macroNormalBend", 1.1f);
+        SetFloatIfFound(serializedRenderer, "spriteAngleLightingInfluence", 0.5f);
+        SetFloatIfFound(serializedRenderer, "wrapDiffuse", 0.18f);
+        SetFloatIfFound(serializedRenderer, "ambientIntensity", 0.9f);
+        SetFloatIfFound(serializedRenderer, "renderSettingsAmbientScale", 0.2f);
+        SetFloatIfFound(serializedRenderer, "surfaceRoughness", 0.86f);
+        SetFloatIfFound(serializedRenderer, "specularStrength", 0f);
+        SetFloatIfFound(serializedRenderer, "maxSpecularPower", 18f);
+        SetFloatIfFound(serializedRenderer, "rimStrength", 0f);
+        SetFloatIfFound(serializedRenderer, "rimPower", 3.2f);
         serializedRenderer.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(renderer);
+    }
+
+    private static void SetFloatIfFound(SerializedObject serializedObject, string propertyName, float value)
+    {
+        SerializedProperty property = serializedObject.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.floatValue = value;
+        }
     }
 
     private static void ApplyLocomotionConfiguration(

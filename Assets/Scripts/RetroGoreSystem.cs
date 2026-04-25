@@ -48,24 +48,24 @@ public static class RetroGoreSystem
             profile.ScreenFlashRadius * Mathf.Sqrt(intensity),
             0.14f);
 
-        SpawnPuffs(profile, center, safeNormal, tangent, bitangent, intensity);
-        SpawnStreaks(profile, center, safeNormal, tangent, bitangent, intensity);
-        SpawnSpriteChunks(profile, center, safeNormal, tangent, bitangent, intensity);
+        SpawnPuffs(profile, center, safeNormal, tangent, bitangent, victim, intensity);
+        SpawnStreaks(profile, center, safeNormal, tangent, bitangent, victim, intensity);
+        SpawnSpriteChunks(profile, center, safeNormal, tangent, bitangent, victim, intensity);
         SpawnMeshChunks(profile, center, safeNormal, tangent, bitangent, victim, intensity);
         SpawnDecals(profile, center, hitPoint, safeNormal, tangent, bitangent, victim, intensity);
     }
 
-    private static void SpawnPuffs(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity)
+    private static void SpawnPuffs(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
     {
         int count = Mathf.RoundToInt(profile.BloodPuffCount * intensity);
         for (int i = 0; i < count; i++)
         {
             Vector3 direction = RandomBurstDirection(normal, tangent, bitangent, profile.ForwardBias);
-            float size = RandomRange(profile.PuffSizeRange) * Random.Range(0.8f, 1.35f) * Mathf.Lerp(0.85f, 1.25f, intensity - 0.75f);
+            float size = RandomRange(profile.PuffSizeRange) * Random.Range(0.48f, 0.88f) * Mathf.Lerp(0.75f, 1.05f, intensity - 0.75f);
             Vector3 position = center + Random.insideUnitSphere * profile.SpawnRadius * Random.Range(0.2f, 1f);
             Vector3 velocity = direction * RandomRange(profile.RadialSpeedRange) * Random.Range(0.55f, 1.05f)
-                + Vector3.up * RandomRange(profile.UpwardSpeedRange) * 0.45f;
-            Color tint = Color.Lerp(new Color(0.78f, 0.02f, 0.015f, 0.96f), new Color(1f, 0.18f, 0.08f, 0.9f), Random.value * 0.35f);
+                + Vector3.up * RandomRange(profile.UpwardSpeedRange) * 0.18f;
+            Color tint = Color.Lerp(new Color(0.78f, 0.02f, 0.015f, 0.66f), new Color(1f, 0.18f, 0.08f, 0.56f), Random.value * 0.35f);
             PlaySprite(
                 profile,
                 profile.RandomBloodFrame(),
@@ -75,26 +75,27 @@ public static class RetroGoreSystem
                 new Vector2(size, size * Random.Range(0.75f, 1.25f)),
                 tint,
                 velocity,
-                RandomRange(profile.GravityRange) * 0.4f,
+                RandomRange(profile.GravityRange) * 1.05f,
                 Random.Range(-420f, 420f),
-                RandomRange(profile.SpriteLifetimeRange) * Random.Range(0.55f, 0.95f),
+                RandomRange(profile.SpriteLifetimeRange) * Random.Range(0.22f, 0.42f),
                 billboard: true,
                 shrink: true,
-                collideAndStick: false);
+                collideAndStick: false,
+                ignoredRoot: victim);
         }
     }
 
-    private static void SpawnStreaks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity)
+    private static void SpawnStreaks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
     {
         int count = Mathf.RoundToInt(profile.StreakCount * intensity);
         for (int i = 0; i < count; i++)
         {
             Vector3 direction = RandomBurstDirection(normal, tangent, bitangent, profile.ForwardBias + 0.15f);
-            float size = RandomRange(profile.StreakSizeRange) * Mathf.Lerp(0.75f, 1.15f, intensity - 0.75f);
+            float size = RandomRange(profile.StreakSizeRange) * Mathf.Lerp(0.62f, 0.95f, intensity - 0.75f);
             Vector3 position = center + Random.insideUnitSphere * profile.SpawnRadius * 0.7f;
             Vector3 velocity = direction * RandomRange(profile.RadialSpeedRange) * Random.Range(0.95f, 1.55f)
-                + Vector3.up * RandomRange(profile.UpwardSpeedRange) * 0.35f;
-            Color tint = Color.Lerp(new Color(0.62f, 0.01f, 0.012f, 0.94f), new Color(1f, 0.07f, 0.02f, 0.88f), Random.value * 0.42f);
+                + Vector3.up * RandomRange(profile.UpwardSpeedRange) * 0.14f;
+            Color tint = Color.Lerp(new Color(0.62f, 0.01f, 0.012f, 0.76f), new Color(1f, 0.07f, 0.02f, 0.66f), Random.value * 0.42f);
             PlaySprite(
                 profile,
                 profile.RandomStreakFrame(),
@@ -104,31 +105,32 @@ public static class RetroGoreSystem
                 new Vector2(size * Random.Range(0.45f, 0.8f), size * Random.Range(1.25f, 2.1f)),
                 tint,
                 velocity,
-                RandomRange(profile.GravityRange) * 0.55f,
+                RandomRange(profile.GravityRange) * 1.2f,
                 Random.Range(-720f, 720f),
-                RandomRange(profile.SpriteLifetimeRange) * Random.Range(0.65f, 1.1f),
+                RandomRange(profile.SpriteLifetimeRange) * Random.Range(0.28f, 0.52f),
                 billboard: true,
                 shrink: true,
-                collideAndStick: false);
+                collideAndStick: false,
+                ignoredRoot: victim);
         }
     }
 
-    private static void SpawnSpriteChunks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity)
+    private static void SpawnSpriteChunks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
     {
         int meatCount = Mathf.RoundToInt(profile.SpriteChunkCount * intensity);
         for (int i = 0; i < meatCount; i++)
         {
-            SpawnChunkSprite(profile, center, normal, tangent, bitangent, profile.RandomMeatFrame(), Random.value < 0.18f);
+            SpawnChunkSprite(profile, center, normal, tangent, bitangent, victim, profile.RandomMeatFrame(), Random.value < 0.18f);
         }
 
         int boneCount = Mathf.RoundToInt(profile.BoneSpriteCount * intensity);
         for (int i = 0; i < boneCount; i++)
         {
-            SpawnChunkSprite(profile, center, normal, tangent, bitangent, profile.RandomBoneFrame(), true);
+            SpawnChunkSprite(profile, center, normal, tangent, bitangent, victim, profile.RandomBoneFrame(), true);
         }
     }
 
-    private static void SpawnChunkSprite(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, int frame, bool brighter)
+    private static void SpawnChunkSprite(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, int frame, bool brighter)
     {
         Vector3 direction = RandomBurstDirection(normal, tangent, bitangent, profile.ForwardBias);
         float size = RandomRange(profile.ChunkSizeRange) * Random.Range(0.78f, 1.35f);
@@ -153,7 +155,8 @@ public static class RetroGoreSystem
             RandomRange(profile.SpriteLifetimeRange) * Random.Range(1f, 1.55f),
             billboard: true,
             shrink: false,
-            collideAndStick: true);
+            collideAndStick: true,
+            ignoredRoot: victim);
     }
 
     private static void SpawnMeshChunks(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
@@ -187,7 +190,8 @@ public static class RetroGoreSystem
                 velocity,
                 RandomRange(profile.GravityRange),
                 Random.rotationUniform.eulerAngles * Random.Range(2.5f, 7.5f),
-                RandomRange(profile.MeshChunkLifetimeRange));
+                RandomRange(profile.MeshChunkLifetimeRange),
+                victim);
         }
     }
 
@@ -227,7 +231,8 @@ public static class RetroGoreSystem
                 RandomRange(profile.DecalLifetimeRange),
                 billboard: false,
                 shrink: false,
-                collideAndStick: false);
+                collideAndStick: false,
+                ignoredRoot: victim);
         }
     }
 
@@ -253,7 +258,8 @@ public static class RetroGoreSystem
             RandomRange(profile.DecalLifetimeRange) * Random.Range(0.55f, 0.95f),
             billboard: false,
             shrink: false,
-            collideAndStick: false);
+            collideAndStick: false,
+            ignoredRoot: null);
     }
 
     private static void PlaySprite(
@@ -270,7 +276,8 @@ public static class RetroGoreSystem
         float lifetime,
         bool billboard,
         bool shrink,
-        bool collideAndStick)
+        bool collideAndStick,
+        Transform ignoredRoot)
     {
         if (profile.BaseAtlas == null)
         {
@@ -283,7 +290,7 @@ public static class RetroGoreSystem
             return;
         }
 
-        particle.Play(profile, frame, label, tint, size, velocity, gravity, angularSpeed, lifetime, billboard, shrink, collideAndStick);
+        particle.Play(profile, frame, label, tint, size, velocity, gravity, angularSpeed, lifetime, billboard, shrink, collideAndStick, ignoredRoot);
     }
 
     private static RetroComponentPool<GoreSpriteParticle> SpritePool
@@ -510,6 +517,19 @@ public static class RetroGoreSystem
         return found;
     }
 
+    private static bool TryLinecastSurface(Vector3 start, Vector3 end, Transform ignoredRoot, out RaycastHit hit)
+    {
+        Vector3 delta = end - start;
+        float distance = delta.magnitude;
+        if (distance <= 0.0001f)
+        {
+            hit = default;
+            return false;
+        }
+
+        return TryRaycastSurface(start, delta / distance, distance, ignoredRoot, out hit);
+    }
+
     private static bool IsIgnoredCollider(Collider collider, Transform ignoredRoot)
     {
         if (collider == null || ignoredRoot == null)
@@ -700,6 +720,7 @@ public static class RetroGoreSystem
         private bool shrink;
         private bool collideAndStick;
         private bool stuck;
+        private Transform ignoredRoot;
 
         public void Configure(Renderer renderer)
         {
@@ -711,7 +732,7 @@ public static class RetroGoreSystem
             }
         }
 
-        public void Play(RetroGoreProfile goreProfile, int frame, string label, Color tint, Vector2 size, Vector3 initialVelocity, float gravityStrength, float spinDegrees, float lifeSeconds, bool faceCamera, bool shrinkOverLife, bool stickOnCollision)
+        public void Play(RetroGoreProfile goreProfile, int frame, string label, Color tint, Vector2 size, Vector3 initialVelocity, float gravityStrength, float spinDegrees, float lifeSeconds, bool faceCamera, bool shrinkOverLife, bool stickOnCollision, Transform collisionIgnoredRoot)
         {
             profile = goreProfile;
             gameObject.name = label;
@@ -730,6 +751,7 @@ public static class RetroGoreSystem
             shrink = shrinkOverLife;
             collideAndStick = stickOnCollision;
             stuck = false;
+            ignoredRoot = collisionIgnoredRoot;
             initialTint = tint;
             SetVisible(true);
         }
@@ -746,6 +768,7 @@ public static class RetroGoreSystem
         {
             profile = null;
             velocity = Vector3.zero;
+            ignoredRoot = null;
             SetVisible(false);
         }
 
@@ -773,7 +796,7 @@ public static class RetroGoreSystem
                 velocity *= Mathf.Exp(-1.15f * deltaTime);
                 Vector3 next = previous + velocity * deltaTime;
 
-                if (collideAndStick && velocity.sqrMagnitude > 0.01f && Physics.Linecast(previous, next, out RaycastHit hit, ~0, QueryTriggerInteraction.Ignore))
+                if (collideAndStick && velocity.sqrMagnitude > 0.01f && TryLinecastSurface(previous, next, ignoredRoot, out RaycastHit hit))
                 {
                     transform.position = hit.point + hit.normal * 0.018f;
                     transform.rotation = ResolveSurfaceRotation(hit.normal) * Quaternion.Euler(0f, 0f, roll);
@@ -918,6 +941,7 @@ public static class RetroGoreSystem
         private int bounces;
         private bool spawnedImpactDecal;
         private bool hasWetSprite;
+        private Transform ignoredRoot;
 
         public void Configure(Renderer renderer, Renderer spriteRenderer)
         {
@@ -937,7 +961,7 @@ public static class RetroGoreSystem
             }
         }
 
-        public void Play(RetroGoreProfile goreProfile, Color color, int wetSpriteFrame, Color spriteTint, Vector2 spriteSize, float size, Vector3 initialVelocity, float gravityStrength, Vector3 spinDegrees, float lifeSeconds)
+        public void Play(RetroGoreProfile goreProfile, Color color, int wetSpriteFrame, Color spriteTint, Vector2 spriteSize, float size, Vector3 initialVelocity, float gravityStrength, Vector3 spinDegrees, float lifeSeconds, Transform collisionIgnoredRoot)
         {
             profile = goreProfile;
             gameObject.name = "GoreMeshChunk";
@@ -957,6 +981,7 @@ public static class RetroGoreSystem
             age = 0f;
             bounces = 0;
             spawnedImpactDecal = false;
+            ignoredRoot = collisionIgnoredRoot;
             ConfigureWetSprite(wetSpriteFrame, spriteTint, spriteSize);
             SetVisible(true);
         }
@@ -974,6 +999,7 @@ public static class RetroGoreSystem
             angularVelocity = Vector3.zero;
             profile = null;
             hasWetSprite = false;
+            ignoredRoot = null;
             SetVisible(false);
         }
 
@@ -1001,7 +1027,7 @@ public static class RetroGoreSystem
             velocity *= Mathf.Exp(-0.42f * deltaTime);
             Vector3 next = previous + velocity * deltaTime;
 
-            if (velocity.sqrMagnitude > 0.01f && Physics.Linecast(previous, next, out RaycastHit hit, ~0, QueryTriggerInteraction.Ignore))
+            if (velocity.sqrMagnitude > 0.01f && TryLinecastSurface(previous, next, ignoredRoot, out RaycastHit hit))
             {
                 transform.position = hit.point + hit.normal * 0.025f;
                 if (!spawnedImpactDecal)

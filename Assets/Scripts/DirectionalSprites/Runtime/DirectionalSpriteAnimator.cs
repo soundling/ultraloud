@@ -371,7 +371,10 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
             return;
         }
 
-        billboardRoot.rotation = Quaternion.LookRotation(directionToCamera.normalized, Vector3.up) * Quaternion.Euler(billboardEulerOffset);
+        // Unity sprites and the built-in Quad present their visual front on local -Z.
+        // Aim that side at the camera so the textured plane is not viewed from behind,
+        // which would visually invert left/right directional frames.
+        billboardRoot.rotation = Quaternion.LookRotation(-directionToCamera.normalized, Vector3.up) * Quaternion.Euler(billboardEulerOffset);
     }
 
     private float GetRelativeYaw(Transform cameraTransform)

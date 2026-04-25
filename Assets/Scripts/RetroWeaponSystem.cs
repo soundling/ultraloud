@@ -1456,7 +1456,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             if (TryResolveHitscanHit(origin, shotDirection, weapon.Range, out HitscanHitResult hit))
             {
                 trailEnd = hit.Point;
-                ApplyDamage(hit.Collider, weapon.Damage, hit.Point, hit.Normal);
+                ApplyDamageToHitTarget(hit.Collider, weapon.Damage, hit.Point, hit.Normal);
                 if (hit.Rigidbody != null)
                 {
                     hit.Rigidbody.AddForceAtPosition(shotDirection * weapon.ImpactForce, hit.Point, ForceMode.Impulse);
@@ -1915,7 +1915,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             weapon.BulletTrailDuration);
     }
 
-    private void ApplyDamage(Collider targetCollider, float damage, Vector3 hitPoint, Vector3 hitNormal)
+    private void ApplyDamageToHitTarget(Collider targetCollider, float damage, Vector3 hitPoint, Vector3 hitNormal)
     {
         if (targetCollider == null || damage <= 0f)
         {

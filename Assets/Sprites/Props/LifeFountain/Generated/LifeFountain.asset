@@ -33,7 +33,7 @@ MonoBehaviour:
       - {fileID: 2800000, guid: 3330ef77b3914de288c12de9bf6fe051, type: 3}
       - {fileID: 2800000, guid: 3c8f76501796028093606e98ec91e9dd, type: 3}
     - label: FrontRight
-      yawDegrees: -45
+      yawDegrees: 45
       symmetry: 1
       flipX: 0
       frames:
@@ -47,7 +47,7 @@ MonoBehaviour:
       - {fileID: 2800000, guid: 60fc92be5a249071dd0615c536c81984, type: 3}
       - {fileID: 2800000, guid: 00b5b86afdf3f3841c28f86660bca809, type: 3}
     - label: FrontSideRight
-      yawDegrees: -67.5
+      yawDegrees: 67.5
       symmetry: 1
       flipX: 0
       frames:
@@ -61,7 +61,7 @@ MonoBehaviour:
       - {fileID: 2800000, guid: f18a511c28bd956865bb4286007a178b, type: 3}
       - {fileID: 2800000, guid: e3ab55646049a25646eac3fc08b9f3b0, type: 3}
     - label: Right
-      yawDegrees: -90
+      yawDegrees: 90
       symmetry: 1
       flipX: 0
       frames:
@@ -75,7 +75,7 @@ MonoBehaviour:
       - {fileID: 2800000, guid: ac80b5ba04e7ceddf1212935ca5aef9d, type: 3}
       - {fileID: 2800000, guid: 6058a5741abc67c94f9cccfebccebacc, type: 3}
     - label: BackSideRight
-      yawDegrees: -112.5
+      yawDegrees: 112.5
       symmetry: 1
       flipX: 0
       frames:
@@ -89,7 +89,7 @@ MonoBehaviour:
       - {fileID: 2800000, guid: 90fb38923bcbb017b1052a3899c490f1, type: 3}
       - {fileID: 2800000, guid: d917921cf3343d71e4425f6185ad6516, type: 3}
     - label: BackRight
-      yawDegrees: -135
+      yawDegrees: 135
       symmetry: 1
       flipX: 0
       frames:

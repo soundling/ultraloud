@@ -6,6 +6,9 @@ public static class RetroGoreSystem
 {
     private const string SpriteShaderName = "Ultraloud/Effects/Gore Sprite HDRP";
     private const int MaxBounces = 2;
+    private const float StainSurfaceOffset = 0.018f;
+    private const float StainProbeDistance = 6.5f;
+    private const float StainProbeHeight = 1.35f;
 
     private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
     private static readonly int BaseMapId = Shader.PropertyToID("_BaseMap");
@@ -49,7 +52,7 @@ public static class RetroGoreSystem
         SpawnStreaks(profile, center, safeNormal, tangent, bitangent, intensity);
         SpawnSpriteChunks(profile, center, safeNormal, tangent, bitangent, intensity);
         SpawnMeshChunks(profile, center, safeNormal, tangent, bitangent, victim, intensity);
-        SpawnDecals(profile, center, hitPoint, safeNormal, tangent, bitangent, intensity);
+        SpawnDecals(profile, center, hitPoint, safeNormal, tangent, bitangent, victim, intensity);
     }
 
     private static void SpawnPuffs(RetroGoreProfile profile, Vector3 center, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity)
@@ -169,28 +172,44 @@ public static class RetroGoreSystem
                 + Vector3.up * RandomRange(profile.UpwardSpeedRange);
             float size = RandomRange(profile.MeshChunkSizeRange) * Random.Range(0.8f, 1.5f) * Mathf.Lerp(0.8f, 1.2f, intensity - 0.75f);
             Color color = ResolveChunkColor(profile);
-            chunk.Play(profile, color, size, velocity, RandomRange(profile.GravityRange), Random.rotationUniform.eulerAngles * Random.Range(2.5f, 7.5f), RandomRange(profile.MeshChunkLifetimeRange));
+            int spriteFrame = Random.value < 0.22f ? profile.RandomBoneFrame() : profile.RandomMeatFrame();
+            Color spriteTint = Color.Lerp(color, Color.white, Random.Range(0.05f, 0.22f));
+            Vector2 spriteSize = new(
+                size * Random.Range(2.1f, 3.9f),
+                size * Random.Range(1.85f, 3.45f));
+            chunk.Play(
+                profile,
+                color,
+                spriteFrame,
+                spriteTint,
+                spriteSize,
+                size,
+                velocity,
+                RandomRange(profile.GravityRange),
+                Random.rotationUniform.eulerAngles * Random.Range(2.5f, 7.5f),
+                RandomRange(profile.MeshChunkLifetimeRange));
         }
     }
 
-    private static void SpawnDecals(RetroGoreProfile profile, Vector3 center, Vector3 hitPoint, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity)
+    private static void SpawnDecals(RetroGoreProfile profile, Vector3 center, Vector3 hitPoint, Vector3 normal, Vector3 tangent, Vector3 bitangent, Transform victim, float intensity)
     {
         int count = Mathf.RoundToInt(profile.DecalCount * Mathf.Lerp(0.8f, 1.35f, intensity - 0.75f));
+        BuildHorizontalBasis(normal, out Vector3 groundTangent, out Vector3 groundBitangent);
         for (int i = 0; i < count; i++)
         {
-            Vector3 origin = center + Random.insideUnitSphere * profile.SpawnRadius * 0.45f;
-            Vector3 castDirection = (Random.value < 0.62f ? Vector3.down : RandomBurstDirection(normal, tangent, bitangent, 0.25f)).normalized;
-            Vector3 decalPosition = hitPoint + normal * 0.025f;
-            Vector3 decalNormal = normal;
-            if (Physics.Raycast(origin, castDirection, out RaycastHit hit, 5.5f, ~0, QueryTriggerInteraction.Ignore))
+            Vector2 scatter = Random.insideUnitCircle * Random.Range(0.15f, 1.95f) * Mathf.Lerp(0.75f, 1.2f, intensity - 0.75f);
+            Vector3 anchor = Vector3.Lerp(hitPoint, center, 0.35f);
+            Vector3 origin = anchor
+                + groundTangent * scatter.x
+                + groundBitangent * scatter.y
+                + normal * Random.Range(0.08f, 0.22f);
+            Vector3 castDirection = Random.value < 0.68f
+                ? Vector3.down
+                : RandomBurstDirection(normal, tangent, bitangent, 0.25f);
+
+            if (!TryResolveStainSurface(origin, castDirection, victim, out Vector3 decalPosition, out Vector3 decalNormal))
             {
-                decalPosition = hit.point + hit.normal * 0.018f;
-                decalNormal = hit.normal;
-            }
-            else
-            {
-                Vector2 scatter = Random.insideUnitCircle * Random.Range(0.15f, 1.75f);
-                decalPosition = hitPoint + tangent * scatter.x + bitangent * scatter.y + normal * (0.02f + i * 0.002f);
+                continue;
             }
 
             float size = RandomRange(profile.DecalSizeRange) * Random.Range(0.55f, 1.25f) * Mathf.Lerp(0.8f, 1.2f, intensity - 0.75f);
@@ -329,8 +348,23 @@ public static class RetroGoreSystem
         MeshRenderer renderer = chunkObject.AddComponent<MeshRenderer>();
         renderer.shadowCastingMode = ShadowCastingMode.On;
         renderer.receiveShadows = true;
+
+        GameObject wetSprite = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        wetSprite.name = "GoreMeshChunkWetSprite";
+        wetSprite.transform.SetParent(chunkObject.transform, false);
+        Collider wetSpriteCollider = wetSprite.GetComponent<Collider>();
+        if (wetSpriteCollider != null)
+        {
+            wetSpriteCollider.enabled = false;
+            Object.Destroy(wetSpriteCollider);
+        }
+
+        Renderer wetSpriteRenderer = wetSprite.GetComponent<Renderer>();
+        wetSpriteRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        wetSpriteRenderer.receiveShadows = false;
+
         GoreMeshChunk chunk = chunkObject.AddComponent<GoreMeshChunk>();
-        chunk.Configure(renderer);
+        chunk.Configure(renderer, wetSpriteRenderer);
         return chunk;
     }
 
@@ -406,6 +440,87 @@ public static class RetroGoreSystem
         bitangent = Vector3.Cross(normal, tangent).normalized;
     }
 
+    private static void BuildHorizontalBasis(Vector3 normal, out Vector3 tangent, out Vector3 bitangent)
+    {
+        Vector3 projected = Vector3.ProjectOnPlane(normal, Vector3.up);
+        if (projected.sqrMagnitude < 0.0001f)
+        {
+            projected = Vector3.forward;
+        }
+
+        bitangent = projected.normalized;
+        tangent = Vector3.Cross(Vector3.up, bitangent).normalized;
+    }
+
+    private static bool TryResolveStainSurface(Vector3 origin, Vector3 preferredDirection, Transform ignoredRoot, out Vector3 position, out Vector3 normal)
+    {
+        Vector3 safeDirection = preferredDirection.sqrMagnitude > 0.0001f ? preferredDirection.normalized : Vector3.down;
+        if (TryRaycastSurface(origin, safeDirection, StainProbeDistance, ignoredRoot, out RaycastHit hit))
+        {
+            position = hit.point + hit.normal * StainSurfaceOffset;
+            normal = hit.normal;
+            return true;
+        }
+
+        Vector3 overheadOrigin = origin + Vector3.up * StainProbeHeight;
+        if (TryRaycastSurface(overheadOrigin, Vector3.down, StainProbeDistance + StainProbeHeight, ignoredRoot, out hit))
+        {
+            position = hit.point + hit.normal * StainSurfaceOffset;
+            normal = hit.normal;
+            return true;
+        }
+
+        Vector3 backstopOrigin = origin - safeDirection * 0.35f + Vector3.up * (StainProbeHeight * 0.65f);
+        if (TryRaycastSurface(backstopOrigin, Vector3.down, StainProbeDistance, ignoredRoot, out hit))
+        {
+            position = hit.point + hit.normal * StainSurfaceOffset;
+            normal = hit.normal;
+            return true;
+        }
+
+        position = default;
+        normal = Vector3.up;
+        return false;
+    }
+
+    private static bool TryRaycastSurface(Vector3 origin, Vector3 direction, float distance, Transform ignoredRoot, out RaycastHit bestHit)
+    {
+        bestHit = default;
+        if (direction.sqrMagnitude < 0.0001f || distance <= 0f)
+        {
+            return false;
+        }
+
+        RaycastHit[] hits = Physics.RaycastAll(origin, direction.normalized, distance, ~0, QueryTriggerInteraction.Ignore);
+        float bestDistance = float.MaxValue;
+        bool found = false;
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+            if (hit.collider == null || IsIgnoredCollider(hit.collider, ignoredRoot) || hit.distance >= bestDistance)
+            {
+                continue;
+            }
+
+            bestHit = hit;
+            bestDistance = hit.distance;
+            found = true;
+        }
+
+        return found;
+    }
+
+    private static bool IsIgnoredCollider(Collider collider, Transform ignoredRoot)
+    {
+        if (collider == null || ignoredRoot == null)
+        {
+            return false;
+        }
+
+        Transform hitTransform = collider.transform;
+        return hitTransform == ignoredRoot || hitTransform.IsChildOf(ignoredRoot);
+    }
+
     private static Quaternion ResolveSurfaceRotation(Vector3 normal)
     {
         Vector3 safeNormal = normal.sqrMagnitude > 0.0001f ? normal.normalized : Vector3.up;
@@ -452,6 +567,54 @@ public static class RetroGoreSystem
         {
             name = "Generated Gore Mesh Chunk Material"
         };
+    }
+
+    private static void ApplyGoreSpriteProfile(Material material, RetroGoreProfile profile, int frame, Color tint)
+    {
+        if (material == null || profile == null)
+        {
+            return;
+        }
+
+        SetTextureIfPresent(material, profile.BaseAtlas, "_BaseMap", "_BaseColorMap", "_UnlitColorMap", "_MainTex");
+        SetTextureIfPresent(material, profile.NormalAtlas, "_NormalMap");
+        SetTextureIfPresent(material, profile.PackedMasksAtlas, "_PackedMasks");
+        SetTextureIfPresent(material, profile.EmissionAtlas, "_EmissionMap");
+        SetColorIfPresent(material, tint, "_BaseColor", "_UnlitColor", "_Color");
+        if (material.HasProperty(FrameUvRectId))
+        {
+            material.SetVector(FrameUvRectId, ResolveFrameRect(profile, frame));
+        }
+
+        if (material.HasProperty(UseNormalMapId))
+        {
+            material.SetFloat(UseNormalMapId, profile.NormalAtlas != null ? 1f : 0f);
+        }
+
+        if (material.HasProperty(UsePackedMasksId))
+        {
+            material.SetFloat(UsePackedMasksId, profile.PackedMasksAtlas != null ? 1f : 0f);
+        }
+
+        if (material.HasProperty(UseEmissionMapId))
+        {
+            material.SetFloat(UseEmissionMapId, profile.EmissionAtlas != null ? 1f : 0f);
+        }
+    }
+
+    private static Vector4 ResolveFrameRect(RetroGoreProfile profile, int frame)
+    {
+        int columns = profile.AtlasColumns;
+        int rows = profile.AtlasRows;
+        frame = Mathf.Clamp(frame, 0, profile.FrameCount - 1);
+        int column = frame % columns;
+        int row = frame / columns;
+        float invColumns = 1f / columns;
+        float invRows = 1f / rows;
+        float uMin = column * invColumns;
+        float vMax = 1f - row * invRows;
+        float vMin = vMax - invRows;
+        return new Vector4(uMin, vMin, invColumns, invRows);
     }
 
     private static void SetTextureIfPresent(Material material, Texture texture, params string[] propertyNames)
@@ -740,33 +903,48 @@ public static class RetroGoreSystem
     {
         private RetroPooledObject pooledObject;
         private Renderer chunkRenderer;
+        private Renderer wetSpriteRenderer;
         private Material material;
+        private Material wetSpriteMaterial;
         private RetroGoreProfile profile;
+        private Color wetSpriteTint;
         private Vector3 velocity;
         private Vector3 angularVelocity;
         private Vector3 baseScale;
+        private Vector3 wetSpriteBaseScale;
         private float gravity;
         private float lifetime;
         private float age;
         private int bounces;
         private bool spawnedImpactDecal;
+        private bool hasWetSprite;
 
-        public void Configure(Renderer renderer)
+        public void Configure(Renderer renderer, Renderer spriteRenderer)
         {
             chunkRenderer = renderer;
+            wetSpriteRenderer = spriteRenderer;
             material = CreateChunkMaterial();
             if (chunkRenderer != null)
             {
                 chunkRenderer.sharedMaterial = material;
             }
+
+            wetSpriteMaterial = CreateSpriteMaterial();
+            if (wetSpriteRenderer != null)
+            {
+                wetSpriteRenderer.sharedMaterial = wetSpriteMaterial;
+                wetSpriteRenderer.enabled = false;
+            }
         }
 
-        public void Play(RetroGoreProfile goreProfile, Color color, float size, Vector3 initialVelocity, float gravityStrength, Vector3 spinDegrees, float lifeSeconds)
+        public void Play(RetroGoreProfile goreProfile, Color color, int wetSpriteFrame, Color spriteTint, Vector2 spriteSize, float size, Vector3 initialVelocity, float gravityStrength, Vector3 spinDegrees, float lifeSeconds)
         {
             profile = goreProfile;
             gameObject.name = "GoreMeshChunk";
             EnsureMaterial();
             SetColorIfPresent(material, color, "_BaseColor", "_UnlitColor", "_Color");
+            SetFloatIfPresent(material, 0.86f, "_Smoothness");
+            SetFloatIfPresent(material, 0.08f, "_Metallic");
             transform.localScale = new Vector3(
                 size * Random.Range(0.65f, 1.45f),
                 size * Random.Range(0.55f, 1.25f),
@@ -779,6 +957,7 @@ public static class RetroGoreSystem
             age = 0f;
             bounces = 0;
             spawnedImpactDecal = false;
+            ConfigureWetSprite(wetSpriteFrame, spriteTint, spriteSize);
             SetVisible(true);
         }
 
@@ -794,13 +973,16 @@ public static class RetroGoreSystem
             velocity = Vector3.zero;
             angularVelocity = Vector3.zero;
             profile = null;
+            hasWetSprite = false;
             SetVisible(false);
         }
 
         public void OnPoolDestroy(RetroPooledObject pooledObject)
         {
             DestroyMaterial(material);
+            DestroyMaterial(wetSpriteMaterial);
             material = null;
+            wetSpriteMaterial = null;
             this.pooledObject = null;
         }
 
@@ -850,6 +1032,7 @@ public static class RetroGoreSystem
             float normalizedAge = Mathf.Clamp01(age / lifetime);
             float scale = Mathf.Lerp(1f, 0.55f, Mathf.SmoothStep(0.72f, 1f, normalizedAge));
             transform.localScale = baseScale * scale;
+            UpdateWetSprite(normalizedAge);
         }
 
         private void EnsureMaterial()
@@ -862,6 +1045,61 @@ public static class RetroGoreSystem
                     chunkRenderer.sharedMaterial = material;
                 }
             }
+
+            if (wetSpriteMaterial == null)
+            {
+                wetSpriteMaterial = CreateSpriteMaterial();
+                if (wetSpriteRenderer != null)
+                {
+                    wetSpriteRenderer.sharedMaterial = wetSpriteMaterial;
+                }
+            }
+        }
+
+        private void ConfigureWetSprite(int frame, Color tint, Vector2 spriteSize)
+        {
+            hasWetSprite = profile != null && profile.BaseAtlas != null && wetSpriteRenderer != null;
+            if (!hasWetSprite)
+            {
+                if (wetSpriteRenderer != null)
+                {
+                    wetSpriteRenderer.enabled = false;
+                }
+
+                return;
+            }
+
+            EnsureMaterial();
+            wetSpriteTint = tint;
+            ApplyGoreSpriteProfile(wetSpriteMaterial, profile, frame, wetSpriteTint);
+
+            Transform spriteTransform = wetSpriteRenderer.transform;
+            spriteTransform.localPosition = Random.onUnitSphere * Random.Range(0.08f, 0.18f);
+            spriteTransform.localRotation = Random.rotation;
+            spriteTransform.localScale = new Vector3(
+                Mathf.Max(0.01f, spriteSize.x),
+                Mathf.Max(0.01f, spriteSize.y),
+                1f);
+            wetSpriteBaseScale = spriteTransform.localScale;
+            wetSpriteRenderer.enabled = true;
+        }
+
+        private void UpdateWetSprite(float normalizedAge)
+        {
+            if (!hasWetSprite || wetSpriteRenderer == null)
+            {
+                return;
+            }
+
+            float fade = 1f - Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.68f, 1f, normalizedAge));
+            Color tint = wetSpriteTint;
+            tint.a *= fade;
+            SetColorIfPresent(wetSpriteMaterial, tint, "_BaseColor", "_UnlitColor", "_Color");
+
+            Transform spriteTransform = wetSpriteRenderer.transform;
+            float scale = Mathf.Lerp(1f, 0.74f, Mathf.SmoothStep(0.74f, 1f, normalizedAge));
+            spriteTransform.localScale = wetSpriteBaseScale * scale;
+            wetSpriteRenderer.enabled = tint.a > 0.01f;
         }
 
         private void SetVisible(bool visible)
@@ -869,6 +1107,11 @@ public static class RetroGoreSystem
             if (chunkRenderer != null)
             {
                 chunkRenderer.enabled = visible;
+            }
+
+            if (wetSpriteRenderer != null)
+            {
+                wetSpriteRenderer.enabled = visible && hasWetSprite;
             }
         }
     }

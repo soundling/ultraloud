@@ -6,6 +6,9 @@ using Random = UnityEngine.Random;
 [DisallowMultipleComponent]
 public sealed class RetroDamageable : MonoBehaviour
 {
+    private const float BloodDecalProbeHeight = 1.2f;
+    private const float BloodDecalProbeDistance = 5.5f;
+
     [SerializeField, Min(1f)] private float maxHealth = 100f;
     [SerializeField] private bool destroyOnDeath = true;
     [SerializeField] private bool disableRenderersOnDeath = true;
@@ -93,7 +96,7 @@ public sealed class RetroDamageable : MonoBehaviour
         bool lethal = currentHealth - damage <= 0f;
         if ((lethal && spawnBloodOnDeath) || (!lethal && spawnBloodOnHit))
         {
-            SpawnBloodSplatter(hitPoint, hitNormal, lethal ? deathBloodScaleMultiplier : 1f);
+            SpawnBloodSplatter(hitPoint, hitNormal, lethal ? deathBloodScaleMultiplier : 1f, lethal);
         }
 
         currentHealth = Mathf.Max(0f, currentHealth - damage);
@@ -133,7 +136,7 @@ public sealed class RetroDamageable : MonoBehaviour
         return transform.position;
     }
 
-    private void SpawnBloodSplatter(Vector3 hitPoint, Vector3 hitNormal, float scaleMultiplier)
+    private void SpawnBloodSplatter(Vector3 hitPoint, Vector3 hitNormal, float scaleMultiplier, bool deathBurst)
     {
         if ((bloodSplatterSprite == null && bloodSpraySprite == null) || scaleMultiplier <= 0f)
         {
@@ -152,11 +155,13 @@ public sealed class RetroDamageable : MonoBehaviour
                 Vector2 scatter = mainDecal
                     ? Vector2.zero
                     : Random.insideUnitCircle * bloodDecalScatterRadius * Random.Range(0.25f, 1f) * scaleMultiplier;
-                Vector3 decalPosition = hitPoint
-                    + tangent * scatter.x
-                    + bitangent * scatter.y
-                    + safeNormal * (bloodSurfaceOffset + i * 0.0015f);
-                Quaternion decalRotation = ResolveBloodRotation(safeNormal)
+
+                if (!TryResolveBloodDecalSurface(hitPoint, safeNormal, tangent, bitangent, scatter, out Vector3 decalPosition, out Vector3 decalNormal))
+                {
+                    continue;
+                }
+
+                Quaternion decalRotation = ResolveBloodRotation(decalNormal)
                     * Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
                 float decalScale = Random.Range(bloodSplatterScaleRange.x, bloodSplatterScaleRange.y)
                     * scaleMultiplier
@@ -176,12 +181,14 @@ public sealed class RetroDamageable : MonoBehaviour
                     decalPosition,
                     decalRotation,
                     decalSize,
-                    bloodSplatterLifetime * Random.Range(0.82f, 1.18f),
+                    Mathf.Max(bloodSplatterLifetime, deathBurst ? 5.25f : 3.2f) * Random.Range(0.82f, 1.18f),
                     Vector3.zero,
                     0f,
                     0f,
                     billboard: false,
-                    shrinkOverLife: false);
+                    shrinkOverLife: false,
+                    collideAndStick: false,
+                    ignoredRoot: transform);
             }
         }
 
@@ -225,7 +232,9 @@ public sealed class RetroDamageable : MonoBehaviour
                 gravity: 7.5f,
                 angularSpeed: Random.Range(-480f, 480f),
                 billboard: true,
-                shrinkOverLife: true);
+                shrinkOverLife: true,
+                collideAndStick: true,
+                ignoredRoot: transform);
         }
     }
 
@@ -241,7 +250,9 @@ public sealed class RetroDamageable : MonoBehaviour
         float gravity,
         float angularSpeed,
         bool billboard,
-        bool shrinkOverLife)
+        bool shrinkOverLife,
+        bool collideAndStick,
+        Transform ignoredRoot)
     {
         if (texture == null)
         {
@@ -256,7 +267,7 @@ public sealed class RetroDamageable : MonoBehaviour
 
         effect.gameObject.name = objectName;
         effect.transform.localScale = new Vector3(Mathf.Max(0.01f, size.x), Mathf.Max(0.01f, size.y), 1f);
-        effect.Initialize(objectName, texture, tint, lifetime, velocity, gravity, angularSpeed, billboard, shrinkOverLife);
+        effect.Initialize(objectName, texture, tint, lifetime, velocity, gravity, angularSpeed, billboard, shrinkOverLife, collideAndStick, ignoredRoot, bloodSurfaceOffset);
     }
 
     private static RetroComponentPool<BloodSpriteEffect> BloodEffectPool
@@ -317,6 +328,106 @@ public sealed class RetroDamageable : MonoBehaviour
         Vector3 seed = Mathf.Abs(Vector3.Dot(normal, Vector3.up)) > 0.92f ? Vector3.forward : Vector3.up;
         tangent = Vector3.Cross(seed, normal).normalized;
         bitangent = Vector3.Cross(normal, tangent).normalized;
+    }
+
+    private static void BuildHorizontalBasis(Vector3 normal, out Vector3 tangent, out Vector3 bitangent)
+    {
+        Vector3 projected = Vector3.ProjectOnPlane(normal, Vector3.up);
+        if (projected.sqrMagnitude < 0.0001f)
+        {
+            projected = Vector3.forward;
+        }
+
+        bitangent = projected.normalized;
+        tangent = Vector3.Cross(Vector3.up, bitangent).normalized;
+    }
+
+    private bool TryResolveBloodDecalSurface(
+        Vector3 hitPoint,
+        Vector3 safeNormal,
+        Vector3 tangent,
+        Vector3 bitangent,
+        Vector2 scatter,
+        out Vector3 decalPosition,
+        out Vector3 decalNormal)
+    {
+        BuildHorizontalBasis(safeNormal, out Vector3 groundTangent, out Vector3 groundBitangent);
+        Vector3 scatterOffset = groundTangent * scatter.x + groundBitangent * scatter.y;
+        Vector3 origin = hitPoint
+            + scatterOffset
+            + safeNormal * Mathf.Max(0.06f, bloodSurfaceOffset + 0.05f);
+        Vector3 lateral = tangent * Random.Range(-0.35f, 0.35f) + bitangent * Random.Range(-0.25f, 0.25f);
+        Vector3 sprayDirection = safeNormal * Random.Range(0.55f, 1.15f)
+            + lateral
+            + Vector3.down * Random.Range(0f, 0.28f);
+        if (sprayDirection.sqrMagnitude < 0.0001f)
+        {
+            sprayDirection = Vector3.down;
+        }
+
+        if (TryRaycastBloodSurface(origin, sprayDirection, BloodDecalProbeDistance, transform, out RaycastHit hit)
+            || TryRaycastBloodSurface(origin + Vector3.up * BloodDecalProbeHeight, Vector3.down, BloodDecalProbeDistance + BloodDecalProbeHeight, transform, out hit)
+            || TryRaycastBloodSurface(hitPoint + scatterOffset + Vector3.up * BloodDecalProbeHeight, Vector3.down, BloodDecalProbeDistance + BloodDecalProbeHeight, transform, out hit))
+        {
+            decalPosition = hit.point + hit.normal * Mathf.Max(0.006f, bloodSurfaceOffset);
+            decalNormal = hit.normal;
+            return true;
+        }
+
+        decalPosition = default;
+        decalNormal = Vector3.up;
+        return false;
+    }
+
+    private static bool TryLinecastBloodSurface(Vector3 start, Vector3 end, Transform ignoredRoot, out RaycastHit hit)
+    {
+        Vector3 delta = end - start;
+        float distance = delta.magnitude;
+        if (distance <= 0.0001f)
+        {
+            hit = default;
+            return false;
+        }
+
+        return TryRaycastBloodSurface(start, delta / distance, distance, ignoredRoot, out hit);
+    }
+
+    private static bool TryRaycastBloodSurface(Vector3 origin, Vector3 direction, float distance, Transform ignoredRoot, out RaycastHit bestHit)
+    {
+        bestHit = default;
+        if (direction.sqrMagnitude < 0.0001f || distance <= 0f)
+        {
+            return false;
+        }
+
+        RaycastHit[] hits = Physics.RaycastAll(origin, direction.normalized, distance, ~0, QueryTriggerInteraction.Ignore);
+        float bestDistance = float.MaxValue;
+        bool found = false;
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit candidate = hits[i];
+            if (candidate.collider == null || IsIgnoredBloodCollider(candidate.collider, ignoredRoot) || candidate.distance >= bestDistance)
+            {
+                continue;
+            }
+
+            bestHit = candidate;
+            bestDistance = candidate.distance;
+            found = true;
+        }
+
+        return found;
+    }
+
+    private static bool IsIgnoredBloodCollider(Collider collider, Transform ignoredRoot)
+    {
+        if (collider == null || ignoredRoot == null)
+        {
+            return false;
+        }
+
+        Transform hitTransform = collider.transform;
+        return hitTransform == ignoredRoot || hitTransform.IsChildOf(ignoredRoot);
     }
 
     private static Material CreateTransparentTextureMaterial(string materialName, Texture texture, Color tint)
@@ -414,9 +525,13 @@ public sealed class RetroDamageable : MonoBehaviour
         private float age;
         private float gravity;
         private float angularSpeed;
+        private float surfaceOffset;
         private float rollDegrees;
         private bool billboard;
         private bool shrinkOverLife;
+        private bool collideAndStick;
+        private bool stuck;
+        private Transform ignoredRoot;
 
         public void ConfigureRenderer(Renderer renderer)
         {
@@ -432,7 +547,10 @@ public sealed class RetroDamageable : MonoBehaviour
             float gravityStrength,
             float spinDegreesPerSecond,
             bool faceCamera,
-            bool shrink)
+            bool shrink,
+            bool stickOnCollision,
+            Transform collisionIgnoredRoot,
+            float collisionSurfaceOffset)
         {
             if (effectRenderer == null)
             {
@@ -448,6 +566,10 @@ public sealed class RetroDamageable : MonoBehaviour
             angularSpeed = spinDegreesPerSecond;
             billboard = faceCamera;
             shrinkOverLife = shrink;
+            collideAndStick = stickOnCollision;
+            stuck = false;
+            ignoredRoot = collisionIgnoredRoot;
+            surfaceOffset = Mathf.Max(0.006f, collisionSurfaceOffset);
             rollDegrees = transform.eulerAngles.z;
             ApplyTint(initialTint);
         }
@@ -472,6 +594,10 @@ public sealed class RetroDamageable : MonoBehaviour
             velocity = Vector3.zero;
             gravity = 0f;
             angularSpeed = 0f;
+            collideAndStick = false;
+            stuck = false;
+            ignoredRoot = null;
+            surfaceOffset = 0.018f;
             age = 0f;
             if (effectRenderer != null)
             {
@@ -489,11 +615,30 @@ public sealed class RetroDamageable : MonoBehaviour
         {
             float deltaTime = Time.deltaTime;
 
-            if (velocity.sqrMagnitude > 0.000001f)
+            if (!stuck && velocity.sqrMagnitude > 0.000001f)
             {
-                transform.position += velocity * deltaTime;
+                Vector3 previous = transform.position;
                 velocity += Vector3.down * gravity * deltaTime;
                 velocity *= Mathf.Exp(-1.45f * deltaTime);
+                Vector3 next = previous + velocity * deltaTime;
+                if (collideAndStick && TryLinecastBloodSurface(previous, next, ignoredRoot, out RaycastHit hit))
+                {
+                    transform.position = hit.point + hit.normal * surfaceOffset;
+                    transform.rotation = ResolveBloodRotation(hit.normal) * Quaternion.Euler(0f, 0f, rollDegrees);
+                    velocity = Vector3.zero;
+                    gravity = 0f;
+                    angularSpeed = 0f;
+                    billboard = false;
+                    shrinkOverLife = false;
+                    stuck = true;
+                    initialScale = transform.localScale * Random.Range(0.85f, 1.2f);
+                    lifetime = Mathf.Max(lifetime - age, Random.Range(0.55f, 1.25f));
+                    age = 0f;
+                }
+                else
+                {
+                    transform.position = next;
+                }
             }
 
             if (billboard)

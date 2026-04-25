@@ -26,27 +26,27 @@ MonoBehaviour:
   minimumClusterHits: 4
   highSingleHitDamage: 80
   gibCooldown: 0.05
-  bloodPuffCount: 20
-  streakCount: 16
-  spriteChunkCount: 16
-  boneSpriteCount: 9
-  decalCount: 12
-  puffSizeRange: {x: 0.48, y: 1.25}
-  streakSizeRange: {x: 0.4, y: 1.35}
-  chunkSizeRange: {x: 0.3, y: 0.78}
-  decalSizeRange: {x: 1.05, y: 3.25}
+  bloodPuffCount: 22
+  streakCount: 18
+  spriteChunkCount: 18
+  boneSpriteCount: 10
+  decalCount: 14
+  puffSizeRange: {x: 0.52, y: 1.38}
+  streakSizeRange: {x: 0.42, y: 1.55}
+  chunkSizeRange: {x: 0.32, y: 0.86}
+  decalSizeRange: {x: 1.15, y: 3.5}
   spriteLifetimeRange: {x: 0.55, y: 1.55}
-  decalLifetimeRange: {x: 6, y: 14}
-  meshChunkCount: 18
-  meshChunkSizeRange: {x: 0.08, y: 0.26}
-  meshChunkLifetimeRange: {x: 2.6, y: 5.8}
+  decalLifetimeRange: {x: 8, y: 18}
+  meshChunkCount: 22
+  meshChunkSizeRange: {x: 0.09, y: 0.3}
+  meshChunkLifetimeRange: {x: 3, y: 6.4}
   meatChunkColor: {r: 0.45, g: 0.015, b: 0.018, a: 1}
   skinChunkColor: {r: 0.95, g: 0.48, b: 0.42, a: 1}
   boneChunkColor: {r: 0.92, g: 0.78, b: 0.55, a: 1}
-  radialSpeedRange: {x: 4.2, y: 13.5}
-  upwardSpeedRange: {x: 1.2, y: 6.8}
-  gravityRange: {x: 6, y: 14.5}
-  forwardBias: 0.68
-  intensityScale: 1.1
+  radialSpeedRange: {x: 4.8, y: 15}
+  upwardSpeedRange: {x: 1.4, y: 7.2}
+  gravityRange: {x: 8, y: 17.5}
+  forwardBias: 0.72
+  intensityScale: 1.15
   spawnRadius: 0.42
-  screenFlashRadius: 1.5
+  screenFlashRadius: 1.65

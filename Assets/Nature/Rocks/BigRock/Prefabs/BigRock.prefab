@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4102278923343097128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584467646471404757}
+  - component: {fileID: 3703756388635565862}
+  m_Layer: 0
+  m_Name: BigRock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1584467646471404757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102278923343097128}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3703756388635565862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102278923343097128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d958fe78b5349949307d18876e22b7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroBigRock
+  baseMap: {fileID: 2800000, guid: 7bdb72e7f10741fe980e2f34fd8e9e8c, type: 3}
+  normalMap: {fileID: 2800000, guid: 74e9b0906c1c400ab8c2763c69c32646, type: 3}
+  heightMap: {fileID: 2800000, guid: bd28f05a9e75440492e647fb104837cc, type: 3}
+  aoMap: {fileID: 2800000, guid: d0247aa9cc044f3d9e8088754d807fee, type: 3}
+  roughnessMap: {fileID: 2800000, guid: 489979f9bedb401a8d9a9a323a833943, type: 3}
+  crackMaskMap: {fileID: 2800000, guid: f3d3a4e568144da29b679856c4342a86, type: 3}
+  edgeWearMap: {fileID: 2800000, guid: 3460173cd1714f1ba64fe1330224ad73, type: 3}
+  cavityMap: {fileID: 2800000, guid: 974d70d898bf4edebeb664fbe1e853fb, type: 3}
+  displacementMap: {fileID: 2800000, guid: 0e11aa6bfb674d30b7465ead526b683c, type: 3}
+  packedMasksMap: {fileID: 2800000, guid: ec184b78c2b84be38932ecf35c253965, type: 3}
+  size: {x: 4.2, y: 2.35, z: 3.15}
+  radialSegments: 36
+  verticalSegments: 18
+  surfaceDisplacement: 0.42
+  facetStrength: 0.58
+  baseFlattening: 0.82
+  baseSpread: 1.12
+  noiseScale: 1.45
+  seed: 18531
+  materialUvScale: {x: 1.45, y: 1.08}
+  addMeshCollider: 1
+  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
+  macroColorLow: {r: 0.54, g: 0.5, b: 0.44, a: 1}
+  macroColorHigh: {r: 0.78, g: 0.75, b: 0.67, a: 1}
+  macroColorStrength: 0.22
+  normalScale: 1.15
+  macroNormalStrength: 0.35
+  heightContrast: 0.65
+  crackDarkening: 0.95
+  cavityDarkening: 0.45
+  edgeWearBrightness: 0.45
+  aoStrength: 0.85
+  roughnessScale: 1
+  specularStrength: 0.18
+  wetness: 0
+  wetnessDarkening: 0.35
+  rimStrength: 0.12
+  rimPower: 4
+  ambientTopColor: {r: 0.54, g: 0.58, b: 0.62, a: 1}
+  ambientBottomColor: {r: 0.12, g: 0.11, b: 0.09, a: 1}
+  ambientIntensity: 1
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.22
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.6

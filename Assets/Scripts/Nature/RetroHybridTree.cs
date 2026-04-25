@@ -265,6 +265,34 @@ public sealed class RetroHybridTree : MonoBehaviour
         }
 
         RebuildIfNeeded(true);
+        UpdateRuntime((float)EditorApplication.timeSinceStartup);
+        SceneView.RepaintAll();
+    }
+
+    internal void EnsureEditorPreview(bool force)
+    {
+        if (this == null || Application.isPlaying || EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            return;
+        }
+
+        if (!isActiveAndEnabled || EditorUtility.IsPersistent(this))
+        {
+            return;
+        }
+
+        ClampSettings();
+        if (force || !HasGeneratedRoot())
+        {
+            rebuildRequested = true;
+            RebuildIfNeeded(true);
+        }
+        else
+        {
+            RebuildIfNeeded(false);
+        }
+
+        UpdateRuntime((float)EditorApplication.timeSinceStartup);
     }
 #endif
 
@@ -279,6 +307,23 @@ public sealed class RetroHybridTree : MonoBehaviour
         RebuildInternal();
         lastBuildHash = hash;
         rebuildRequested = false;
+    }
+
+    private bool HasGeneratedRoot()
+    {
+        if (generatedRoot != null)
+        {
+            return true;
+        }
+
+        Transform existing = transform.Find(GeneratedRootName);
+        if (existing == null)
+        {
+            return false;
+        }
+
+        generatedRoot = existing.gameObject;
+        return true;
     }
 
     private int ComputeBuildHash()
@@ -1149,3 +1194,80 @@ public sealed class RetroHybridTree : MonoBehaviour
         return Mathf.Lerp(min, max, (float)random.NextDouble());
     }
 }
+
+#if UNITY_EDITOR
+[InitializeOnLoad]
+internal static class RetroHybridTreeEditorPreviewBridge
+{
+    private const double UpdateInterval = 0.25;
+
+    private static double nextUpdateTime;
+
+    static RetroHybridTreeEditorPreviewBridge()
+    {
+        EditorApplication.update -= Tick;
+        EditorApplication.update += Tick;
+        EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        AssemblyReloadEvents.afterAssemblyReload -= QueueFullRefresh;
+        AssemblyReloadEvents.afterAssemblyReload += QueueFullRefresh;
+        QueueFullRefresh();
+    }
+
+    private static void OnPlayModeStateChanged(PlayModeStateChange state)
+    {
+        if (state == PlayModeStateChange.EnteredEditMode || state == PlayModeStateChange.ExitingPlayMode)
+        {
+            QueueFullRefresh();
+        }
+    }
+
+    private static void QueueFullRefresh()
+    {
+        EditorApplication.delayCall -= FullRefresh;
+        EditorApplication.delayCall += FullRefresh;
+    }
+
+    private static void Tick()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            return;
+        }
+
+        double now = EditorApplication.timeSinceStartup;
+        if (now < nextUpdateTime)
+        {
+            return;
+        }
+
+        nextUpdateTime = now + UpdateInterval;
+        RefreshVisibleTrees(false);
+    }
+
+    private static void FullRefresh()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            return;
+        }
+
+        RefreshVisibleTrees(true);
+        SceneView.RepaintAll();
+    }
+
+    private static void RefreshVisibleTrees(bool force)
+    {
+        RetroHybridTree[] trees = Object.FindObjectsByType<RetroHybridTree>(FindObjectsInactive.Exclude);
+        foreach (RetroHybridTree tree in trees)
+        {
+            if (tree == null)
+            {
+                continue;
+            }
+
+            tree.EnsureEditorPreview(force);
+        }
+    }
+}
+#endif

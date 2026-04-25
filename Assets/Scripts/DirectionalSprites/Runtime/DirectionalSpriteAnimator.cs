@@ -67,6 +67,7 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     public Texture2D CurrentNormalMap => currentNormalMap;
     public int CurrentFrameIndex => currentFrameIndex;
     public bool CurrentFlipX => currentFlipX;
+    public bool IsPlaying => isPlaying;
     public Transform FacingReferenceTransform => facingReference != null ? facingReference : transform;
 
     private void Reset()

@@ -58,6 +58,13 @@ public sealed class DirectionalSpriteLocomotion : MonoBehaviour
         }
 
         string nextClipId = smoothedSpeed >= walkThreshold ? walkClipId : idleClipId;
+        if (animator.IsPlaying
+            && !string.Equals(animator.CurrentClipId, idleClipId, StringComparison.OrdinalIgnoreCase)
+            && !string.Equals(animator.CurrentClipId, walkClipId, StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(nextClipId))
         {
             return;

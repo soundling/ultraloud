@@ -142,3 +142,111 @@ MonoBehaviour:
       - {fileID: 2800000, guid: f0d12ec9874248b8a75d96d7aa753dc1, type: 3}
       - {fileID: 2800000, guid: a8f3dc94c3414430823cdc4873fd1140, type: 3}
       - {fileID: 2800000, guid: 51daff6b43c34539979f6cdfe578f0f6, type: 3}
+  - clipId: Shoot
+    loop: 0
+    framesPerSecond: 10
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 2843239909d34148b060c85ef9178f68, type: 3}
+      - {fileID: 21300000, guid: 783f6af3157e4e23b9e94a9a2240884b, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: a7df4b186fd24bb794f678e6d87ffc0e, type: 3}
+      - {fileID: 2800000, guid: f1efbafd24dd4c62abe191edd404fd93, type: 3}
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 3c2a45c1f8ba408381057de1fde93d57, type: 3}
+      - {fileID: 21300000, guid: 886c230f79304968bbc5abe7e0384b82, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 7142250ae5af434abf3c6019d8fb1379, type: 3}
+      - {fileID: 2800000, guid: b722b385b17346f0978483cdcde75f7c, type: 3}
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: d2651ab277ed4151b64879156ef05243, type: 3}
+      - {fileID: 21300000, guid: dba3ed132ae1489198aa17ec62551498, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 54cf8693923a41b3a492539634018558, type: 3}
+      - {fileID: 2800000, guid: ff5ae184106b4106ad58cafd88d0ea03, type: 3}
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: e8a543c15c8e49c6a684c6e2e5071e49, type: 3}
+      - {fileID: 21300000, guid: 6fa82ad7bb1549dea519546185a078fb, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: b8b0d7d7edc642418f65210ced8d7057, type: 3}
+      - {fileID: 2800000, guid: 0dcfec313bff4330ad582e59e24f3479, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: f14210057f06431fb0f25ffc5551c064, type: 3}
+      - {fileID: 21300000, guid: 71cd8fe3b6004e82a9ff0b5008187d0d, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 0b3e7e955d7c417598ef1832d08c079b, type: 3}
+      - {fileID: 2800000, guid: ed8685cb58dc466396ab891ddc4699b2, type: 3}
+  - clipId: Melee
+    loop: 0
+    framesPerSecond: 12
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: fbd455f37478486ba34a96ad51667d86, type: 3}
+      - {fileID: 21300000, guid: 56c9761d9313459aa03761d62add5d70, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 550ee89dd50b430292e97d75af919268, type: 3}
+      - {fileID: 2800000, guid: 38804fd086c54f56ad5efdc0a223a85b, type: 3}
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 50856cde1843440aaf2977a6ffcf06e6, type: 3}
+      - {fileID: 21300000, guid: a9c610d487b64630a2ddf842e30ead72, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 4dc5c5468719405bbc84c478eee64648, type: 3}
+      - {fileID: 2800000, guid: b87f6e6784bf493f92cf175c98f32a9e, type: 3}
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 461b932f46da4caeacd035f5956996b3, type: 3}
+      - {fileID: 21300000, guid: a2254b09055b46a88432b65b9c9c0240, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: c12cb1aa721e4690933be17c14898202, type: 3}
+      - {fileID: 2800000, guid: 5976c4a907744c47b2bde3799cb4a721, type: 3}
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 7580a8436ae74f448c1fea69ab84b1ef, type: 3}
+      - {fileID: 21300000, guid: 1c1c247a59f94f94a90fc1ab88c84bef, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 8442e91e70c7403b923ee8d433686b25, type: 3}
+      - {fileID: 2800000, guid: 7c0a124df21a40978bac5adaf694c3fa, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: c46306a24d0945b399ebbeba2eaf37a1, type: 3}
+      - {fileID: 21300000, guid: 8cfa71e6ec9648c699cd2209ea13df75, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 46a7f111c4b24afc97ad5aa5b342408a, type: 3}
+      - {fileID: 2800000, guid: 8ebb411d910f42af81e6228e841423f1, type: 3}

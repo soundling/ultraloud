@@ -9,9 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 860110000000000002}
+  - component: {fileID: 860110000000000020}
   - component: {fileID: 860110000000000004}
   - component: {fileID: 860110000000000005}
+  - component: {fileID: 860110000000000021}
   - component: {fileID: 860110000000000007}
+  - component: {fileID: 860110000000000022}
+  - component: {fileID: 860110000000000023}
+  - component: {fileID: 860110000000000024}
   m_Layer: 0
   m_Name: Merchant
   m_TagString: Untagged
@@ -35,6 +40,29 @@ Transform:
   - {fileID: 860110000000000011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &860110000000000020
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860110000000000001}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.65
+  m_Height: 14.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &860110000000000004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,7 +73,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
   definition: {fileID: 11400000, guid: aedb7afd2c4242468ed885b8c72a88b5, type: 2}
   initialClipId: Idle
@@ -70,7 +98,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
   animator: {fileID: 860110000000000004}
   targetRenderer: {fileID: 860110000000000013}
@@ -114,7 +142,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13199b9dc2b44059ae420f6b8f0a6b13, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteLocomotion
   animator: {fileID: 860110000000000004}
   movementBody: {fileID: 0}
@@ -124,6 +152,163 @@ MonoBehaviour:
   horizontalOnly: 1
   walkThreshold: 0.05
   speedSmoothing: 12
+--- !u!114 &860110000000000021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860110000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
+  animator: {fileID: 860110000000000004}
+  visualRenderer: {fileID: 860110000000000013}
+  hitPlane: {fileID: 860110000000000011}
+  useAlphaMask: 1
+  useSpritePhysicsShapeFallback: 1
+  acceptWhenMaskUnavailable: 1
+  rejectHitsOutsideQuad: 1
+  alphaThreshold: 0.1
+  edgePaddingPixels: 3
+  drawDebugHits: 0
+  debugDrawDuration: 0.35
+--- !u!114 &860110000000000022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860110000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 165
+  destroyOnDeath: 1
+  disableRenderersOnDeath: 1
+  disableCollidersOnDeath: 1
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 21300000, guid: d8ef5cda1b3a4fbd9ac17a7c48c72059, type: 3}
+  bloodSpraySprite: {fileID: 21300000, guid: a7f1c37d9e644f08b26891a75bc8d6ef, type: 3}
+  bloodColor: {r: 0.42, g: 0.015, b: 0.01, a: 0.9}
+  spawnBloodOnHit: 1
+  spawnBloodOnDeath: 1
+  bloodSplatterScaleRange: {x: 0.5, y: 0.9}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 10
+  bloodSprayScaleRange: {x: 0.1, y: 0.22}
+  bloodSpraySpeedRange: {x: 1.2, y: 3.8}
+  deathBloodScaleMultiplier: 2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.3
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!114 &860110000000000023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860110000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6146816490b742aeb0d1ce80d4677be4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroNpcAgent
+  behaviorMode: 1
+  idleMode: 0
+  startProvoked: 0
+  provokeOnDamage: 1
+  calmAfterLosingTarget: 0
+  target: {fileID: 0}
+  preferFpsControllerTarget: 1
+  targetTag: Player
+  awarenessRadius: 20
+  loseTargetRadius: 36
+  fieldOfView: 220
+  requireLineOfSight: 0
+  lineOfSightMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  targetSearchInterval: 0.2
+  eyeHeight: 7.1
+  targetAimHeight: 1.15
+  navigationMode: 1
+  navMeshAgent: {fileID: 0}
+  movementBody: {fileID: 0}
+  moveSpeed: 2.15
+  acceleration: 12
+  turnSpeed: 720
+  stoppingDistance: 10.5
+  repathInterval: 0.18
+  horizontalOnly: 1
+  attackRange: 13.5
+  attackDamage: 0
+  attackCooldown: 1.2
+  fleeDistance: 6
+  patrolPoints: []
+  loopPatrol: 1
+  patrolPointTolerance: 0.45
+  wanderRadius: 0
+  wanderPointTolerance: 0.45
+  idleWaitRange: {x: 1.25, y: 3}
+  damageable: {fileID: 860110000000000022}
+--- !u!114 &860110000000000024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860110000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee1cf1d4d8e4fbfbb7f65b8f12f3b9d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroMerchantCombatant
+  npcAgent: {fileID: 860110000000000023}
+  damageable: {fileID: 860110000000000022}
+  animator: {fileID: 860110000000000004}
+  visualRenderer: {fileID: 860110000000000013}
+  shootClipId: Shoot
+  meleeClipId: Melee
+  engagementRange: 24
+  targetAimHeight: 1.15
+  muzzleHeight: 7.15
+  muzzleForwardOffset: 0.55
+  muzzleSideOffset: 0.34
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 1
+  rangedAttackRange: 18
+  shotsPerBurstRange: {x: 2, y: 4}
+  shotInterval: 0.16
+  burstCooldown: 1.25
+  shotDamage: 7
+  shotSpreadAngle: 1.8
+  movingSpreadPenalty: 1.2
+  shotImpactForce: 7
+  bulletTrailColor: {r: 1, g: 0.78, b: 0.28, a: 0.9}
+  bulletTrailWidth: 0.024
+  bulletTrailDuration: 0.11
+  bulletTrailStartOffset: 0.18
+  bulletTrailEndOffset: 0.08
+  meleeRange: 3.1
+  meleeDamage: 24
+  meleeCooldown: 1.15
+  meleeWindup: 0.14
+  meleeArcDegrees: 78
+  meleeFlashColor: {r: 0.25, g: 0.95, b: 1, a: 0.8}
+  tacticDurationRange: {x: 0.6, y: 1.25}
+  idealMinRange: 7.5
+  idealMaxRange: 13.5
+  strafeSpeed: 1.65
+  backpedalSpeed: 2.35
+  pressureSpeed: 1.85
 --- !u!1 &860110000000000010
 GameObject:
   m_ObjectHideFlags: 0

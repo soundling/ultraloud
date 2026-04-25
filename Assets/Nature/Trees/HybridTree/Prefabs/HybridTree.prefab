@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 487048517524814267}
+  - component: {fileID: 721245609304874213}
   - component: {fileID: 6239846880971778972}
+  - component: {fileID: 721245609304874214}
+  - component: {fileID: 721245609304874215}
   m_Layer: 0
   m_Name: HybridTree
   m_TagString: Untagged
@@ -32,6 +35,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &721245609304874213
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4312151664240458513}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Height: 5.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.9, z: 0}
 --- !u!114 &6239846880971778972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,3 +126,60 @@ MonoBehaviour:
   impostorDistance: 34
   impostorFadeBand: 4
   billboardImpostor: 1
+--- !u!114 &721245609304874214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4312151664240458513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 1800
+  destroyOnDeath: 0
+  disableRenderersOnDeath: 0
+  disableCollidersOnDeath: 0
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!114 &721245609304874215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4312151664240458513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d44664b2d44d18d51408ff6544f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroShootableFeedback
+  damageable: {fileID: 721245609304874214}
+  surfaceKind: 0
+  spawnImpactEffects: 1
+  spawnDeathEffects: 1
+  useImpactFlash: 1
+  visualRoot: {fileID: 0}
+  kickVisualRoot: 1
+  visualKickDistance: 0.05
+  visualKickAngle: 4.5
+  visualKickReturnSpeed: 16
+  effectScale: 1
+  deathEffectMultiplier: 2.4
+  disableFlockAgentOnDeath: 0

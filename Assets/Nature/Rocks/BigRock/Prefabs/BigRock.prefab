@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1584467646471404757}
+  - component: {fileID: 821245609304874113}
   - component: {fileID: 3703756388635565862}
+  - component: {fileID: 821245609304874114}
+  - component: {fileID: 821245609304874115}
   m_Layer: 0
   m_Name: BigRock
   m_TagString: Untagged
@@ -32,6 +35,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &821245609304874113
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102278923343097128}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.2, y: 2.35, z: 3.15}
+  m_Center: {x: 0, y: 1.175, z: 0}
 --- !u!114 &3703756388635565862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,3 +116,60 @@ MonoBehaviour:
   directionalLightScale: 0.00001
   punctualLightScale: 0.01
   maxNormalizedLightIntensity: 1.6
+--- !u!114 &821245609304874114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102278923343097128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 9999
+  destroyOnDeath: 0
+  disableRenderersOnDeath: 0
+  disableCollidersOnDeath: 0
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!114 &821245609304874115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102278923343097128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d44664b2d44d18d51408ff6544f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroShootableFeedback
+  damageable: {fileID: 821245609304874114}
+  surfaceKind: 1
+  spawnImpactEffects: 1
+  spawnDeathEffects: 1
+  useImpactFlash: 1
+  visualRoot: {fileID: 0}
+  kickVisualRoot: 1
+  visualKickDistance: 0.018
+  visualKickAngle: 1.5
+  visualKickReturnSpeed: 18
+  effectScale: 1.1
+  deathEffectMultiplier: 2.2
+  disableFlockAgentOnDeath: 0

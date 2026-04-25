@@ -65,7 +65,7 @@ public sealed class RetroBigRockBuilderWindow : EditorWindow
         {
             scroll = scope.scrollPosition;
             EditorGUILayout.LabelField("Big Rock Builder", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Creates a clean RetroBigRock object with generated maps assigned. The irregular mesh, material, and optional collider are generated as non-saved cache children.", MessageType.Info);
+            EditorGUILayout.HelpBox("Creates a clean RetroBigRock object with generated maps assigned, shootable collision, stone impact feedback, and non-saved generated render cache children.", MessageType.Info);
 
             EditorGUILayout.Space(8f);
             using (new EditorGUILayout.HorizontalScope())
@@ -143,6 +143,7 @@ public sealed class RetroBigRockBuilderWindow : EditorWindow
         }
 
         AssignDefaultMaps(rock);
+        RetroShootablePrefabUtility.ConfigureBigRock(rock.gameObject);
         rock.RebuildRockNow();
         EditorUtility.SetDirty(rock);
         if (!Application.isPlaying && rock.gameObject.scene.IsValid())
@@ -156,6 +157,7 @@ public sealed class RetroBigRockBuilderWindow : EditorWindow
         GameObject rockObject = new(objectName);
         RetroBigRock rock = rockObject.AddComponent<RetroBigRock>();
         AssignDefaultMaps(rock);
+        RetroShootablePrefabUtility.ConfigureBigRock(rockObject);
         return rockObject;
     }
 
@@ -177,6 +179,7 @@ public sealed class RetroBigRockBuilderWindow : EditorWindow
 
         GameObject prefabRoot = CreateConfiguredRockObject(Path.GetFileNameWithoutExtension(path));
         RetroBigRock rock = prefabRoot.GetComponent<RetroBigRock>();
+        RetroShootablePrefabUtility.ConfigureBigRock(prefabRoot);
         rock.RebuildRockNow();
         StripGeneratedChildren(prefabRoot.transform);
 

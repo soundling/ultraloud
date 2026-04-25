@@ -82,11 +82,6 @@ Shader "Ultraloud/Effects/Gore Sprite HDRP"
     float _UseEmissionMap;
     CBUFFER_END
 
-    float2 LocalFrameUv(float2 atlasUv)
-    {
-        return saturate((atlasUv - _FrameUvRect.xy) / max(_FrameUvRect.zw, float2(0.0001, 0.0001)));
-    }
-
     float3 UnpackGoreNormal(float4 packedNormal)
     {
         float3 normalTS = packedNormal.xyz * 2.0 - 1.0;
@@ -115,18 +110,19 @@ Shader "Ultraloud/Effects/Gore Sprite HDRP"
         out SurfaceData surfaceData,
         out BuiltinData builtinData)
     {
-        float2 uv = input.texCoord0.xy;
-        float4 baseSample = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, TRANSFORM_TEX(uv, _BaseMap));
+        float2 localUv = saturate(input.texCoord0.xy);
+        float2 atlasUv = _FrameUvRect.xy + localUv * _FrameUvRect.zw;
+        float4 baseSample = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, TRANSFORM_TEX(atlasUv, _BaseMap));
         float alpha = ComputeAlpha(baseSample.a);
 
         ZERO_BUILTIN_INITIALIZE(builtinData);
         builtinData.opacity = alpha;
         builtinData.alphaClipTreshold = _AlphaCutoff;
 
-        float3 normalTS = float3((LocalFrameUv(uv).x * 2.0 - 1.0) * 0.25, 0.0, 1.0);
+        float3 normalTS = float3((localUv.x * 2.0 - 1.0) * 0.25, 0.0, 1.0);
         if (_UseNormalMap > 0.5)
         {
-            normalTS = UnpackGoreNormal(SAMPLE_TEXTURE2D(_NormalMap, sampler_NormalMap, TRANSFORM_TEX(uv, _NormalMap)));
+            normalTS = UnpackGoreNormal(SAMPLE_TEXTURE2D(_NormalMap, sampler_NormalMap, TRANSFORM_TEX(atlasUv, _NormalMap)));
         }
 
         float3x3 tangentToWorld = float3x3(
@@ -144,7 +140,7 @@ Shader "Ultraloud/Effects/Gore Sprite HDRP"
         }
 
         float4 masks = _UsePackedMasks > 0.5
-            ? SAMPLE_TEXTURE2D(_PackedMasks, sampler_PackedMasks, TRANSFORM_TEX(uv, _PackedMasks))
+            ? SAMPLE_TEXTURE2D(_PackedMasks, sampler_PackedMasks, TRANSFORM_TEX(atlasUv, _PackedMasks))
             : float4(0.75, 0.2, 0.0, 1.0);
         float wet = masks.r;
         float bone = masks.b;
@@ -156,7 +152,7 @@ Shader "Ultraloud/Effects/Gore Sprite HDRP"
         float specular = pow(saturate(dot(normalWS, halfDir)), lerp(18.0, 78.0, wet)) * _WetSpecular * (0.25 + wet);
         float rim = pow(1.0 - nDotV, _RimPower) * _RimStrength;
         float3 emission = _UseEmissionMap > 0.5
-            ? SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, TRANSFORM_TEX(uv, _EmissionMap)).rgb * _EmissionStrength
+            ? SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, TRANSFORM_TEX(atlasUv, _EmissionMap)).rgb * _EmissionStrength
             : 0.0;
 
         float3 albedo = baseSample.rgb * _BaseColor.rgb;

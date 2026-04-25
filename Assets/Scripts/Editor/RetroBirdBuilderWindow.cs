@@ -79,7 +79,7 @@ public sealed class RetroBirdBuilderWindow : EditorWindow
         {
             scroll = scope.scrollPosition;
             EditorGUILayout.LabelField("Bird Builder", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Creates animated bird billboards with generated atlas maps, scene-light shading, wing transmission, and optional generic flocking.", MessageType.Info);
+            EditorGUILayout.HelpBox("Creates animated shootable bird billboards with generated atlas maps, scene-light shading, wing transmission, feather/blood impact feedback, and optional generic flocking.", MessageType.Info);
 
             EditorGUILayout.Space(8f);
             using (new EditorGUILayout.HorizontalScope())
@@ -171,6 +171,7 @@ public sealed class RetroBirdBuilderWindow : EditorWindow
         }
 
         AssignDefaultMaps(bird);
+        RetroShootablePrefabUtility.ConfigureSmallBird(bird.gameObject);
         bird.RebuildBirdNow();
         EditorUtility.SetDirty(bird);
         if (!Application.isPlaying && bird.gameObject.scene.IsValid())
@@ -187,6 +188,7 @@ public sealed class RetroBirdBuilderWindow : EditorWindow
 
         RetroFlockAgent agent = birdObject.AddComponent<RetroFlockAgent>();
         ConfigureAgentDefaults(agent, groupId, birdObject.transform.position, birdObject.transform.forward * 4.5f);
+        RetroShootablePrefabUtility.ConfigureSmallBird(birdObject);
         return birdObject;
     }
 
@@ -252,6 +254,7 @@ public sealed class RetroBirdBuilderWindow : EditorWindow
 
         GameObject prefabRoot = CreateConfiguredBirdObject(Path.GetFileNameWithoutExtension(path), "Birds");
         RetroBirdRenderer bird = prefabRoot.GetComponent<RetroBirdRenderer>();
+        RetroShootablePrefabUtility.ConfigureSmallBird(prefabRoot);
         bird.RebuildBirdNow();
         StripGeneratedChildren(prefabRoot.transform);
 

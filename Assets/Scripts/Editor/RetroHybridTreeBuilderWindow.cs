@@ -67,7 +67,7 @@ public sealed class RetroHybridTreeBuilderWindow : EditorWindow
         {
             scroll = scope.scrollPosition;
             EditorGUILayout.LabelField("Hybrid Tree Builder", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Creates a clean RetroHybridTree object with the generated maps assigned. The procedural trunk, leaf cards, wind mesh, and impostor are generated as non-saved cache children.", MessageType.Info);
+            EditorGUILayout.HelpBox("Creates a clean RetroHybridTree object with generated maps, shootable collision, wood/leaf impact feedback, and non-saved procedural render cache children.", MessageType.Info);
 
             EditorGUILayout.Space(8f);
             using (new EditorGUILayout.HorizontalScope())
@@ -145,6 +145,7 @@ public sealed class RetroHybridTreeBuilderWindow : EditorWindow
         }
 
         AssignDefaultMaps(tree);
+        RetroShootablePrefabUtility.ConfigureHybridTree(tree.gameObject);
         tree.RebuildTreeNow();
         EditorUtility.SetDirty(tree);
         if (!Application.isPlaying && tree.gameObject.scene.IsValid())
@@ -158,6 +159,7 @@ public sealed class RetroHybridTreeBuilderWindow : EditorWindow
         GameObject treeObject = new(objectName);
         RetroHybridTree tree = treeObject.AddComponent<RetroHybridTree>();
         AssignDefaultMaps(tree);
+        RetroShootablePrefabUtility.ConfigureHybridTree(treeObject);
         return treeObject;
     }
 
@@ -179,6 +181,7 @@ public sealed class RetroHybridTreeBuilderWindow : EditorWindow
 
         GameObject prefabRoot = CreateConfiguredTreeObject(Path.GetFileNameWithoutExtension(path));
         RetroHybridTree tree = prefabRoot.GetComponent<RetroHybridTree>();
+        RetroShootablePrefabUtility.ConfigureHybridTree(prefabRoot);
         tree.RebuildTreeNow();
         StripGeneratedChildren(prefabRoot.transform);
 

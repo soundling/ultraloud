@@ -191,6 +191,7 @@ public sealed class RetroHybridTree : MonoBehaviour
 
     private void OnDestroy()
     {
+        DestroyGeneratedRoot();
         DestroyRuntimeMaterials();
     }
 
@@ -315,6 +316,7 @@ public sealed class RetroHybridTree : MonoBehaviour
         DestroyGeneratedRoot();
 
         generatedRoot = new GameObject(GeneratedRootName);
+        generatedRoot.hideFlags = HideFlags.DontSave;
         generatedRoot.transform.SetParent(transform, false);
         generatedRoot.transform.localPosition = Vector3.zero;
         generatedRoot.transform.localRotation = Quaternion.identity;
@@ -362,6 +364,7 @@ public sealed class RetroHybridTree : MonoBehaviour
     private void CreateTrunk(Transform parent)
     {
         GameObject trunk = new("TrunkAndBranches");
+        trunk.hideFlags = HideFlags.DontSave;
         trunk.transform.SetParent(parent, false);
         MeshFilter filter = trunk.AddComponent<MeshFilter>();
         trunkRenderer = trunk.AddComponent<MeshRenderer>();
@@ -401,7 +404,8 @@ public sealed class RetroHybridTree : MonoBehaviour
 
         Mesh mesh = new()
         {
-            name = "Generated Hybrid Tree Trunk"
+            name = "Generated Hybrid Tree Trunk",
+            hideFlags = HideFlags.DontSave
         };
         mesh.SetVertices(vertices);
         mesh.SetNormals(normals);
@@ -473,6 +477,7 @@ public sealed class RetroHybridTree : MonoBehaviour
     private void CreateCanopy(Transform parent)
     {
         GameObject canopy = new("LeafCards");
+        canopy.hideFlags = HideFlags.DontSave;
         canopy.transform.SetParent(parent, false);
         MeshFilter filter = canopy.AddComponent<MeshFilter>();
         canopyRenderer = canopy.AddComponent<MeshRenderer>();
@@ -500,7 +505,8 @@ public sealed class RetroHybridTree : MonoBehaviour
 
         Mesh mesh = new()
         {
-            name = "Generated Hybrid Tree Leaf Cards"
+            name = "Generated Hybrid Tree Leaf Cards",
+            hideFlags = HideFlags.DontSave
         };
         mesh.MarkDynamic();
         mesh.SetVertices(vertices);
@@ -650,6 +656,7 @@ public sealed class RetroHybridTree : MonoBehaviour
     private void CreateImpostor(Transform parent)
     {
         GameObject impostor = new("DistantImpostor");
+        impostor.hideFlags = HideFlags.DontSave;
         impostor.transform.SetParent(parent, false);
         impostorTransform = impostor.transform;
         MeshFilter filter = impostor.AddComponent<MeshFilter>();
@@ -696,7 +703,8 @@ public sealed class RetroHybridTree : MonoBehaviour
 
         Mesh mesh = new()
         {
-            name = "Generated Hybrid Tree Impostor"
+            name = "Generated Hybrid Tree Impostor",
+            hideFlags = HideFlags.DontSave
         };
         mesh.vertices = vertices;
         mesh.uv = uvs;

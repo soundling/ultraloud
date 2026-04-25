@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4312151664240458513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 487048517524814267}
+  - component: {fileID: 6239846880971778972}
+  m_Layer: 0
+  m_Name: HybridTree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &487048517524814267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4312151664240458513}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6239846880971778972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4312151664240458513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa04b773eb404f2fa11b81e88de1da30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHybridTree
+  leafBaseMap: {fileID: 2800000, guid: ae3d6e7f0493417cb5cf1b8eaac3c1ec, type: 3}
+  leafNormalMap: {fileID: 2800000, guid: bd9bd34da54c4f329f9b61a9e0f44fcc, type: 3}
+  leafDepthMap: {fileID: 2800000, guid: 58fe5fdf543d4e3b960c44f129f69528, type: 3}
+  leafThicknessMap: {fileID: 2800000, guid: a573dfafa25246b3b0ec532d9d1869ce, type: 3}
+  leafDensityMap: {fileID: 2800000, guid: f0025c82fb704713bc0392c1bc2c8557, type: 3}
+  leafWindMap: {fileID: 2800000, guid: 2ac60f8c87694315836ea17010eae909, type: 3}
+  barkBaseMap: {fileID: 2800000, guid: 0a65e9b151564c35a84d5c506c57f9b2, type: 3}
+  barkNormalMap: {fileID: 2800000, guid: 5a6c550ceb8d4cc38a148bebe4373b04, type: 3}
+  impostorBaseMap: {fileID: 2800000, guid: e9d05f7ab01f45bf9096069f1dcf895e, type: 3}
+  impostorNormalMap: {fileID: 2800000, guid: 5a10805135944326b769423615766040, type: 3}
+  impostorDepthMap: {fileID: 2800000, guid: fedb85a160e844d6aa403cb55c16c845, type: 3}
+  impostorThicknessMap: {fileID: 2800000, guid: 102144fe38c04161b094286a3e221b37, type: 3}
+  treeHeight: 5.6
+  trunkHeight: 3.25
+  trunkRadius: 0.22
+  branchRadius: 0.07
+  branchCount: 11
+  canopyRadius: 2.05
+  canopyHeight: 2.35
+  leafCardCount: 112
+  leafCardMinSize: 0.82
+  leafCardMaxSize: 1.55
+  seed: 71423
+  animateWind: 1
+  windStrength: 0.18
+  windSpeed: 1.35
+  windGustVariation: 0.45
+  leafTint: {r: 1, g: 1, b: 1, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  canopyNormalBend: 0.38
+  wrapDiffuse: 0.55
+  densityShadowStrength: 0.65
+  depthSelfShadowStrength: 0.32
+  surfaceRoughness: 0.82
+  specularStrength: 0.14
+  rimStrength: 0.1
+  rimPower: 3
+  transmissionColor: {r: 0.72, g: 0.96, b: 0.34, a: 1}
+  transmissionStrength: 0.8
+  transmissionPower: 2.2
+  ambientTopColor: {r: 0.58, g: 0.64, b: 0.56, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.14, b: 0.09, a: 1}
+  ambientIntensity: 1.05
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.25
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.55
+  enableImpostorLod: 1
+  impostorDistance: 34
+  impostorFadeBand: 4
+  billboardImpostor: 1

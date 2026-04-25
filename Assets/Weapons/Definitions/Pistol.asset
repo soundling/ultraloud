@@ -57,7 +57,13 @@ MonoBehaviour:
   spriteVisualSize: {x: 0.95, y: 0.72}
   spriteMuzzleLocalPosition: {x: 0, y: 0.02, z: 0.34}
   spriteMuzzleLocalOffset: {x: 0.055, y: 0, z: 0}
-  muzzleFlashSprite: {fileID: 21300000, guid: 871bc7d0c2fd4c70970dd1caee115c04, type: 3}
+  muzzleFlashSprite: {fileID: 21300000, guid: 6f9e829ced154495a754f5c52c9a0e01, type: 3}
+  muzzleFlashFrames:
+  - {fileID: 21300000, guid: 6f9e829ced154495a754f5c52c9a0e01, type: 3}
+  - {fileID: 21300000, guid: d87bed3b42584942b43f580c99650bb0, type: 3}
+  - {fileID: 21300000, guid: 89227a0d3d574d0dae6d80a42ebc94a7, type: 3}
+  - {fileID: 21300000, guid: 93fdff732e54458199d2d47eac97cb68, type: 3}
+  muzzleFlashFrameDuration: 0.016
   muzzleFlashSpriteSize: {x: 0.38, y: 0.28}
   baseTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
   emissiveTintMultiplier: {r: 1, g: 1, b: 1, a: 1}

@@ -75,6 +75,8 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         public float SpriteWeaponBodyTint;
         public float SpriteWeaponAccentTint;
         public Sprite MuzzleFlashSprite;
+        public Sprite[] MuzzleFlashFrames;
+        public float MuzzleFlashFrameDuration;
         public Vector2 MuzzleFlashSpriteSize;
         public GameObject Visual;
         public Transform Muzzle;
@@ -175,6 +177,8 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     private float switchEndTime = -999f;
     private float bobTime;
     private float muzzleFlashDisableTime = -999f;
+    private float muzzleFlashNextFrameTime = -999f;
+    private int muzzleFlashFrameIndex;
     private Vector2 lookSample;
     private Vector3 recoilPositionOffset;
     private Vector3 recoilEulerOffset;
@@ -418,6 +422,13 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         weapon.SpriteWeaponBodyTint = Mathf.Clamp01(definition.weaponBodyTint);
         weapon.SpriteWeaponAccentTint = Mathf.Clamp01(definition.weaponAccentTint);
         weapon.MuzzleFlashSprite = definition.muzzleFlashSprite != null ? definition.muzzleFlashSprite : weapon.MuzzleFlashSprite;
+        weapon.MuzzleFlashFrames = HasAnySprite(definition.muzzleFlashFrames) ? definition.muzzleFlashFrames : weapon.MuzzleFlashFrames;
+        weapon.MuzzleFlashFrameDuration = Mathf.Max(0.005f, definition.muzzleFlashFrameDuration);
+        if (weapon.MuzzleFlashSprite == null)
+        {
+            weapon.MuzzleFlashSprite = ResolveFrameFromArray(weapon.MuzzleFlashFrames, 0);
+        }
+
         weapon.MuzzleFlashSpriteSize = new Vector2(
             Mathf.Max(0.01f, definition.muzzleFlashSpriteSize.x),
             Mathf.Max(0.01f, definition.muzzleFlashSpriteSize.y));
@@ -656,6 +667,8 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         weapon.SpriteWeaponBodyTint = spriteView != null ? spriteView.weaponBodyTint : 0.18f;
         weapon.SpriteWeaponAccentTint = spriteView != null ? spriteView.weaponAccentTint : 0.7f;
         weapon.MuzzleFlashSprite = ResolveSerializedMuzzleFlashSprite(index);
+        weapon.MuzzleFlashFrames = Array.Empty<Sprite>();
+        weapon.MuzzleFlashFrameDuration = Mathf.Max(0.005f, spriteMuzzleFlashDuration);
         weapon.MuzzleFlashSpriteSize = ResolveSerializedMuzzleFlashSpriteSize(index);
     }
 
@@ -829,13 +842,17 @@ public sealed class RetroWeaponSystem : MonoBehaviour
 
     private void ApplySpriteMuzzleFlashMaterial()
     {
+        ApplySpriteMuzzleFlashMaterial(ResolveMuzzleFlashSprite(currentWeaponIndex));
+    }
+
+    private void ApplySpriteMuzzleFlashMaterial(Sprite flashSprite)
+    {
         if (spriteMuzzleFlash == null)
         {
             return;
         }
 
         Renderer flashRenderer = spriteMuzzleFlash.GetComponent<Renderer>();
-        Sprite flashSprite = ResolveMuzzleFlashSprite(currentWeaponIndex);
         if (flashRenderer == null || flashSprite == null || flashSprite.texture == null)
         {
             if (flashRenderer != null)
@@ -846,10 +863,14 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             return;
         }
 
-        if (spriteMuzzleFlashMaterial == null || spriteMuzzleFlashTexture != flashSprite.texture)
+        if (spriteMuzzleFlashMaterial == null)
         {
-            DestroyRuntimeMaterial(spriteMuzzleFlashMaterial);
             spriteMuzzleFlashMaterial = CreateTransparentTextureMaterial("Sprite Muzzle Flash", flashSprite.texture, Color.white, additive: true);
+            spriteMuzzleFlashTexture = flashSprite.texture;
+        }
+        else if (spriteMuzzleFlashTexture != flashSprite.texture)
+        {
+            SetMaterialTextureIfPresent(spriteMuzzleFlashMaterial, flashSprite.texture, "_UnlitColorMap", "_BaseColorMap", "_MainTex", "_BaseMap");
             spriteMuzzleFlashTexture = flashSprite.texture;
         }
 
@@ -949,12 +970,26 @@ public sealed class RetroWeaponSystem : MonoBehaviour
 
     private Sprite ResolveMuzzleFlashSprite(int weaponIndex)
     {
+        return ResolveMuzzleFlashSprite(weaponIndex, 0);
+    }
+
+    private Sprite ResolveMuzzleFlashSprite(int weaponIndex, int frameIndex)
+    {
         if (weapons != null
             && weaponIndex >= 0
             && weaponIndex < weapons.Length
-            && weapons[weaponIndex]?.MuzzleFlashSprite != null)
+            && weapons[weaponIndex] != null)
         {
-            return weapons[weaponIndex].MuzzleFlashSprite;
+            Sprite frame = ResolveFrameFromArray(weapons[weaponIndex].MuzzleFlashFrames, frameIndex);
+            if (frame != null)
+            {
+                return frame;
+            }
+
+            if (weapons[weaponIndex].MuzzleFlashSprite != null)
+            {
+                return weapons[weaponIndex].MuzzleFlashSprite;
+            }
         }
 
         return ResolveSerializedMuzzleFlashSprite(weaponIndex);
@@ -968,6 +1003,39 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
 
         return muzzleFlashSprites[weaponIndex];
+    }
+
+    private int ResolveMuzzleFlashFrameCount(int weaponIndex)
+    {
+        if (weapons != null
+            && weaponIndex >= 0
+            && weaponIndex < weapons.Length
+            && HasAnySprite(weapons[weaponIndex]?.MuzzleFlashFrames))
+        {
+            return weapons[weaponIndex].MuzzleFlashFrames.Length;
+        }
+
+        return ResolveMuzzleFlashSprite(weaponIndex) != null ? 1 : 0;
+    }
+
+    private float ResolveMuzzleFlashFrameDuration(int weaponIndex)
+    {
+        if (weapons != null
+            && weaponIndex >= 0
+            && weaponIndex < weapons.Length
+            && weapons[weaponIndex] != null
+            && weapons[weaponIndex].MuzzleFlashFrameDuration > 0f)
+        {
+            return weapons[weaponIndex].MuzzleFlashFrameDuration;
+        }
+
+        int frameCount = ResolveMuzzleFlashFrameCount(weaponIndex);
+        if (frameCount > 1)
+        {
+            return Mathf.Max(0.005f, spriteMuzzleFlashDuration / frameCount);
+        }
+
+        return Mathf.Max(0.005f, spriteMuzzleFlashDuration);
     }
 
     private Vector2 ResolveMuzzleFlashSpriteSize(int weaponIndex)
@@ -1627,6 +1695,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     {
         if (Time.time < muzzleFlashDisableTime)
         {
+            AdvanceSpriteMuzzleFlashAnimation();
             return;
         }
 
@@ -1635,6 +1704,35 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         {
             weapon.MuzzleFlash.SetActive(false);
         }
+    }
+
+    private void AdvanceSpriteMuzzleFlashAnimation()
+    {
+        if (!usingSpriteVolumeViewModel || Time.time < muzzleFlashNextFrameTime)
+        {
+            return;
+        }
+
+        WeaponRuntime weapon = CurrentWeapon;
+        if (weapon == null || weapon.MuzzleFlash == null || !weapon.MuzzleFlash.activeSelf)
+        {
+            return;
+        }
+
+        int frameCount = ResolveMuzzleFlashFrameCount(currentWeaponIndex);
+        if (frameCount <= 1 || muzzleFlashFrameIndex >= frameCount - 1)
+        {
+            return;
+        }
+
+        float frameDuration = ResolveMuzzleFlashFrameDuration(currentWeaponIndex);
+        while (Time.time >= muzzleFlashNextFrameTime && muzzleFlashFrameIndex < frameCount - 1)
+        {
+            muzzleFlashFrameIndex++;
+            muzzleFlashNextFrameTime += frameDuration;
+        }
+
+        ApplySpriteMuzzleFlashMaterial(ResolveMuzzleFlashSprite(currentWeaponIndex, muzzleFlashFrameIndex));
     }
 
     private void ShowMuzzleFlash(WeaponRuntime weapon)
@@ -1647,16 +1745,21 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         float flashScale = weapon.MuzzleFlashScale * UnityEngine.Random.Range(0.9f, 1.15f);
         if (usingSpriteVolumeViewModel)
         {
-            if (ResolveMuzzleFlashSprite(currentWeaponIndex) == null)
+            Sprite firstFrame = ResolveMuzzleFlashSprite(currentWeaponIndex, 0);
+            if (firstFrame == null)
             {
                 return;
             }
 
-            ApplySpriteMuzzleFlashMaterial();
+            muzzleFlashFrameIndex = 0;
+            float frameDuration = ResolveMuzzleFlashFrameDuration(currentWeaponIndex);
+            int frameCount = ResolveMuzzleFlashFrameCount(currentWeaponIndex);
+            ApplySpriteMuzzleFlashMaterial(firstFrame);
             Vector2 flashSize = ResolveMuzzleFlashSpriteSize(currentWeaponIndex) * UnityEngine.Random.Range(0.9f, 1.15f);
             weapon.MuzzleFlash.transform.localScale = new Vector3(flashSize.x, flashSize.y, 1f);
             weapon.MuzzleFlash.transform.localRotation = Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f));
-            muzzleFlashDisableTime = Time.time + spriteMuzzleFlashDuration;
+            muzzleFlashNextFrameTime = Time.time + frameDuration;
+            muzzleFlashDisableTime = Time.time + (frameCount > 1 ? frameDuration * frameCount : spriteMuzzleFlashDuration);
         }
         else
         {
@@ -1665,6 +1768,56 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
 
         weapon.MuzzleFlash.SetActive(true);
+    }
+
+    private static bool HasAnySprite(Sprite[] sprites)
+    {
+        if (sprites == null || sprites.Length == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            if (sprites[i] != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static Sprite ResolveFrameFromArray(Sprite[] frames, int frameIndex)
+    {
+        if (!HasAnySprite(frames))
+        {
+            return null;
+        }
+
+        int clampedIndex = Mathf.Clamp(frameIndex, 0, frames.Length - 1);
+        if (frames[clampedIndex] != null)
+        {
+            return frames[clampedIndex];
+        }
+
+        for (int i = clampedIndex + 1; i < frames.Length; i++)
+        {
+            if (frames[i] != null)
+            {
+                return frames[i];
+            }
+        }
+
+        for (int i = clampedIndex - 1; i >= 0; i--)
+        {
+            if (frames[i] != null)
+            {
+                return frames[i];
+            }
+        }
+
+        return null;
     }
 
     private Vector3 GetSpreadDirection(float spreadAngle)

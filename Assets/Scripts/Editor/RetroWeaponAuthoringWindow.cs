@@ -24,6 +24,14 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         "Assets/Sprites/Weapons/MuzzleFlash_GrenadeLauncher.png"
     };
 
+    private static readonly string[] PistolMuzzleFlashFramePaths =
+    {
+        "Assets/Sprites/Weapons/MuzzleFlash/Pistol/Pistol_MuzzleFlash_00.png",
+        "Assets/Sprites/Weapons/MuzzleFlash/Pistol/Pistol_MuzzleFlash_01.png",
+        "Assets/Sprites/Weapons/MuzzleFlash/Pistol/Pistol_MuzzleFlash_02.png",
+        "Assets/Sprites/Weapons/MuzzleFlash/Pistol/Pistol_MuzzleFlash_03.png"
+    };
+
     private RetroWeaponSystem weaponSystem;
     private SerializedObject serializedWeaponSystem;
     private SerializedObject serializedDefinition;
@@ -264,7 +272,7 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         DrawSection(definition, "Projectile", "projectileSpeed", "explosionRadius", "explosionForce", "fuseTime");
         DrawSection(definition, "Presentation", "localPosition", "localEuler", "recoilPosition", "recoilEuler", "bodyColor", "accentColor", "primitiveMuzzleFlashScale");
         DrawSection(definition, "Bullet Trails", "bulletTrailEnabled", "bulletTrailColor", "bulletTrailWidth", "bulletTrailDuration", "bulletTrailStartOffset", "bulletTrailEndOffset", "bulletTrailMaxSegmentsPerShot");
-        DrawSection(definition, "Sprite Viewmodel", "spriteMapSet", "spriteVisualLocalPosition", "spriteVisualLocalEuler", "spriteVisualSize", "spriteMuzzleLocalPosition", "spriteMuzzleLocalOffset", "muzzleFlashSprite", "muzzleFlashSpriteSize", "baseTintMultiplier", "emissiveTintMultiplier", "weaponBodyTint", "weaponAccentTint");
+        DrawSection(definition, "Sprite Viewmodel", "spriteMapSet", "spriteVisualLocalPosition", "spriteVisualLocalEuler", "spriteVisualSize", "spriteMuzzleLocalPosition", "spriteMuzzleLocalOffset", "muzzleFlashSprite", "muzzleFlashFrames", "muzzleFlashFrameDuration", "muzzleFlashSpriteSize", "baseTintMultiplier", "emissiveTintMultiplier", "weaponBodyTint", "weaponAccentTint");
     }
 
     private static void DrawSection(SerializedObject serializedObject, string label, params string[] propertyNames)
@@ -386,10 +394,10 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
             EditorGUILayout.HelpBox("Sprite Viewmodel is missing a map set. The weapon will fall back to primitive geometry.", MessageType.Warning);
         }
 
-        if (definition.muzzleFlashSprite == null)
+        if (definition.muzzleFlashSprite == null && !HasAnySprite(definition.muzzleFlashFrames))
         {
             warningCount++;
-            EditorGUILayout.HelpBox("Muzzle Flash Sprite is unassigned. Sprite weapons will fire without a flash sprite.", MessageType.Warning);
+            EditorGUILayout.HelpBox("Muzzle Flash Sprite/Frames are unassigned. Sprite weapons will fire without a flash sprite.", MessageType.Warning);
         }
 
         if (definition.maxSpreadAngle < definition.spreadAngle)
@@ -586,6 +594,7 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         {
             case 0:
                 ApplyPreset(definition, "Pistol", RetroWeaponKind.Hitscan, RetroFireMode.SemiAuto, 12, 72, 72, 1.2f, 0.28f, 28f, 110f, 1, 0.45f, 18f, 0f, 0f, 0f, 0f, new Vector3(0.02f, -0.01f, 0f), Vector3.zero, new Vector3(0f, 0.006f, -0.06f), new Vector3(4.5f, 1.2f, 1.6f), new Color(0.13f, 0.13f, 0.15f), new Color(0.72f, 0.68f, 0.58f), 0.18f, new Vector3(-0.02f, -0.02f, 0f), Vector3.zero, new Vector2(0.95f, 0.72f), new Vector3(0f, 0.02f, 0.34f), new Vector3(0.055f, 0f, 0f), muzzleSprite, new Vector2(0.38f, 0.28f), defaultMapSet);
+                definition.muzzleFlashFrames = LoadSprites(PistolMuzzleFlashFramePaths);
                 break;
             case 1:
                 ApplyPreset(definition, "Rifle", RetroWeaponKind.Hitscan, RetroFireMode.Automatic, 30, 150, 150, 1.65f, 0.095f, 18f, 165f, 1, 0.8f, 20f, 0f, 0f, 0f, 0f, new Vector3(0.03f, -0.03f, 0.03f), new Vector3(1f, 0f, 0f), new Vector3(0f, 0.008f, -0.035f), new Vector3(2.5f, 0.7f, 1.2f), new Color(0.16f, 0.18f, 0.19f), new Color(0.42f, 0.34f, 0.22f), 0.24f, new Vector3(0.02f, -0.05f, 0.04f), new Vector3(0f, 0f, -1.5f), new Vector2(1.35f, 0.78f), new Vector3(0f, -0.02f, 0.78f), new Vector3(0.055f, 0f, 0f), muzzleSprite, new Vector2(0.62f, 0.24f), defaultMapSet);
@@ -749,6 +758,8 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         definition.spriteMuzzleLocalPosition = spriteMuzzlePosition;
         definition.spriteMuzzleLocalOffset = spriteMuzzleOffset;
         definition.muzzleFlashSprite = muzzleFlashSprite;
+        definition.muzzleFlashFrames = new Sprite[0];
+        definition.muzzleFlashFrameDuration = 0.018f;
         definition.muzzleFlashSpriteSize = muzzleFlashSize;
         definition.baseTintMultiplier = Color.white;
         definition.emissiveTintMultiplier = Color.white;
@@ -798,6 +809,40 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         {
             AssetDatabase.CreateFolder(parentPath, folderName);
         }
+    }
+
+    private static Sprite[] LoadSprites(string[] assetPaths)
+    {
+        if (assetPaths == null || assetPaths.Length == 0)
+        {
+            return new Sprite[0];
+        }
+
+        Sprite[] sprites = new Sprite[assetPaths.Length];
+        for (int i = 0; i < assetPaths.Length; i++)
+        {
+            sprites[i] = AssetDatabase.LoadAssetAtPath<Sprite>(assetPaths[i]);
+        }
+
+        return sprites;
+    }
+
+    private static bool HasAnySprite(Sprite[] sprites)
+    {
+        if (sprites == null || sprites.Length == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            if (sprites[i] != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static void SaveAssets()

@@ -83,6 +83,8 @@ public sealed class RetroWeaponDefinition : ScriptableObject
     public Vector3 spriteMuzzleLocalPosition = new Vector3(0f, 0.02f, 0.34f);
     public Vector3 spriteMuzzleLocalOffset = new Vector3(0.055f, 0f, 0f);
     public Sprite muzzleFlashSprite;
+    public Sprite[] muzzleFlashFrames = new Sprite[0];
+    [Min(0.005f)] public float muzzleFlashFrameDuration = 0.018f;
     public Vector2 muzzleFlashSpriteSize = new Vector2(0.38f, 0.28f);
     public Color baseTintMultiplier = Color.white;
     public Color emissiveTintMultiplier = Color.white;
@@ -123,6 +125,7 @@ public sealed class RetroWeaponDefinition : ScriptableObject
         bulletTrailMaxSegmentsPerShot = Mathf.Clamp(bulletTrailMaxSegmentsPerShot, 1, 16);
         spriteVisualSize.x = Mathf.Max(0.01f, spriteVisualSize.x);
         spriteVisualSize.y = Mathf.Max(0.01f, spriteVisualSize.y);
+        muzzleFlashFrameDuration = Mathf.Max(0.005f, muzzleFlashFrameDuration);
         muzzleFlashSpriteSize.x = Mathf.Max(0.01f, muzzleFlashSpriteSize.x);
         muzzleFlashSpriteSize.y = Mathf.Max(0.01f, muzzleFlashSpriteSize.y);
     }

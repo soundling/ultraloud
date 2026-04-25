@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3826471596501218221}
   - component: {fileID: 5609674908130844124}
   - component: {fileID: 1634411413869349658}
+  - component: {fileID: 3456999968892401581}
   - component: {fileID: 9066546874688981827}
   - component: {fileID: 2329832245787383114}
   - component: {fileID: 7312467192231948501}
@@ -130,6 +131,29 @@ MonoBehaviour:
   rimColor: {r: 1, g: 1, b: 1, a: 1}
   rimStrength: 0.18
   rimPower: 3
+--- !u!114 &3456999968892401581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979429319908061950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
+  animator: {fileID: 5609674908130844124}
+  visualRenderer: {fileID: 6447873005006890028}
+  hitPlane: {fileID: 5630841822586472345}
+  useAlphaMask: 1
+  useSpritePhysicsShapeFallback: 1
+  acceptWhenMaskUnavailable: 1
+  rejectHitsOutsideQuad: 1
+  alphaThreshold: 0.08
+  edgePaddingPixels: 3
+  drawDebugHits: 0
+  debugDrawDuration: 0.35
 --- !u!114 &9066546874688981827
 MonoBehaviour:
   m_ObjectHideFlags: 0

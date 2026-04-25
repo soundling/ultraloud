@@ -81,6 +81,18 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         public GameObject MuzzleFlash;
     }
 
+    private struct HitscanHitResult
+    {
+        public Collider Collider;
+        public Rigidbody Rigidbody;
+        public Vector3 Point;
+        public Vector3 Normal;
+        public float Distance;
+    }
+
+    private const int HitscanHitBufferSize = 64;
+    private static readonly RaycastHit[] HitscanHitBuffer = new RaycastHit[HitscanHitBufferSize];
+
     [Header("References")]
     [SerializeField] private Camera viewCamera;
     [SerializeField] private Renderer legacyViewModelRenderer;
@@ -1373,17 +1385,16 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         {
             Vector3 shotDirection = GetSpreadDirection(spreadAngle);
             Vector3 trailEnd = origin + shotDirection * weapon.Range;
-            bool hitSomething = Physics.Raycast(origin, shotDirection, out RaycastHit hit, weapon.Range, hitMask, QueryTriggerInteraction.Ignore);
-            if (hitSomething)
+            if (TryResolveHitscanHit(origin, shotDirection, weapon.Range, out HitscanHitResult hit))
             {
-                trailEnd = hit.point;
-                ApplyDamage(hit.collider, weapon.Damage, hit.point, hit.normal);
-                if (hit.rigidbody != null)
+                trailEnd = hit.Point;
+                ApplyDamage(hit.Collider, weapon.Damage, hit.Point, hit.Normal);
+                if (hit.Rigidbody != null)
                 {
-                    hit.rigidbody.AddForceAtPosition(shotDirection * weapon.ImpactForce, hit.point, ForceMode.Impulse);
+                    hit.Rigidbody.AddForceAtPosition(shotDirection * weapon.ImpactForce, hit.Point, ForceMode.Impulse);
                 }
 
-                SpawnImpactFlash(hit.point, hit.normal, weapon.AccentColor);
+                SpawnImpactFlash(hit.Point, hit.Normal, weapon.AccentColor);
             }
 
             if (pelletIndex < maxTrailSegments)
@@ -1391,6 +1402,83 @@ public sealed class RetroWeaponSystem : MonoBehaviour
                 SpawnBulletTrail(weapon, ResolveBulletTrailStart(weapon, shotDirection), trailEnd, shotDirection);
             }
         }
+    }
+
+    private bool TryResolveHitscanHit(Vector3 origin, Vector3 direction, float range, out HitscanHitResult result)
+    {
+        result = default;
+        result.Distance = float.MaxValue;
+
+        int hitCount = Physics.RaycastNonAlloc(
+            origin,
+            direction,
+            HitscanHitBuffer,
+            range,
+            hitMask,
+            QueryTriggerInteraction.Ignore);
+
+        if (hitCount <= 0)
+        {
+            return false;
+        }
+
+        RaycastHit[] hits = HitscanHitBuffer;
+        if (hitCount >= HitscanHitBuffer.Length)
+        {
+            hits = Physics.RaycastAll(origin, direction, range, hitMask, QueryTriggerInteraction.Ignore);
+            hitCount = hits.Length;
+        }
+
+        Ray shotRay = new Ray(origin, direction);
+        bool foundHit = false;
+        for (int i = 0; i < hitCount; i++)
+        {
+            if (!TryBuildHitscanHitResult(shotRay, hits[i], range, out HitscanHitResult candidate))
+            {
+                continue;
+            }
+
+            if (candidate.Distance >= result.Distance)
+            {
+                continue;
+            }
+
+            result = candidate;
+            foundHit = true;
+        }
+
+        return foundHit;
+    }
+
+    private static bool TryBuildHitscanHitResult(Ray shotRay, RaycastHit rawHit, float range, out HitscanHitResult result)
+    {
+        result = default;
+        Collider targetCollider = rawHit.collider;
+        if (targetCollider == null)
+        {
+            return false;
+        }
+
+        result.Collider = targetCollider;
+        result.Rigidbody = rawHit.rigidbody;
+        result.Point = rawHit.point;
+        result.Normal = rawHit.normal.sqrMagnitude > 0.0001f ? rawHit.normal.normalized : -shotRay.direction;
+        result.Distance = rawHit.distance;
+
+        DirectionalSpriteHitMask spriteHitMask = targetCollider.GetComponentInParent<DirectionalSpriteHitMask>();
+        if (spriteHitMask != null && spriteHitMask.isActiveAndEnabled)
+        {
+            if (!spriteHitMask.TryConfirmHit(shotRay, rawHit, range, out Vector3 visualPoint, out Vector3 visualNormal, out float visualDistance))
+            {
+                return false;
+            }
+
+            result.Point = visualPoint;
+            result.Normal = visualNormal.sqrMagnitude > 0.0001f ? visualNormal.normalized : result.Normal;
+            result.Distance = visualDistance;
+        }
+
+        return result.Distance >= 0f && result.Distance <= range;
     }
 
     private void FireGrenadeLauncher(WeaponRuntime weapon)

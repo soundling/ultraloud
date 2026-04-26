@@ -78,6 +78,10 @@ public sealed class RetroBigRock : MonoBehaviour
     [SerializeField] private Vector2 materialUvScale = new(1.45f, 1.08f);
     [SerializeField] private bool addMeshCollider = true;
 
+    [Header("Navigation")]
+    [SerializeField] private bool blockNavigation = true;
+    [SerializeField, Min(0f)] private float navObstaclePadding = 0.35f;
+
     [Header("Shading")]
     [SerializeField] private Color baseColorTint = Color.white;
     [SerializeField] private Color macroColorLow = new(0.54f, 0.50f, 0.44f, 1f);
@@ -192,6 +196,7 @@ public sealed class RetroBigRock : MonoBehaviour
         noiseScale = Mathf.Clamp(noiseScale, 0.5f, 4f);
         materialUvScale.x = Mathf.Max(0.05f, materialUvScale.x);
         materialUvScale.y = Mathf.Max(0.05f, materialUvScale.y);
+        navObstaclePadding = Mathf.Max(0f, navObstaclePadding);
         macroColorStrength = Mathf.Clamp01(macroColorStrength);
         normalScale = Mathf.Clamp(normalScale, 0f, 3f);
         macroNormalStrength = Mathf.Clamp(macroNormalStrength, 0f, 2f);
@@ -297,6 +302,8 @@ public sealed class RetroBigRock : MonoBehaviour
             hash = hash * 31 + baseSpread.GetHashCode();
             hash = hash * 31 + noiseScale.GetHashCode();
             hash = hash * 31 + seed;
+            hash = hash * 31 + blockNavigation.GetHashCode();
+            hash = hash * 31 + navObstaclePadding.GetHashCode();
             hash = hash * 31 + GetAssetHash(baseMap);
             hash = hash * 31 + GetAssetHash(normalMap);
             hash = hash * 31 + GetAssetHash(heightMap);
@@ -364,8 +371,29 @@ public sealed class RetroBigRock : MonoBehaviour
             rockCollider.sharedMesh = rockMesh;
         }
 
+        ConfigureNavigationObstacle();
         ApplyMaterial();
         RefreshLighting(ResolveCamera());
+    }
+
+    private void ConfigureNavigationObstacle()
+    {
+        if (!blockNavigation || generatedRoot == null)
+        {
+            return;
+        }
+
+        RetroNavMeshDynamicObstacle dynamicObstacle = generatedRoot.GetComponent<RetroNavMeshDynamicObstacle>();
+        if (dynamicObstacle == null)
+        {
+            dynamicObstacle = generatedRoot.AddComponent<RetroNavMeshDynamicObstacle>();
+        }
+
+        Vector3 obstacleSize = new(
+            Mathf.Max(0.1f, size.x + navObstaclePadding * 2f),
+            Mathf.Max(0.1f, size.y + navObstaclePadding),
+            Mathf.Max(0.1f, size.z + navObstaclePadding * 2f));
+        dynamicObstacle.ConfigureBox(obstacleSize, new Vector3(0f, obstacleSize.y * 0.5f, 0f), Application.isPlaying);
     }
 
     private Mesh BuildRockMesh()

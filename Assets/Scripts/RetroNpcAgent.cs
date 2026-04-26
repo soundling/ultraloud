@@ -68,6 +68,13 @@ public sealed class RetroNpcAgent : MonoBehaviour
     [SerializeField, Min(0f)] private float stoppingDistance = 1.35f;
     [SerializeField, Min(0.02f)] private float repathInterval = 0.18f;
     [SerializeField] private bool horizontalOnly = true;
+    [SerializeField] private bool autoCreateNavMeshAgent = true;
+    [SerializeField, Min(0.01f)] private float navAgentRadius = 0.42f;
+    [SerializeField, Min(0.1f)] private float navAgentHeight = 1.8f;
+    [SerializeField] private ObstacleAvoidanceType obstacleAvoidance = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+    [SerializeField, Range(0, 99)] private int avoidancePriority = 50;
+    [SerializeField] private bool staggerAvoidancePriority = true;
+    [SerializeField, Range(0, 49)] private int avoidancePrioritySpread = 20;
 
     [Header("Combat")]
     [SerializeField, Min(0f)] private float attackRange = 1.65f;
@@ -101,6 +108,8 @@ public sealed class RetroNpcAgent : MonoBehaviour
     private bool subscribedToDamageable;
     private IDisposable damageEventSubscription;
     private RetroNpcBrainState state = RetroNpcBrainState.Idle;
+    private int resolvedAvoidancePriority;
+    private bool avoidancePriorityResolved;
 
     public RetroNpcBehaviorMode BehaviorMode => behaviorMode;
     public RetroNpcBrainState CurrentState => state;
@@ -110,13 +119,13 @@ public sealed class RetroNpcAgent : MonoBehaviour
 
     private void Reset()
     {
-        AutoAssignReferences();
+        AutoAssignReferences(true);
         homePosition = transform.position;
     }
 
     private void Awake()
     {
-        AutoAssignReferences();
+        AutoAssignReferences(true);
         homePosition = transform.position;
         provoked = startProvoked;
         ConfigureNavMeshAgent();
@@ -124,7 +133,7 @@ public sealed class RetroNpcAgent : MonoBehaviour
 
     private void OnEnable()
     {
-        AutoAssignReferences();
+        AutoAssignReferences(true);
         homePosition = transform.position;
         provoked = startProvoked;
         hasIdleDestination = false;
@@ -153,6 +162,11 @@ public sealed class RetroNpcAgent : MonoBehaviour
         turnSpeed = Mathf.Max(0f, turnSpeed);
         stoppingDistance = Mathf.Max(0f, stoppingDistance);
         repathInterval = Mathf.Max(0.02f, repathInterval);
+        navAgentRadius = Mathf.Max(0.01f, navAgentRadius);
+        navAgentHeight = Mathf.Max(navAgentRadius * 2f, navAgentHeight);
+        avoidancePriority = Mathf.Clamp(avoidancePriority, 0, 99);
+        avoidancePrioritySpread = Mathf.Clamp(avoidancePrioritySpread, 0, 49);
+        avoidancePriorityResolved = false;
         attackRange = Mathf.Max(0f, attackRange);
         attackDamage = Mathf.Max(0f, attackDamage);
         attackCooldown = Mathf.Max(0.05f, attackCooldown);
@@ -162,7 +176,8 @@ public sealed class RetroNpcAgent : MonoBehaviour
         wanderPointTolerance = Mathf.Max(0.05f, wanderPointTolerance);
         idleWaitRange.x = Mathf.Max(0f, idleWaitRange.x);
         idleWaitRange.y = Mathf.Max(idleWaitRange.x, idleWaitRange.y);
-        AutoAssignReferences();
+        AutoAssignReferences(false);
+        ConfigureNavMeshAgent();
     }
 
     private void Update()
@@ -565,6 +580,10 @@ public sealed class RetroNpcAgent : MonoBehaviour
         navMeshAgent.angularSpeed = turnSpeed;
         navMeshAgent.stoppingDistance = stopDistance;
         navMeshAgent.updateRotation = false;
+        navMeshAgent.radius = navAgentRadius;
+        navMeshAgent.height = navAgentHeight;
+        navMeshAgent.obstacleAvoidanceType = obstacleAvoidance;
+        navMeshAgent.avoidancePriority = ResolveAvoidancePriority();
         navMeshAgent.isStopped = false;
 
         if (Time.time >= nextRepathTime || (navMeshAgent.destination - destination).sqrMagnitude > 0.25f)
@@ -648,7 +667,23 @@ public sealed class RetroNpcAgent : MonoBehaviour
 
     private bool CanUseNavMeshAgent()
     {
-        return navMeshAgent != null && navMeshAgent.isActiveAndEnabled && navMeshAgent.isOnNavMesh;
+        if (navMeshAgent == null || !navMeshAgent.isActiveAndEnabled)
+        {
+            return false;
+        }
+
+        if (navMeshAgent.isOnNavMesh)
+        {
+            return true;
+        }
+
+        float sampleRadius = Mathf.Max(1f, navAgentRadius * 4f);
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, sampleRadius, navMeshAgent.areaMask))
+        {
+            navMeshAgent.Warp(hit.position);
+        }
+
+        return navMeshAgent.isOnNavMesh;
     }
 
     private void ConfigureNavMeshAgent()
@@ -663,6 +698,30 @@ public sealed class RetroNpcAgent : MonoBehaviour
         navMeshAgent.angularSpeed = turnSpeed;
         navMeshAgent.stoppingDistance = stoppingDistance;
         navMeshAgent.updateRotation = false;
+        navMeshAgent.radius = navAgentRadius;
+        navMeshAgent.height = navAgentHeight;
+        navMeshAgent.obstacleAvoidanceType = obstacleAvoidance;
+        navMeshAgent.avoidancePriority = ResolveAvoidancePriority();
+    }
+
+    private int ResolveAvoidancePriority()
+    {
+        if (!staggerAvoidancePriority || avoidancePrioritySpread <= 0)
+        {
+            return avoidancePriority;
+        }
+
+        if (avoidancePriorityResolved)
+        {
+            return resolvedAvoidancePriority;
+        }
+
+        int range = avoidancePrioritySpread * 2 + 1;
+        int instanceHash = System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(this) & int.MaxValue;
+        int offset = Mathf.Abs(instanceHash) % range - avoidancePrioritySpread;
+        resolvedAvoidancePriority = Mathf.Clamp(avoidancePriority + offset, 0, 99);
+        avoidancePriorityResolved = true;
+        return resolvedAvoidancePriority;
     }
 
     private bool AcquireTarget(bool force)
@@ -923,7 +982,7 @@ public sealed class RetroNpcAgent : MonoBehaviour
         state = nextState;
     }
 
-    private void AutoAssignReferences()
+    private void AutoAssignReferences(bool allowCreateNavMeshAgent)
     {
         if (damageable == null)
         {
@@ -938,6 +997,15 @@ public sealed class RetroNpcAgent : MonoBehaviour
         if (navMeshAgent == null)
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+        }
+
+        if (navMeshAgent == null
+            && allowCreateNavMeshAgent
+            && autoCreateNavMeshAgent
+            && navigationMode != RetroNpcNavigationMode.Transform
+            && navigationMode != RetroNpcNavigationMode.Rigidbody)
+        {
+            navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
         }
     }
 

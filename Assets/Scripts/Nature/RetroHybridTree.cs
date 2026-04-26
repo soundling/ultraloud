@@ -82,6 +82,11 @@ public sealed class RetroHybridTree : MonoBehaviour
     [SerializeField, Min(0.05f)] private float leafCardMaxSize = 1.55f;
     [SerializeField] private int seed = 71423;
 
+    [Header("Navigation")]
+    [SerializeField] private bool blockNavigation = true;
+    [SerializeField, Min(0f)] private float navObstacleRadiusPadding = 0.35f;
+    [SerializeField, Min(0f)] private float navObstacleHeightPadding = 0.25f;
+
     [Header("Wind")]
     [SerializeField] private bool animateWind = true;
     [SerializeField, Range(0f, 1f)] private float windStrength = 0.18f;
@@ -214,6 +219,8 @@ public sealed class RetroHybridTree : MonoBehaviour
         leafCardCount = Mathf.Clamp(leafCardCount, 16, 256);
         leafCardMinSize = Mathf.Max(0.05f, leafCardMinSize);
         leafCardMaxSize = Mathf.Max(leafCardMinSize, leafCardMaxSize);
+        navObstacleRadiusPadding = Mathf.Max(0f, navObstacleRadiusPadding);
+        navObstacleHeightPadding = Mathf.Max(0f, navObstacleHeightPadding);
         windStrength = Mathf.Clamp01(windStrength);
         windSpeed = Mathf.Max(0f, windSpeed);
         windGustVariation = Mathf.Clamp01(windGustVariation);
@@ -342,6 +349,9 @@ public sealed class RetroHybridTree : MonoBehaviour
             hash = hash * 31 + leafCardMinSize.GetHashCode();
             hash = hash * 31 + leafCardMaxSize.GetHashCode();
             hash = hash * 31 + seed;
+            hash = hash * 31 + blockNavigation.GetHashCode();
+            hash = hash * 31 + navObstacleRadiusPadding.GetHashCode();
+            hash = hash * 31 + navObstacleHeightPadding.GetHashCode();
             hash = hash * 31 + GetAssetHash(leafBaseMap);
             hash = hash * 31 + GetAssetHash(leafNormalMap);
             hash = hash * 31 + GetAssetHash(barkBaseMap);
@@ -370,8 +380,28 @@ public sealed class RetroHybridTree : MonoBehaviour
         CreateTrunk(generatedRoot.transform);
         CreateCanopy(generatedRoot.transform);
         CreateImpostor(generatedRoot.transform);
+        ConfigureNavigationObstacle();
         ApplyMaterials();
         UpdateLod(ResolveCamera());
+    }
+
+    private void ConfigureNavigationObstacle()
+    {
+        if (!blockNavigation || generatedRoot == null)
+        {
+            return;
+        }
+
+        RetroNavMeshDynamicObstacle dynamicObstacle = generatedRoot.GetComponent<RetroNavMeshDynamicObstacle>();
+        if (dynamicObstacle == null)
+        {
+            dynamicObstacle = generatedRoot.AddComponent<RetroNavMeshDynamicObstacle>();
+        }
+
+        float trunkBlockRadius = Mathf.Max(trunkRadius * 2.4f, branchRadius * 5f);
+        float obstacleRadius = Mathf.Max(0.35f, trunkBlockRadius) + navObstacleRadiusPadding;
+        float obstacleHeight = Mathf.Max(0.5f, trunkHeight + navObstacleHeightPadding);
+        dynamicObstacle.ConfigureCapsule(obstacleRadius, obstacleHeight, new Vector3(0f, obstacleHeight * 0.5f, 0f), Application.isPlaying);
     }
 
     private void DestroyGeneratedRoot()

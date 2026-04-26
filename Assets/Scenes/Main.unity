@@ -119,6 +119,293 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &166369995
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 970210000000000001, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_Name
+      value: PinUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.36133
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.62603
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.41115
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000002, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000011, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9671592
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000011, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000011, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.25417134
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000011, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000013, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 970210000000000013, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0ae3f25456b84c1ab92fef2066eed91a, type: 3}
+--- !u!1001 &207922982
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2730484296271873959, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_Name
+      value: BritishGhoul
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169432608377671334, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: rimStrength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169432608377671334, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: ambientTopColor.b
+      value: 0.34509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169432608377671334, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: ambientTopColor.g
+      value: 0.38431376
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169432608377671334, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: ambientTopColor.r
+      value: 0.43921572
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799395536685289405, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199166239023155866, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966380484585622265, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.969195
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966380484585622265, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966380484585622265, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.2462946
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966380484585622265, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d44fddcf1e05c442b69b7144dba41d1, type: 3}
+--- !u!1 &300056017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300056018}
+  - component: {fileID: 300056019}
+  m_Layer: 0
+  m_Name: VegetationPatch_09
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &300056018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300056017}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.64101976, z: 0, w: -0.76752436}
+  m_LocalPosition: {x: 10.756586, y: 0, z: 0.77064455}
+  m_LocalScale: {x: 0.9354483, y: 0.9354483, z: 0.9354483}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &300056019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300056017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 110984
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
 --- !u!1001 &343475160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -216,6 +503,901 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 580865d498405f747a81304521197491, type: 3}
+--- !u!1 &355559237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 355559238}
+  - component: {fileID: 355559242}
+  - component: {fileID: 355559241}
+  - component: {fileID: 355559240}
+  - component: {fileID: 355559239}
+  m_Layer: 0
+  m_Name: HybridTreeVariant_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &355559238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355559237}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.99069357, z: 0, w: 0.13611144}
+  m_LocalPosition: {x: -5.151434, y: 0, z: -8.747701}
+  m_LocalScale: {x: 0.29282713, y: 0.29282713, z: 0.29282713}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &355559239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355559237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d44664b2d44d18d51408ff6544f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroShootableFeedback
+  damageable: {fileID: 355559240}
+  surfaceKind: 0
+  spawnImpactEffects: 1
+  spawnDeathEffects: 1
+  useImpactFlash: 1
+  visualRoot: {fileID: 0}
+  kickVisualRoot: 1
+  visualKickDistance: 0.05
+  visualKickAngle: 4.5
+  visualKickReturnSpeed: 16
+  effectScale: 1
+  deathEffectMultiplier: 2.4
+  disableFlockAgentOnDeath: 0
+--- !u!114 &355559240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355559237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 1800
+  destroyOnDeath: 0
+  disableRenderersOnDeath: 0
+  disableCollidersOnDeath: 0
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!136 &355559241
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355559237}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Height: 5.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.9, z: 0}
+--- !u!114 &355559242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355559237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa04b773eb404f2fa11b81e88de1da30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHybridTree
+  leafBaseMap: {fileID: 2800000, guid: 70386f455f9abc2448bc73d365addb1c, type: 3}
+  leafNormalMap: {fileID: 2800000, guid: be8e6611d2533c14abe7c786ea600660, type: 3}
+  leafDepthMap: {fileID: 2800000, guid: f88963ca97c42c243901768a205e3021, type: 3}
+  leafThicknessMap: {fileID: 2800000, guid: 7e0ffef4544bae743b169b239e92f376, type: 3}
+  leafDensityMap: {fileID: 2800000, guid: 18f32ead26ebd5e478290c69c06c84bc, type: 3}
+  leafWindMap: {fileID: 2800000, guid: be2a33dfc6d1db848bf90dd53a3a1c57, type: 3}
+  barkBaseMap: {fileID: 2800000, guid: 3e4e8cd72fca24047908ac94bc41ae5d, type: 3}
+  barkNormalMap: {fileID: 2800000, guid: eaa97196a56f9764188c4cff3b4cec53, type: 3}
+  impostorBaseMap: {fileID: 2800000, guid: e9d05f7ab01f45bf9096069f1dcf895e, type: 3}
+  impostorNormalMap: {fileID: 2800000, guid: 5a10805135944326b769423615766040, type: 3}
+  impostorDepthMap: {fileID: 2800000, guid: fedb85a160e844d6aa403cb55c16c845, type: 3}
+  impostorThicknessMap: {fileID: 2800000, guid: 102144fe38c04161b094286a3e221b37, type: 3}
+  treeHeight: 6.615301
+  trunkHeight: 3.6525297
+  trunkRadius: 0.28209892
+  branchRadius: 0.04578808
+  branchCount: 13
+  canopyRadius: 1.6828555
+  canopyHeight: 1.9298323
+  leafCardCount: 135
+  leafCardMinSize: 0.7980627
+  leafCardMaxSize: 1.204299
+  seed: 314530
+  animateWind: 1
+  windStrength: 0.18562841
+  windSpeed: 1.5220702
+  windGustVariation: 0.45
+  leafTint: {r: 0.90624446, g: 0.94, b: 0.72, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  canopyNormalBend: 0.38
+  wrapDiffuse: 0.55
+  densityShadowStrength: 0.65
+  depthSelfShadowStrength: 0.32
+  surfaceRoughness: 0.82
+  specularStrength: 0.14
+  rimStrength: 0.1
+  rimPower: 3
+  transmissionColor: {r: 0.72, g: 0.96, b: 0.34, a: 1}
+  transmissionStrength: 0.62053084
+  transmissionPower: 2.2
+  ambientTopColor: {r: 0.58, g: 0.64, b: 0.56, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.14, b: 0.09, a: 1}
+  ambientIntensity: 1.05
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.25
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.55
+  enableImpostorLod: 0
+  impostorDistance: 34
+  impostorFadeBand: 4
+  billboardImpostor: 1
+--- !u!1 &386246903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 386246904}
+  - component: {fileID: 386246905}
+  m_Layer: 0
+  m_Name: VegetationPatch_12
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &386246904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386246903}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.45760286, z: 0, w: -0.8891567}
+  m_LocalPosition: {x: 0.85333735, y: 0, z: -8.584649}
+  m_LocalScale: {x: 1.0682708, y: 1.0682708, z: 1.0682708}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &386246905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386246903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 543320
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &393626855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 393626856}
+  - component: {fileID: 393626857}
+  m_Layer: 0
+  m_Name: VegetationPatch_13
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &393626856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393626855}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.99962133, z: 0, w: 0.027518451}
+  m_LocalPosition: {x: -3.4967163, y: 0, z: 1.1831161}
+  m_LocalScale: {x: 0.82409656, y: 0.82409656, z: 0.82409656}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &393626857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393626855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 115501
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &601494262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 601494263}
+  - component: {fileID: 601494264}
+  m_Layer: 0
+  m_Name: VegetationPatch_14
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &601494263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601494262}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.90999705, z: 0, w: 0.41461474}
+  m_LocalPosition: {x: 12.035263, y: 0, z: 6.8849745}
+  m_LocalScale: {x: 1.1244342, y: 1.1244342, z: 1.1244342}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &601494264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601494262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 195553
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &633421730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 633421731}
+  - component: {fileID: 633421732}
+  m_Layer: 0
+  m_Name: VegetationPatch_03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &633421731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633421730}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.20141432, z: 0, w: -0.97950613}
+  m_LocalPosition: {x: 1.6113954, y: 0, z: 8.476619}
+  m_LocalScale: {x: 1.0366056, y: 1.0366056, z: 1.0366056}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &633421732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633421730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 239149
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &691757673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691757674}
+  - component: {fileID: 691757675}
+  m_Layer: 0
+  m_Name: VegetationPatch_07
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &691757674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691757673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7017536, z: 0, w: -0.7124197}
+  m_LocalPosition: {x: -13.432593, y: 0, z: 1.9289207}
+  m_LocalScale: {x: 0.9560309, y: 0.9560309, z: 0.9560309}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &691757675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691757673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 1
+  cardCount: 128
+  patchRadius: 2.35
+  patchHeight: 1.65
+  minCardSize: 0.46
+  maxCardSize: 1.28
+  horizontalCardRatio: 0.08
+  centerDensity: 0.82
+  groundOffset: 0.025
+  seed: 438478
+  animateWind: 1
+  windStrength: 0.1
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.92, g: 0.96, b: 0.82, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &723135754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 723135755}
+  - component: {fileID: 723135756}
+  m_Layer: 0
+  m_Name: VegetationPatch_08
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &723135755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723135754}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.9180821, z: 0, w: -0.39639035}
+  m_LocalPosition: {x: -2.6044867, y: 0, z: -12.816113}
+  m_LocalScale: {x: 0.9866366, y: 0.9866366, z: 0.9866366}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &723135756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723135754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 911008
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &764624343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 764624344}
+  - component: {fileID: 764624345}
+  m_Layer: 0
+  m_Name: VegetationPatch_05
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &764624344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764624343}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.8308435, z: 0, w: -0.5565061}
+  m_LocalPosition: {x: -4.198964, y: 0, z: 4.961705}
+  m_LocalScale: {x: 0.88252836, y: 0.88252836, z: 0.88252836}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &764624345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764624343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 712725
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &798867712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798867713}
+  - component: {fileID: 798867714}
+  m_Layer: 0
+  m_Name: VegetationPatch_06
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &798867713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798867712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.99630284, z: 0, w: 0.08591094}
+  m_LocalPosition: {x: 0.5838993, y: 0, z: -5.737545}
+  m_LocalScale: {x: 1.3082696, y: 1.3082696, z: 1.3082696}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &798867714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798867712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 3e021033aead6274b955787df3788ae7, type: 3}
+  normalMap: {fileID: 2800000, guid: 83c99c8454b9abe4a9e77aaf9734bd4e, type: 3}
+  depthMap: {fileID: 2800000, guid: 619bda0418dd654428d24b3d48f7cd4f, type: 3}
+  thicknessMap: {fileID: 2800000, guid: 3beef67cd0f771a4182e153132f1b4dc, type: 3}
+  densityMap: {fileID: 2800000, guid: 4c22da1672b97c54da2f5aced398e83b, type: 3}
+  windMap: {fileID: 2800000, guid: fbcee466850cc5d4c8959baf19a9a82f, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 0
+  cardCount: 84
+  patchRadius: 3.1
+  patchHeight: 0.85
+  minCardSize: 0.32
+  maxCardSize: 0.9
+  horizontalCardRatio: 0.62
+  centerDensity: 0.52
+  groundOffset: 0.025
+  seed: 1702
+  animateWind: 1
+  windStrength: 0.08
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.92, g: 0.98, b: 0.86, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
 --- !u!1 &812871312
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +1579,278 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef32b3b73c2c8014b9d93e3c4a7faf70, type: 3}
+--- !u!1 &882267864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882267865}
+  - component: {fileID: 882267866}
+  m_Layer: 0
+  m_Name: VegetationPatch_10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &882267865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882267864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.42565402, z: 0, w: -0.904886}
+  m_LocalPosition: {x: 8.627702, y: 0, z: 6.531397}
+  m_LocalScale: {x: 1.1459606, y: 1.1459606, z: 1.1459606}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &882267866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882267864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 1
+  cardCount: 128
+  patchRadius: 2.35
+  patchHeight: 1.65
+  minCardSize: 0.46
+  maxCardSize: 1.28
+  horizontalCardRatio: 0.08
+  centerDensity: 0.82
+  groundOffset: 0.025
+  seed: 782735
+  animateWind: 1
+  windStrength: 0.1
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.92, g: 0.96, b: 0.82, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &912261310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 912261311}
+  - component: {fileID: 912261315}
+  - component: {fileID: 912261314}
+  - component: {fileID: 912261313}
+  - component: {fileID: 912261312}
+  m_Layer: 0
+  m_Name: HybridTreeVariant_03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &912261311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912261310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.88015956, z: 0, w: -0.47467792}
+  m_LocalPosition: {x: 2.3106685, y: 0, z: 2.6691608}
+  m_LocalScale: {x: 0.24227417, y: 0.24227417, z: 0.24227417}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912261312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912261310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d44664b2d44d18d51408ff6544f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroShootableFeedback
+  damageable: {fileID: 912261313}
+  surfaceKind: 0
+  spawnImpactEffects: 1
+  spawnDeathEffects: 1
+  useImpactFlash: 1
+  visualRoot: {fileID: 0}
+  kickVisualRoot: 1
+  visualKickDistance: 0.05
+  visualKickAngle: 4.5
+  visualKickReturnSpeed: 16
+  effectScale: 1
+  deathEffectMultiplier: 2.4
+  disableFlockAgentOnDeath: 0
+--- !u!114 &912261313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912261310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 1800
+  destroyOnDeath: 0
+  disableRenderersOnDeath: 0
+  disableCollidersOnDeath: 0
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!136 &912261314
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912261310}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Height: 5.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.9, z: 0}
+--- !u!114 &912261315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912261310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa04b773eb404f2fa11b81e88de1da30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHybridTree
+  leafBaseMap: {fileID: 2800000, guid: 70386f455f9abc2448bc73d365addb1c, type: 3}
+  leafNormalMap: {fileID: 2800000, guid: be8e6611d2533c14abe7c786ea600660, type: 3}
+  leafDepthMap: {fileID: 2800000, guid: f88963ca97c42c243901768a205e3021, type: 3}
+  leafThicknessMap: {fileID: 2800000, guid: 7e0ffef4544bae743b169b239e92f376, type: 3}
+  leafDensityMap: {fileID: 2800000, guid: 18f32ead26ebd5e478290c69c06c84bc, type: 3}
+  leafWindMap: {fileID: 2800000, guid: be2a33dfc6d1db848bf90dd53a3a1c57, type: 3}
+  barkBaseMap: {fileID: 2800000, guid: 367093bcc00732a46b20e15a47d80453, type: 3}
+  barkNormalMap: {fileID: 2800000, guid: 36f1f017b98f7a74d9a92144e4cb106c, type: 3}
+  impostorBaseMap: {fileID: 2800000, guid: e9d05f7ab01f45bf9096069f1dcf895e, type: 3}
+  impostorNormalMap: {fileID: 2800000, guid: 5a10805135944326b769423615766040, type: 3}
+  impostorDepthMap: {fileID: 2800000, guid: fedb85a160e844d6aa403cb55c16c845, type: 3}
+  impostorThicknessMap: {fileID: 2800000, guid: 102144fe38c04161b094286a3e221b37, type: 3}
+  treeHeight: 6.075347
+  trunkHeight: 3.98198
+  trunkRadius: 0.3136107
+  branchRadius: 0.047011346
+  branchCount: 11
+  canopyRadius: 1.9211189
+  canopyHeight: 2.8891866
+  leafCardCount: 150
+  leafCardMinSize: 0.8724818
+  leafCardMaxSize: 1.5522454
+  seed: 258783
+  animateWind: 1
+  windStrength: 0.12216561
+  windSpeed: 1.238019
+  windGustVariation: 0.45
+  leafTint: {r: 0.9853255, g: 0.94, b: 0.72, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  canopyNormalBend: 0.38
+  wrapDiffuse: 0.55
+  densityShadowStrength: 0.65
+  depthSelfShadowStrength: 0.32
+  surfaceRoughness: 0.82
+  specularStrength: 0.14
+  rimStrength: 0.1
+  rimPower: 3
+  transmissionColor: {r: 0.72, g: 0.96, b: 0.34, a: 1}
+  transmissionStrength: 0.9747837
+  transmissionPower: 2.2
+  ambientTopColor: {r: 0.58, g: 0.64, b: 0.56, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.14, b: 0.09, a: 1}
+  ambientIntensity: 1.05
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.25
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.55
+  enableImpostorLod: 0
+  impostorDistance: 34
+  impostorFadeBand: 4
+  billboardImpostor: 1
 --- !u!1 &1010682440
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +2151,184 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c481c8b520845b58bbcd878b04a87d0, type: 3}
+--- !u!1 &1036891672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1036891673}
+  - component: {fileID: 1036891674}
+  m_Layer: 0
+  m_Name: VegetationPatch_15
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1036891673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036891672}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.10777322, z: 0, w: 0.9941755}
+  m_LocalPosition: {x: 1.6476736, y: 0, z: 9.333988}
+  m_LocalScale: {x: 1.203071, y: 1.203071, z: 1.203071}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1036891674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036891672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 3e021033aead6274b955787df3788ae7, type: 3}
+  normalMap: {fileID: 2800000, guid: 83c99c8454b9abe4a9e77aaf9734bd4e, type: 3}
+  depthMap: {fileID: 2800000, guid: 619bda0418dd654428d24b3d48f7cd4f, type: 3}
+  thicknessMap: {fileID: 2800000, guid: 3beef67cd0f771a4182e153132f1b4dc, type: 3}
+  densityMap: {fileID: 2800000, guid: 4c22da1672b97c54da2f5aced398e83b, type: 3}
+  windMap: {fileID: 2800000, guid: fbcee466850cc5d4c8959baf19a9a82f, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 0
+  cardCount: 84
+  patchRadius: 3.1
+  patchHeight: 0.85
+  minCardSize: 0.32
+  maxCardSize: 0.9
+  horizontalCardRatio: 0.62
+  centerDensity: 0.52
+  groundOffset: 0.025
+  seed: 841581
+  animateWind: 1
+  windStrength: 0.08
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.92, g: 0.98, b: 0.86, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &1087903091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1087903092}
+  - component: {fileID: 1087903093}
+  m_Layer: 0
+  m_Name: VegetationPatch_16
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1087903092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087903091}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.999977, z: 0, w: -0.0067825234}
+  m_LocalPosition: {x: -11.518127, y: 0, z: -6.1330805}
+  m_LocalScale: {x: 0.7370441, y: 0.7370441, z: 0.7370441}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1087903093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087903091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 933771
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
 --- !u!1 &1113481540
 GameObject:
   m_ObjectHideFlags: 1
@@ -840,6 +2472,95 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1202237817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1202237818}
+  - component: {fileID: 1202237819}
+  m_Layer: 0
+  m_Name: VegetationPatch_11
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1202237818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202237817}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.2939991, z: 0, w: -0.9558057}
+  m_LocalPosition: {x: 4.2958922, y: 0, z: -7.1808043}
+  m_LocalScale: {x: 1.335739, y: 1.335739, z: 1.335739}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1202237819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202237817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 728323
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
 --- !u!1001 &1330139319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -937,6 +2658,550 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 580865d498405f747a81304521197491, type: 3}
+--- !u!1 &1348242203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1348242204}
+  - component: {fileID: 1348242205}
+  m_Layer: 0
+  m_Name: VegetationPatch_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1348242204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348242203}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.8459296, z: 0, w: 0.53329456}
+  m_LocalPosition: {x: -10.95177, y: 0, z: -7.8634686}
+  m_LocalScale: {x: 1.2794315, y: 1.2794315, z: 1.2794315}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1348242205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348242203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 1
+  cardCount: 128
+  patchRadius: 2.35
+  patchHeight: 1.65
+  minCardSize: 0.46
+  maxCardSize: 1.28
+  horizontalCardRatio: 0.08
+  centerDensity: 0.82
+  groundOffset: 0.025
+  seed: 163596
+  animateWind: 1
+  windStrength: 0.1
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.92, g: 0.96, b: 0.82, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &1372408763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1372408764}
+  - component: {fileID: 1372408768}
+  - component: {fileID: 1372408767}
+  - component: {fileID: 1372408766}
+  - component: {fileID: 1372408765}
+  m_Layer: 0
+  m_Name: HybridTreeVariant_04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1372408764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372408763}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.26386824, z: 0, w: -0.9645587}
+  m_LocalPosition: {x: 9.976996, y: 0, z: 5.136325}
+  m_LocalScale: {x: 0.40393147, y: 0.40393147, z: 0.40393147}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1372408765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372408763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d44664b2d44d18d51408ff6544f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroShootableFeedback
+  damageable: {fileID: 1372408766}
+  surfaceKind: 0
+  spawnImpactEffects: 1
+  spawnDeathEffects: 1
+  useImpactFlash: 1
+  visualRoot: {fileID: 0}
+  kickVisualRoot: 1
+  visualKickDistance: 0.05
+  visualKickAngle: 4.5
+  visualKickReturnSpeed: 16
+  effectScale: 1
+  deathEffectMultiplier: 2.4
+  disableFlockAgentOnDeath: 0
+--- !u!114 &1372408766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372408763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 1800
+  destroyOnDeath: 0
+  disableRenderersOnDeath: 0
+  disableCollidersOnDeath: 0
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!136 &1372408767
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372408763}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Height: 5.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.9, z: 0}
+--- !u!114 &1372408768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372408763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa04b773eb404f2fa11b81e88de1da30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHybridTree
+  leafBaseMap: {fileID: 2800000, guid: 70386f455f9abc2448bc73d365addb1c, type: 3}
+  leafNormalMap: {fileID: 2800000, guid: be8e6611d2533c14abe7c786ea600660, type: 3}
+  leafDepthMap: {fileID: 2800000, guid: f88963ca97c42c243901768a205e3021, type: 3}
+  leafThicknessMap: {fileID: 2800000, guid: 7e0ffef4544bae743b169b239e92f376, type: 3}
+  leafDensityMap: {fileID: 2800000, guid: 18f32ead26ebd5e478290c69c06c84bc, type: 3}
+  leafWindMap: {fileID: 2800000, guid: be2a33dfc6d1db848bf90dd53a3a1c57, type: 3}
+  barkBaseMap: {fileID: 2800000, guid: 83d1d51e0518690489d9ecc559f9e4a7, type: 3}
+  barkNormalMap: {fileID: 2800000, guid: 1421a9fcf66567b4e938bbdac2c31b50, type: 3}
+  impostorBaseMap: {fileID: 2800000, guid: e9d05f7ab01f45bf9096069f1dcf895e, type: 3}
+  impostorNormalMap: {fileID: 2800000, guid: 5a10805135944326b769423615766040, type: 3}
+  impostorDepthMap: {fileID: 2800000, guid: fedb85a160e844d6aa403cb55c16c845, type: 3}
+  impostorThicknessMap: {fileID: 2800000, guid: 102144fe38c04161b094286a3e221b37, type: 3}
+  treeHeight: 6.191573
+  trunkHeight: 2.939006
+  trunkRadius: 0.18685703
+  branchRadius: 0.061041523
+  branchCount: 14
+  canopyRadius: 2.3601027
+  canopyHeight: 2.7866263
+  leafCardCount: 132
+  leafCardMinSize: 0.92236304
+  leafCardMaxSize: 1.726025
+  seed: 508982
+  animateWind: 1
+  windStrength: 0.11871665
+  windSpeed: 1.7203718
+  windGustVariation: 0.45
+  leafTint: {r: 0.8288728, g: 0.94, b: 0.72, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  canopyNormalBend: 0.38
+  wrapDiffuse: 0.55
+  densityShadowStrength: 0.65
+  depthSelfShadowStrength: 0.32
+  surfaceRoughness: 0.82
+  specularStrength: 0.14
+  rimStrength: 0.1
+  rimPower: 3
+  transmissionColor: {r: 0.72, g: 0.96, b: 0.34, a: 1}
+  transmissionStrength: 0.5830246
+  transmissionPower: 2.2
+  ambientTopColor: {r: 0.58, g: 0.64, b: 0.56, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.14, b: 0.09, a: 1}
+  ambientIntensity: 1.05
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.25
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.55
+  enableImpostorLod: 0
+  impostorDistance: 34
+  impostorFadeBand: 4
+  billboardImpostor: 1
+--- !u!1 &1396034467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396034468}
+  - component: {fileID: 1396034472}
+  - component: {fileID: 1396034471}
+  - component: {fileID: 1396034470}
+  - component: {fileID: 1396034469}
+  m_Layer: 0
+  m_Name: HybridTreeVariant_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1396034468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396034467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.79261136, z: 0, w: 0.60972714}
+  m_LocalPosition: {x: 2.28405, y: 0, z: -2.7712402}
+  m_LocalScale: {x: 0.41088405, y: 0.41088405, z: 0.41088405}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1396034469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396034467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d44664b2d44d18d51408ff6544f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroShootableFeedback
+  damageable: {fileID: 1396034470}
+  surfaceKind: 0
+  spawnImpactEffects: 1
+  spawnDeathEffects: 1
+  useImpactFlash: 1
+  visualRoot: {fileID: 0}
+  kickVisualRoot: 1
+  visualKickDistance: 0.05
+  visualKickAngle: 4.5
+  visualKickReturnSpeed: 16
+  effectScale: 1
+  deathEffectMultiplier: 2.4
+  disableFlockAgentOnDeath: 0
+--- !u!114 &1396034470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396034467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 1800
+  destroyOnDeath: 0
+  disableRenderersOnDeath: 0
+  disableCollidersOnDeath: 0
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!136 &1396034471
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396034467}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Height: 5.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.9, z: 0}
+--- !u!114 &1396034472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396034467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa04b773eb404f2fa11b81e88de1da30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHybridTree
+  leafBaseMap: {fileID: 2800000, guid: 70386f455f9abc2448bc73d365addb1c, type: 3}
+  leafNormalMap: {fileID: 2800000, guid: be8e6611d2533c14abe7c786ea600660, type: 3}
+  leafDepthMap: {fileID: 2800000, guid: f88963ca97c42c243901768a205e3021, type: 3}
+  leafThicknessMap: {fileID: 2800000, guid: 7e0ffef4544bae743b169b239e92f376, type: 3}
+  leafDensityMap: {fileID: 2800000, guid: 18f32ead26ebd5e478290c69c06c84bc, type: 3}
+  leafWindMap: {fileID: 2800000, guid: be2a33dfc6d1db848bf90dd53a3a1c57, type: 3}
+  barkBaseMap: {fileID: 2800000, guid: f941e6150454bc8428172bd036e50cd7, type: 3}
+  barkNormalMap: {fileID: 2800000, guid: e3407589ccf2d9f4686e16469df8839e, type: 3}
+  impostorBaseMap: {fileID: 2800000, guid: e9d05f7ab01f45bf9096069f1dcf895e, type: 3}
+  impostorNormalMap: {fileID: 2800000, guid: 5a10805135944326b769423615766040, type: 3}
+  impostorDepthMap: {fileID: 2800000, guid: fedb85a160e844d6aa403cb55c16c845, type: 3}
+  impostorThicknessMap: {fileID: 2800000, guid: 102144fe38c04161b094286a3e221b37, type: 3}
+  treeHeight: 5.2907867
+  trunkHeight: 3.0273223
+  trunkRadius: 0.28095102
+  branchRadius: 0.07394788
+  branchCount: 13
+  canopyRadius: 2.238146
+  canopyHeight: 1.9868954
+  leafCardCount: 111
+  leafCardMinSize: 0.88089323
+  leafCardMaxSize: 1.6835463
+  seed: 664230
+  animateWind: 1
+  windStrength: 0.16502073
+  windSpeed: 1.2120589
+  windGustVariation: 0.45
+  leafTint: {r: 0.9704828, g: 0.94, b: 0.72, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  canopyNormalBend: 0.38
+  wrapDiffuse: 0.55
+  densityShadowStrength: 0.65
+  depthSelfShadowStrength: 0.32
+  surfaceRoughness: 0.82
+  specularStrength: 0.14
+  rimStrength: 0.1
+  rimPower: 3
+  transmissionColor: {r: 0.72, g: 0.96, b: 0.34, a: 1}
+  transmissionStrength: 0.7060958
+  transmissionPower: 2.2
+  ambientTopColor: {r: 0.58, g: 0.64, b: 0.56, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.14, b: 0.09, a: 1}
+  ambientIntensity: 1.05
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.25
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.55
+  enableImpostorLod: 0
+  impostorDistance: 34
+  impostorFadeBand: 4
+  billboardImpostor: 1
+--- !u!1 &1469789970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1469789971}
+  - component: {fileID: 1469789972}
+  m_Layer: 0
+  m_Name: VegetationPatch_04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1469789971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469789970}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.1862389, z: 0, w: 0.9825045}
+  m_LocalPosition: {x: -9.014589, y: 0, z: 5.9856277}
+  m_LocalScale: {x: 0.7211738, y: 0.7211738, z: 0.7211738}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1469789972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469789970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 1
+  cardCount: 128
+  patchRadius: 2.35
+  patchHeight: 1.65
+  minCardSize: 0.46
+  maxCardSize: 1.28
+  horizontalCardRatio: 0.08
+  centerDensity: 0.82
+  groundOffset: 0.025
+  seed: 201274
+  animateWind: 1
+  windStrength: 0.1
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.92, g: 0.96, b: 0.82, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
 --- !u!1 &1519972863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +3335,295 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbad7b3fe3d54e18b78dc9673f2f1d9b, type: 3}
+--- !u!1001 &1571865862
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465768419953132963, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2840684689666223519, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+      propertyPath: m_Name
+      value: B2 Bomber Raid
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bfbf8e8cf42866f48a985f4760a3806d, type: 3}
+--- !u!1 &1582127792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1582127793}
+  - component: {fileID: 1582127794}
+  m_Layer: 0
+  m_Name: VegetationPatch_17
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1582127793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582127792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.8143464, z: 0, w: 0.5803792}
+  m_LocalPosition: {x: 12.810645, y: 0, z: 0.47567278}
+  m_LocalScale: {x: 0.78081137, y: 0.78081137, z: 0.78081137}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1582127794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582127792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 749173
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
+--- !u!1 &1587743788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1587743789}
+  m_Layer: 0
+  m_Name: VegetationCluster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1587743789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587743788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1592853926}
+  - {fileID: 1348242204}
+  - {fileID: 1687515100}
+  - {fileID: 633421731}
+  - {fileID: 1469789971}
+  - {fileID: 764624344}
+  - {fileID: 798867713}
+  - {fileID: 691757674}
+  - {fileID: 723135755}
+  - {fileID: 300056018}
+  - {fileID: 882267865}
+  - {fileID: 1202237818}
+  - {fileID: 386246904}
+  - {fileID: 393626856}
+  - {fileID: 601494263}
+  - {fileID: 1036891673}
+  - {fileID: 1087903092}
+  - {fileID: 1582127793}
+  - {fileID: 1755239150}
+  - {fileID: 1396034468}
+  - {fileID: 355559238}
+  - {fileID: 912261311}
+  - {fileID: 1372408764}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1592853925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592853926}
+  - component: {fileID: 1592853927}
+  m_Layer: 0
+  m_Name: VegetationPatch_00
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1592853926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592853925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.9996635, z: 0, w: -0.02594089}
+  m_LocalPosition: {x: 12.253364, y: 0, z: 3.614345}
+  m_LocalScale: {x: 1.0994246, y: 1.0994246, z: 1.0994246}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1592853927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592853925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 3e021033aead6274b955787df3788ae7, type: 3}
+  normalMap: {fileID: 2800000, guid: 83c99c8454b9abe4a9e77aaf9734bd4e, type: 3}
+  depthMap: {fileID: 2800000, guid: 619bda0418dd654428d24b3d48f7cd4f, type: 3}
+  thicknessMap: {fileID: 2800000, guid: 3beef67cd0f771a4182e153132f1b4dc, type: 3}
+  densityMap: {fileID: 2800000, guid: 4c22da1672b97c54da2f5aced398e83b, type: 3}
+  windMap: {fileID: 2800000, guid: fbcee466850cc5d4c8959baf19a9a82f, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 0
+  cardCount: 84
+  patchRadius: 3.1
+  patchHeight: 0.85
+  minCardSize: 0.32
+  maxCardSize: 0.9
+  horizontalCardRatio: 0.62
+  centerDensity: 0.52
+  groundOffset: 0.025
+  seed: 946881
+  animateWind: 1
+  windStrength: 0.08
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.92, g: 0.98, b: 0.86, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
 --- !u!1001 &1638352202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1167,6 +3721,95 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 580865d498405f747a81304521197491, type: 3}
+--- !u!1 &1687515099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1687515100}
+  - component: {fileID: 1687515101}
+  m_Layer: 0
+  m_Name: VegetationPatch_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1687515100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687515099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.36715835, z: 0, w: -0.93015844}
+  m_LocalPosition: {x: -6.9063034, y: 0, z: -4.347729}
+  m_LocalScale: {x: 0.9551091, y: 0.9551091, z: 0.9551091}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1687515101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687515099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 7411b5d088cb0e04b96bec12f3fa94ea, type: 3}
+  normalMap: {fileID: 2800000, guid: 44e7a53c33c1cc94c9b42eabf337dd33, type: 3}
+  depthMap: {fileID: 2800000, guid: 9abd08e3d0a50c1438a0c4515394085e, type: 3}
+  thicknessMap: {fileID: 2800000, guid: b477040e253c42c49afdc7f3173a7cf8, type: 3}
+  densityMap: {fileID: 2800000, guid: 657d64b3bb77eaf488e5db38128d03f1, type: 3}
+  windMap: {fileID: 2800000, guid: 387ac811d966a8c4083dda4e53e22676, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 2
+  cardCount: 148
+  patchRadius: 3.8
+  patchHeight: 1.45
+  minCardSize: 0.35
+  maxCardSize: 1.15
+  horizontalCardRatio: 0.34
+  centerDensity: 0.68
+  groundOffset: 0.025
+  seed: 524139
+  animateWind: 1
+  windStrength: 0.11
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.95, g: 0.98, b: 0.88, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45
 --- !u!1 &1691599269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,6 +3983,189 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c481c8b520845b58bbcd878b04a87d0, type: 3}
+--- !u!1 &1755239149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1755239150}
+  - component: {fileID: 1755239154}
+  - component: {fileID: 1755239153}
+  - component: {fileID: 1755239152}
+  - component: {fileID: 1755239151}
+  m_Layer: 0
+  m_Name: HybridTreeVariant_00
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1755239150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755239149}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.9990531, z: 0, w: -0.04350747}
+  m_LocalPosition: {x: -7.0465894, y: 0, z: 1.2559583}
+  m_LocalScale: {x: 0.34367284, y: 0.34367284, z: 0.34367284}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587743789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1755239151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755239149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d44664b2d44d18d51408ff6544f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroShootableFeedback
+  damageable: {fileID: 1755239152}
+  surfaceKind: 0
+  spawnImpactEffects: 1
+  spawnDeathEffects: 1
+  useImpactFlash: 1
+  visualRoot: {fileID: 0}
+  kickVisualRoot: 1
+  visualKickDistance: 0.05
+  visualKickAngle: 4.5
+  visualKickReturnSpeed: 16
+  effectScale: 1
+  deathEffectMultiplier: 2.4
+  disableFlockAgentOnDeath: 0
+--- !u!114 &1755239152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755239149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 1800
+  destroyOnDeath: 0
+  disableRenderersOnDeath: 0
+  disableCollidersOnDeath: 0
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!136 &1755239153
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755239149}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Height: 5.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.9, z: 0}
+--- !u!114 &1755239154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755239149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa04b773eb404f2fa11b81e88de1da30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHybridTree
+  leafBaseMap: {fileID: 2800000, guid: 70386f455f9abc2448bc73d365addb1c, type: 3}
+  leafNormalMap: {fileID: 2800000, guid: be8e6611d2533c14abe7c786ea600660, type: 3}
+  leafDepthMap: {fileID: 2800000, guid: f88963ca97c42c243901768a205e3021, type: 3}
+  leafThicknessMap: {fileID: 2800000, guid: 7e0ffef4544bae743b169b239e92f376, type: 3}
+  leafDensityMap: {fileID: 2800000, guid: 18f32ead26ebd5e478290c69c06c84bc, type: 3}
+  leafWindMap: {fileID: 2800000, guid: be2a33dfc6d1db848bf90dd53a3a1c57, type: 3}
+  barkBaseMap: {fileID: 2800000, guid: 367093bcc00732a46b20e15a47d80453, type: 3}
+  barkNormalMap: {fileID: 2800000, guid: 36f1f017b98f7a74d9a92144e4cb106c, type: 3}
+  impostorBaseMap: {fileID: 2800000, guid: e9d05f7ab01f45bf9096069f1dcf895e, type: 3}
+  impostorNormalMap: {fileID: 2800000, guid: 5a10805135944326b769423615766040, type: 3}
+  impostorDepthMap: {fileID: 2800000, guid: fedb85a160e844d6aa403cb55c16c845, type: 3}
+  impostorThicknessMap: {fileID: 2800000, guid: 102144fe38c04161b094286a3e221b37, type: 3}
+  treeHeight: 5.4109855
+  trunkHeight: 2.8687546
+  trunkRadius: 0.16288157
+  branchRadius: 0.09330011
+  branchCount: 12
+  canopyRadius: 1.4562533
+  canopyHeight: 2.724753
+  leafCardCount: 145
+  leafCardMinSize: 0.8737858
+  leafCardMaxSize: 1.3520846
+  seed: 615525
+  animateWind: 1
+  windStrength: 0.2044039
+  windSpeed: 1.8038107
+  windGustVariation: 0.45
+  leafTint: {r: 0.96258944, g: 0.94, b: 0.72, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  canopyNormalBend: 0.38
+  wrapDiffuse: 0.55
+  densityShadowStrength: 0.65
+  depthSelfShadowStrength: 0.32
+  surfaceRoughness: 0.82
+  specularStrength: 0.14
+  rimStrength: 0.1
+  rimPower: 3
+  transmissionColor: {r: 0.72, g: 0.96, b: 0.34, a: 1}
+  transmissionStrength: 0.6373442
+  transmissionPower: 2.2
+  ambientTopColor: {r: 0.58, g: 0.64, b: 0.56, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.14, b: 0.09, a: 1}
+  ambientIntensity: 1.05
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.25
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.55
+  enableImpostorLod: 0
+  impostorDistance: 34
+  impostorFadeBand: 4
+  billboardImpostor: 1
 --- !u!1 &1818853024
 GameObject:
   m_ObjectHideFlags: 1
@@ -1694,7 +4520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 860110000000000011, guid: 50f7bd29928e4ad687903ce3a2395836, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.553323
+      value: 0.9056606
       objectReference: {fileID: 0}
     - target: {fileID: 860110000000000011, guid: 50f7bd29928e4ad687903ce3a2395836, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1702,7 +4528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 860110000000000011, guid: 50f7bd29928e4ad687903ce3a2395836, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.83296686
+      value: 0.4240034
       objectReference: {fileID: 0}
     - target: {fileID: 860110000000000011, guid: 50f7bd29928e4ad687903ce3a2395836, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1874,6 +4700,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7584147684641392264, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: weaponSpriteViews.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
+      propertyPath: mapSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f929fc9415971540913dabb791443b2, type: 2}
     - target: {fileID: 8585270780640454543, guid: 5eef104047ee2974683716c2288d71c1, type: 3}
       propertyPath: ambientColor.b
       value: 1
@@ -1941,3 +4775,7 @@ SceneRoots:
   - {fileID: 1531825696}
   - {fileID: 2108707831}
   - {fileID: 2044858490}
+  - {fileID: 1571865862}
+  - {fileID: 166369995}
+  - {fileID: 1587743789}
+  - {fileID: 207922982}

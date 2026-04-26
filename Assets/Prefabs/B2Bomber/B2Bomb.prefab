@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.35, y: 1.35, z: 1.35}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e0bf4d360e584c8bb470aac15cdfc992, type: 3}
   - {fileID: 21300000, guid: 80f0f4e7539048c59dee99a3a56499e9, type: 3}
   animationFramesPerSecond: 9
-  spriteScale: 1.35
+  spriteScale: 1.1
   trailColor: {r: 1, g: 0.24, b: 0.04, a: 0.78}
   trailInterval: 0.065
   fallDuration: 4.65

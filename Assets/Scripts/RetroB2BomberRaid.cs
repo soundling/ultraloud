@@ -20,15 +20,15 @@ public sealed class RetroB2BomberRaid : MonoBehaviour
 
     [Header("Pass")]
     [SerializeField, Min(20f)] private float passHeight = 68f;
-    [SerializeField, Min(12f)] private float passLength = 170f;
+    [SerializeField, Min(12f)] private float passLength = 340f;
     [SerializeField, Min(1f)] private float passSpeed = 18f;
     [SerializeField, Min(0f)] private float lateralJitter = 22f;
 
     [Header("Bombing")]
-    [SerializeField] private Vector2Int bombsPerPassRange = new Vector2Int(3, 5);
-    [SerializeField, Min(0f)] private float bombLineLength = 44f;
-    [SerializeField, Min(0f)] private float targetScatterRadius = 10f;
-    [SerializeField, Min(0f)] private float minimumPlayerMissDistance = 6f;
+    [SerializeField] private Vector2Int bombsPerPassRange = new Vector2Int(4, 6);
+    [SerializeField, Min(0f)] private float bombLineLength = 92f;
+    [SerializeField, Min(0f)] private float targetScatterRadius = 22f;
+    [SerializeField, Min(0f)] private float minimumPlayerMissDistance = 8f;
     [SerializeField] private bool avoidDirectPlayerCenter = true;
 
     private float nextRaidTime;

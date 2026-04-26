@@ -184,7 +184,7 @@ public sealed class RetroB2BomberBuilderWindow : EditorWindow
         SetSpriteArray(serialized, "animationFrames", sprites);
         SetObject(serialized, "explosionPrefab", explosionPrefab);
         SetFloat(serialized, "animationFramesPerSecond", 9f);
-        SetFloat(serialized, "spriteScale", 1.35f);
+        SetFloat(serialized, "spriteScale", 1.1f);
         SetFloat(serialized, "trailInterval", 0.065f);
         SetFloat(serialized, "fallDuration", 4.65f);
         SetFloat(serialized, "fallSpeed", 13.5f);
@@ -240,13 +240,13 @@ public sealed class RetroB2BomberBuilderWindow : EditorWindow
         SetVector2(serialized, "firstPassDelayRange", new Vector2(8f, 18f));
         SetVector2(serialized, "passIntervalRange", new Vector2(28f, 55f));
         SetFloat(serialized, "passHeight", 68f);
-        SetFloat(serialized, "passLength", 170f);
+        SetFloat(serialized, "passLength", 340f);
         SetFloat(serialized, "passSpeed", 18f);
         SetFloat(serialized, "lateralJitter", 22f);
-        SetVector2Int(serialized, "bombsPerPassRange", new Vector2Int(3, 5));
-        SetFloat(serialized, "bombLineLength", 44f);
-        SetFloat(serialized, "targetScatterRadius", 10f);
-        SetFloat(serialized, "minimumPlayerMissDistance", 6f);
+        SetVector2Int(serialized, "bombsPerPassRange", new Vector2Int(4, 6));
+        SetFloat(serialized, "bombLineLength", 92f);
+        SetFloat(serialized, "targetScatterRadius", 22f);
+        SetFloat(serialized, "minimumPlayerMissDistance", 8f);
         SetBool(serialized, "avoidDirectPlayerCenter", true);
         serialized.ApplyModifiedPropertiesWithoutUndo();
 

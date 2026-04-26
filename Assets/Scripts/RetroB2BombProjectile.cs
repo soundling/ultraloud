@@ -9,7 +9,7 @@ public sealed class RetroB2BombProjectile : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] animationFrames = new Sprite[0];
     [SerializeField, Min(0.1f)] private float animationFramesPerSecond = 9f;
-    [SerializeField, Min(0.01f)] private float spriteScale = 1.35f;
+    [SerializeField, Min(0.01f)] private float spriteScale = 1.1f;
     [SerializeField] private Color trailColor = new Color(1f, 0.24f, 0.04f, 0.78f);
     [SerializeField, Min(0f)] private float trailInterval = 0.065f;
 

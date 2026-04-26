@@ -54,11 +54,11 @@ MonoBehaviour:
   firstPassDelayRange: {x: 8, y: 18}
   passIntervalRange: {x: 28, y: 55}
   passHeight: 68
-  passLength: 170
+  passLength: 340
   passSpeed: 18
   lateralJitter: 22
-  bombsPerPassRange: {x: 3, y: 5}
-  bombLineLength: 44
-  targetScatterRadius: 10
-  minimumPlayerMissDistance: 6
+  bombsPerPassRange: {x: 4, y: 6}
+  bombLineLength: 92
+  targetScatterRadius: 22
+  minimumPlayerMissDistance: 8
   avoidDirectPlayerCenter: 1

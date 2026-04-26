@@ -33,6 +33,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     [SerializeField] private Transform dismountAnchor;
 
     [Header("Sprite Sets")]
+    [SerializeField] private string mountDisplayName = "Horse";
     [SerializeField] private DirectionalSpriteDefinition riderlessDefinition;
     [SerializeField] private DirectionalSpriteDefinition defaultMountedNpcDefinition;
     [SerializeField] private Sprite[] firstPersonRidingFrames = new Sprite[0];
@@ -128,7 +129,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     private string currentClip;
 
     protected override string DefaultInteractionVerb => riderMode == RiderMode.Empty ? "Ride" : "Dismount";
-    protected override string DefaultInteractionName => "Horse";
+    protected override string DefaultInteractionName => string.IsNullOrWhiteSpace(mountDisplayName) ? gameObject.name : mountDisplayName;
     public bool IsOccupied => riderMode != RiderMode.Empty;
     public bool HasPlayerRider => riderMode == RiderMode.Player;
     public bool HasNpcRider => riderMode == RiderMode.Npc;
@@ -247,7 +248,8 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
     public override string GetInteractionPrompt(in RetroInteractionContext context)
     {
-        return riderMode == RiderMode.Player ? "Dismount Horse" : "Ride Horse";
+        string displayName = ResolveMountDisplayName();
+        return riderMode == RiderMode.Player ? $"Dismount {displayName}" : $"Ride {displayName}";
     }
 
     public bool CanAcceptNpcRider(GameObject rider)
@@ -1355,8 +1357,13 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         GUI.color = new Color(0f, 0f, 0f, 0.56f);
         GUI.DrawTexture(rect, Texture2D.whiteTexture);
         GUI.color = new Color(1f, 1f, 1f, 0.93f);
-        GUI.Label(rect, "F  Dismount Horse", PromptStyle);
+        GUI.Label(rect, $"F  Dismount {ResolveMountDisplayName()}", PromptStyle);
         GUI.color = previous;
+    }
+
+    private string ResolveMountDisplayName()
+    {
+        return string.IsNullOrWhiteSpace(mountDisplayName) ? "Mount" : mountDisplayName;
     }
 
     private static GUIStyle promptStyle;

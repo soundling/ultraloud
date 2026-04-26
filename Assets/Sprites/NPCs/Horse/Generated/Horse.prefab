@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1149139379202393684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 993872203425496663}
+  m_Layer: 0
+  m_Name: DismountAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &993872203425496663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149139379202393684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.55, y: 0.08, z: -0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1383630116129464409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2204272916077150142
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,11 +42,11 @@ GameObject:
   - component: {fileID: 1383630116129464409}
   - component: {fileID: 2551637955867247087}
   - component: {fileID: 3188742337044214459}
-  - component: {fileID: 7360734943654931494}
-  - component: {fileID: 7000196474525814589}
-  - component: {fileID: 924078465446153111}
-  - component: {fileID: 3018643051345234362}
-  - component: {fileID: 2304496533033288}
+  - component: {fileID: 3668001169383485882}
+  - component: {fileID: 3369551764474768604}
+  - component: {fileID: 3277848220903811491}
+  - component: {fileID: 2594177115149909959}
+  - component: {fileID: 4594719144673500637}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -31,14 +62,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2204272916077150142}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.09738519, z: 0, w: 0.99524677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6795667887248797608}
-  - {fileID: 3061795434046721071}
-  - {fileID: 6629332841000129859}
+  - {fileID: 709671801432763373}
+  - {fileID: 993872203425496663}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2551637955867247087
@@ -110,7 +141,7 @@ MonoBehaviour:
   rimColor: {r: 1, g: 0.55, b: 0.2, a: 1}
   rimStrength: 0.28
   rimPower: 2.9
---- !u!114 &7360734943654931494
+--- !u!114 &3668001169383485882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,7 +164,7 @@ MonoBehaviour:
   edgePaddingPixels: 3
   drawDebugHits: 0
   debugDrawDuration: 0.35
---- !u!65 &7000196474525814589
+--- !u!65 &3369551764474768604
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,7 +185,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8, y: 2.35, z: 3.1}
   m_Center: {x: 0, y: 1.17, z: 0}
---- !u!54 &924078465446153111
+--- !u!54 &3277848220903811491
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,7 +212,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &3018643051345234362
+--- !u!114 &2594177115149909959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,7 +244,7 @@ MonoBehaviour:
   bloodDecalScatterRadius: 0.32
   bloodSplatterLifetime: 1.6
   bloodSprayLifetime: 0.55
---- !u!114 &2304496533033288
+--- !u!114 &4594719144673500637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,14 +273,15 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls: []
-  damageable: {fileID: 3018643051345234362}
+  damageable: {fileID: 2594177115149909959}
   animator: {fileID: 2551637955867247087}
   locomotion: {fileID: 0}
-  movementBody: {fileID: 924078465446153111}
+  movementBody: {fileID: 3277848220903811491}
   visualRenderer: {fileID: 1660845858964520164}
   visualRoot: {fileID: 6795667887248797608}
-  seatAnchor: {fileID: 3061795434046721071}
-  dismountAnchor: {fileID: 6629332841000129859}
+  seatAnchor: {fileID: 709671801432763373}
+  dismountAnchor: {fileID: 993872203425496663}
+  mountDisplayName: Horse
   riderlessDefinition: {fileID: 11400000, guid: 97bcc241e6c1755448cc2f7e5e8c2173, type: 2}
   defaultMountedNpcDefinition: {fileID: 11400000, guid: 9306287ee2481ef49a902970eebfdd54, type: 2}
   firstPersonRidingFrames:
@@ -304,37 +336,6 @@ MonoBehaviour:
   dustTrailInterval: 0.075
   dustTrailColor: {r: 0.72, g: 0.62, b: 0.43, a: 0.52}
   speedRimColor: {r: 1, g: 0.58, b: 0.18, a: 1}
---- !u!1 &3217932512450802366
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6629332841000129859}
-  m_Layer: 0
-  m_Name: DismountAnchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6629332841000129859
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3217932512450802366}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.55, y: 0.08, z: -0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1383630116129464409}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3255768098525180902
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3255768098525180902}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.085, z: 0}
   m_LocalScale: {x: 6.27, y: 6.27, z: 1}
   m_ConstrainProportionsScale: 0
@@ -425,7 +426,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7074443686071468906
+--- !u!1 &8802095196792504694
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -433,7 +434,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3061795434046721071}
+  - component: {fileID: 709671801432763373}
   m_Layer: 0
   m_Name: SeatAnchor
   m_TagString: Untagged
@@ -441,13 +442,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3061795434046721071
+--- !u!4 &709671801432763373
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7074443686071468906}
+  m_GameObject: {fileID: 8802095196792504694}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.62, z: -0.08}

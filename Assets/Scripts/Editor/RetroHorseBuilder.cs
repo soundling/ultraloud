@@ -195,6 +195,7 @@ public static class RetroHorseBuilder
             RetroHorseNpcRider rider = GetOrAdd<RetroHorseNpcRider>(root);
             SerializedObject serialized = new(rider);
             serialized.FindProperty("mountedHorseDefinition").objectReferenceValue = mountedDefinition;
+            SetBool(serialized, "preferMountDefaultMountedDefinition", true);
             SetFloat(serialized, "searchRadius", 24f);
             SetFloat(serialized, "searchInterval", 1.1f);
             SetBool(serialized, "autoMountOnEnable", true);
@@ -316,6 +317,7 @@ public static class RetroHorseBuilder
         Sprite[] firstPersonFrames)
     {
         SerializedObject serialized = new(mount);
+        SetString(serialized, "mountDisplayName", "Horse");
         serialized.FindProperty("damageable").objectReferenceValue = damageable;
         serialized.FindProperty("animator").objectReferenceValue = animator;
         serialized.FindProperty("movementBody").objectReferenceValue = body;

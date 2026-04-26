@@ -330,16 +330,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroHorseNpcRider
   mountedHorseDefinition: {fileID: 11400000, guid: 9306287ee2481ef49a902970eebfdd54, type: 2}
-  searchRadius: 24
-  searchInterval: 1.1
+  preferMountDefaultMountedDefinition: 1
+  searchRadius: 26
+  searchInterval: 0.95
   autoMountOnEnable: 1
-  targetSearchRadius: 34
+  targetSearchRadius: 38
   targetRefreshInterval: 0.52
-  chaseDistance: 6.2
-  orbitDistance: 3.2
-  wanderThrottle: 0.38
-  chaseThrottle: 0.86
-  chaos: 0.28
+  chaseDistance: 8.2
+  orbitDistance: 3.8
+  wanderThrottle: 0.46
+  chaseThrottle: 0.95
+  chaos: 0.38
   preferredTargetTag: Player
 --- !u!1 &860110000000000010
 GameObject:
@@ -367,7 +368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860110000000000010}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.09738519, z: -0, w: 0.99524677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10.24, y: 15.36, z: 1}
   m_ConstrainProportionsScale: 0

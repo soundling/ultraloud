@@ -6,6 +6,7 @@ public sealed class RetroHorseNpcRider : MonoBehaviour
 {
     [Header("Mounting")]
     [SerializeField] private DirectionalSpriteDefinition mountedHorseDefinition;
+    [SerializeField] private bool preferMountDefaultMountedDefinition = true;
     [SerializeField, Min(0f)] private float searchRadius = 18f;
     [SerializeField, Min(0.1f)] private float searchInterval = 1.15f;
     [SerializeField] private bool autoMountOnEnable = true;
@@ -176,7 +177,11 @@ public sealed class RetroHorseNpcRider : MonoBehaviour
             return;
         }
 
-        DirectionalSpriteDefinition definition = mountedHorseDefinition != null ? mountedHorseDefinition : best.DefaultMountedNpcDefinition;
+        DirectionalSpriteDefinition definition = preferMountDefaultMountedDefinition && best.DefaultMountedNpcDefinition != null
+            ? best.DefaultMountedNpcDefinition
+            : mountedHorseDefinition != null
+                ? mountedHorseDefinition
+                : best.DefaultMountedNpcDefinition;
         if (best.TryMountNpc(gameObject, definition, true))
         {
             currentHorse = best;

@@ -101,10 +101,21 @@ public sealed class RetroGameContext : MonoBehaviour
     private void EnsureServices()
     {
         eventBus = EnsureLocalService(eventBus);
-        poolService = EnsureLocalService(poolService);
+        poolService = EnsurePoolService(poolService);
         audioService = EnsureLocalService(audioService);
         vfxService = EnsureLocalService(vfxService);
         weaponFeedbackService = EnsureLocalService(weaponFeedbackService);
+    }
+
+    private RetroPoolService EnsurePoolService(RetroPoolService service)
+    {
+        if (service != null)
+        {
+            return service;
+        }
+
+        service = GetComponent<RetroPoolService>();
+        return service != null ? service : RetroPoolService.Shared;
     }
 
     private T EnsureLocalService<T>(T service) where T : Component

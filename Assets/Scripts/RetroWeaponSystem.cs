@@ -106,7 +106,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     [SerializeField] private string previousWeaponActionName = "Previous";
     [SerializeField] private string nextWeaponActionName = "Next";
     [SerializeField] private bool disableLegacyViewModel = true;
-    [SerializeField] private bool showDebugHud = true;
+    [SerializeField] private bool showDebugHud;
 
     [Header("HUD")]
     [SerializeField] private bool showCrosshair = true;
@@ -2312,6 +2312,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             DrawCrosshair();
         }
 
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (!showDebugHud || CurrentWeapon == null)
         {
             return;
@@ -2324,6 +2325,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         GUI.Label(new Rect(28f, Screen.height - 98f, 320f, 24f), $"Weapon: {CurrentWeapon.Name}");
         GUI.Label(new Rect(28f, Screen.height - 74f, 380f, 24f), $"Ammo: {CurrentWeapon.AmmoInMagazine} / {CurrentWeapon.ReserveAmmo}   Spread: {CurrentSpreadAngle:0.0}");
         GUI.Label(new Rect(28f, Screen.height - 50f, 390f, 24f), isReloading ? "Reloading..." : "LMB Fire  |  R Reload  |  Mouse Wheel / 1-4 Switch");
+#endif
     }
 
     private void DrawCrosshair()

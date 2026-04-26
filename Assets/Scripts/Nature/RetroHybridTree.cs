@@ -1056,12 +1056,7 @@ public sealed class RetroHybridTree : MonoBehaviour
         Array.Clear(bestLights, 0, bestLights.Length);
         Array.Clear(bestLightScores, 0, bestLightScores.Length);
 
-#if UNITY_2023_1_OR_NEWER
-        Light[] sceneLights = Object.FindObjectsByType<Light>(FindObjectsInactive.Exclude);
-#else
-        Light[] sceneLights = Object.FindObjectsOfType<Light>();
-#endif
-        foreach (Light lightSource in sceneLights)
+        foreach (Light lightSource in RetroSceneLightCache.ActiveLights)
         {
             if (lightSource == null || !lightSource.isActiveAndEnabled || lightSource.intensity <= 0f)
             {

@@ -767,7 +767,7 @@ public sealed class RetroPoolService : MonoBehaviour
     {
         if (shared != null && shared != this)
         {
-            Destroy(gameObject);
+            Destroy(this);
             return;
         }
 

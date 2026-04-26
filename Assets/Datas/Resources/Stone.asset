@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec5500c26a74bc29b0857ae52c6e435, type: 3}
+  m_Name: Stone
+  m_EditorClassIdentifier: Assembly-CSharp::RetroResourceDefinition
+  resourceId: stone
+  displayName: Stone
+  icon: {fileID: 21300000, guid: 9bb90e4495236a64a9a936efe92547a5, type: 3}
+  worldSprite: {fileID: 21300000, guid: a03d9d531a4727a46ae7e3f469ed2b10, type: 3}
+  maxAmount: 250
+  hudTint: {r: 0.78, g: 0.83, b: 0.88, a: 1}

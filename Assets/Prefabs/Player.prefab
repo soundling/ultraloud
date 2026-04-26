@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 7584147684641392264}
   - component: {fileID: 9123456701234567890}
   - component: {fileID: 9123456701234567891}
+  - component: {fileID: 3570539131399357119}
+  - component: {fileID: 8124625961941899817}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -100,7 +102,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f0ee0c88c6c44d7b0943c5d3d7bc9a1, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroFpsController
   viewCamera: {fileID: 7054228522200109693}
   viewModelRoot: {fileID: 12911891844774974}
@@ -159,7 +161,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d73eea8e75e4d509f57d7d454b8f93c, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroWeaponSystem
   viewCamera: {fileID: 7054228522200109693}
   legacyViewModelRenderer: {fileID: 9006146410676730140}
@@ -266,7 +268,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8abc0d1f3ab94c0fb6a395bfba806173, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroInteractor
   viewCamera: {fileID: 7054228522200109693}
   inputActions: {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
@@ -295,7 +297,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
   maxHealth: 100
   destroyOnDeath: 0
@@ -317,6 +319,40 @@ MonoBehaviour:
   bloodDecalScatterRadius: 0.32
   bloodSplatterLifetime: 1.6
   bloodSprayLifetime: 0.55
+--- !u!114 &3570539131399357119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49508971552978660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112d382aa5e046beb097121083bf93b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroInventory
+  items: []
+  logChanges: 0
+--- !u!114 &8124625961941899817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49508971552978660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7667b1f46910423fa8d9948f7a5e26d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroInventoryHud
+  inventory: {fileID: 3570539131399357119}
+  hideWhenEmpty: 1
+  maxVisibleItems: 8
+  screenOffset: {x: 18, y: 18}
+  iconSize: {x: 34, y: 34}
+  itemSpacing: 8
+  panelColor: {r: 0, g: 0, b: 0, a: 0.48}
+  textColor: {r: 1, g: 1, b: 1, a: 0.95}
 --- !u!1 &3742490610285423131
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +454,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0efc4c0fe83a47f9ad612e6b070f97fd, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonSpriteVolumeRenderer
   targetRenderer: {fileID: 9006146410676730140}
   mapSet: {fileID: 11400000, guid: 9f929fc9415971540913dabb791443b2, type: 2}

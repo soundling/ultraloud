@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec5500c26a74bc29b0857ae52c6e435, type: 3}
+  m_Name: Apple
+  m_EditorClassIdentifier: Assembly-CSharp::RetroResourceDefinition
+  resourceId: apple
+  displayName: Apple
+  icon: {fileID: 21300000, guid: 82c1d0fbd1b378f43ae6e65db2498309, type: 3}
+  worldSprite: {fileID: 21300000, guid: 1d63ca36b758a5a41a8177fde5571643, type: 3}
+  maxAmount: 99
+  hudTint: {r: 1, g: 0.72, b: 0.62, a: 1}

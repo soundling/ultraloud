@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 860110000000000022}
   - component: {fileID: 860110000000000023}
   - component: {fileID: 860110000000000024}
+  - component: {fileID: 3413420709156339614}
   m_Layer: 0
   m_Name: Merchant
   m_TagString: Untagged
@@ -73,7 +74,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
   definition: {fileID: 11400000, guid: aedb7afd2c4242468ed885b8c72a88b5, type: 2}
   initialClipId: Idle
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
   animator: {fileID: 860110000000000004}
   targetRenderer: {fileID: 860110000000000013}
@@ -132,26 +133,6 @@ MonoBehaviour:
   rimColor: {r: 1, g: 1, b: 1, a: 1}
   rimStrength: 0
   rimPower: 3.2
---- !u!114 &860110000000000007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860110000000000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13199b9dc2b44059ae420f6b8f0a6b13, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteLocomotion
-  animator: {fileID: 860110000000000004}
-  movementBody: {fileID: 0}
-  movementReference: {fileID: 860110000000000002}
-  idleClipId: Idle
-  walkClipId: Walk
-  horizontalOnly: 1
-  walkThreshold: 0.05
-  speedSmoothing: 12
 --- !u!114 &860110000000000021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +143,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
   animator: {fileID: 860110000000000004}
   visualRenderer: {fileID: 860110000000000013}
@@ -175,6 +156,26 @@ MonoBehaviour:
   edgePaddingPixels: 3
   drawDebugHits: 0
   debugDrawDuration: 0.35
+--- !u!114 &860110000000000007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860110000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13199b9dc2b44059ae420f6b8f0a6b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteLocomotion
+  animator: {fileID: 860110000000000004}
+  movementBody: {fileID: 0}
+  movementReference: {fileID: 860110000000000002}
+  idleClipId: Idle
+  walkClipId: Walk
+  horizontalOnly: 1
+  walkThreshold: 0.05
+  speedSmoothing: 12
 --- !u!114 &860110000000000022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
   maxHealth: 165
   destroyOnDeath: 1
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6146816490b742aeb0d1ce80d4677be4, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroNpcAgent
   behaviorMode: 1
   idleMode: 0
@@ -246,6 +247,13 @@ MonoBehaviour:
   stoppingDistance: 10.5
   repathInterval: 0.18
   horizontalOnly: 1
+  autoCreateNavMeshAgent: 1
+  navAgentRadius: 0.42
+  navAgentHeight: 1.8
+  obstacleAvoidance: 4
+  avoidancePriority: 50
+  staggerAvoidancePriority: 1
+  avoidancePrioritySpread: 20
   attackRange: 13.5
   attackDamage: 0
   attackCooldown: 1.2
@@ -267,7 +275,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ee1cf1d4d8e4fbfbb7f65b8f12f3b9d, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroMerchantCombatant
   npcAgent: {fileID: 860110000000000023}
   damageable: {fileID: 860110000000000022}
@@ -309,6 +317,30 @@ MonoBehaviour:
   strafeSpeed: 1.65
   backpedalSpeed: 2.35
   pressureSpeed: 1.85
+--- !u!114 &3413420709156339614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860110000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd7dc306e78164d8143cbcdc723350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHorseNpcRider
+  mountedHorseDefinition: {fileID: 11400000, guid: 9306287ee2481ef49a902970eebfdd54, type: 2}
+  searchRadius: 24
+  searchInterval: 1.1
+  autoMountOnEnable: 1
+  targetSearchRadius: 34
+  targetRefreshInterval: 0.52
+  chaseDistance: 6.2
+  orbitDistance: 3.2
+  wanderThrottle: 0.38
+  chaseThrottle: 0.86
+  chaos: 0.28
+  preferredTargetTag: Player
 --- !u!1 &860110000000000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +389,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860110000000000010}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

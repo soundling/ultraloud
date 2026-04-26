@@ -1,0 +1,458 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2204272916077150142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1383630116129464409}
+  - component: {fileID: 2551637955867247087}
+  - component: {fileID: 3188742337044214459}
+  - component: {fileID: 7360734943654931494}
+  - component: {fileID: 7000196474525814589}
+  - component: {fileID: 924078465446153111}
+  - component: {fileID: 3018643051345234362}
+  - component: {fileID: 2304496533033288}
+  m_Layer: 0
+  m_Name: Horse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1383630116129464409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6795667887248797608}
+  - {fileID: 3061795434046721071}
+  - {fileID: 6629332841000129859}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2551637955867247087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
+  definition: {fileID: 11400000, guid: 97bcc241e6c1755448cc2f7e5e8c2173, type: 2}
+  initialClipId: Idle
+  playOnEnable: 1
+  useUnscaledTime: 0
+  animationSpeed: 1
+  spriteRenderer: {fileID: 0}
+  billboardRoot: {fileID: 6795667887248797608}
+  facingReference: {fileID: 1383630116129464409}
+  targetCamera: {fileID: 0}
+  viewAngleSource: 0
+  billboardMode: 1
+  billboardEulerOffset: {x: 0, y: 0, z: 0}
+  logicalFacingOffset: 0
+--- !u!114 &3188742337044214459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
+  animator: {fileID: 2551637955867247087}
+  targetRenderer: {fileID: 1660845858964520164}
+  lightReferenceMode: 0
+  lightAnchor: {fileID: 0}
+  refreshLightsInEditor: 1
+  maxLights: 4
+  lightRefreshInterval: 0.15
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.5
+  lightingBasisMode: 2
+  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
+  alphaCutoff: 0.08
+  normalScale: 1.48
+  detailNormalInfluence: 0.86
+  macroNormalBend: 1.12
+  spriteAngleLightingInfluence: 0.58
+  twoSidedLighting: 1
+  flipBackfacingNormals: 1
+  wrapDiffuse: 0.24
+  ambientTopColor: {r: 0.52, g: 0.56, b: 0.62, a: 1}
+  ambientBottomColor: {r: 0.14, g: 0.12, b: 0.1, a: 1}
+  ambientIntensity: 0.82
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.22
+  surfaceRoughness: 0.78
+  specularStrength: 0.25
+  minSpecularPower: 6
+  maxSpecularPower: 18
+  rimColor: {r: 1, g: 0.55, b: 0.2, a: 1}
+  rimStrength: 0.28
+  rimPower: 2.9
+--- !u!114 &7360734943654931494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
+  animator: {fileID: 2551637955867247087}
+  visualRenderer: {fileID: 1660845858964520164}
+  hitPlane: {fileID: 6795667887248797608}
+  useAlphaMask: 1
+  useSpritePhysicsShapeFallback: 1
+  acceptWhenMaskUnavailable: 1
+  rejectHitsOutsideQuad: 1
+  alphaThreshold: 0.08
+  edgePaddingPixels: 3
+  drawDebugHits: 0
+  debugDrawDuration: 0.35
+--- !u!65 &7000196474525814589
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8, y: 2.35, z: 3.1}
+  m_Center: {x: 0, y: 1.17, z: 0}
+--- !u!54 &924078465446153111
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!114 &3018643051345234362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 180
+  destroyOnDeath: 1
+  disableRenderersOnDeath: 1
+  disableCollidersOnDeath: 1
+  destroyDelay: 0.15
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.62, g: 0.09, b: 0.035, a: 0.88}
+  spawnBloodOnHit: 1
+  spawnBloodOnDeath: 1
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!114 &2304496533033288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ea268eee034fd4288f6e3ccb8757b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHorseMount
+  interactionEnabled: 1
+  interactionName: 
+  interactionVerb: 
+  interactionMaxDistance: 3.2
+  interactionPriority: 0
+  interactionCue: {fileID: 0}
+  interactionMessage: 
+  interactionMessageDuration: 1.6
+  onFocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnfocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  damageable: {fileID: 3018643051345234362}
+  animator: {fileID: 2551637955867247087}
+  locomotion: {fileID: 0}
+  movementBody: {fileID: 924078465446153111}
+  visualRenderer: {fileID: 1660845858964520164}
+  visualRoot: {fileID: 6795667887248797608}
+  seatAnchor: {fileID: 3061795434046721071}
+  dismountAnchor: {fileID: 6629332841000129859}
+  riderlessDefinition: {fileID: 11400000, guid: 97bcc241e6c1755448cc2f7e5e8c2173, type: 2}
+  defaultMountedNpcDefinition: {fileID: 11400000, guid: 9306287ee2481ef49a902970eebfdd54, type: 2}
+  firstPersonRidingFrames:
+  - {fileID: 21300000, guid: d49344e7e1ac3e5469b343233c8ebac6, type: 3}
+  - {fileID: 21300000, guid: 5b79e99b19b7cf64c8113f3099eea483, type: 3}
+  - {fileID: 21300000, guid: 39066601f5878b74eac3a5706618f512, type: 3}
+  - {fileID: 21300000, guid: 4347f45aaacd5ae4eb3b53c4b4eee5ac, type: 3}
+  firstPersonRidingMaterial: {fileID: 0}
+  idleClipId: Idle
+  walkClipId: Walk
+  gallopClipId: Gallop
+  actionMapName: Player
+  moveActionName: Move
+  lookActionName: Look
+  sprintActionName: Sprint
+  jumpActionName: Jump
+  interactActionName: Interact
+  fallbackDismountKey: 20
+  fallbackJumpKey: 1
+  mouseSensitivity: 0.13
+  gamepadLookSpeed: 170
+  maxLookPitch: 68
+  maxLookYawOffset: 82
+  walkSpeed: 5.4
+  gallopSpeed: 11.2
+  reverseSpeed: 2.2
+  acceleration: 25
+  braking: 34
+  turnSpeed: 190
+  emptyWanderSpeed: 1.65
+  emptyWanderRadius: 8
+  emptyWanderRetargetTime: 2.6
+  wanderWhenEmpty: 1
+  cameraBobAmplitude: 0.11
+  cameraBobFrequency: 10.8
+  cameraRollDegrees: 3.5
+  gallopFovBoost: 8.5
+  cameraBlendSpeed: 13
+  cameraMountedLocalOffset: {x: 0, y: 0.18, z: 0.04}
+  firstPersonOverlayLocalPosition: {x: 0, y: -0.47, z: 0.84}
+  firstPersonOverlaySize: {x: 1.38, y: 1.38}
+  firstPersonFrameDuration: 0.07
+  impactDamage: 20
+  impactRadius: 1.15
+  impactForwardOffset: 1.3
+  impactCooldown: 0.42
+  impactKnockback: 7.5
+  impactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  impactTriggerInteraction: 1
+  dustTrailInterval: 0.075
+  dustTrailColor: {r: 0.72, g: 0.62, b: 0.43, a: 0.52}
+  speedRimColor: {r: 1, g: 0.58, b: 0.18, a: 1}
+--- !u!1 &3217932512450802366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6629332841000129859}
+  m_Layer: 0
+  m_Name: DismountAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6629332841000129859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217932512450802366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.55, y: 0.08, z: -0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1383630116129464409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3255768098525180902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6795667887248797608}
+  - component: {fileID: 7310854870651255758}
+  - component: {fileID: 1660845858964520164}
+  m_Layer: 0
+  m_Name: Quad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6795667887248797608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255768098525180902}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.085, z: 0}
+  m_LocalScale: {x: 6.27, y: 6.27, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1383630116129464409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7310854870651255758
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255768098525180902}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1660845858964520164
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255768098525180902}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7074443686071468906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3061795434046721071}
+  m_Layer: 0
+  m_Name: SeatAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3061795434046721071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074443686071468906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.62, z: -0.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1383630116129464409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -96,6 +96,7 @@ public sealed class RetroFpsController : MonoBehaviour
     public Camera ViewCamera => viewCamera;
     public Transform ViewModelRoot => viewModelRoot;
     public InputActionAsset InputActionsAsset => inputActions;
+    public bool IsViewModelPresentationEnabled => driveViewModelPresentation;
 
     public void SetViewModelPresentationEnabled(bool isEnabled)
     {

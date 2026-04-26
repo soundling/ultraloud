@@ -354,8 +354,8 @@ public static class RetroMotocrossBuilder
         SetFloat(serialized, "cameraRollDegrees", 7.5f);
         SetFloat(serialized, "gallopFovBoost", 12.5f);
         serialized.FindProperty("cameraMountedLocalOffset").vector3Value = new Vector3(0f, -0.04f, 0.08f);
-        serialized.FindProperty("firstPersonOverlayLocalPosition").vector3Value = new Vector3(0f, -0.49f, 0.78f);
-        serialized.FindProperty("firstPersonOverlaySize").vector2Value = new Vector2(1.46f, 1.46f);
+        serialized.FindProperty("firstPersonOverlayLocalPosition").vector3Value = new Vector3(0f, -0.32f, 0.84f);
+        serialized.FindProperty("firstPersonOverlaySize").vector2Value = new Vector2(0.94f, 0.94f);
         SetFloat(serialized, "firstPersonFrameDuration", 0.045f);
         SetFloat(serialized, "impactDamage", 28f);
         SetFloat(serialized, "impactRadius", 1.22f);

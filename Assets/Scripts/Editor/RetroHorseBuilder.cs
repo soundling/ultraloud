@@ -355,6 +355,8 @@ public static class RetroHorseBuilder
         SetFloat(serialized, "cameraBobAmplitude", 0.11f);
         SetFloat(serialized, "cameraBobFrequency", 10.8f);
         SetFloat(serialized, "gallopFovBoost", 8.5f);
+        serialized.FindProperty("firstPersonOverlayLocalPosition").vector3Value = new Vector3(0f, -0.31f, 0.86f);
+        serialized.FindProperty("firstPersonOverlaySize").vector2Value = new Vector2(0.92f, 0.92f);
         SetFloat(serialized, "firstPersonFrameDuration", 0.07f);
         SetFloat(serialized, "impactDamage", 20f);
         SetFloat(serialized, "impactRadius", 1.15f);

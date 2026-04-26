@@ -321,8 +321,8 @@ MonoBehaviour:
   gallopFovBoost: 8.5
   cameraBlendSpeed: 13
   cameraMountedLocalOffset: {x: 0, y: 0.18, z: 0.04}
-  firstPersonOverlayLocalPosition: {x: 0, y: -0.47, z: 0.84}
-  firstPersonOverlaySize: {x: 1.38, y: 1.38}
+  firstPersonOverlayLocalPosition: {x: 0, y: -0.31, z: 0.86}
+  firstPersonOverlaySize: {x: 0.92, y: 0.92}
   firstPersonFrameDuration: 0.07
   impactDamage: 20
   impactRadius: 1.15

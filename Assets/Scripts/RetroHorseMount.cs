@@ -77,8 +77,8 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     [SerializeField, Min(0f)] private float gallopFovBoost = 8f;
     [SerializeField, Min(0.1f)] private float cameraBlendSpeed = 13f;
     [SerializeField] private Vector3 cameraMountedLocalOffset = new(0f, 0.18f, 0.04f);
-    [SerializeField] private Vector3 firstPersonOverlayLocalPosition = new(0f, -0.47f, 0.84f);
-    [SerializeField] private Vector2 firstPersonOverlaySize = new(1.38f, 1.38f);
+    [SerializeField] private Vector3 firstPersonOverlayLocalPosition = new(0f, -0.31f, 0.86f);
+    [SerializeField] private Vector2 firstPersonOverlaySize = new(0.92f, 0.92f);
     [SerializeField, Min(0.01f)] private float firstPersonFrameDuration = 0.075f;
 
     [Header("Impact")]
@@ -363,9 +363,9 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         lookYawOffset = 0f;
         lookPitch = NormalizePitch(controller.ViewCamera.transform.localEulerAngles.x);
 
-        ResolvePlayerRideActions(actorRoot, controller);
         HidePlayerObjectsForRide(playerState);
         DisablePlayerForRide(playerState);
+        ResolvePlayerRideActions(actorRoot, controller);
         EnsureFirstPersonOverlay(playerState);
 
         if (visualRenderer != null)
@@ -390,10 +390,10 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
             playerState.ActorTransform.SetPositionAndRotation(ResolveDismountPosition(), Quaternion.Euler(0f, transform.eulerAngles.y, 0f));
         }
 
-        RestorePlayerAfterRide(playerState);
         DestroyFirstPersonOverlay();
         RestoreHiddenPlayerObjects();
         ReleasePlayerRideActions();
+        RestorePlayerAfterRide(playerState);
 
         if (visualRenderer != null)
         {
@@ -1010,7 +1010,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
     private Vector2 ReadMoveInput()
     {
-        if (moveAction != null)
+        if (moveAction != null && moveAction.enabled)
         {
             return Vector2.ClampMagnitude(moveAction.ReadValue<Vector2>(), 1f);
         }
@@ -1042,7 +1042,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     private Vector2 ReadLookInput(out bool gamepadLook)
     {
         gamepadLook = false;
-        if (lookAction != null)
+        if (lookAction != null && lookAction.enabled)
         {
             Vector2 value = lookAction.ReadValue<Vector2>();
             InputDevice device = lookAction.activeControl != null ? lookAction.activeControl.device : null;
@@ -1060,7 +1060,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
     private bool ReadSprintInput()
     {
-        if (sprintAction != null)
+        if (sprintAction != null && sprintAction.enabled)
         {
             return sprintAction.IsPressed();
         }
@@ -1070,7 +1070,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
     private bool WasJumpPressed()
     {
-        if (jumpAction != null && jumpAction.WasPressedThisFrame())
+        if (jumpAction != null && jumpAction.enabled && jumpAction.WasPressedThisFrame())
         {
             return true;
         }
@@ -1080,7 +1080,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
     private bool WasDismountPressed()
     {
-        if (interactAction != null && interactAction.WasPressedThisFrame())
+        if (interactAction != null && interactAction.enabled && interactAction.WasPressedThisFrame())
         {
             return true;
         }
@@ -1152,10 +1152,9 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         overlay.transform.SetParent(state.ViewCamera.transform, false);
         overlay.transform.localPosition = firstPersonOverlayLocalPosition;
         overlay.transform.localRotation = Quaternion.identity;
-        overlay.transform.localScale = new Vector3(firstPersonOverlaySize.x, firstPersonOverlaySize.y, 1f);
+        overlay.transform.localScale = Vector3.one;
 
         SpriteRenderer spriteRenderer = overlay.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = firstPersonRidingFrames[0];
         spriteRenderer.sortingOrder = short.MaxValue;
         if (firstPersonRidingMaterial != null)
         {
@@ -1164,6 +1163,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
         playerState.OverlayObject = overlay;
         playerState.OverlayRenderer = spriteRenderer;
+        ApplyFirstPersonOverlaySprite(spriteRenderer, firstPersonRidingFrames[0]);
         overlayFrameTimer = 0f;
         overlayFrameIndex = 0;
     }
@@ -1181,12 +1181,29 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         {
             overlayFrameTimer -= firstPersonFrameDuration;
             overlayFrameIndex = (overlayFrameIndex + 1) % firstPersonRidingFrames.Length;
-            playerState.OverlayRenderer.sprite = firstPersonRidingFrames[overlayFrameIndex];
+            ApplyFirstPersonOverlaySprite(playerState.OverlayRenderer, firstPersonRidingFrames[overlayFrameIndex]);
         }
 
         Transform overlayTransform = playerState.OverlayRenderer.transform;
         float bob = Mathf.Sin(Time.time * cameraBobFrequency) * 0.018f * speed01;
         overlayTransform.localPosition = firstPersonOverlayLocalPosition + new Vector3(0f, bob, 0f);
+    }
+
+    private void ApplyFirstPersonOverlaySprite(SpriteRenderer renderer, Sprite sprite)
+    {
+        if (renderer == null || sprite == null)
+        {
+            return;
+        }
+
+        renderer.sprite = sprite;
+        Vector3 spriteSize = sprite.bounds.size;
+        float width = Mathf.Max(0.0001f, spriteSize.x);
+        float height = Mathf.Max(0.0001f, spriteSize.y);
+        renderer.transform.localScale = new Vector3(
+            firstPersonOverlaySize.x / width,
+            firstPersonOverlaySize.y / height,
+            1f);
     }
 
     private void DestroyFirstPersonOverlay()

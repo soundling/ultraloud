@@ -16,6 +16,7 @@ MonoBehaviour:
   normal: {fileID: 2800000, guid: 4354d97c10bb80a4cab9e902d4abebe6, type: 3}
   frontDepth: {fileID: 2800000, guid: 3520f41d102c51344a46aec534d40929, type: 3}
   emissive: {fileID: 2800000, guid: 5843351ed8231504ab33d2ed06093148, type: 3}
+  viewOffset: {x: 0, y: 0}
   volumeThickness: 0.058
   parallaxScale: 0.002
   invertFrontDepth: 0

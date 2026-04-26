@@ -6,6 +6,8 @@ using UnityEngine;
 public sealed class RetroWeaponFireAnimationBuilderWindow : EditorWindow
 {
     private const int FrameCount = 4;
+    private const byte ViewOffsetAlphaThreshold = 16;
+    private const float ViewOffsetIgnoredTopFraction = 0.33f;
     private const string SpriteRootPath = "Assets/Sprites/Weapons/Viewmodels";
     private const string MapSetRootPath = "Assets/Weapons/ViewmodelMapSets/FireAnimation";
 
@@ -168,6 +170,7 @@ public sealed class RetroWeaponFireAnimationBuilderWindow : EditorWindow
         mapSet.normal = AssetDatabase.LoadAssetAtPath<Texture2D>(BuildTexturePath(spec, frame, "Normal"));
         mapSet.frontDepth = AssetDatabase.LoadAssetAtPath<Texture2D>(BuildTexturePath(spec, frame, "Depth"));
         mapSet.emissive = AssetDatabase.LoadAssetAtPath<Texture2D>(BuildTexturePath(spec, frame, "Emission"));
+        mapSet.viewOffset = CalculateFrameViewOffset(reference, mapSet.baseColor);
         mapSet.emissiveColor = spec.EmissionColor;
         mapSet.normalScale = Mathf.Max(mapSet.normalScale, 1.08f);
         mapSet.transmissionStrength = Mathf.Max(mapSet.transmissionStrength, 0.12f);
@@ -195,6 +198,112 @@ public sealed class RetroWeaponFireAnimationBuilderWindow : EditorWindow
         target.roughness = source.roughness;
         target.metallic = source.metallic;
         target.materialThickness = source.materialThickness;
+    }
+
+    private static Vector2 CalculateFrameViewOffset(FirstPersonSpriteVolumeMapSet reference, Texture2D frameBaseColor)
+    {
+        if (reference == null || reference.baseColor == null || frameBaseColor == null)
+        {
+            return Vector2.zero;
+        }
+
+        if (!TryReadTextureAlphaBounds(reference.baseColor, out TextureAlphaBounds referenceBounds)
+            || !TryReadTextureAlphaBounds(frameBaseColor, out TextureAlphaBounds frameBounds))
+        {
+            return reference.viewOffset;
+        }
+
+        if (referenceBounds.Width <= 0
+            || referenceBounds.Height <= 0
+            || referenceBounds.Width != frameBounds.Width
+            || referenceBounds.Height != frameBounds.Height)
+        {
+            return reference.viewOffset;
+        }
+
+        return reference.viewOffset + new Vector2(
+            (referenceBounds.CenterX - frameBounds.CenterX) / referenceBounds.Width,
+            (referenceBounds.CenterY - frameBounds.CenterY) / referenceBounds.Height);
+    }
+
+    private static bool TryReadTextureAlphaBounds(Texture2D texture, out TextureAlphaBounds bounds)
+    {
+        bounds = default;
+        if (texture == null)
+        {
+            return false;
+        }
+
+        string assetPath = AssetDatabase.GetAssetPath(texture);
+        if (string.IsNullOrWhiteSpace(assetPath) || !File.Exists(assetPath))
+        {
+            return false;
+        }
+
+        byte[] bytes = File.ReadAllBytes(assetPath);
+        Texture2D readableTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false, false);
+        try
+        {
+            if (!readableTexture.LoadImage(bytes, false))
+            {
+                return false;
+            }
+
+            Color32[] pixels = readableTexture.GetPixels32();
+            int width = readableTexture.width;
+            int height = readableTexture.height;
+            int trimmedTopYExclusive = Mathf.Clamp(
+                Mathf.CeilToInt(height * (1f - ViewOffsetIgnoredTopFraction)),
+                1,
+                height);
+
+            return TryFindAlphaBounds(pixels, width, height, trimmedTopYExclusive, out bounds)
+                || TryFindAlphaBounds(pixels, width, height, height, out bounds);
+        }
+        finally
+        {
+            DestroyImmediate(readableTexture);
+        }
+    }
+
+    private static bool TryFindAlphaBounds(Color32[] pixels, int width, int height, int maxYExclusive, out TextureAlphaBounds bounds)
+    {
+        bounds = default;
+        if (pixels == null || width <= 0 || height <= 0 || maxYExclusive <= 0)
+        {
+            return false;
+        }
+
+        int minX = width;
+        int minY = height;
+        int maxX = -1;
+        int maxY = -1;
+        int safeMaxYExclusive = Mathf.Clamp(maxYExclusive, 1, height);
+
+        for (int y = 0; y < safeMaxYExclusive; y++)
+        {
+            int rowOffset = y * width;
+            for (int x = 0; x < width; x++)
+            {
+                if (pixels[rowOffset + x].a <= ViewOffsetAlphaThreshold)
+                {
+                    continue;
+                }
+
+                minX = Mathf.Min(minX, x);
+                minY = Mathf.Min(minY, y);
+                maxX = Mathf.Max(maxX, x);
+                maxY = Mathf.Max(maxY, y);
+            }
+        }
+
+        if (maxX < minX || maxY < minY)
+        {
+            return false;
+        }
+
+        bounds = new TextureAlphaBounds(width, height, minX, minY, maxX, maxY);
+        return true;
     }
 
     private static void AssignDefinition(WeaponFireAnimationSpec spec, FirstPersonSpriteVolumeMapSet[] mapSets)
@@ -275,6 +384,22 @@ public sealed class RetroWeaponFireAnimationBuilderWindow : EditorWindow
         if (!string.IsNullOrWhiteSpace(parentPath) && !string.IsNullOrWhiteSpace(folderName))
         {
             AssetDatabase.CreateFolder(parentPath, folderName);
+        }
+    }
+
+    private readonly struct TextureAlphaBounds
+    {
+        public readonly int Width;
+        public readonly int Height;
+        public readonly float CenterX;
+        public readonly float CenterY;
+
+        public TextureAlphaBounds(int width, int height, int minX, int minY, int maxX, int maxY)
+        {
+            Width = width;
+            Height = height;
+            CenterX = (minX + maxX) * 0.5f;
+            CenterY = (minY + maxY) * 0.5f;
         }
     }
 

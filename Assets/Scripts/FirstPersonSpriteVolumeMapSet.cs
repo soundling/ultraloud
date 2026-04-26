@@ -10,6 +10,10 @@ public sealed class FirstPersonSpriteVolumeMapSet : ScriptableObject
     public Texture2D frontDepth;
     public Texture2D emissive;
 
+    [Header("Presentation")]
+    [Tooltip("Normalized first-person viewmodel offset. X/Y are fractions of the rendered quad size; positive X moves right and positive Y moves up.")]
+    public Vector2 viewOffset = Vector2.zero;
+
     [Header("Shape Tricks")]
     [Range(0f, 0.2f)] public float volumeThickness = 0.06f;
     [Range(0f, 0.08f)] public float parallaxScale = 0.012f;

@@ -165,9 +165,6 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     private Transform runtimeRoot;
     private Transform spriteViewModelTransform;
     private Transform spriteMuzzle;
-    private GameObject spriteMuzzleFlash;
-    private Material spriteMuzzleFlashMaterial;
-    private Texture spriteMuzzleFlashTexture;
     private RetroComponentPool<RetroGrenadeProjectile> grenadeProjectilePool;
     private FirstPersonSpriteVolumeMapSet defaultSpriteMapSet;
     private bool usingSpriteVolumeViewModel;
@@ -180,8 +177,6 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     private float switchEndTime = -999f;
     private float bobTime;
     private float muzzleFlashDisableTime = -999f;
-    private float muzzleFlashNextFrameTime = -999f;
-    private int muzzleFlashFrameIndex;
     private WeaponRuntime spriteFireAnimationWeapon;
     private float spriteFireAnimationEndTime = -999f;
     private float spriteFireAnimationNextFrameTime = -999f;
@@ -243,13 +238,6 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         {
             actionMap.Disable();
         }
-    }
-
-    private void OnDestroy()
-    {
-        DestroyRuntimeMaterial(spriteMuzzleFlashMaterial);
-        spriteMuzzleFlashMaterial = null;
-        spriteMuzzleFlashTexture = null;
     }
 
     private void Update()
@@ -777,13 +765,26 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             return;
         }
 
-        legacySpriteVolumeRenderer.MapSet = ResolveActiveSpriteMapSet(weapon);
+        FirstPersonSpriteVolumeMapSet activeMapSet = ResolveActiveSpriteMapSet(weapon);
+        legacySpriteVolumeRenderer.MapSet = activeMapSet;
         legacySpriteVolumeRenderer.SetTintMultipliers(
             ResolveSpriteBaseTint(weapon),
             ResolveSpriteEmissiveTint(weapon));
 
+        ApplySpriteViewTransform(weapon, activeMapSet);
+        legacySpriteVolumeRenderer.ApplyNow(forceLightRefresh);
+    }
+
+    private void ApplySpriteViewTransform(WeaponRuntime weapon, FirstPersonSpriteVolumeMapSet activeMapSet)
+    {
+        if (weapon == null || spriteViewModelTransform == null)
+        {
+            return;
+        }
+
         Vector2 visualSize = weapon.SpriteVisualSize;
-        spriteViewModelTransform.localPosition = weapon.SpriteVisualLocalPosition;
+        Vector3 mapSetOffset = ResolveSpriteMapSetLocalOffset(weapon, activeMapSet);
+        spriteViewModelTransform.localPosition = weapon.SpriteVisualLocalPosition + mapSetOffset;
         spriteViewModelTransform.localRotation = Quaternion.Euler(weapon.SpriteVisualLocalEuler);
         spriteViewModelTransform.localScale = new Vector3(
             Mathf.Max(0.01f, visualSize.x),
@@ -793,19 +794,24 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         EnsureSpriteMuzzleObjects();
         if (spriteMuzzle != null)
         {
-            spriteMuzzle.localPosition = weapon.SpriteMuzzleLocalPosition + weapon.SpriteMuzzleLocalOffset;
+            spriteMuzzle.localPosition = weapon.SpriteMuzzleLocalPosition + weapon.SpriteMuzzleLocalOffset + mapSetOffset;
             spriteMuzzle.localRotation = Quaternion.identity;
             weapon.Muzzle = spriteMuzzle;
         }
+    }
 
-        if (spriteMuzzleFlash != null)
+    private static Vector3 ResolveSpriteMapSetLocalOffset(WeaponRuntime weapon, FirstPersonSpriteVolumeMapSet activeMapSet)
+    {
+        if (weapon == null || activeMapSet == null)
         {
-            spriteMuzzleFlash.SetActive(false);
-            weapon.MuzzleFlash = spriteMuzzleFlash;
-            ApplySpriteMuzzleFlashMaterial();
+            return Vector3.zero;
         }
 
-        legacySpriteVolumeRenderer.ApplyNow(forceLightRefresh);
+        Vector2 visualSize = weapon.SpriteVisualSize;
+        return new Vector3(
+            activeMapSet.viewOffset.x * Mathf.Max(0.01f, visualSize.x),
+            activeMapSet.viewOffset.y * Mathf.Max(0.01f, visualSize.y),
+            0f);
     }
 
     private void EnsureSpriteMuzzleObjects()
@@ -820,72 +826,6 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             spriteMuzzle = new GameObject("SpriteMuzzle").transform;
             spriteMuzzle.SetParent(runtimeRoot, false);
         }
-
-        if (spriteMuzzleFlash != null)
-        {
-            return;
-        }
-
-        spriteMuzzleFlash = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        spriteMuzzleFlash.name = "SpriteMuzzleFlash";
-        spriteMuzzleFlash.transform.SetParent(spriteMuzzle, false);
-        spriteMuzzleFlash.transform.localPosition = Vector3.zero;
-        spriteMuzzleFlash.transform.localRotation = Quaternion.identity;
-        spriteMuzzleFlash.transform.localScale = Vector3.one * 0.1f;
-
-        Collider flashCollider = spriteMuzzleFlash.GetComponent<Collider>();
-        if (flashCollider != null)
-        {
-            flashCollider.enabled = false;
-            Destroy(flashCollider);
-        }
-
-        Renderer flashRenderer = spriteMuzzleFlash.GetComponent<Renderer>();
-        if (flashRenderer != null)
-        {
-            flashRenderer.shadowCastingMode = ShadowCastingMode.Off;
-            flashRenderer.receiveShadows = false;
-        }
-
-        spriteMuzzleFlash.SetActive(false);
-    }
-
-    private void ApplySpriteMuzzleFlashMaterial()
-    {
-        ApplySpriteMuzzleFlashMaterial(ResolveMuzzleFlashSprite(currentWeaponIndex));
-    }
-
-    private void ApplySpriteMuzzleFlashMaterial(Sprite flashSprite)
-    {
-        if (spriteMuzzleFlash == null)
-        {
-            return;
-        }
-
-        Renderer flashRenderer = spriteMuzzleFlash.GetComponent<Renderer>();
-        if (flashRenderer == null || flashSprite == null || flashSprite.texture == null)
-        {
-            if (flashRenderer != null)
-            {
-                flashRenderer.enabled = false;
-            }
-
-            return;
-        }
-
-        if (spriteMuzzleFlashMaterial == null)
-        {
-            spriteMuzzleFlashMaterial = CreateTransparentTextureMaterial("Sprite Muzzle Flash", flashSprite.texture, Color.white, additive: true);
-            spriteMuzzleFlashTexture = flashSprite.texture;
-        }
-        else if (spriteMuzzleFlashTexture != flashSprite.texture)
-        {
-            SetMaterialTextureIfPresent(spriteMuzzleFlashMaterial, flashSprite.texture, "_UnlitColorMap", "_BaseColorMap", "_MainTex", "_BaseMap");
-            spriteMuzzleFlashTexture = flashSprite.texture;
-        }
-
-        flashRenderer.enabled = true;
-        flashRenderer.sharedMaterial = spriteMuzzleFlashMaterial;
     }
 
     private WeaponSpriteView ResolveWeaponSpriteView(int weaponIndex)
@@ -978,33 +918,6 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         return weaponIndex >= 0 ? new Vector3(0.055f, 0f, 0f) : Vector3.zero;
     }
 
-    private Sprite ResolveMuzzleFlashSprite(int weaponIndex)
-    {
-        return ResolveMuzzleFlashSprite(weaponIndex, 0);
-    }
-
-    private Sprite ResolveMuzzleFlashSprite(int weaponIndex, int frameIndex)
-    {
-        if (weapons != null
-            && weaponIndex >= 0
-            && weaponIndex < weapons.Length
-            && weapons[weaponIndex] != null)
-        {
-            Sprite frame = ResolveFrameFromArray(weapons[weaponIndex].MuzzleFlashFrames, frameIndex);
-            if (frame != null)
-            {
-                return frame;
-            }
-
-            if (weapons[weaponIndex].MuzzleFlashSprite != null)
-            {
-                return weapons[weaponIndex].MuzzleFlashSprite;
-            }
-        }
-
-        return ResolveSerializedMuzzleFlashSprite(weaponIndex);
-    }
-
     private Sprite ResolveSerializedMuzzleFlashSprite(int weaponIndex)
     {
         if (muzzleFlashSprites == null || weaponIndex < 0 || weaponIndex >= muzzleFlashSprites.Length)
@@ -1013,54 +926,6 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
 
         return muzzleFlashSprites[weaponIndex];
-    }
-
-    private int ResolveMuzzleFlashFrameCount(int weaponIndex)
-    {
-        if (weapons != null
-            && weaponIndex >= 0
-            && weaponIndex < weapons.Length
-            && HasAnySprite(weapons[weaponIndex]?.MuzzleFlashFrames))
-        {
-            return weapons[weaponIndex].MuzzleFlashFrames.Length;
-        }
-
-        return ResolveMuzzleFlashSprite(weaponIndex) != null ? 1 : 0;
-    }
-
-    private float ResolveMuzzleFlashFrameDuration(int weaponIndex)
-    {
-        if (weapons != null
-            && weaponIndex >= 0
-            && weaponIndex < weapons.Length
-            && weapons[weaponIndex] != null
-            && weapons[weaponIndex].MuzzleFlashFrameDuration > 0f)
-        {
-            return weapons[weaponIndex].MuzzleFlashFrameDuration;
-        }
-
-        int frameCount = ResolveMuzzleFlashFrameCount(weaponIndex);
-        if (frameCount > 1)
-        {
-            return Mathf.Max(0.005f, spriteMuzzleFlashDuration / frameCount);
-        }
-
-        return Mathf.Max(0.005f, spriteMuzzleFlashDuration);
-    }
-
-    private Vector2 ResolveMuzzleFlashSpriteSize(int weaponIndex)
-    {
-        if (weapons != null
-            && weaponIndex >= 0
-            && weaponIndex < weapons.Length
-            && weapons[weaponIndex] != null
-            && weapons[weaponIndex].MuzzleFlashSpriteSize.x > 0f
-            && weapons[weaponIndex].MuzzleFlashSpriteSize.y > 0f)
-        {
-            return weapons[weaponIndex].MuzzleFlashSpriteSize;
-        }
-
-        return ResolveSerializedMuzzleFlashSpriteSize(weaponIndex);
     }
 
     private Vector2 ResolveSerializedMuzzleFlashSpriteSize(int weaponIndex)
@@ -1793,6 +1658,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
 
         legacySpriteVolumeRenderer.MapSet = mapSet;
+        ApplySpriteViewTransform(weapon, mapSet);
         legacySpriteVolumeRenderer.ApplyNow(forceLightRefresh: false);
     }
 
@@ -1809,7 +1675,9 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             return;
         }
 
-        legacySpriteVolumeRenderer.MapSet = animatedWeapon.SpriteMapSet != null ? animatedWeapon.SpriteMapSet : defaultSpriteMapSet;
+        FirstPersonSpriteVolumeMapSet baseMapSet = animatedWeapon.SpriteMapSet != null ? animatedWeapon.SpriteMapSet : defaultSpriteMapSet;
+        legacySpriteVolumeRenderer.MapSet = baseMapSet;
+        ApplySpriteViewTransform(animatedWeapon, baseMapSet);
         legacySpriteVolumeRenderer.ApplyNow(forceLightRefresh: false);
     }
 
@@ -1825,9 +1693,13 @@ public sealed class RetroWeaponSystem : MonoBehaviour
 
     private void UpdateMuzzleFlashState()
     {
+        if (usingSpriteVolumeViewModel)
+        {
+            return;
+        }
+
         if (Time.time < muzzleFlashDisableTime)
         {
-            AdvanceSpriteMuzzleFlashAnimation();
             return;
         }
 
@@ -1838,66 +1710,21 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
     }
 
-    private void AdvanceSpriteMuzzleFlashAnimation()
-    {
-        if (!usingSpriteVolumeViewModel || Time.time < muzzleFlashNextFrameTime)
-        {
-            return;
-        }
-
-        WeaponRuntime weapon = CurrentWeapon;
-        if (weapon == null || weapon.MuzzleFlash == null || !weapon.MuzzleFlash.activeSelf)
-        {
-            return;
-        }
-
-        int frameCount = ResolveMuzzleFlashFrameCount(currentWeaponIndex);
-        if (frameCount <= 1 || muzzleFlashFrameIndex >= frameCount - 1)
-        {
-            return;
-        }
-
-        float frameDuration = ResolveMuzzleFlashFrameDuration(currentWeaponIndex);
-        while (Time.time >= muzzleFlashNextFrameTime && muzzleFlashFrameIndex < frameCount - 1)
-        {
-            muzzleFlashFrameIndex++;
-            muzzleFlashNextFrameTime += frameDuration;
-        }
-
-        ApplySpriteMuzzleFlashMaterial(ResolveMuzzleFlashSprite(currentWeaponIndex, muzzleFlashFrameIndex));
-    }
-
     private void ShowMuzzleFlash(WeaponRuntime weapon)
     {
+        if (usingSpriteVolumeViewModel)
+        {
+            return;
+        }
+
         if (weapon == null || weapon.MuzzleFlash == null)
         {
             return;
         }
 
         float flashScale = weapon.MuzzleFlashScale * UnityEngine.Random.Range(0.9f, 1.15f);
-        if (usingSpriteVolumeViewModel)
-        {
-            Sprite firstFrame = ResolveMuzzleFlashSprite(currentWeaponIndex, 0);
-            if (firstFrame == null)
-            {
-                return;
-            }
-
-            muzzleFlashFrameIndex = 0;
-            float frameDuration = ResolveMuzzleFlashFrameDuration(currentWeaponIndex);
-            int frameCount = ResolveMuzzleFlashFrameCount(currentWeaponIndex);
-            ApplySpriteMuzzleFlashMaterial(firstFrame);
-            Vector2 flashSize = ResolveMuzzleFlashSpriteSize(currentWeaponIndex) * UnityEngine.Random.Range(0.9f, 1.15f);
-            weapon.MuzzleFlash.transform.localScale = new Vector3(flashSize.x, flashSize.y, 1f);
-            weapon.MuzzleFlash.transform.localRotation = Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f));
-            muzzleFlashNextFrameTime = Time.time + frameDuration;
-            muzzleFlashDisableTime = Time.time + (frameCount > 1 ? frameDuration * frameCount : spriteMuzzleFlashDuration);
-        }
-        else
-        {
-            weapon.MuzzleFlash.transform.localScale = Vector3.one * flashScale;
-            muzzleFlashDisableTime = Time.time + 0.045f;
-        }
+        weapon.MuzzleFlash.transform.localScale = Vector3.one * flashScale;
+        muzzleFlashDisableTime = Time.time + 0.045f;
 
         weapon.MuzzleFlash.SetActive(true);
     }
@@ -2351,106 +2178,6 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
 
         return material;
-    }
-
-    private static Material CreateTransparentTextureMaterial(string materialName, Texture texture, Color tint, bool additive)
-    {
-        Shader shader = Shader.Find("HDRP/Unlit");
-        shader ??= Shader.Find("Unlit/Transparent");
-        shader ??= Shader.Find("Sprites/Default");
-
-        Material material = new Material(shader)
-        {
-            name = materialName,
-            renderQueue = (int)RenderQueue.Transparent
-        };
-
-        material.SetOverrideTag("RenderType", "Transparent");
-        material.DisableKeyword("_ALPHATEST_ON");
-        material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-        material.EnableKeyword(additive ? "_BLENDMODE_ADD" : "_BLENDMODE_ALPHA");
-
-        SetMaterialTextureIfPresent(material, texture, "_UnlitColorMap", "_BaseColorMap", "_MainTex", "_BaseMap");
-        SetMaterialColorIfPresent(material, tint, "_UnlitColor", "_BaseColor", "_Color");
-        SetMaterialFloatIfPresent(material, 0f, "_AlphaRemapMin");
-        SetMaterialFloatIfPresent(material, 1f, "_AlphaRemapMax");
-        SetMaterialFloatIfPresent(material, 1f, "_SurfaceType");
-        SetMaterialFloatIfPresent(material, additive ? 1f : 0f, "_BlendMode");
-        SetMaterialFloatIfPresent(material, 0f, "_AlphaCutoffEnable", "_AlphaClip");
-        SetMaterialFloatIfPresent(material, 0f, "_ZWrite", "_TransparentZWrite");
-        SetMaterialFloatIfPresent(material, (float)CullMode.Off, "_CullMode", "_CullModeForward");
-        SetMaterialFloatIfPresent(material, (float)BlendMode.SrcAlpha, "_SrcBlend");
-        SetMaterialFloatIfPresent(material, additive ? (float)BlendMode.One : (float)BlendMode.OneMinusSrcAlpha, "_DstBlend");
-        SetMaterialFloatIfPresent(material, (float)BlendMode.One, "_AlphaSrcBlend");
-        SetMaterialFloatIfPresent(material, (float)BlendMode.OneMinusSrcAlpha, "_AlphaDstBlend");
-
-        return material;
-    }
-
-    private static void DestroyRuntimeMaterial(Material material)
-    {
-        if (material == null)
-        {
-            return;
-        }
-
-        if (Application.isPlaying)
-        {
-            Destroy(material);
-        }
-        else
-        {
-            DestroyImmediate(material);
-        }
-    }
-
-    private static void SetMaterialTextureIfPresent(Material material, Texture texture, params string[] propertyNames)
-    {
-        if (material == null || texture == null)
-        {
-            return;
-        }
-
-        for (int i = 0; i < propertyNames.Length; i++)
-        {
-            if (material.HasProperty(propertyNames[i]))
-            {
-                material.SetTexture(propertyNames[i], texture);
-            }
-        }
-
-    }
-
-    private static void SetMaterialColorIfPresent(Material material, Color color, params string[] propertyNames)
-    {
-        if (material == null)
-        {
-            return;
-        }
-
-        for (int i = 0; i < propertyNames.Length; i++)
-        {
-            if (material.HasProperty(propertyNames[i]))
-            {
-                material.SetColor(propertyNames[i], color);
-            }
-        }
-    }
-
-    private static void SetMaterialFloatIfPresent(Material material, float value, params string[] propertyNames)
-    {
-        if (material == null)
-        {
-            return;
-        }
-
-        for (int i = 0; i < propertyNames.Length; i++)
-        {
-            if (material.HasProperty(propertyNames[i]))
-            {
-                material.SetFloat(propertyNames[i], value);
-            }
-        }
     }
 
     private static void ApplyRuntimeMaterialColor(Material material, Color baseColor, bool emissive)

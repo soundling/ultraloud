@@ -197,7 +197,7 @@ public static class RetroMotocrossBuilder
             SetBool(serialized, "preferMountDefaultMountedDefinition", true);
             SetFloat(serialized, "searchRadius", 26f);
             SetFloat(serialized, "searchInterval", 0.95f);
-            SetBool(serialized, "autoMountOnEnable", true);
+            SetBool(serialized, "autoMountOnEnable", false);
             SetFloat(serialized, "targetSearchRadius", 38f);
             SetFloat(serialized, "chaseDistance", 8.2f);
             SetFloat(serialized, "orbitDistance", 3.8f);
@@ -315,6 +315,11 @@ public static class RetroMotocrossBuilder
         Sprite[] firstPersonFrames)
     {
         SerializedObject serialized = new(mount);
+        SetBool(serialized, "interactionEnabled", true);
+        SetString(serialized, "interactionName", "Motocross");
+        SetString(serialized, "interactionVerb", "Ride");
+        SetFloat(serialized, "interactionMaxDistance", 4.5f);
+        SetInt(serialized, "interactionPriority", 35);
         SetString(serialized, "mountDisplayName", "Motocross");
         serialized.FindProperty("damageable").objectReferenceValue = damageable;
         serialized.FindProperty("animator").objectReferenceValue = animator;
@@ -485,6 +490,15 @@ public static class RetroMotocrossBuilder
         if (property != null)
         {
             property.stringValue = value;
+        }
+    }
+
+    private static void SetInt(SerializedObject serialized, string propertyName, int value)
+    {
+        SerializedProperty property = serialized.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.intValue = value;
         }
     }
 

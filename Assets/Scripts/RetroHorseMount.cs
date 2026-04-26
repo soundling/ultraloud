@@ -126,6 +126,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     private int overlayFrameIndex;
     private bool wasVisualRendererEnabled = true;
     private Vector3 visualBaseLocalPosition;
+    private float visualPhaseOffset = -1f;
     private string currentClip;
 
     protected override string DefaultInteractionVerb => riderMode == RiderMode.Empty ? "Ride" : "Dismount";
@@ -144,6 +145,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     private void Awake()
     {
         AutoAssignReferences();
+        EnsureVisualPhaseOffset();
         homePosition = transform.position;
         wanderDestination = homePosition;
         ConfigurePhysics();
@@ -152,6 +154,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     private void OnEnable()
     {
         AutoAssignReferences();
+        EnsureVisualPhaseOffset();
         ConfigurePhysics();
         visualBaseLocalPosition = visualRoot != null ? visualRoot.localPosition : Vector3.zero;
         if (riderMode == RiderMode.Empty)
@@ -240,10 +243,10 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
         if (riderMode == RiderMode.Empty)
         {
-            return context.Actor != null && context.Actor.GetComponent<RetroFpsController>() != null;
+            return ResolvePlayerController(context.Actor) != null;
         }
 
-        return riderMode == RiderMode.Player && context.Actor == playerState.Actor;
+        return riderMode == RiderMode.Player && ResolvePlayerController(context.Actor) == playerState.Controller;
     }
 
     public override string GetInteractionPrompt(in RetroInteractionContext context)
@@ -281,8 +284,8 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         mountedAtTime = Time.time;
         mountedFrame = Time.frameCount;
 
-        DisableNpcRiderObject(npcState);
-        AttachNpcRider(npcState);
+        DisableNpcRiderObject(ref npcState);
+        AttachNpcRider(ref npcState);
         ApplyDefinition(mountedDefinition != null ? mountedDefinition : defaultMountedNpcDefinition);
         PlayClip(idleClipId, true);
         return true;
@@ -345,21 +348,22 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
             return false;
         }
 
-        RetroFpsController controller = actor.GetComponent<RetroFpsController>();
+        RetroFpsController controller = ResolvePlayerController(actor);
         if (controller == null || controller.ViewCamera == null)
         {
             return false;
         }
 
+        GameObject actorRoot = controller.gameObject;
         riderMode = RiderMode.Player;
         mountedAtTime = Time.unscaledTime;
         mountedFrame = Time.frameCount;
-        playerState = CapturePlayerState(actor, controller);
+        playerState = CapturePlayerState(actorRoot, controller);
         currentVelocity = Vector3.zero;
         lookYawOffset = 0f;
         lookPitch = NormalizePitch(controller.ViewCamera.transform.localEulerAngles.x);
 
-        ResolvePlayerRideActions(actor, controller);
+        ResolvePlayerRideActions(actorRoot, controller);
         HidePlayerObjectsForRide(playerState);
         DisablePlayerForRide(playerState);
         EnsureFirstPersonOverlay(playerState);
@@ -690,12 +694,10 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
             return;
         }
 
+        EnsureVisualPhaseOffset();
         float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, gallopSpeed), ProjectHorizontal(currentVelocity).magnitude);
-        float bob = Mathf.Sin(Time.time * cameraBobFrequency + GetInstanceID() * 0.014f) * cameraBobAmplitude * 0.65f * Mathf.Lerp(0.2f, 1.2f, speed01);
-        float sideSpeed = Vector3.Dot(ProjectHorizontal(currentVelocity), transform.right);
-        float lean = Mathf.Clamp(-sideSpeed * 2.1f, -7f, 7f);
+        float bob = Mathf.Sin(Time.time * cameraBobFrequency + visualPhaseOffset) * cameraBobAmplitude * 0.65f * Mathf.Lerp(0.2f, 1.2f, speed01);
         visualRoot.localPosition = visualBaseLocalPosition + Vector3.up * bob;
-        visualRoot.localRotation = Quaternion.Euler(0f, 0f, lean);
     }
 
     private void ApplyShaderPulse()
@@ -706,8 +708,9 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         }
 
         propertyBlock ??= new MaterialPropertyBlock();
+        EnsureVisualPhaseOffset();
         float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, gallopSpeed), ProjectHorizontal(currentVelocity).magnitude);
-        float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 13.5f + GetInstanceID() * 0.02f);
+        float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 13.5f + visualPhaseOffset * 1.37f);
         visualRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetColor(RimColorId, speedRimColor);
         propertyBlock.SetFloat(RimStrengthId, Mathf.Lerp(0.08f, 0.54f + pulse * 0.22f, speed01));
@@ -1194,7 +1197,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         }
     }
 
-    private void DisableNpcRiderObject(NpcRideState state)
+    private void DisableNpcRiderObject(ref NpcRideState state)
     {
         if (state.Rider == null || !state.HideRiderObject)
         {
@@ -1223,18 +1226,23 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
             }
         }
 
-        state.DisabledBehaviours = state.Rider.GetComponents<MonoBehaviour>();
+        state.DisabledBehaviours = state.Rider.GetComponentsInChildren<MonoBehaviour>(true);
         state.BehaviourStates = new bool[state.DisabledBehaviours.Length];
         for (int i = 0; i < state.DisabledBehaviours.Length; i++)
         {
             MonoBehaviour behaviour = state.DisabledBehaviours[i];
             state.BehaviourStates[i] = behaviour != null && behaviour.enabled;
-            if (behaviour == null || behaviour is RetroHorseNpcRider)
+            if (behaviour == null || behaviour is RetroHorseNpcRider || behaviour is RetroDamageable)
             {
                 continue;
             }
 
-            if (behaviour is RetroNpcAgent || behaviour is RetroMerchantCombatant || behaviour is DirectionalSpriteLocomotion)
+            if (behaviour is RetroNpcAgent
+                || behaviour is RetroMerchantCombatant
+                || behaviour is DirectionalSpriteLocomotion
+                || behaviour is DirectionalSpriteAnimator
+                || behaviour is DirectionalSpriteBillboardLitRenderer
+                || behaviour is DirectionalSpriteHitMask)
             {
                 behaviour.enabled = false;
             }
@@ -1254,7 +1262,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         }
     }
 
-    private void AttachNpcRider(NpcRideState state)
+    private void AttachNpcRider(ref NpcRideState state)
     {
         if (state.Rider == null)
         {
@@ -1366,6 +1374,14 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         return string.IsNullOrWhiteSpace(mountDisplayName) ? "Mount" : mountDisplayName;
     }
 
+    private void EnsureVisualPhaseOffset()
+    {
+        if (visualPhaseOffset < 0f)
+        {
+            visualPhaseOffset = Random.Range(0f, 1000f);
+        }
+    }
+
     private static GUIStyle promptStyle;
     private static GUIStyle PromptStyle => promptStyle ??= new GUIStyle(GUI.skin.label)
     {
@@ -1394,6 +1410,28 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         }
 
         return angle;
+    }
+
+    private static RetroFpsController ResolvePlayerController(GameObject actor)
+    {
+        if (actor == null)
+        {
+            return null;
+        }
+
+        RetroFpsController controller = actor.GetComponent<RetroFpsController>();
+        if (controller != null)
+        {
+            return controller;
+        }
+
+        controller = actor.GetComponentInParent<RetroFpsController>();
+        if (controller != null)
+        {
+            return controller;
+        }
+
+        return actor.GetComponentInChildren<RetroFpsController>(true);
     }
 
     private static Vector3 GetBodyVelocity(Rigidbody body)

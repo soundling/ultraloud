@@ -198,7 +198,7 @@ public static class RetroHorseBuilder
             SetBool(serialized, "preferMountDefaultMountedDefinition", true);
             SetFloat(serialized, "searchRadius", 24f);
             SetFloat(serialized, "searchInterval", 1.1f);
-            SetBool(serialized, "autoMountOnEnable", true);
+            SetBool(serialized, "autoMountOnEnable", false);
             SetFloat(serialized, "targetSearchRadius", 34f);
             SetFloat(serialized, "targetRefreshInterval", 0.52f);
             SetFloat(serialized, "chaseDistance", 6.2f);
@@ -317,6 +317,11 @@ public static class RetroHorseBuilder
         Sprite[] firstPersonFrames)
     {
         SerializedObject serialized = new(mount);
+        SetBool(serialized, "interactionEnabled", true);
+        SetString(serialized, "interactionName", "Horse");
+        SetString(serialized, "interactionVerb", "Ride");
+        SetFloat(serialized, "interactionMaxDistance", 4.5f);
+        SetInt(serialized, "interactionPriority", 35);
         SetString(serialized, "mountDisplayName", "Horse");
         serialized.FindProperty("damageable").objectReferenceValue = damageable;
         serialized.FindProperty("animator").objectReferenceValue = animator;
@@ -484,6 +489,15 @@ public static class RetroHorseBuilder
         if (property != null)
         {
             property.stringValue = value;
+        }
+    }
+
+    private static void SetInt(SerializedObject serialized, string propertyName, int value)
+    {
+        SerializedProperty property = serialized.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.intValue = value;
         }
     }
 

@@ -274,8 +274,8 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
   actionMapName: Player
   interactActionName: Interact
-  maxDistance: 3.2
-  probeRadius: 0.26
+  maxDistance: 4.6
+  probeRadius: 0.36
   interactionMask:
     serializedVersion: 2
     m_Bits: 4294967295

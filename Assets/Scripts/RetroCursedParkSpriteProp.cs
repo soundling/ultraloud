@@ -30,7 +30,7 @@ public sealed class RetroCursedParkSpriteProp : MonoBehaviour
 
     private MaterialPropertyBlock propertyBlock;
     private Quaternion authoredLocalRotation;
-    private int phaseSeed;
+    private float phaseOffset = -1f;
 
     private void Reset()
     {
@@ -41,7 +41,7 @@ public sealed class RetroCursedParkSpriteProp : MonoBehaviour
     {
         AutoAssign();
         authoredLocalRotation = transform.localRotation;
-        phaseSeed = GetInstanceID();
+        EnsurePhaseOffset();
         ApplyProperties();
     }
 
@@ -82,7 +82,8 @@ public sealed class RetroCursedParkSpriteProp : MonoBehaviour
         float sway = 0f;
         if (!groundDecal && swayStrength > 0f)
         {
-            float t = Time.realtimeSinceStartup * 1.7f + phaseSeed * 0.0031f;
+            EnsurePhaseOffset();
+            float t = Time.realtimeSinceStartup * 1.7f + phaseOffset;
             sway = Mathf.Sin(t) * swayStrength;
         }
 
@@ -150,7 +151,8 @@ public sealed class RetroCursedParkSpriteProp : MonoBehaviour
         float flicker = 1f;
         if (flickerStrength > 0f)
         {
-            float t = Time.realtimeSinceStartup * 8.7f + phaseSeed * 0.017f;
+            EnsurePhaseOffset();
+            float t = Time.realtimeSinceStartup * 8.7f + phaseOffset * 1.61f;
             flicker += Mathf.Sin(t) * flickerStrength + Mathf.Sin(t * 2.31f) * flickerStrength * 0.35f;
         }
 
@@ -162,5 +164,13 @@ public sealed class RetroCursedParkSpriteProp : MonoBehaviour
         propertyBlock.SetFloat(AlphaCutoffId, alphaCutoff);
         propertyBlock.SetFloat(SpecularStrengthId, groundDecal ? 0.05f : 0.22f);
         targetRenderer.SetPropertyBlock(propertyBlock);
+    }
+
+    private void EnsurePhaseOffset()
+    {
+        if (phaseOffset < 0f)
+        {
+            phaseOffset = Random.Range(0f, 1000f);
+        }
     }
 }

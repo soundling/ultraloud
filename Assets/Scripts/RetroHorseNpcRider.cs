@@ -9,7 +9,7 @@ public sealed class RetroHorseNpcRider : MonoBehaviour
     [SerializeField] private bool preferMountDefaultMountedDefinition = true;
     [SerializeField, Min(0f)] private float searchRadius = 18f;
     [SerializeField, Min(0.1f)] private float searchInterval = 1.15f;
-    [SerializeField] private bool autoMountOnEnable = true;
+    [SerializeField] private bool autoMountOnEnable = false;
 
     [Header("Riding")]
     [SerializeField, Min(0f)] private float targetSearchRadius = 30f;
@@ -31,6 +31,7 @@ public sealed class RetroHorseNpcRider : MonoBehaviour
     private float nextTargetRefreshTime;
     private float nextWanderPickTime;
     private float orbitSign = 1f;
+    private float chaosPhaseOffset = -1f;
 
     public RetroHorseMount CurrentHorse => currentHorse;
     public bool IsMounted => currentHorse != null && currentHorse.IsNpcRider(gameObject);
@@ -43,12 +44,14 @@ public sealed class RetroHorseNpcRider : MonoBehaviour
     private void Awake()
     {
         AutoAssignReferences();
+        EnsureChaosPhaseOffset();
         homePosition = transform.position;
     }
 
     private void OnEnable()
     {
         AutoAssignReferences();
+        EnsureChaosPhaseOffset();
         homePosition = transform.position;
         nextSearchTime = autoMountOnEnable ? 0f : Time.time + searchInterval;
         PickWanderDirection();
@@ -148,7 +151,7 @@ public sealed class RetroHorseNpcRider : MonoBehaviour
     private void TryClaimNearestHorse()
     {
 #if UNITY_2023_1_OR_NEWER
-        RetroHorseMount[] horses = FindObjectsByType<RetroHorseMount>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        RetroHorseMount[] horses = FindObjectsByType<RetroHorseMount>(FindObjectsInactive.Exclude);
 #else
         RetroHorseMount[] horses = FindObjectsOfType<RetroHorseMount>();
 #endif
@@ -244,10 +247,19 @@ public sealed class RetroHorseNpcRider : MonoBehaviour
 
     private Vector3 AddChaos(Vector3 direction, float strength)
     {
-        float t = Time.time * 2.1f + GetInstanceID() * 0.017f;
+        EnsureChaosPhaseOffset();
+        float t = Time.time * 2.1f + chaosPhaseOffset;
         Vector3 wobble = new(Mathf.Sin(t * 1.7f), 0f, Mathf.Cos(t * 1.23f));
         Vector3 mixed = ProjectHorizontal(direction) + wobble * Mathf.Clamp01(strength);
         return mixed.sqrMagnitude > 0.0001f ? mixed.normalized : direction;
+    }
+
+    private void EnsureChaosPhaseOffset()
+    {
+        if (chaosPhaseOffset < 0f)
+        {
+            chaosPhaseOffset = Random.Range(0f, 1000f);
+        }
     }
 
     private void AutoAssignReferences()

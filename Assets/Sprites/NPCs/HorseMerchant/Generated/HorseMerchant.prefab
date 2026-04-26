@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 489012878694149054}
   - component: {fileID: 7987704858627704657}
   - component: {fileID: 4700458120654297155}
-  - component: {fileID: 9128992339952554560}
+  - component: {fileID: 8796590713336923878}
   m_Layer: 0
   m_Name: HorseMerchant
   m_TagString: Untagged
@@ -117,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551150455497868843}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.09738519, z: 0, w: 0.99524677}
+  m_LocalRotation: {x: 0, y: 0.9310681, z: 0, w: 0.36484554}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   rimColor: {r: 1, g: 0.55, b: 0.2, a: 1}
   rimStrength: 0.28
   rimPower: 2.9
---- !u!65 &9128992339952554560
+--- !u!65 &8796590713336923878
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

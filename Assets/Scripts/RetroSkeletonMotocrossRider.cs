@@ -94,6 +94,7 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
     private float modeSign = 1f;
     private bool deathFxSpawned;
     private Vector3 visualBaseLocalPosition;
+    private float chaosPhaseOffset = -1f;
 
     private void Reset()
     {
@@ -103,6 +104,7 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
     private void Awake()
     {
         AutoAssignReferences();
+        EnsureChaosPhaseOffset();
         homePosition = transform.position;
         ConfigurePhysics();
     }
@@ -110,6 +112,7 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
     private void OnEnable()
     {
         AutoAssignReferences();
+        EnsureChaosPhaseOffset();
         ConfigurePhysics();
         visualBaseLocalPosition = visualRoot != null ? visualRoot.localPosition : Vector3.zero;
         homePosition = transform.position;
@@ -239,7 +242,7 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
         targetCandidates.Clear();
 
 #if UNITY_2023_1_OR_NEWER
-        RetroDamageable[] damageables = FindObjectsByType<RetroDamageable>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        RetroDamageable[] damageables = FindObjectsByType<RetroDamageable>(FindObjectsInactive.Exclude);
 #else
         RetroDamageable[] damageables = FindObjectsOfType<RetroDamageable>();
 #endif
@@ -401,7 +404,8 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
 
     private Vector3 AddChaos(Vector3 direction, float strength)
     {
-        float t = Time.time * 3.7f + GetInstanceID() * 0.013f;
+        EnsureChaosPhaseOffset();
+        float t = Time.time * 3.7f + chaosPhaseOffset;
         Vector3 jitter = new(Mathf.Sin(t * 1.7f), 0f, Mathf.Cos(t * 1.19f));
         Vector3 mixed = direction + jitter * strength;
         mixed = mixed.ProjectHorizontal();
@@ -565,7 +569,8 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
         }
 
         float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, burstSpeed), currentVelocity.ProjectHorizontal().magnitude);
-        float bob = Mathf.Sin(Time.time * bobFrequency + GetInstanceID() * 0.01f) * bobAmplitude * Mathf.Lerp(0.35f, 1.25f, speed01);
+        EnsureChaosPhaseOffset();
+        float bob = Mathf.Sin(Time.time * bobFrequency + chaosPhaseOffset * 0.77f) * bobAmplitude * Mathf.Lerp(0.35f, 1.25f, speed01);
         float wheelieLift = moveMode == ChaosMoveMode.Wheelie ? Mathf.Sin(Time.time * 18f) * 0.08f + 0.16f : 0f;
         visualRoot.localPosition = visualBaseLocalPosition + new Vector3(0f, bob + wheelieLift, 0f);
 
@@ -608,6 +613,14 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
         {
             deathFxSpawned = true;
             RetroGameContext.Vfx.SpawnExplosionFlash(transform.position + Vector3.up * 1.15f, speedRimColor, 1.45f, 0.18f);
+        }
+    }
+
+    private void EnsureChaosPhaseOffset()
+    {
+        if (chaosPhaseOffset < 0f)
+        {
+            chaosPhaseOffset = Random.Range(0f, 1000f);
         }
     }
 

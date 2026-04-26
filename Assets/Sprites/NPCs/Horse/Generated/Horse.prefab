@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1149139379202393684
+--- !u!1 &183450814528461030
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 993872203425496663}
+  - component: {fileID: 8108749813473597657}
   m_Layer: 0
   m_Name: DismountAnchor
   m_TagString: Untagged
@@ -16,13 +16,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &993872203425496663
+--- !u!4 &8108749813473597657
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149139379202393684}
+  m_GameObject: {fileID: 183450814528461030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.55, y: 0.08, z: -0.2}
@@ -42,11 +42,11 @@ GameObject:
   - component: {fileID: 1383630116129464409}
   - component: {fileID: 2551637955867247087}
   - component: {fileID: 3188742337044214459}
-  - component: {fileID: 3668001169383485882}
-  - component: {fileID: 3369551764474768604}
-  - component: {fileID: 3277848220903811491}
-  - component: {fileID: 2594177115149909959}
-  - component: {fileID: 4594719144673500637}
+  - component: {fileID: 3183533246597935858}
+  - component: {fileID: 5819486349313479689}
+  - component: {fileID: 3393213877454287673}
+  - component: {fileID: 7193178051228020220}
+  - component: {fileID: 208746695939058205}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -62,14 +62,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2204272916077150142}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.09738519, z: 0, w: 0.99524677}
+  m_LocalRotation: {x: 0, y: 0.9310681, z: 0, w: 0.36484554}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6795667887248797608}
-  - {fileID: 709671801432763373}
-  - {fileID: 993872203425496663}
+  - {fileID: 8702704731675496927}
+  - {fileID: 8108749813473597657}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2551637955867247087
@@ -141,7 +141,7 @@ MonoBehaviour:
   rimColor: {r: 1, g: 0.55, b: 0.2, a: 1}
   rimStrength: 0.28
   rimPower: 2.9
---- !u!114 &3668001169383485882
+--- !u!114 &3183533246597935858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,7 +164,7 @@ MonoBehaviour:
   edgePaddingPixels: 3
   drawDebugHits: 0
   debugDrawDuration: 0.35
---- !u!65 &3369551764474768604
+--- !u!65 &5819486349313479689
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,7 +185,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8, y: 2.35, z: 3.1}
   m_Center: {x: 0, y: 1.17, z: 0}
---- !u!54 &3277848220903811491
+--- !u!54 &3393213877454287673
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,7 +212,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &2594177115149909959
+--- !u!114 &7193178051228020220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   bloodDecalScatterRadius: 0.32
   bloodSplatterLifetime: 1.6
   bloodSprayLifetime: 0.55
---- !u!114 &4594719144673500637
+--- !u!114 &208746695939058205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,10 +257,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RetroHorseMount
   interactionEnabled: 1
-  interactionName: 
-  interactionVerb: 
-  interactionMaxDistance: 3.2
-  interactionPriority: 0
+  interactionName: Horse
+  interactionVerb: Ride
+  interactionMaxDistance: 4.5
+  interactionPriority: 35
   interactionCue: {fileID: 0}
   interactionMessage: 
   interactionMessageDuration: 1.6
@@ -273,14 +273,14 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls: []
-  damageable: {fileID: 2594177115149909959}
+  damageable: {fileID: 7193178051228020220}
   animator: {fileID: 2551637955867247087}
   locomotion: {fileID: 0}
-  movementBody: {fileID: 3277848220903811491}
+  movementBody: {fileID: 3393213877454287673}
   visualRenderer: {fileID: 1660845858964520164}
   visualRoot: {fileID: 6795667887248797608}
-  seatAnchor: {fileID: 709671801432763373}
-  dismountAnchor: {fileID: 993872203425496663}
+  seatAnchor: {fileID: 8702704731675496927}
+  dismountAnchor: {fileID: 8108749813473597657}
   mountDisplayName: Horse
   riderlessDefinition: {fileID: 11400000, guid: 97bcc241e6c1755448cc2f7e5e8c2173, type: 2}
   defaultMountedNpcDefinition: {fileID: 11400000, guid: 9306287ee2481ef49a902970eebfdd54, type: 2}
@@ -426,7 +426,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8802095196792504694
+--- !u!1 &7654875768798686850
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -434,7 +434,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 709671801432763373}
+  - component: {fileID: 8702704731675496927}
   m_Layer: 0
   m_Name: SeatAnchor
   m_TagString: Untagged
@@ -442,13 +442,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &709671801432763373
+--- !u!4 &8702704731675496927
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8802095196792504694}
+  m_GameObject: {fileID: 7654875768798686850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.62, z: -0.08}

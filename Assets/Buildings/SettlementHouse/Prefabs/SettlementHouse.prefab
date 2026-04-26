@@ -1,0 +1,776 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1794257214030792108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2298408427833869056}
+  m_Layer: 0
+  m_Name: InsideSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2298408427833869056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794257214030792108}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  m_LocalPosition: {x: 0, y: 0.08, z: 0.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3693896905509604084}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4069779445224358269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6949269506711290918}
+  - component: {fileID: 5006058798633116943}
+  - component: {fileID: 2861510103975058083}
+  m_Layer: 0
+  m_Name: InteriorExitInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6949269506711290918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4069779445224358269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.92, y: 1.155, z: -1.9449999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3693896905509604084}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5006058798633116943
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4069779445224358269}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.45, y: 2.25, z: 0.34}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2861510103975058083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4069779445224358269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf4b9fd1db7e814682c444e7e59eb19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroBuildingDoorInteractable
+  interactionEnabled: 1
+  interactionName: settlement house
+  interactionVerb: Exit
+  interactionMaxDistance: 3.35
+  interactionPriority: 35
+  interactionCue: {fileID: 0}
+  interactionMessage: 
+  interactionMessageDuration: 1.6
+  onFocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnfocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  teleportTarget: {fileID: 6798916679303160732}
+  alignActorYaw: 1
+  clearRigidbodyVelocity: 1
+  enteredMessage: You step outside.
+  enteredMessageDuration: 1.1
+--- !u!1 &4072495984447109558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3693896905509604084}
+  - component: {fileID: 144959656791501045}
+  m_Layer: 0
+  m_Name: SettlementHouse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3693896905509604084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072495984447109558}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2298408427833869056}
+  - {fileID: 6798916679303160732}
+  - {fileID: 2728597121425907844}
+  - {fileID: 6949269506711290918}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &144959656791501045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072495984447109558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d54d844897856043be5d87a81c79c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHybridBuilding
+  frontMaps:
+    baseMap: {fileID: 2800000, guid: e7ae291a2ed49a942a0e9ed55e7fc84b, type: 3}
+    normalMap: {fileID: 2800000, guid: 591cdb1bef987f74cb4333b5b8d6b5de, type: 3}
+    heightMap: {fileID: 2800000, guid: cf02ced74965db540960cd7a06798863, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: d67b3a34abe4f1646a21b4daaaf4e35e, type: 3}
+    emissionMap: {fileID: 2800000, guid: 2891d80e5e5933849807efd4db93e18f, type: 3}
+  sideMaps:
+    baseMap: {fileID: 2800000, guid: 5660b98f0f06c7847961034a57f00beb, type: 3}
+    normalMap: {fileID: 2800000, guid: cdccc9a445ff50f4c9443ff704ef2d58, type: 3}
+    heightMap: {fileID: 2800000, guid: 22a5a2a54a8f43842968127b2d98407f, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: f702e63f97927bc449883628d7399d95, type: 3}
+    emissionMap: {fileID: 2800000, guid: 4ad067d5d42d5e643a56652b6b0b6183, type: 3}
+  backMaps:
+    baseMap: {fileID: 2800000, guid: a511fd7349a278044b82ed388e1be458, type: 3}
+    normalMap: {fileID: 2800000, guid: bce7ed35e03b02948a19818bee3e847c, type: 3}
+    heightMap: {fileID: 2800000, guid: f9fc20290b17c2448a861ef79754a239, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: f7027a1dc0de8064b9178862708a0952, type: 3}
+    emissionMap: {fileID: 2800000, guid: cd56af429e1df724196f0928e4dd3bd3, type: 3}
+  roofMaps:
+    baseMap: {fileID: 2800000, guid: 1ddfa5404eed68c4e93b662cad3d4a18, type: 3}
+    normalMap: {fileID: 2800000, guid: de9ee6ff663054046b2affb9264beace, type: 3}
+    heightMap: {fileID: 2800000, guid: b4ff5eab7e90d5c40af301b9c6d6ee22, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: c34426d6b1c37d548ae20b290c484d52, type: 3}
+    emissionMap: {fileID: 2800000, guid: f1acc746e826f7c458065706cc5b6378, type: 3}
+  doorMaps:
+    baseMap: {fileID: 2800000, guid: cb7798bb9c668b84faa79e6d8b99e82e, type: 3}
+    normalMap: {fileID: 2800000, guid: cf29618de1fd08344b385a5a9defff39, type: 3}
+    heightMap: {fileID: 2800000, guid: 07a9a9b45df67bc419879b9efda89981, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: 5e5e58f95e3bce04b976327425266561, type: 3}
+    emissionMap: {fileID: 2800000, guid: 9c5286ec99e375b44af52cd64bf94c0d, type: 3}
+  interiorWallMaps:
+    baseMap: {fileID: 2800000, guid: dd3933bb780f392408fee73252677ef5, type: 3}
+    normalMap: {fileID: 2800000, guid: 6fee61179b190c547be7333e6f806064, type: 3}
+    heightMap: {fileID: 2800000, guid: 989dcfd8baf45f947a3d94f3644e560c, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: fe4d0f0f5af751c44a0828c55ae88252, type: 3}
+    emissionMap: {fileID: 2800000, guid: 48816af5351464546ac505d46b54ccd5, type: 3}
+  interiorFloorMaps:
+    baseMap: {fileID: 2800000, guid: 5379bc6139631e741ba883dcc625fb12, type: 3}
+    normalMap: {fileID: 2800000, guid: 48ad2a78263b9da4d8c01948a9773b7c, type: 3}
+    heightMap: {fileID: 2800000, guid: 43bef61ae98242741890cade9cdb4696, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: fe7caec37a3ffd84d9afb25f35680857, type: 3}
+    emissionMap: {fileID: 2800000, guid: b58f4b8cfd54a6940a1aff9d02a8b079, type: 3}
+  interiorCeilingMaps:
+    baseMap: {fileID: 2800000, guid: ec8a7fed42134a64b8a796f1bd9f451e, type: 3}
+    normalMap: {fileID: 2800000, guid: 311cbd096d7a2e34fac3c9ac9daf9dd9, type: 3}
+    heightMap: {fileID: 2800000, guid: 974cdc0d5ec4f9a4d873dedbc7cf9cb2, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: 65ca87f1232a6464a9fd77294726b276, type: 3}
+    emissionMap: {fileID: 2800000, guid: 5d9101a0b5a70a74d845254bb595cfc6, type: 3}
+  interiorDoorMaps:
+    baseMap: {fileID: 2800000, guid: 3afbdac97f1ae83478a6e639fec57e3e, type: 3}
+    normalMap: {fileID: 2800000, guid: 80ea431a7e2ca704ca164515acab1447, type: 3}
+    heightMap: {fileID: 2800000, guid: 1fe5eca64fa27924da0a88c34041fff3, type: 3}
+    packedMasksMap: {fileID: 2800000, guid: 7e9f370dd820cfb4190a9b451f757ee7, type: 3}
+    emissionMap: {fileID: 2800000, guid: e7531516f20125e45848e67db43ea69a, type: 3}
+  width: 6
+  depth: 4.25
+  wallHeight: 3.6
+  roofHeight: 1.05
+  roofOverhang: 0.22
+  faceOffset: 0.018
+  drawDoorSprite: 1
+  doorLocalX: 0.92
+  doorWidth: 1.45
+  doorHeight: 2.25
+  doorBottom: 0.03
+  doorColliderDepth: 0.34
+  doorForwardOffset: 0.18
+  insideSpawnLocalPosition: {x: 0, y: 0.08, z: 0.82}
+  insideSpawnYaw: 180
+  outsideSpawnLocalPosition: {x: 0.92, y: 0.08, z: -3.55}
+  outsideSpawnYaw: 180
+  buildInterior: 1
+  interiorInset: 0.08
+  interiorHeight: 3.28
+  drawInteriorDoorSprite: 1
+  interiorSeed: 48191
+  furniturePropCount: 12
+  dirtDecalCount: 20
+  furniturePropLibrary:
+  - label: TornSofa
+    maps:
+      baseMap: {fileID: 2800000, guid: 6af94dd2eae44be4bb147c500f23c402, type: 3}
+      normalMap: {fileID: 2800000, guid: ac840d7a7576aa743bda44b87b19946c, type: 3}
+      heightMap: {fileID: 2800000, guid: abf9aa0f481c68248bbaeb04ae174ab0, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: f06b88e6b707cd447b6e7dfd44ef2f9a, type: 3}
+      emissionMap: {fileID: 2800000, guid: 1e72675c62b900c49b36afda89304967, type: 3}
+    baseSize: {x: 1.85, y: 0.92}
+    scaleRange: {x: 0.9, y: 1.18}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 1
+  - label: DirtyTable
+    maps:
+      baseMap: {fileID: 2800000, guid: 6d167020177f23a4c828c8e97e62fc3a, type: 3}
+      normalMap: {fileID: 2800000, guid: 8b5bd9c34154c6c4b8971796b552c453, type: 3}
+      heightMap: {fileID: 2800000, guid: 978a2b08e8f0d0f4d829f74431aef24f, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 793d6997443dcac4c90a346017f89811, type: 3}
+      emissionMap: {fileID: 2800000, guid: ccc61dfc0b1ed4449913dbff13ab5c0e, type: 3}
+    baseSize: {x: 1.28, y: 0.84}
+    scaleRange: {x: 0.85, y: 1.16}
+    floorDecal: 0
+    preferWallPlacement: 0
+    castShadow: 1
+  - label: BrokenChair
+    maps:
+      baseMap: {fileID: 2800000, guid: d587ab74f44eef046ba0c9e740e56dd8, type: 3}
+      normalMap: {fileID: 2800000, guid: 5f64be13f4e2d6f4183d8b1bb9c994f3, type: 3}
+      heightMap: {fileID: 2800000, guid: 6c6294ed78bbbe446aed0d6bd255f269, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: c31c543fe38316d48b43f7ebefb19e54, type: 3}
+      emissionMap: {fileID: 2800000, guid: 7e8b223707e071840b4f11f10e2a7e3b, type: 3}
+    baseSize: {x: 0.72, y: 1.02}
+    scaleRange: {x: 0.82, y: 1.15}
+    floorDecal: 0
+    preferWallPlacement: 0
+    castShadow: 1
+  - label: SmallStool
+    maps:
+      baseMap: {fileID: 2800000, guid: 611297f3403335c4d9556a4fe4111fb2, type: 3}
+      normalMap: {fileID: 2800000, guid: ce619721f54e13d4e9ac199d5e37b30f, type: 3}
+      heightMap: {fileID: 2800000, guid: 68c1d81d57a4e1141ab4e1831a3ecb4f, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 8c7d9f3de3cffab41ad14e0c77684344, type: 3}
+      emissionMap: {fileID: 2800000, guid: c88a74c1e40295f45b4adc3926762630, type: 3}
+    baseSize: {x: 0.62, y: 0.58}
+    scaleRange: {x: 0.75, y: 1.1}
+    floorDecal: 0
+    preferWallPlacement: 0
+    castShadow: 1
+  - label: RottenCabinet
+    maps:
+      baseMap: {fileID: 2800000, guid: aa43b14289f88784bb7259e5f584e124, type: 3}
+      normalMap: {fileID: 2800000, guid: 81d1a93a1720a864a98d33de2b9794f2, type: 3}
+      heightMap: {fileID: 2800000, guid: 3a5b9b8e5b9af544b8c4174f70a4f4f1, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: ec9cfaa54f63db24d857f1e8ac58f2b7, type: 3}
+      emissionMap: {fileID: 2800000, guid: e1c2c201b91709e42b25bd8dd8f13376, type: 3}
+    baseSize: {x: 1.1, y: 1.75}
+    scaleRange: {x: 0.86, y: 1.12}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 1
+  - label: CrookedBookshelf
+    maps:
+      baseMap: {fileID: 2800000, guid: 337843edd9c362b408cf37c9b82dbdf7, type: 3}
+      normalMap: {fileID: 2800000, guid: 30013773d34160946b222fea2d04bf65, type: 3}
+      heightMap: {fileID: 2800000, guid: 73c48381f5da4d5428ed909b77075cd7, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 1585950c5807e7d45aa4164ec104cd52, type: 3}
+      emissionMap: {fileID: 2800000, guid: e50a5b3f1334b7249b7a994b857cc483, type: 3}
+    baseSize: {x: 1.18, y: 1.95}
+    scaleRange: {x: 0.82, y: 1.08}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 1
+  - label: RustyStove
+    maps:
+      baseMap: {fileID: 2800000, guid: 4169c67b29f155d42993016a158d7e00, type: 3}
+      normalMap: {fileID: 2800000, guid: 52fc994eaac8e0f44a313d0f0776a281, type: 3}
+      heightMap: {fileID: 2800000, guid: dd0345152711fb3448e2041fc522585f, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 19efa9660d975a140ab4a668aa0f00a2, type: 3}
+      emissionMap: {fileID: 2800000, guid: b5e9b357d5b97c54f92d0b22a0c35fd0, type: 3}
+    baseSize: {x: 0.95, y: 1.2}
+    scaleRange: {x: 0.86, y: 1.08}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 1
+  - label: OilLamp
+    maps:
+      baseMap: {fileID: 2800000, guid: 539e38769d21cd14aaaa9ec4020c1d8e, type: 3}
+      normalMap: {fileID: 2800000, guid: 480b0f821b181ec4ebe105a97464684f, type: 3}
+      heightMap: {fileID: 2800000, guid: 907a9334092a28147886941a9329fe0e, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: f223bdb158831624292db6c7b5c15785, type: 3}
+      emissionMap: {fileID: 2800000, guid: 856c531ef1780b845a80a13d93fddef7, type: 3}
+    baseSize: {x: 0.45, y: 0.72}
+    scaleRange: {x: 0.8, y: 1.25}
+    floorDecal: 0
+    preferWallPlacement: 0
+    castShadow: 1
+  - label: CrateStack
+    maps:
+      baseMap: {fileID: 2800000, guid: 42e3adff9d563644c8de5b4ab062ce55, type: 3}
+      normalMap: {fileID: 2800000, guid: d7fc15c4ef47933428da7664a1a8f789, type: 3}
+      heightMap: {fileID: 2800000, guid: 779e95b9efc1b924cad59dbb130b35df, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 117d9061db79954418242a6f7dcaa6d2, type: 3}
+      emissionMap: {fileID: 2800000, guid: 8f54a316ea9ad28468554bd49267ffaf, type: 3}
+    baseSize: {x: 1.05, y: 1.05}
+    scaleRange: {x: 0.85, y: 1.2}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 1
+  - label: Barrel
+    maps:
+      baseMap: {fileID: 2800000, guid: c8ef780b236301b4a9749fa0fbfa8d73, type: 3}
+      normalMap: {fileID: 2800000, guid: 683d28bce1717e2408021a7114fb5a6b, type: 3}
+      heightMap: {fileID: 2800000, guid: 8d86586b4968ff842a000f174a7d66e5, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: e329e86e1adf8054a9d0c7192ca04d68, type: 3}
+      emissionMap: {fileID: 2800000, guid: c54a8a1aa7542d34194998d63c0ee1d7, type: 3}
+    baseSize: {x: 0.82, y: 1.15}
+    scaleRange: {x: 0.85, y: 1.2}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 1
+  - label: TrashBags
+    maps:
+      baseMap: {fileID: 2800000, guid: 5b5e5fd8434d4634a9b048543db8a0db, type: 3}
+      normalMap: {fileID: 2800000, guid: 79298923791c2694fa800c2067b86c2b, type: 3}
+      heightMap: {fileID: 2800000, guid: fccdb17f9135a0d4c9ddb223e7076ea0, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 1bd05b4166dc49449a98d3ba87a887d6, type: 3}
+      emissionMap: {fileID: 2800000, guid: 358e9219e7701fe43a8ed6adc3aa6657, type: 3}
+    baseSize: {x: 1.15, y: 0.78}
+    scaleRange: {x: 0.82, y: 1.25}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 1
+  - label: RolledRug
+    maps:
+      baseMap: {fileID: 2800000, guid: 8cc82d3bede914f4786294c42a9db1ee, type: 3}
+      normalMap: {fileID: 2800000, guid: 042df2a9ef2e17244bb875bd35aaeca0, type: 3}
+      heightMap: {fileID: 2800000, guid: 897c144f28627434b980c3b9cf94910d, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 1a5760d6f75cb0142bd8b782f729974b, type: 3}
+      emissionMap: {fileID: 2800000, guid: 2039aa665b5dc1d4da92322170090b19, type: 3}
+    baseSize: {x: 1.18, y: 0.55}
+    scaleRange: {x: 0.85, y: 1.28}
+    floorDecal: 0
+    preferWallPlacement: 0
+    castShadow: 1
+  - label: FilthyMattress
+    maps:
+      baseMap: {fileID: 2800000, guid: faad809349e131c40ba138caca5ed296, type: 3}
+      normalMap: {fileID: 2800000, guid: 945199eab5f9bbf479d52fdf3d976cb3, type: 3}
+      heightMap: {fileID: 2800000, guid: f50d439ab413d6b4ebc6a047c1305622, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 2523d61207d6dd245b567858315644e6, type: 3}
+      emissionMap: {fileID: 2800000, guid: 44932f5f947cc314e97aea6c39d49402, type: 3}
+    baseSize: {x: 1.72, y: 0.72}
+    scaleRange: {x: 0.88, y: 1.18}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 1
+  - label: BrokenFrame
+    maps:
+      baseMap: {fileID: 2800000, guid: 6c1b7b5fbf205874e9001a4b24f2bb7f, type: 3}
+      normalMap: {fileID: 2800000, guid: 5bdbc11dd69321b4e829436b857cd9f7, type: 3}
+      heightMap: {fileID: 2800000, guid: c0051ab3c30c39948a2080e57d24a715, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: c5e7c2d88403edc4093d9aec168fd57e, type: 3}
+      emissionMap: {fileID: 2800000, guid: 6e45ef34d6cf31943a05d01cc1e05094, type: 3}
+    baseSize: {x: 0.72, y: 0.92}
+    scaleRange: {x: 0.82, y: 1.14}
+    floorDecal: 0
+    preferWallPlacement: 1
+    castShadow: 0
+  - label: Bucket
+    maps:
+      baseMap: {fileID: 2800000, guid: 59ebc133336cfd840afb5e4d3189a428, type: 3}
+      normalMap: {fileID: 2800000, guid: 81beef368b0759b4cb34149996698929, type: 3}
+      heightMap: {fileID: 2800000, guid: 9c40c74f09edc2d4ab62e7a849bc2d13, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 19511d8c4e31f9d498c79c4c8ceba95e, type: 3}
+      emissionMap: {fileID: 2800000, guid: 9f2f7b4823d2c3545adffd1450259e2d, type: 3}
+    baseSize: {x: 0.58, y: 0.68}
+    scaleRange: {x: 0.82, y: 1.22}
+    floorDecal: 0
+    preferWallPlacement: 0
+    castShadow: 1
+  - label: SideTableBottles
+    maps:
+      baseMap: {fileID: 2800000, guid: 7345a15e527ed84448ae738d27ced0be, type: 3}
+      normalMap: {fileID: 2800000, guid: 8dd8ccd9dc8b97b4a845cc0c28cb90ca, type: 3}
+      heightMap: {fileID: 2800000, guid: 46311841d41be3944a7fd3e1b0d4678b, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 7565f6ac224dce3439b4ceaf4da986d7, type: 3}
+      emissionMap: {fileID: 2800000, guid: 31aa61c79867de44ea99b6175392cdc1, type: 3}
+    baseSize: {x: 0.82, y: 0.95}
+    scaleRange: {x: 0.82, y: 1.18}
+    floorDecal: 0
+    preferWallPlacement: 0
+    castShadow: 1
+  dirtDecalLibrary:
+  - label: MudStain
+    maps:
+      baseMap: {fileID: 2800000, guid: a301e4d0a859c9449a7b1be6d39ed8bc, type: 3}
+      normalMap: {fileID: 2800000, guid: 23d91317089596d499fa0cfaf1134a3e, type: 3}
+      heightMap: {fileID: 2800000, guid: c0be1f533e02767448aa11b1fc816a74, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: e15cbfd487959bc4faf2f2646b46ca89, type: 3}
+      emissionMap: {fileID: 2800000, guid: f448d328b35720940a2b4f9eccf276d7, type: 3}
+    baseSize: {x: 1.15, y: 0.85}
+    scaleRange: {x: 0.8, y: 1.45}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: OilStain
+    maps:
+      baseMap: {fileID: 2800000, guid: 655356252470dc84e8e23d3b69e8e41e, type: 3}
+      normalMap: {fileID: 2800000, guid: 245f25e78592e384793ace68e6417a08, type: 3}
+      heightMap: {fileID: 2800000, guid: 07036995351db8b4797ebe20beb054cb, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 307fad5b13e49914695c8fe709be0455, type: 3}
+      emissionMap: {fileID: 2800000, guid: c31dd24d1d0471549bf3edd9490e59c4, type: 3}
+    baseSize: {x: 1.05, y: 0.8}
+    scaleRange: {x: 0.75, y: 1.35}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: DustPile
+    maps:
+      baseMap: {fileID: 2800000, guid: d315f8795dbcd7641885836657a99ff5, type: 3}
+      normalMap: {fileID: 2800000, guid: a10dbae2a7b7c494a93f105e8e9c3c1a, type: 3}
+      heightMap: {fileID: 2800000, guid: 699d26538eb42cd479ba7052a2c82be5, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 3c70327c15f9d8c46a614d4ee1c2dff1, type: 3}
+      emissionMap: {fileID: 2800000, guid: 4415862f034aee34c936517196eb6c05, type: 3}
+    baseSize: {x: 0.9, y: 0.72}
+    scaleRange: {x: 0.75, y: 1.3}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: GlassShards
+    maps:
+      baseMap: {fileID: 2800000, guid: 15f1bd3b95f9a574296cfe427cd7d793, type: 3}
+      normalMap: {fileID: 2800000, guid: 10c3fc8d2e70c254bb11f57ce22477ae, type: 3}
+      heightMap: {fileID: 2800000, guid: 8af61dc94ff388b4fba79fe50e2b0daa, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 9cd65ca3ac9acb544b96c3297763f961, type: 3}
+      emissionMap: {fileID: 2800000, guid: 768d8a1efe451114b95cccf41493edef, type: 3}
+    baseSize: {x: 0.8, y: 0.72}
+    scaleRange: {x: 0.7, y: 1.18}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: TornPapers
+    maps:
+      baseMap: {fileID: 2800000, guid: e79ce74a2ae51ea4586212e892f25f49, type: 3}
+      normalMap: {fileID: 2800000, guid: 6d9038eaeecdadb4e9aba605340400df, type: 3}
+      heightMap: {fileID: 2800000, guid: 9ccf7ffffb4292d47b753bbee9b9d911, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: bdf6d0f13cefbae41b4f71a9be861a40, type: 3}
+      emissionMap: {fileID: 2800000, guid: 914994cd2e1c189479f2b1d1a0aa0d3a, type: 3}
+    baseSize: {x: 0.92, y: 0.72}
+    scaleRange: {x: 0.75, y: 1.25}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: ClothScrap
+    maps:
+      baseMap: {fileID: 2800000, guid: 3080b62263268c146b49e2f5f3b38809, type: 3}
+      normalMap: {fileID: 2800000, guid: 8d14b4c6a6065b54fa3ca65965aa2d00, type: 3}
+      heightMap: {fileID: 2800000, guid: 0dd4b82265812b943be42993a2a99be3, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 441f025dfe35ce14699c60ee50447546, type: 3}
+      emissionMap: {fileID: 2800000, guid: 0d3a8cf7277bba34692a0f3ea7a418e7, type: 3}
+    baseSize: {x: 0.96, y: 0.72}
+    scaleRange: {x: 0.75, y: 1.22}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: RubblePile
+    maps:
+      baseMap: {fileID: 2800000, guid: 8df27346ed0e5f5449820d4adec09465, type: 3}
+      normalMap: {fileID: 2800000, guid: 41afd1d5666393b47a622f45a89b2bb4, type: 3}
+      heightMap: {fileID: 2800000, guid: 48eaaf45d57ae8543be6d9ad8d39ed36, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 7ea1315f08a036e459f5e15e49c7c473, type: 3}
+      emissionMap: {fileID: 2800000, guid: 0d604d85a8d0e7748aa65b1ebde6a447, type: 3}
+    baseSize: {x: 0.95, y: 0.78}
+    scaleRange: {x: 0.78, y: 1.28}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: SpilledAsh
+    maps:
+      baseMap: {fileID: 2800000, guid: 87f0157ef58228c4581ae4166a3a1c19, type: 3}
+      normalMap: {fileID: 2800000, guid: 47f35868bfd86574cbb108c3afd5c91f, type: 3}
+      heightMap: {fileID: 2800000, guid: 5d5fd915dbcdcee428cb14767980c53f, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: b59b2cd608ac706478c69ca3dbc083ea, type: 3}
+      emissionMap: {fileID: 2800000, guid: 72757c40eab51a64fa752c0de141dc7b, type: 3}
+    baseSize: {x: 1.05, y: 0.75}
+    scaleRange: {x: 0.78, y: 1.35}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: MoldPatch
+    maps:
+      baseMap: {fileID: 2800000, guid: 95df96b48e793cc4b9a29cb7261fb6a3, type: 3}
+      normalMap: {fileID: 2800000, guid: 74b9d66d405bf8744ad0900494f59722, type: 3}
+      heightMap: {fileID: 2800000, guid: c16fac2cdeefbda46b17a7322df1778a, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 7c8f99c2c94061b469c3e631739e7667, type: 3}
+      emissionMap: {fileID: 2800000, guid: 0652add3c1bf3a240a5b4f276a586b4f, type: 3}
+    baseSize: {x: 0.95, y: 0.82}
+    scaleRange: {x: 0.75, y: 1.28}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: Footprints
+    maps:
+      baseMap: {fileID: 2800000, guid: 261bd85510a8b3e4b9397b2b68d4cc8f, type: 3}
+      normalMap: {fileID: 2800000, guid: 0223becb3c5b4424db0a840c74672f4c, type: 3}
+      heightMap: {fileID: 2800000, guid: c5fd30ad79e538f4880d1a4fadf696c0, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 53fed3388e716a94ab4330e94cf6183b, type: 3}
+      emissionMap: {fileID: 2800000, guid: 5f8deb186430f214d991faa38d7dba6e, type: 3}
+    baseSize: {x: 1.05, y: 0.85}
+    scaleRange: {x: 0.72, y: 1.2}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: RopeCoil
+    maps:
+      baseMap: {fileID: 2800000, guid: 4049e877f534bdb41bbb05feca84d48d, type: 3}
+      normalMap: {fileID: 2800000, guid: 71c05a5d42eb8ac43870da23a5c1e8e9, type: 3}
+      heightMap: {fileID: 2800000, guid: 753e01faad95a3d4e8914fdd7f521909, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: c3f158ac4b361ae4f94040d0dbfe8ea7, type: 3}
+      emissionMap: {fileID: 2800000, guid: b2e9571f5e88af64a8e36000bfccc82c, type: 3}
+    baseSize: {x: 0.8, y: 0.8}
+    scaleRange: {x: 0.75, y: 1.18}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: SawdustPile
+    maps:
+      baseMap: {fileID: 2800000, guid: 78586919914490e4e939f47bc4439266, type: 3}
+      normalMap: {fileID: 2800000, guid: 512ee82036bc75348ac0c60dddef9a68, type: 3}
+      heightMap: {fileID: 2800000, guid: 771c1cbcbbd03224da8ebbb4eae2e689, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 1ca340a4a037e3344983d455a0bd99f2, type: 3}
+      emissionMap: {fileID: 2800000, guid: 9e6e8b434e8f91a4ca06d14091af55ad, type: 3}
+    baseSize: {x: 1.05, y: 0.72}
+    scaleRange: {x: 0.8, y: 1.35}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: CrackedBoard
+    maps:
+      baseMap: {fileID: 2800000, guid: b6122ff269343d24f9912ed745f00f01, type: 3}
+      normalMap: {fileID: 2800000, guid: 31bc696c8b8af2448b1747aba4a9433e, type: 3}
+      heightMap: {fileID: 2800000, guid: 65749aaffd30a5f47b21dcb52458e564, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 4fabfa3e0d335a1478faf6a6d2c2adb5, type: 3}
+      emissionMap: {fileID: 2800000, guid: e0c6a1498bfc58743a0b1adb33b89a56, type: 3}
+    baseSize: {x: 1.05, y: 0.82}
+    scaleRange: {x: 0.75, y: 1.25}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: TinyDebris
+    maps:
+      baseMap: {fileID: 2800000, guid: c2e2ae9dc456de745be9dd0515750001, type: 3}
+      normalMap: {fileID: 2800000, guid: 92523e3cdc6fa0d428009b767c7dfa70, type: 3}
+      heightMap: {fileID: 2800000, guid: 3e16511b8beee7843bdb838b9df4547c, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: e8de40f753dcf4043994430e5bbc9c9c, type: 3}
+      emissionMap: {fileID: 2800000, guid: 9b121d26cdd788a4296f650a14a7a201, type: 3}
+    baseSize: {x: 0.85, y: 0.7}
+    scaleRange: {x: 0.72, y: 1.2}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: CircularRugStain
+    maps:
+      baseMap: {fileID: 2800000, guid: fc28be0df07b2404c8613e060980ca9b, type: 3}
+      normalMap: {fileID: 2800000, guid: f7b64599b31c5b14caa132de47867bab, type: 3}
+      heightMap: {fileID: 2800000, guid: c7233319cb95ab845b96409a521e96c1, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 5eb92aba597b6fa41b6ea12d94a4974e, type: 3}
+      emissionMap: {fileID: 2800000, guid: c9dcc9f26c564704aa58009e948f3b59, type: 3}
+    baseSize: {x: 1.15, y: 1}
+    scaleRange: {x: 0.78, y: 1.32}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  - label: BottleShards
+    maps:
+      baseMap: {fileID: 2800000, guid: 6aa1e028b0b9efe4eb2363ca0f7a2dc5, type: 3}
+      normalMap: {fileID: 2800000, guid: d6d84832d785e2d41b53c7ea37c9645f, type: 3}
+      heightMap: {fileID: 2800000, guid: fc6bf1919d08f26419184a37e856a50f, type: 3}
+      packedMasksMap: {fileID: 2800000, guid: 99486ef31c380774383be905e9bf08d0, type: 3}
+      emissionMap: {fileID: 2800000, guid: e2d42323232092749b8c1d9732566c70, type: 3}
+    baseSize: {x: 0.82, y: 0.72}
+    scaleRange: {x: 0.72, y: 1.18}
+    floorDecal: 1
+    preferWallPlacement: 0
+    castShadow: 0
+  addCollisionWalls: 1
+  wallColliderThickness: 0.22
+  blockNavigation: 1
+  navObstaclePadding: 0.28
+  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
+  alphaCutoff: 0.08
+  normalScale: 1.15
+  heightContrast: 0.55
+  aoStrength: 0.88
+  roughnessScale: 1
+  specularStrength: 0.13
+  edgeWearBrightness: 0.34
+  crackDarkening: 0.82
+  emissionStrength: 1.65
+  ambientTopColor: {r: 0.58, g: 0.62, b: 0.64, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.1, a: 1}
+  ambientIntensity: 1
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.24
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.55
+--- !u!1 &6648513260260660233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6798916679303160732}
+  m_Layer: 0
+  m_Name: OutsideSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6798916679303160732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648513260260660233}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  m_LocalPosition: {x: 0.92, y: 0.08, z: -3.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3693896905509604084}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7597926649272233203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2728597121425907844}
+  - component: {fileID: 7979466192050914537}
+  - component: {fileID: 5196380913191056367}
+  m_Layer: 0
+  m_Name: ExteriorDoorInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2728597121425907844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597926649272233203}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.92, y: 1.155, z: -2.305}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3693896905509604084}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7979466192050914537
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597926649272233203}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.45, y: 2.25, z: 0.34}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5196380913191056367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597926649272233203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf4b9fd1db7e814682c444e7e59eb19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroBuildingDoorInteractable
+  interactionEnabled: 1
+  interactionName: settlement house
+  interactionVerb: Enter
+  interactionMaxDistance: 3.35
+  interactionPriority: 35
+  interactionCue: {fileID: 0}
+  interactionMessage: 
+  interactionMessageDuration: 1.6
+  onFocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnfocused:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  teleportTarget: {fileID: 2298408427833869056}
+  alignActorYaw: 1
+  clearRigidbodyVelocity: 1
+  enteredMessage: You step inside.
+  enteredMessageDuration: 1.1

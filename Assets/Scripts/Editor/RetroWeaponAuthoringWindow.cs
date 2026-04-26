@@ -6,7 +6,7 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
 {
     private const string DefaultPlayerPrefabPath = "Assets/Prefabs/Player.prefab";
     private const string DefaultDefinitionFolder = "Assets/Weapons/Definitions";
-    private const string GunVolumeMapSetPath = "Assets/Datas/GunVolumeMapSet.asset";
+    private const string FallbackGunVolumeMapSetPath = "Assets/Datas/GunVolumeMapSet.asset";
 
     private static readonly string[] DefaultDefinitionPaths =
     {
@@ -22,6 +22,14 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         "Assets/Sprites/Weapons/MuzzleFlash_Rifle.png",
         "Assets/Sprites/Weapons/MuzzleFlash_Shotgun.png",
         "Assets/Sprites/Weapons/MuzzleFlash_GrenadeLauncher.png"
+    };
+
+    private static readonly string[] WeaponViewmodelMapSetPaths =
+    {
+        "Assets/Weapons/ViewmodelMapSets/PistolViewmodelMapSet.asset",
+        "Assets/Weapons/ViewmodelMapSets/RifleViewmodelMapSet.asset",
+        "Assets/Weapons/ViewmodelMapSets/ShotgunViewmodelMapSet.asset",
+        "Assets/Weapons/ViewmodelMapSets/GrenadeLauncherViewmodelMapSet.asset"
     };
 
     private static readonly string[] PistolMuzzleFlashFramePaths =
@@ -587,7 +595,7 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
 
     private static void ApplyDefaultPreset(RetroWeaponDefinition definition, int slot)
     {
-        FirstPersonSpriteVolumeMapSet defaultMapSet = AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(GunVolumeMapSetPath);
+        FirstPersonSpriteVolumeMapSet defaultMapSet = LoadWeaponViewmodelMapSet(slot);
         Sprite muzzleSprite = AssetDatabase.LoadAssetAtPath<Sprite>(MuzzleFlashSpritePaths[Mathf.Clamp(slot, 0, MuzzleFlashSpritePaths.Length - 1)]);
 
         switch (slot)
@@ -609,6 +617,15 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
 
         ApplyDefaultTrailPreset(definition, slot);
         ApplyDefaultFeelPreset(definition, slot);
+    }
+
+    private static FirstPersonSpriteVolumeMapSet LoadWeaponViewmodelMapSet(int slot)
+    {
+        string path = WeaponViewmodelMapSetPaths[Mathf.Clamp(slot, 0, WeaponViewmodelMapSetPaths.Length - 1)];
+        FirstPersonSpriteVolumeMapSet mapSet = AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(path);
+        return mapSet != null
+            ? mapSet
+            : AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(FallbackGunVolumeMapSetPath);
     }
 
     private static void ApplyDefaultTrailPreset(RetroWeaponDefinition definition, int slot)
@@ -763,8 +780,8 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         definition.muzzleFlashSpriteSize = muzzleFlashSize;
         definition.baseTintMultiplier = Color.white;
         definition.emissiveTintMultiplier = Color.white;
-        definition.weaponBodyTint = 0.18f;
-        definition.weaponAccentTint = 0.7f;
+        definition.weaponBodyTint = 0f;
+        definition.weaponAccentTint = 0.35f;
     }
 
     private static string ResolveSlotLabel(int slot)

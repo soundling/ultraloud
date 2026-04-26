@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0d5c6e5ad24bf1ab2e44a9fc8b7123, type: 3}
+  m_Name: GrenadeLauncherViewmodelMapSet
+  m_EditorClassIdentifier: Assembly-CSharp::FirstPersonSpriteVolumeMapSet
+  baseColor: {fileID: 2800000, guid: e8dd8d9b17522444799042a63fe86887, type: 3}
+  normal: {fileID: 2800000, guid: 2b8bc5e376373de4888a481a77b09509, type: 3}
+  frontDepth: {fileID: 2800000, guid: f6daf42f69288244d85aa4612c1d905a, type: 3}
+  emissive: {fileID: 2800000, guid: 15a1f559f7124764c89349f57caf692d, type: 3}
+  volumeThickness: 0.07
+  parallaxScale: 0.002
+  invertFrontDepth: 0
+  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
+  emissiveColor: {r: 1, g: 0.58, b: 0.18, a: 1}
+  normalScale: 0.92
+  alphaCutoff: 0.025
+  preserveBaseCoverage: 1
+  coverageThreshold: 0.012
+  selfShadowStrength: 0.32
+  transmissionStrength: 0.08
+  ambientOcclusionStrength: 1.05
+  specularStrength: 0.95
+  ambientOcclusion: 0.72
+  roughness: 0.58
+  metallic: 0.24
+  materialThickness: 0.64

@@ -13,7 +13,7 @@ public static class RetroPlayerRigSetupTool
     private const string InputActionsPath = "Assets/InputSystem_Actions.inputactions";
     private const string NoFrictionMaterialPath = "Assets/Settings/PlayerNoFriction.physicMaterial";
     private const string GunMaterialPath = "Assets/Sprites/Gun.mat";
-    private const string GunVolumeMapSetPath = "Assets/Datas/GunVolumeMapSet.asset";
+    private const string FallbackGunVolumeMapSetPath = "Assets/Datas/GunVolumeMapSet.asset";
     private static readonly string[] WeaponDefinitionPaths =
     {
         "Assets/Weapons/Definitions/Pistol.asset",
@@ -28,6 +28,14 @@ public static class RetroPlayerRigSetupTool
         "Assets/Sprites/Weapons/MuzzleFlash_Rifle.png",
         "Assets/Sprites/Weapons/MuzzleFlash_Shotgun.png",
         "Assets/Sprites/Weapons/MuzzleFlash_GrenadeLauncher.png"
+    };
+
+    private static readonly string[] WeaponViewmodelMapSetPaths =
+    {
+        "Assets/Weapons/ViewmodelMapSets/PistolViewmodelMapSet.asset",
+        "Assets/Weapons/ViewmodelMapSets/RifleViewmodelMapSet.asset",
+        "Assets/Weapons/ViewmodelMapSets/ShotgunViewmodelMapSet.asset",
+        "Assets/Weapons/ViewmodelMapSets/GrenadeLauncherViewmodelMapSet.asset"
     };
 
     private static readonly Vector2[] MuzzleFlashSpriteSizes =
@@ -412,7 +420,7 @@ public static class RetroPlayerRigSetupTool
             return;
         }
 
-        FirstPersonSpriteVolumeMapSet mapSet = AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(GunVolumeMapSetPath);
+        FirstPersonSpriteVolumeMapSet mapSet = LoadWeaponViewmodelMapSet(0);
         if (mapSet == null)
         {
             return;
@@ -422,6 +430,15 @@ public static class RetroPlayerRigSetupTool
         serializedRenderer.FindProperty("mapSet").objectReferenceValue = mapSet;
         serializedRenderer.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(spriteVolumeRenderer);
+    }
+
+    private static FirstPersonSpriteVolumeMapSet LoadWeaponViewmodelMapSet(int slot)
+    {
+        string path = WeaponViewmodelMapSetPaths[Mathf.Clamp(slot, 0, WeaponViewmodelMapSetPaths.Length - 1)];
+        FirstPersonSpriteVolumeMapSet mapSet = AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(path);
+        return mapSet != null
+            ? mapSet
+            : AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(FallbackGunVolumeMapSetPath);
     }
 
     private static UnityEngine.Object GetOrCreateNoFrictionMaterialAsset()

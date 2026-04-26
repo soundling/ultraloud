@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7023922958156240661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6460271926446157993}
+  - component: {fileID: 9111541064684873526}
+  - component: {fileID: 2796928274734138937}
+  - component: {fileID: 2219582959922764425}
+  - component: {fileID: 1169889934019670786}
+  m_Layer: 0
+  m_Name: HybridTreeDiverse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6460271926446157993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023922958156240661}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9111541064684873526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023922958156240661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa04b773eb404f2fa11b81e88de1da30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroHybridTree
+  leafBaseMap: {fileID: 2800000, guid: 70386f455f9abc2448bc73d365addb1c, type: 3}
+  leafNormalMap: {fileID: 2800000, guid: be8e6611d2533c14abe7c786ea600660, type: 3}
+  leafDepthMap: {fileID: 2800000, guid: f88963ca97c42c243901768a205e3021, type: 3}
+  leafThicknessMap: {fileID: 2800000, guid: 7e0ffef4544bae743b169b239e92f376, type: 3}
+  leafDensityMap: {fileID: 2800000, guid: 18f32ead26ebd5e478290c69c06c84bc, type: 3}
+  leafWindMap: {fileID: 2800000, guid: be2a33dfc6d1db848bf90dd53a3a1c57, type: 3}
+  barkBaseMap: {fileID: 2800000, guid: 367093bcc00732a46b20e15a47d80453, type: 3}
+  barkNormalMap: {fileID: 2800000, guid: 36f1f017b98f7a74d9a92144e4cb106c, type: 3}
+  impostorBaseMap: {fileID: 2800000, guid: e9d05f7ab01f45bf9096069f1dcf895e, type: 3}
+  impostorNormalMap: {fileID: 2800000, guid: 5a10805135944326b769423615766040, type: 3}
+  impostorDepthMap: {fileID: 2800000, guid: fedb85a160e844d6aa403cb55c16c845, type: 3}
+  impostorThicknessMap: {fileID: 2800000, guid: 102144fe38c04161b094286a3e221b37, type: 3}
+  treeHeight: 4.785712
+  trunkHeight: 2.2161682
+  trunkRadius: 0.22603217
+  branchRadius: 0.06127579
+  branchCount: 11
+  canopyRadius: 2.457965
+  canopyHeight: 2.5503917
+  leafCardCount: 124
+  leafCardMinSize: 0.84457135
+  leafCardMaxSize: 1.1090927
+  seed: 31277
+  animateWind: 1
+  windStrength: 0.22349215
+  windSpeed: 1.0335128
+  windGustVariation: 0.45
+  leafTint: {r: 0.9384564, g: 0.94, b: 0.72, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  canopyNormalBend: 0.38
+  wrapDiffuse: 0.55
+  densityShadowStrength: 0.65
+  depthSelfShadowStrength: 0.32
+  surfaceRoughness: 0.82
+  specularStrength: 0.14
+  rimStrength: 0.1
+  rimPower: 3
+  transmissionColor: {r: 0.72, g: 0.96, b: 0.34, a: 1}
+  transmissionStrength: 0.5511636
+  transmissionPower: 2.2
+  ambientTopColor: {r: 0.58, g: 0.64, b: 0.56, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.14, b: 0.09, a: 1}
+  ambientIntensity: 1.05
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.25
+  maxLights: 4
+  lightRefreshInterval: 0.18
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.55
+  enableImpostorLod: 0
+  impostorDistance: 34
+  impostorFadeBand: 4
+  billboardImpostor: 1
+--- !u!136 &2796928274734138937
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023922958156240661}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.8
+  m_Height: 5.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.9, z: 0}
+--- !u!114 &2219582959922764425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023922958156240661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 1800
+  destroyOnDeath: 0
+  disableRenderersOnDeath: 0
+  disableCollidersOnDeath: 0
+  destroyDelay: 0
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!114 &1169889934019670786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7023922958156240661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34d44664b2d44d18d51408ff6544f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroShootableFeedback
+  damageable: {fileID: 2219582959922764425}
+  surfaceKind: 0
+  spawnImpactEffects: 1
+  spawnDeathEffects: 1
+  useImpactFlash: 1
+  visualRoot: {fileID: 0}
+  kickVisualRoot: 1
+  visualKickDistance: 0.05
+  visualKickAngle: 4.5
+  visualKickReturnSpeed: 16
+  effectScale: 1
+  deathEffectMultiplier: 2.4
+  disableFlockAgentOnDeath: 0

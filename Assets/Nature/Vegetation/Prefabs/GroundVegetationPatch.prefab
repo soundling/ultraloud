@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5819306722811795655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3431701302343837088}
+  - component: {fileID: 5752820705790238126}
+  m_Layer: 0
+  m_Name: GroundVegetationPatch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3431701302343837088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5819306722811795655}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5752820705790238126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5819306722811795655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ebd9a1e5242a6b1fd592c53f089c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVegetationPatch
+  baseMap: {fileID: 2800000, guid: 3e021033aead6274b955787df3788ae7, type: 3}
+  normalMap: {fileID: 2800000, guid: 83c99c8454b9abe4a9e77aaf9734bd4e, type: 3}
+  depthMap: {fileID: 2800000, guid: 619bda0418dd654428d24b3d48f7cd4f, type: 3}
+  thicknessMap: {fileID: 2800000, guid: 3beef67cd0f771a4182e153132f1b4dc, type: 3}
+  densityMap: {fileID: 2800000, guid: 4c22da1672b97c54da2f5aced398e83b, type: 3}
+  windMap: {fileID: 2800000, guid: fbcee466850cc5d4c8959baf19a9a82f, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  patchKind: 0
+  cardCount: 84
+  patchRadius: 3.1
+  patchHeight: 0.85
+  minCardSize: 0.32
+  maxCardSize: 0.9
+  horizontalCardRatio: 0.62
+  centerDensity: 0.52
+  groundOffset: 0.025
+  seed: 7151
+  animateWind: 1
+  windStrength: 0.08
+  windSpeed: 1.6
+  gustVariation: 0.52
+  tint: {r: 0.92, g: 0.98, b: 0.86, a: 1}
+  alphaCutoff: 0.08
+  coverageSoftness: 0.045
+  normalScale: 1
+  normalBend: 0.32
+  wrapDiffuse: 0.58
+  densityShadowStrength: 0.7
+  depthSelfShadowStrength: 0.3
+  surfaceRoughness: 0.84
+  specularStrength: 0.1
+  rimStrength: 0.13
+  rimPower: 3.2
+  transmissionColor: {r: 0.75, g: 0.95, b: 0.38, a: 1}
+  transmissionStrength: 0.78
+  transmissionPower: 2.4
+  ambientTopColor: {r: 0.55, g: 0.62, b: 0.52, a: 1}
+  ambientBottomColor: {r: 0.13, g: 0.12, b: 0.08, a: 1}
+  ambientIntensity: 1.05
+  maxLights: 4
+  lightRefreshInterval: 0.22
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.45

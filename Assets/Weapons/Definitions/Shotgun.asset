@@ -44,6 +44,11 @@ MonoBehaviour:
   bodyColor: {r: 0.18, g: 0.14, b: 0.11, a: 1}
   accentColor: {r: 0.45, g: 0.36, b: 0.19, a: 1}
   primitiveMuzzleFlashScale: 0.32
+  fireCue: {fileID: 0}
+  dryFireCue: {fileID: 0}
+  reloadStartCue: {fileID: 0}
+  reloadCompleteCue: {fileID: 0}
+  selectCue: {fileID: 0}
   bulletTrailEnabled: 1
   bulletTrailColor: {r: 1, g: 0.68, b: 0.32, a: 0.58}
   bulletTrailWidth: 0.012
@@ -51,15 +56,17 @@ MonoBehaviour:
   bulletTrailStartOffset: 0.08
   bulletTrailEndOffset: 0.08
   bulletTrailMaxSegmentsPerShot: 8
-  spriteMapSet: {fileID: 11400000, guid: 4df6d820be9549d0a1b6d3806918e8ae, type: 2}
-  spriteVisualLocalPosition: {x: 0.01, y: -0.06, z: 0.06}
+  spriteMapSet: {fileID: 11400000, guid: c12f3dc67776faf4cb044df27e339af8, type: 2}
+  spriteVisualLocalPosition: {x: 0.01, y: -0.063, z: 0.06}
   spriteVisualLocalEuler: {x: 0, y: 0, z: -2}
-  spriteVisualSize: {x: 1.45, y: 0.82}
+  spriteVisualSize: {x: 1.46, y: 0.82}
   spriteMuzzleLocalPosition: {x: 0, y: -0.01, z: 0.72}
   spriteMuzzleLocalOffset: {x: 0.055, y: 0, z: 0}
   muzzleFlashSprite: {fileID: 21300000, guid: 12b894c207064fd6b3b5d9b503fdc3de, type: 3}
+  muzzleFlashFrames: []
+  muzzleFlashFrameDuration: 0.018
   muzzleFlashSpriteSize: {x: 0.82, y: 0.48}
   baseTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
   emissiveTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
-  weaponBodyTint: 0.18
-  weaponAccentTint: 0.7
+  weaponBodyTint: 0
+  weaponAccentTint: 0.35

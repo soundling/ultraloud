@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d73eea8e75e4d509f57d7d454b8f93c, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::RetroWeaponSystem
   viewCamera: {fileID: 7054228522200109693}
   legacyViewModelRenderer: {fileID: 9006146410676730140}
@@ -188,7 +188,43 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3099fded4b24d91a09f0d4a4c6e8715, type: 2}
   - {fileID: 11400000, guid: f51aa2dc9f77472e9c48cf453fd1f042, type: 2}
   useSpriteVolumeViewModel: 1
-  weaponSpriteViews: []
+  weaponSpriteViews:
+  - mapSet: {fileID: 11400000, guid: 9f929fc9415971540913dabb791443b2, type: 2}
+    visualLocalPosition: {x: -0.02, y: -0.018, z: 0}
+    visualLocalEuler: {x: 0, y: 0, z: 0}
+    visualSize: {x: 1.05, y: 0.72}
+    muzzleLocalPosition: {x: 0, y: 0.02, z: 0.34}
+    baseTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+    emissiveTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+    weaponBodyTint: 0
+    weaponAccentTint: 0.35
+  - mapSet: {fileID: 11400000, guid: 2f580db866b82df47a481ce11265c65d, type: 2}
+    visualLocalPosition: {x: 0.02, y: -0.058, z: 0.04}
+    visualLocalEuler: {x: 0, y: 0, z: -1.5}
+    visualSize: {x: 1.34, y: 0.78}
+    muzzleLocalPosition: {x: 0, y: -0.02, z: 0.78}
+    baseTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+    emissiveTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+    weaponBodyTint: 0
+    weaponAccentTint: 0.35
+  - mapSet: {fileID: 11400000, guid: c12f3dc67776faf4cb044df27e339af8, type: 2}
+    visualLocalPosition: {x: 0.01, y: -0.063, z: 0.06}
+    visualLocalEuler: {x: 0, y: 0, z: -2}
+    visualSize: {x: 1.46, y: 0.82}
+    muzzleLocalPosition: {x: 0, y: -0.01, z: 0.72}
+    baseTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+    emissiveTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+    weaponBodyTint: 0
+    weaponAccentTint: 0.35
+  - mapSet: {fileID: 11400000, guid: c9d316ad731ce9f42ad568ea3a897695, type: 2}
+    visualLocalPosition: {x: 0.02, y: -0.066, z: 0.06}
+    visualLocalEuler: {x: 0, y: 0, z: -1}
+    visualSize: {x: 1.32, y: 0.86}
+    muzzleLocalPosition: {x: 0, y: 0, z: 0.75}
+    baseTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+    emissiveTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
+    weaponBodyTint: 0
+    weaponAccentTint: 0.35
   muzzleFlashSprites:
   - {fileID: 21300000, guid: 871bc7d0c2fd4c70970dd1caee115c04, type: 3}
   - {fileID: 21300000, guid: ab5bc9395e834f65a29736e936465a44, type: 3}
@@ -382,10 +418,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0efc4c0fe83a47f9ad612e6b070f97fd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonSpriteVolumeRenderer
   targetRenderer: {fileID: 9006146410676730140}
-  mapSet: {fileID: 11400000, guid: 4df6d820be9549d0a1b6d3806918e8ae, type: 2}
+  mapSet: {fileID: 11400000, guid: 9f929fc9415971540913dabb791443b2, type: 2}
   baseColorTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
   emissiveColorMultiplier: {r: 1, g: 1, b: 1, a: 1}
   lightReferenceMode: 0

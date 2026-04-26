@@ -16,7 +16,7 @@ MonoBehaviour:
   clips:
   - clipId: Idle
     loop: 1
-    framesPerSecond: 3.5
+    framesPerSecond: 0.85
     angles:
     - label: Front
       yawDegrees: 0

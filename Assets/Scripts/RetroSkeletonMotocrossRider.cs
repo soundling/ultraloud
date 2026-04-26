@@ -17,6 +17,9 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
     }
 
     private const int OverlapBufferSize = 40;
+    private const float StationaryClipSpeedThreshold = 0.12f;
+    private const float StationaryVisualBobAmplitude = 0.014f;
+    private const float StationaryVisualBobFrequency = 1.9f;
     private static readonly Collider[] OverlapBuffer = new Collider[OverlapBufferSize];
 
     private static readonly int RimColorId = Shader.PropertyToID("_RimColor");
@@ -527,19 +530,23 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
     {
         if (moveMode == ChaosMoveMode.Wheelie)
         {
+            ResumeAnimator();
             PlayClip(wheelieClipId);
         }
         else if (moveMode == ChaosMoveMode.Ram)
         {
+            ResumeAnimator();
             PlayClip(attackClipId);
         }
         else if (currentVelocity.ProjectHorizontal().magnitude > cruiseSpeed * 0.25f)
         {
+            ResumeAnimator();
             PlayClip(rideClipId);
         }
         else
         {
             PlayClip(idleClipId);
+            PauseAnimatorOnIdle();
         }
     }
 
@@ -568,9 +575,17 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
             return;
         }
 
-        float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, burstSpeed), currentVelocity.ProjectHorizontal().magnitude);
+        float speed = currentVelocity.ProjectHorizontal().magnitude;
+        float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, burstSpeed), speed);
         EnsureChaosPhaseOffset();
-        float bob = Mathf.Sin(Time.time * bobFrequency + chaosPhaseOffset * 0.77f) * bobAmplitude * Mathf.Lerp(0.35f, 1.25f, speed01);
+        float motionBob = Mathf.Sin(Time.time * bobFrequency + chaosPhaseOffset * 0.77f)
+            * bobAmplitude
+            * 1.25f
+            * speed01;
+        float idleBob = speed <= StationaryClipSpeedThreshold
+            ? Mathf.Sin(Time.time * StationaryVisualBobFrequency + chaosPhaseOffset) * StationaryVisualBobAmplitude
+            : 0f;
+        float bob = motionBob + idleBob;
         float wheelieLift = moveMode == ChaosMoveMode.Wheelie ? Mathf.Sin(Time.time * 18f) * 0.08f + 0.16f : 0f;
         visualRoot.localPosition = visualBaseLocalPosition + new Vector3(0f, bob + wheelieLift, 0f);
 
@@ -582,6 +597,24 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
         }
 
         visualRoot.rotation = visualRoot.rotation * Quaternion.Euler(0f, 0f, lean);
+    }
+
+    private void ResumeAnimator()
+    {
+        if (animator != null && !animator.IsPlaying)
+        {
+            animator.Resume();
+        }
+    }
+
+    private void PauseAnimatorOnIdle()
+    {
+        if (animator != null
+            && animator.IsPlaying
+            && string.Equals(animator.CurrentClipId, idleClipId, System.StringComparison.OrdinalIgnoreCase))
+        {
+            animator.Pause();
+        }
     }
 
     private void ApplyShaderPulse()

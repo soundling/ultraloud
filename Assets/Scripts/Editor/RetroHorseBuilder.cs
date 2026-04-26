@@ -79,7 +79,8 @@ public static class RetroHorseBuilder
             {
                 "Gallop" => 12.5f,
                 "Walk" => 8.5f,
-                _ => 3.5f
+                "Idle" => 0.85f,
+                _ => 1f
             };
         }
 
@@ -239,6 +240,7 @@ public static class RetroHorseBuilder
         serialized.FindProperty("initialClipId").stringValue = "Idle";
         serialized.FindProperty("playOnEnable").boolValue = true;
         serialized.FindProperty("animationSpeed").floatValue = 1f;
+        serialized.FindProperty("freezeInitialClipInEditMode").boolValue = true;
         serialized.FindProperty("spriteRenderer").objectReferenceValue = null;
         serialized.FindProperty("billboardRoot").objectReferenceValue = quad;
         serialized.FindProperty("facingReference").objectReferenceValue = animator.transform;

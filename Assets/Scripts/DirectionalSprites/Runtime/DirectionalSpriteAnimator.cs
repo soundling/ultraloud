@@ -26,6 +26,7 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     [SerializeField] private bool playOnEnable = true;
     [SerializeField] private bool useUnscaledTime;
     [SerializeField, Min(0f)] private float animationSpeed = 1f;
+    [SerializeField] private bool freezeInitialClipInEditMode;
 
     [Header("Scene References")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -118,6 +119,14 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
+        if (!Application.isPlaying && freezeInitialClipInEditMode)
+        {
+            FreezeInitialClipForEditMode();
+            return;
+        }
+#endif
+
         float deltaTime = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
         AdvanceAnimation(deltaTime);
     }
@@ -171,6 +180,27 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     {
         RefreshVisual();
     }
+
+#if UNITY_EDITOR
+    private void FreezeInitialClipForEditMode()
+    {
+        if (definition == null)
+        {
+            currentClip = null;
+            return;
+        }
+
+        if (currentClip == null
+            || !string.Equals(currentClip.clipId, initialClipId, System.StringComparison.OrdinalIgnoreCase))
+        {
+            Play(initialClipId, true);
+        }
+
+        clipTime = 0f;
+        isPlaying = false;
+        RefreshVisual();
+    }
+#endif
 
     private void AutoAssignReferences()
     {

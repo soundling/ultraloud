@@ -142,6 +142,7 @@ MonoBehaviour:
   playOnEnable: 1
   useUnscaledTime: 0
   animationSpeed: 1
+  freezeInitialClipInEditMode: 1
   spriteRenderer: {fileID: 0}
   billboardRoot: {fileID: 5658854479887508152}
   facingReference: {fileID: 489012878694149054}

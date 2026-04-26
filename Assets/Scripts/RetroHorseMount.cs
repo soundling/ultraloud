@@ -15,6 +15,9 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     }
 
     private const int ImpactBufferSize = 36;
+    private const float StationaryClipSpeedThreshold = 0.12f;
+    private const float StationaryVisualBobAmplitude = 0.018f;
+    private const float StationaryVisualBobFrequency = 1.65f;
     private static readonly Collider[] ImpactBuffer = new Collider[ImpactBufferSize];
     private static readonly int RimColorId = Shader.PropertyToID("_RimColor");
     private static readonly int RimStrengthId = Shader.PropertyToID("_RimStrength");
@@ -657,15 +660,18 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         float speed = ProjectHorizontal(currentVelocity).magnitude;
         if (speed > walkSpeed * 1.12f)
         {
+            ResumeAnimator();
             PlayClip(gallopClipId);
         }
         else if (speed > 0.25f)
         {
+            ResumeAnimator();
             PlayClip(walkClipId);
         }
         else
         {
             PlayClip(idleClipId);
+            PauseAnimatorOnIdle();
         }
     }
 
@@ -695,8 +701,16 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         }
 
         EnsureVisualPhaseOffset();
-        float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, gallopSpeed), ProjectHorizontal(currentVelocity).magnitude);
-        float bob = Mathf.Sin(Time.time * cameraBobFrequency + visualPhaseOffset) * cameraBobAmplitude * 0.65f * Mathf.Lerp(0.2f, 1.2f, speed01);
+        float speed = ProjectHorizontal(currentVelocity).magnitude;
+        float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, gallopSpeed), speed);
+        float motionBob = Mathf.Sin(Time.time * cameraBobFrequency + visualPhaseOffset)
+            * cameraBobAmplitude
+            * 0.78f
+            * speed01;
+        float idleBob = speed <= StationaryClipSpeedThreshold
+            ? Mathf.Sin(Time.time * StationaryVisualBobFrequency + visualPhaseOffset) * StationaryVisualBobAmplitude
+            : 0f;
+        float bob = motionBob + idleBob;
         visualRoot.localPosition = visualBaseLocalPosition + Vector3.up * bob;
     }
 
@@ -1175,18 +1189,49 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
             return;
         }
 
-        float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, gallopSpeed), ProjectHorizontal(currentVelocity).magnitude);
-        overlayFrameTimer += Time.deltaTime * Mathf.Lerp(0.45f, 1.55f, speed01);
-        if (overlayFrameTimer >= firstPersonFrameDuration)
+        float speed = ProjectHorizontal(currentVelocity).magnitude;
+        float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, gallopSpeed), speed);
+        if (speed <= StationaryClipSpeedThreshold)
         {
-            overlayFrameTimer -= firstPersonFrameDuration;
-            overlayFrameIndex = (overlayFrameIndex + 1) % firstPersonRidingFrames.Length;
-            ApplyFirstPersonOverlaySprite(playerState.OverlayRenderer, firstPersonRidingFrames[overlayFrameIndex]);
+            overlayFrameTimer = 0f;
+            if (overlayFrameIndex != 0)
+            {
+                overlayFrameIndex = 0;
+                ApplyFirstPersonOverlaySprite(playerState.OverlayRenderer, firstPersonRidingFrames[overlayFrameIndex]);
+            }
+        }
+        else
+        {
+            overlayFrameTimer += Time.deltaTime * Mathf.Lerp(0.75f, 1.55f, speed01);
+            if (overlayFrameTimer >= firstPersonFrameDuration)
+            {
+                overlayFrameTimer -= firstPersonFrameDuration;
+                overlayFrameIndex = (overlayFrameIndex + 1) % firstPersonRidingFrames.Length;
+                ApplyFirstPersonOverlaySprite(playerState.OverlayRenderer, firstPersonRidingFrames[overlayFrameIndex]);
+            }
         }
 
         Transform overlayTransform = playerState.OverlayRenderer.transform;
         float bob = Mathf.Sin(Time.time * cameraBobFrequency) * 0.018f * speed01;
         overlayTransform.localPosition = firstPersonOverlayLocalPosition + new Vector3(0f, bob, 0f);
+    }
+
+    private void ResumeAnimator()
+    {
+        if (animator != null && !animator.IsPlaying)
+        {
+            animator.Resume();
+        }
+    }
+
+    private void PauseAnimatorOnIdle()
+    {
+        if (animator != null
+            && animator.IsPlaying
+            && string.Equals(animator.CurrentClipId, idleClipId, System.StringComparison.OrdinalIgnoreCase))
+        {
+            animator.Pause();
+        }
     }
 
     private void ApplyFirstPersonOverlaySprite(SpriteRenderer renderer, Sprite sprite)

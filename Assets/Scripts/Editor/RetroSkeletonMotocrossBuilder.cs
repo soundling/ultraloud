@@ -62,7 +62,8 @@ public static class RetroSkeletonMotocrossBuilder
                 "Ride" => 13f,
                 "Wheelie" => 11f,
                 "Attack" => 12f,
-                _ => 7f
+                "Idle" => 1.05f,
+                _ => 1f
             };
         }
 
@@ -143,6 +144,7 @@ public static class RetroSkeletonMotocrossBuilder
         serialized.FindProperty("initialClipId").stringValue = "Idle";
         serialized.FindProperty("playOnEnable").boolValue = true;
         serialized.FindProperty("animationSpeed").floatValue = 1.16f;
+        serialized.FindProperty("freezeInitialClipInEditMode").boolValue = true;
         serialized.FindProperty("spriteRenderer").objectReferenceValue = null;
         serialized.FindProperty("billboardRoot").objectReferenceValue = quad;
         serialized.FindProperty("facingReference").objectReferenceValue = animator.transform;

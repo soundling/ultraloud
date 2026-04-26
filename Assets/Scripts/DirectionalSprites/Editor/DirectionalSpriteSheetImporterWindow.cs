@@ -329,10 +329,12 @@ internal static class DirectionalSpriteSheetImporter
             if (definition == null)
             {
                 definition = ScriptableObject.CreateInstance<DirectionalSpriteDefinition>();
+                definition.name = safeAssetName;
                 AssetDatabase.CreateAsset(definition, definitionPath);
             }
 
             EditorUtility.CopySerialized(tempDefinition, definition);
+            definition.name = safeAssetName;
             EditorUtility.SetDirty(definition);
             UnityEngine.Object.DestroyImmediate(tempDefinition);
 

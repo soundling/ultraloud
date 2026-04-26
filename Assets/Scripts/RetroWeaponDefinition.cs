@@ -77,6 +77,8 @@ public sealed class RetroWeaponDefinition : ScriptableObject
 
     [Header("Sprite Viewmodel")]
     public FirstPersonSpriteVolumeMapSet spriteMapSet;
+    public FirstPersonSpriteVolumeMapSet[] fireAnimationMapSets = new FirstPersonSpriteVolumeMapSet[0];
+    [Min(0.005f)] public float fireAnimationFrameDuration = 0.024f;
     public Vector3 spriteVisualLocalPosition = new Vector3(-0.02f, -0.02f, 0f);
     public Vector3 spriteVisualLocalEuler = Vector3.zero;
     public Vector2 spriteVisualSize = new Vector2(0.95f, 0.72f);
@@ -125,6 +127,7 @@ public sealed class RetroWeaponDefinition : ScriptableObject
         bulletTrailMaxSegmentsPerShot = Mathf.Clamp(bulletTrailMaxSegmentsPerShot, 1, 16);
         spriteVisualSize.x = Mathf.Max(0.01f, spriteVisualSize.x);
         spriteVisualSize.y = Mathf.Max(0.01f, spriteVisualSize.y);
+        fireAnimationFrameDuration = Mathf.Max(0.005f, fireAnimationFrameDuration);
         muzzleFlashFrameDuration = Mathf.Max(0.005f, muzzleFlashFrameDuration);
         muzzleFlashSpriteSize.x = Mathf.Max(0.01f, muzzleFlashSpriteSize.x);
         muzzleFlashSpriteSize.y = Mathf.Max(0.01f, muzzleFlashSpriteSize.y);

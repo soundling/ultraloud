@@ -444,6 +444,7 @@ internal static class DirectionalSpriteFrameBuilder
     {
         string safeAssetName = SanitizePathToken(assetName);
         DirectionalSpriteDefinition tempDefinition = ScriptableObject.CreateInstance<DirectionalSpriteDefinition>();
+        tempDefinition.name = safeAssetName;
         tempDefinition.defaultClipId = discoveredPairs.Select(static pair => pair.clipId).FirstOrDefault() ?? "Idle";
         tempDefinition.clips = new List<DirectionalSpriteClip>();
 
@@ -471,10 +472,12 @@ internal static class DirectionalSpriteFrameBuilder
         if (definition == null)
         {
             definition = ScriptableObject.CreateInstance<DirectionalSpriteDefinition>();
+            definition.name = safeAssetName;
             AssetDatabase.CreateAsset(definition, definitionPath);
         }
 
         EditorUtility.CopySerialized(tempDefinition, definition);
+        definition.name = safeAssetName;
         EditorUtility.SetDirty(definition);
         UnityEngine.Object.DestroyImmediate(tempDefinition);
         AssetDatabase.SaveAssets();

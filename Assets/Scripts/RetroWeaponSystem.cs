@@ -65,6 +65,8 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         public float BulletTrailEndOffset;
         public int BulletTrailMaxSegmentsPerShot;
         public FirstPersonSpriteVolumeMapSet SpriteMapSet;
+        public FirstPersonSpriteVolumeMapSet[] FireAnimationMapSets;
+        public float FireAnimationFrameDuration;
         public Vector3 SpriteVisualLocalPosition;
         public Vector3 SpriteVisualLocalEuler;
         public Vector2 SpriteVisualSize;
@@ -128,6 +130,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     [SerializeField] private WeaponSpriteView[] weaponSpriteViews = Array.Empty<WeaponSpriteView>();
     [SerializeField] private Sprite[] muzzleFlashSprites = Array.Empty<Sprite>();
     [SerializeField] private Vector2[] muzzleFlashSpriteSizes = Array.Empty<Vector2>();
+    [SerializeField, Min(0.005f)] private float spriteFireAnimationFrameDuration = 0.024f;
     [SerializeField, Min(0.01f)] private float spriteMuzzleFlashDuration = 0.055f;
     [SerializeField] private Vector3[] spriteMuzzleLocalOffsets =
     {
@@ -179,6 +182,10 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     private float muzzleFlashDisableTime = -999f;
     private float muzzleFlashNextFrameTime = -999f;
     private int muzzleFlashFrameIndex;
+    private WeaponRuntime spriteFireAnimationWeapon;
+    private float spriteFireAnimationEndTime = -999f;
+    private float spriteFireAnimationNextFrameTime = -999f;
+    private int spriteFireAnimationFrameIndex = -1;
     private Vector2 lookSample;
     private Vector3 recoilPositionOffset;
     private Vector3 recoilEulerOffset;
@@ -259,6 +266,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         HandleReloadInput();
         HandleFireInput();
         UpdateMuzzleFlashState();
+        UpdateSpriteFireAnimationState();
     }
 
     private void LateUpdate()
@@ -410,6 +418,8 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         weapon.BulletTrailEndOffset = Mathf.Max(0f, definition.bulletTrailEndOffset);
         weapon.BulletTrailMaxSegmentsPerShot = Mathf.Clamp(definition.bulletTrailMaxSegmentsPerShot, 1, 16);
         weapon.SpriteMapSet = definition.spriteMapSet != null ? definition.spriteMapSet : weapon.SpriteMapSet;
+        weapon.FireAnimationMapSets = HasAnyMapSet(definition.fireAnimationMapSets) ? definition.fireAnimationMapSets : weapon.FireAnimationMapSets;
+        weapon.FireAnimationFrameDuration = Mathf.Max(0.005f, definition.fireAnimationFrameDuration);
         weapon.SpriteVisualLocalPosition = definition.spriteVisualLocalPosition;
         weapon.SpriteVisualLocalEuler = definition.spriteVisualLocalEuler;
         weapon.SpriteVisualSize = new Vector2(
@@ -670,6 +680,8 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         weapon.MuzzleFlashFrames = Array.Empty<Sprite>();
         weapon.MuzzleFlashFrameDuration = Mathf.Max(0.005f, spriteMuzzleFlashDuration);
         weapon.MuzzleFlashSpriteSize = ResolveSerializedMuzzleFlashSpriteSize(index);
+        weapon.FireAnimationMapSets = Array.Empty<FirstPersonSpriteVolumeMapSet>();
+        weapon.FireAnimationFrameDuration = Mathf.Max(0.005f, spriteFireAnimationFrameDuration);
     }
 
     private void EnsureRuntimePresentation()
@@ -765,9 +777,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             return;
         }
 
-        legacySpriteVolumeRenderer.MapSet = weapon.SpriteMapSet != null
-            ? weapon.SpriteMapSet
-            : defaultSpriteMapSet;
+        legacySpriteVolumeRenderer.MapSet = ResolveActiveSpriteMapSet(weapon);
         legacySpriteVolumeRenderer.SetTintMultipliers(
             ResolveSpriteBaseTint(weapon),
             ResolveSpriteEmissiveTint(weapon));
@@ -1222,6 +1232,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
 
         isReloading = false;
+        StopSpriteFireAnimation(restoreBaseMap: false);
         currentWeaponIndex = weaponIndex;
         switchEndTime = Time.time + weaponSwitchDuration;
         nextFireTime = Mathf.Max(nextFireTime, switchEndTime);
@@ -1375,6 +1386,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
 
         AddSpreadBloom(weapon);
         ApplyWeaponKick(weapon.RecoilPosition, weapon.RecoilEuler);
+        TriggerSpriteFireAnimation(weapon);
         ShowMuzzleFlash(weapon);
         WeaponFired?.Invoke(weapon.Definition);
         PublishWeaponFired(weapon);
@@ -1691,6 +1703,126 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             + switchEuler);
     }
 
+    private FirstPersonSpriteVolumeMapSet ResolveActiveSpriteMapSet(WeaponRuntime weapon)
+    {
+        if (weapon == null)
+        {
+            return defaultSpriteMapSet;
+        }
+
+        if (spriteFireAnimationWeapon == weapon && spriteFireAnimationFrameIndex >= 0)
+        {
+            FirstPersonSpriteVolumeMapSet animationMapSet = ResolveFrameFromArray(weapon.FireAnimationMapSets, spriteFireAnimationFrameIndex);
+            if (animationMapSet != null)
+            {
+                return animationMapSet;
+            }
+        }
+
+        return weapon.SpriteMapSet != null ? weapon.SpriteMapSet : defaultSpriteMapSet;
+    }
+
+    private void TriggerSpriteFireAnimation(WeaponRuntime weapon)
+    {
+        if (!usingSpriteVolumeViewModel || weapon == null || legacySpriteVolumeRenderer == null || !HasAnyMapSet(weapon.FireAnimationMapSets))
+        {
+            return;
+        }
+
+        spriteFireAnimationWeapon = weapon;
+        spriteFireAnimationFrameIndex = 0;
+
+        float frameDuration = ResolveSpriteFireAnimationFrameDuration(weapon);
+        int frameCount = ResolveSpriteFireAnimationFrameCount(weapon);
+        spriteFireAnimationNextFrameTime = Time.time + frameDuration;
+        spriteFireAnimationEndTime = Time.time + frameDuration * Mathf.Max(1, frameCount);
+        ApplySpriteFireAnimationFrame(weapon, spriteFireAnimationFrameIndex);
+    }
+
+    private void UpdateSpriteFireAnimationState()
+    {
+        if (!usingSpriteVolumeViewModel || spriteFireAnimationWeapon == null)
+        {
+            return;
+        }
+
+        if (spriteFireAnimationWeapon != CurrentWeapon)
+        {
+            StopSpriteFireAnimation(restoreBaseMap: false);
+            return;
+        }
+
+        if (Time.time >= spriteFireAnimationEndTime)
+        {
+            StopSpriteFireAnimation(restoreBaseMap: true);
+            return;
+        }
+
+        if (Time.time < spriteFireAnimationNextFrameTime)
+        {
+            return;
+        }
+
+        int frameCount = ResolveSpriteFireAnimationFrameCount(spriteFireAnimationWeapon);
+        if (frameCount <= 1 || spriteFireAnimationFrameIndex >= frameCount - 1)
+        {
+            return;
+        }
+
+        float frameDuration = ResolveSpriteFireAnimationFrameDuration(spriteFireAnimationWeapon);
+        while (Time.time >= spriteFireAnimationNextFrameTime && spriteFireAnimationFrameIndex < frameCount - 1)
+        {
+            spriteFireAnimationFrameIndex++;
+            spriteFireAnimationNextFrameTime += frameDuration;
+        }
+
+        ApplySpriteFireAnimationFrame(spriteFireAnimationWeapon, spriteFireAnimationFrameIndex);
+    }
+
+    private void ApplySpriteFireAnimationFrame(WeaponRuntime weapon, int frameIndex)
+    {
+        if (weapon == null || legacySpriteVolumeRenderer == null)
+        {
+            return;
+        }
+
+        FirstPersonSpriteVolumeMapSet mapSet = ResolveFrameFromArray(weapon.FireAnimationMapSets, frameIndex);
+        if (mapSet == null)
+        {
+            return;
+        }
+
+        legacySpriteVolumeRenderer.MapSet = mapSet;
+        legacySpriteVolumeRenderer.ApplyNow(forceLightRefresh: false);
+    }
+
+    private void StopSpriteFireAnimation(bool restoreBaseMap)
+    {
+        WeaponRuntime animatedWeapon = spriteFireAnimationWeapon;
+        spriteFireAnimationWeapon = null;
+        spriteFireAnimationFrameIndex = -1;
+        spriteFireAnimationNextFrameTime = -999f;
+        spriteFireAnimationEndTime = -999f;
+
+        if (!restoreBaseMap || animatedWeapon == null || animatedWeapon != CurrentWeapon || legacySpriteVolumeRenderer == null)
+        {
+            return;
+        }
+
+        legacySpriteVolumeRenderer.MapSet = animatedWeapon.SpriteMapSet != null ? animatedWeapon.SpriteMapSet : defaultSpriteMapSet;
+        legacySpriteVolumeRenderer.ApplyNow(forceLightRefresh: false);
+    }
+
+    private static int ResolveSpriteFireAnimationFrameCount(WeaponRuntime weapon)
+    {
+        return HasAnyMapSet(weapon?.FireAnimationMapSets) ? weapon.FireAnimationMapSets.Length : 0;
+    }
+
+    private static float ResolveSpriteFireAnimationFrameDuration(WeaponRuntime weapon)
+    {
+        return Mathf.Max(0.005f, weapon != null ? weapon.FireAnimationFrameDuration : 0.024f);
+    }
+
     private void UpdateMuzzleFlashState()
     {
         if (Time.time < muzzleFlashDisableTime)
@@ -1788,9 +1920,59 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         return false;
     }
 
+    private static bool HasAnyMapSet(FirstPersonSpriteVolumeMapSet[] mapSets)
+    {
+        if (mapSets == null || mapSets.Length == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < mapSets.Length; i++)
+        {
+            if (mapSets[i] != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static Sprite ResolveFrameFromArray(Sprite[] frames, int frameIndex)
     {
         if (!HasAnySprite(frames))
+        {
+            return null;
+        }
+
+        int clampedIndex = Mathf.Clamp(frameIndex, 0, frames.Length - 1);
+        if (frames[clampedIndex] != null)
+        {
+            return frames[clampedIndex];
+        }
+
+        for (int i = clampedIndex + 1; i < frames.Length; i++)
+        {
+            if (frames[i] != null)
+            {
+                return frames[i];
+            }
+        }
+
+        for (int i = clampedIndex - 1; i >= 0; i--)
+        {
+            if (frames[i] != null)
+            {
+                return frames[i];
+            }
+        }
+
+        return null;
+    }
+
+    private static FirstPersonSpriteVolumeMapSet ResolveFrameFromArray(FirstPersonSpriteVolumeMapSet[] frames, int frameIndex)
+    {
+        if (!HasAnyMapSet(frames))
         {
             return null;
         }

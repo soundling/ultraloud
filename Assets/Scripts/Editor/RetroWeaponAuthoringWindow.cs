@@ -32,6 +32,38 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         "Assets/Weapons/ViewmodelMapSets/GrenadeLauncherViewmodelMapSet.asset"
     };
 
+    private static readonly string[][] WeaponFireAnimationMapSetPaths =
+    {
+        new[]
+        {
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Pistol/PistolFireFrame00.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Pistol/PistolFireFrame01.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Pistol/PistolFireFrame02.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Pistol/PistolFireFrame03.asset"
+        },
+        new[]
+        {
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Rifle/RifleFireFrame00.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Rifle/RifleFireFrame01.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Rifle/RifleFireFrame02.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Rifle/RifleFireFrame03.asset"
+        },
+        new[]
+        {
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Shotgun/ShotgunFireFrame00.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Shotgun/ShotgunFireFrame01.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Shotgun/ShotgunFireFrame02.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/Shotgun/ShotgunFireFrame03.asset"
+        },
+        new[]
+        {
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/GrenadeLauncher/GrenadeLauncherFireFrame00.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/GrenadeLauncher/GrenadeLauncherFireFrame01.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/GrenadeLauncher/GrenadeLauncherFireFrame02.asset",
+            "Assets/Weapons/ViewmodelMapSets/FireAnimation/GrenadeLauncher/GrenadeLauncherFireFrame03.asset"
+        }
+    };
+
     private static readonly string[] PistolMuzzleFlashFramePaths =
     {
         "Assets/Sprites/Weapons/MuzzleFlash/Pistol/Pistol_MuzzleFlash_00.png",
@@ -140,6 +172,7 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         serializedWeaponSystem.Update();
 
         EditorGUILayout.PropertyField(serializedWeaponSystem.FindProperty("useSpriteVolumeViewModel"));
+        EditorGUILayout.PropertyField(serializedWeaponSystem.FindProperty("spriteFireAnimationFrameDuration"));
         EditorGUILayout.PropertyField(serializedWeaponSystem.FindProperty("spriteMuzzleFlashDuration"));
         EditorGUILayout.PropertyField(serializedWeaponSystem.FindProperty("baseLocalPosition"));
         EditorGUILayout.PropertyField(serializedWeaponSystem.FindProperty("baseLocalEuler"));
@@ -280,7 +313,7 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         DrawSection(definition, "Projectile", "projectileSpeed", "explosionRadius", "explosionForce", "fuseTime");
         DrawSection(definition, "Presentation", "localPosition", "localEuler", "recoilPosition", "recoilEuler", "bodyColor", "accentColor", "primitiveMuzzleFlashScale");
         DrawSection(definition, "Bullet Trails", "bulletTrailEnabled", "bulletTrailColor", "bulletTrailWidth", "bulletTrailDuration", "bulletTrailStartOffset", "bulletTrailEndOffset", "bulletTrailMaxSegmentsPerShot");
-        DrawSection(definition, "Sprite Viewmodel", "spriteMapSet", "spriteVisualLocalPosition", "spriteVisualLocalEuler", "spriteVisualSize", "spriteMuzzleLocalPosition", "spriteMuzzleLocalOffset", "muzzleFlashSprite", "muzzleFlashFrames", "muzzleFlashFrameDuration", "muzzleFlashSpriteSize", "baseTintMultiplier", "emissiveTintMultiplier", "weaponBodyTint", "weaponAccentTint");
+        DrawSection(definition, "Sprite Viewmodel", "spriteMapSet", "fireAnimationMapSets", "fireAnimationFrameDuration", "spriteVisualLocalPosition", "spriteVisualLocalEuler", "spriteVisualSize", "spriteMuzzleLocalPosition", "spriteMuzzleLocalOffset", "muzzleFlashSprite", "muzzleFlashFrames", "muzzleFlashFrameDuration", "muzzleFlashSpriteSize", "baseTintMultiplier", "emissiveTintMultiplier", "weaponBodyTint", "weaponAccentTint");
     }
 
     private static void DrawSection(SerializedObject serializedObject, string label, params string[] propertyNames)
@@ -406,6 +439,12 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         {
             warningCount++;
             EditorGUILayout.HelpBox("Muzzle Flash Sprite/Frames are unassigned. Sprite weapons will fire without a flash sprite.", MessageType.Warning);
+        }
+
+        if (definition.spriteMapSet != null && !HasAnyMapSet(definition.fireAnimationMapSets))
+        {
+            warningCount++;
+            EditorGUILayout.HelpBox("Fire Animation Map Sets are unassigned. The weapon will still recoil, but the viewmodel sprite will not animate through the shot.", MessageType.Info);
         }
 
         if (definition.maxSpreadAngle < definition.spreadAngle)
@@ -617,6 +656,8 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
 
         ApplyDefaultTrailPreset(definition, slot);
         ApplyDefaultFeelPreset(definition, slot);
+        definition.fireAnimationMapSets = LoadWeaponFireAnimationMapSets(slot);
+        definition.fireAnimationFrameDuration = ResolveDefaultFireAnimationFrameDuration(slot);
     }
 
     private static FirstPersonSpriteVolumeMapSet LoadWeaponViewmodelMapSet(int slot)
@@ -626,6 +667,30 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         return mapSet != null
             ? mapSet
             : AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(FallbackGunVolumeMapSetPath);
+    }
+
+    private static FirstPersonSpriteVolumeMapSet[] LoadWeaponFireAnimationMapSets(int slot)
+    {
+        int safeSlot = Mathf.Clamp(slot, 0, WeaponFireAnimationMapSetPaths.Length - 1);
+        string[] paths = WeaponFireAnimationMapSetPaths[safeSlot];
+        FirstPersonSpriteVolumeMapSet[] mapSets = new FirstPersonSpriteVolumeMapSet[paths.Length];
+        for (int i = 0; i < paths.Length; i++)
+        {
+            mapSets[i] = AssetDatabase.LoadAssetAtPath<FirstPersonSpriteVolumeMapSet>(paths[i]);
+        }
+
+        return HasAnyMapSet(mapSets) ? mapSets : new FirstPersonSpriteVolumeMapSet[0];
+    }
+
+    private static float ResolveDefaultFireAnimationFrameDuration(int slot)
+    {
+        return slot switch
+        {
+            1 => 0.018f,
+            2 => 0.032f,
+            3 => 0.034f,
+            _ => 0.024f
+        };
     }
 
     private static void ApplyDefaultTrailPreset(RetroWeaponDefinition definition, int slot)
@@ -854,6 +919,24 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         for (int i = 0; i < sprites.Length; i++)
         {
             if (sprites[i] != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool HasAnyMapSet(FirstPersonSpriteVolumeMapSet[] mapSets)
+    {
+        if (mapSets == null || mapSets.Length == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < mapSets.Length; i++)
+        {
+            if (mapSets[i] != null)
             {
                 return true;
             }

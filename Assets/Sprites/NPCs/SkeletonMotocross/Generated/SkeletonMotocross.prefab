@@ -1,0 +1,383 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &37544343851347618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4853075981840829609}
+  - component: {fileID: 9124665858335532542}
+  - component: {fileID: 8877239135138878656}
+  - component: {fileID: 3683856065325434977}
+  - component: {fileID: 5750375229889104894}
+  - component: {fileID: 5193661389449046503}
+  - component: {fileID: 2148782233203493745}
+  - component: {fileID: 4123290624946782891}
+  - component: {fileID: 2335529150254852188}
+  m_Layer: 0
+  m_Name: SkeletonMotocross
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4853075981840829609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6330704516990759137}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9124665858335532542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
+  definition: {fileID: 11400000, guid: 14fe2c320c6367246be36b6b4df0bcdd, type: 2}
+  initialClipId: Idle
+  playOnEnable: 1
+  useUnscaledTime: 0
+  animationSpeed: 1.16
+  spriteRenderer: {fileID: 0}
+  billboardRoot: {fileID: 6330704516990759137}
+  facingReference: {fileID: 4853075981840829609}
+  targetCamera: {fileID: 0}
+  viewAngleSource: 0
+  billboardMode: 1
+  billboardEulerOffset: {x: 0, y: 0, z: 0}
+  logicalFacingOffset: 0
+--- !u!114 &8877239135138878656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
+  animator: {fileID: 9124665858335532542}
+  targetRenderer: {fileID: 665935443740438527}
+  lightReferenceMode: 0
+  lightAnchor: {fileID: 0}
+  refreshLightsInEditor: 1
+  maxLights: 4
+  lightRefreshInterval: 0.15
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.5
+  lightingBasisMode: 2
+  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
+  alphaCutoff: 0.08
+  normalScale: 1.45
+  detailNormalInfluence: 0.92
+  macroNormalBend: 1.2
+  spriteAngleLightingInfluence: 0.62
+  twoSidedLighting: 1
+  flipBackfacingNormals: 1
+  wrapDiffuse: 0.25
+  ambientTopColor: {r: 0.52, g: 0.56, b: 0.62, a: 1}
+  ambientBottomColor: {r: 0.14, g: 0.12, b: 0.1, a: 1}
+  ambientIntensity: 0.86
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.2
+  surfaceRoughness: 0.76
+  specularStrength: 0.42
+  minSpecularPower: 6
+  maxSpecularPower: 18
+  rimColor: {r: 1, g: 0.28, b: 0.08, a: 1}
+  rimStrength: 0.42
+  rimPower: 2.7
+--- !u!114 &3683856065325434977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
+  animator: {fileID: 9124665858335532542}
+  visualRenderer: {fileID: 665935443740438527}
+  hitPlane: {fileID: 6330704516990759137}
+  useAlphaMask: 1
+  useSpritePhysicsShapeFallback: 1
+  acceptWhenMaskUnavailable: 1
+  rejectHitsOutsideQuad: 1
+  alphaThreshold: 0.08
+  edgePaddingPixels: 3
+  drawDebugHits: 0
+  debugDrawDuration: 0.35
+--- !u!65 &5750375229889104894
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.7, y: 5.3, z: 2.6}
+  m_Center: {x: 0, y: 2.65, z: 0}
+--- !u!54 &5193661389449046503
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!114 &2148782233203493745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 220
+  destroyOnDeath: 1
+  disableRenderersOnDeath: 1
+  disableCollidersOnDeath: 1
+  destroyDelay: 0.15
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.72, g: 0.66, b: 0.49, a: 0.88}
+  spawnBloodOnHit: 1
+  spawnBloodOnDeath: 1
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+--- !u!114 &4123290624946782891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac547ac71ef4cbfb27470907463f5de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroGibOnDeath
+  damageable: {fileID: 2148782233203493745}
+  goreProfile: {fileID: 11400000, guid: 65e7b685ce3843359abe93b81f4e6966, type: 2}
+  useProfileThresholds: 1
+  damageWindow: 0.9
+  clusterWindow: 0.18
+  minimumRecentDamage: 60
+  minimumClusterDamage: 48
+  minimumClusterHits: 4
+  highSingleHitDamage: 76
+  spawnAtRendererCenter: 1
+  localCenterOffset: {x: 0, y: 0.35, z: 0}
+  intensityMultiplier: 0.74
+  debugDecision: 0
+--- !u!114 &2335529150254852188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37544343851347618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1daac7a7b86edf048bffb213dcfa0a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroSkeletonMotocrossRider
+  damageable: {fileID: 2148782233203493745}
+  animator: {fileID: 9124665858335532542}
+  locomotion: {fileID: 0}
+  movementBody: {fileID: 5193661389449046503}
+  visualRenderer: {fileID: 665935443740438527}
+  visualRoot: {fileID: 6330704516990759137}
+  idleClipId: Idle
+  rideClipId: Ride
+  wheelieClipId: Wheelie
+  attackClipId: Attack
+  awarenessRadius: 34
+  retargetInterval: 0.72
+  randomTargetChance: 0.68
+  preferredTargetTag: Player
+  attackAnythingDamageable: 1
+  cruiseSpeed: 7.8
+  burstSpeed: 14.2
+  reversePanicSpeed: 4.5
+  acceleration: 44
+  turnSpeed: 820
+  orbitRadius: 7.4
+  wanderRadius: 13
+  tacticDurationRange: {x: 0.32, y: 0.95}
+  wheelieChance: 0.28
+  donutChance: 0.2
+  ramDamage: 31
+  ramRadius: 2.45
+  ramForwardOffset: 2.25
+  ramCooldown: 0.36
+  ramKnockback: 11
+  damageMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 1
+  bobAmplitude: 0.17
+  bobFrequency: 15
+  leanDegrees: 16
+  speedRimColor: {r: 1, g: 0.12, b: 0.02, a: 1}
+  wheelieRimColor: {r: 1, g: 0.76, b: 0.18, a: 1}
+  exhaustTrailInterval: 0.052
+  exhaustTrailColor: {r: 1, g: 0.26, b: 0.02, a: 0.88}
+  boneDustTrailColor: {r: 0.74, g: 0.68, b: 0.48, a: 0.6}
+--- !u!1 &4960860563851368177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6330704516990759137}
+  - component: {fileID: 8776020430392249475}
+  - component: {fileID: 665935443740438527}
+  m_Layer: 0
+  m_Name: Quad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6330704516990759137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960860563851368177}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.2, z: 0}
+  m_LocalScale: {x: 10.24, y: 7.68, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4853075981840829609}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8776020430392249475
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960860563851368177}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &665935443740438527
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960860563851368177}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}

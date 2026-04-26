@@ -1,0 +1,1615 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4c437ce27b4bb4982a2985d98ea66d, type: 3}
+  m_Name: CursedParkAssetLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::RetroCursedParkAssetLibrary
+  assets:
+  - id: RustFerrisWheel
+    displayName: rust ferris wheel
+    category: 0
+    baseMap: {fileID: 2800000, guid: e617ca82bf76eed42bed7708cb2bc71c, type: 3}
+    normalMap: {fileID: 2800000, guid: 598d731dc4b4c25458c2c75d3d188f3e, type: 3}
+    emissionMap: {fileID: 2800000, guid: 43e000a586c473f44bda17c39492d9a6, type: 3}
+    baseSize: {x: 12.5, y: 12.5}
+    scaleRange: {x: 0.92, y: 1.28}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.15
+    flickerStrength: 0.34
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: SkullCoasterGate
+    displayName: skull coaster gate
+    category: 0
+    baseMap: {fileID: 2800000, guid: eb5bdb36e6c607b4b8addf324d110955, type: 3}
+    normalMap: {fileID: 2800000, guid: 8392719e0abd11f4da02bed6d551dad6, type: 3}
+    emissionMap: {fileID: 2800000, guid: fbb45996debf6f9498f0d7792090c5b2, type: 3}
+    baseSize: {x: 9.4, y: 9.4}
+    scaleRange: {x: 0.88, y: 1.24}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.92
+    flickerStrength: 0.25
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CrookedFunhouse
+    displayName: crooked funhouse
+    category: 0
+    baseMap: {fileID: 2800000, guid: 110e1681e2297264eb8b6304510651a6, type: 3}
+    normalMap: {fileID: 2800000, guid: 3814c8ab0b3fab143ab26c5cf90cacbb, type: 3}
+    emissionMap: {fileID: 2800000, guid: fdf12f4b98306d2459b4d33f39328644, type: 3}
+    baseSize: {x: 10.5, y: 10.5}
+    scaleRange: {x: 0.9, y: 1.3}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.2
+    flickerStrength: 0.42
+    swayStrength: 0.14
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: ClownMouthTunnel
+    displayName: mouth tunnel
+    category: 0
+    baseMap: {fileID: 2800000, guid: 901ddd5be1de87f459c815c5b8f23616, type: 3}
+    normalMap: {fileID: 2800000, guid: 0bf906a962f8320409af8d205b09260c, type: 3}
+    emissionMap: {fileID: 2800000, guid: b3f78816dbebf1c4d845cf7604448898, type: 3}
+    baseSize: {x: 9.7, y: 9.7}
+    scaleRange: {x: 0.9, y: 1.28}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.82
+    flickerStrength: 0.32
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BrokenCarousel
+    displayName: broken carousel
+    category: 0
+    baseMap: {fileID: 2800000, guid: 44fc1e492870bd94d94516f7ece75c03, type: 3}
+    normalMap: {fileID: 2800000, guid: 6111787c7be8fa54095a2c3b1a13e46e, type: 3}
+    emissionMap: {fileID: 2800000, guid: 697d0c524f311f945b47c743cce70979, type: 3}
+    baseSize: {x: 9.1, y: 9.1}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.88
+    flickerStrength: 0.28
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: HauntedBumperCars
+    displayName: haunted bumper cars
+    category: 0
+    baseMap: {fileID: 2800000, guid: cd4d99efa22a7124c9d34a40ce5e41f6, type: 3}
+    normalMap: {fileID: 2800000, guid: dce639fd6f3d59d4bb2b7a3637f39ff8, type: 3}
+    emissionMap: {fileID: 2800000, guid: ebdb3635996997f4591368f790c390a6, type: 3}
+    baseSize: {x: 7.6, y: 7.6}
+    scaleRange: {x: 0.88, y: 1.22}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.05
+    flickerStrength: 0.4
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CursedShootingGallery
+    displayName: cursed shooting gallery
+    category: 0
+    baseMap: {fileID: 2800000, guid: 77266163a4d214b468db15c3476e41b9, type: 3}
+    normalMap: {fileID: 2800000, guid: 301c9787e67e77f4aa33e56dce59b975, type: 3}
+    emissionMap: {fileID: 2800000, guid: e9b526d837db0744d8e8aa8ccabe0321, type: 3}
+    baseSize: {x: 7.9, y: 7.9}
+    scaleRange: {x: 0.92, y: 1.24}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.95
+    flickerStrength: 0.32
+    swayStrength: 0.07
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: FortuneTent
+    displayName: fortune tent
+    category: 0
+    baseMap: {fileID: 2800000, guid: 601c8197765d52c40940f1bf71319811, type: 3}
+    normalMap: {fileID: 2800000, guid: e732cef43650fa1459d5c0e3c20b5215, type: 3}
+    emissionMap: {fileID: 2800000, guid: 60c016eaee2a547469c59bef9989cd6f, type: 3}
+    baseSize: {x: 8.5, y: 8.5}
+    scaleRange: {x: 0.88, y: 1.25}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.55
+    flickerStrength: 0.5
+    swayStrength: 0.15
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: DropTower
+    displayName: drop tower
+    category: 0
+    baseMap: {fileID: 2800000, guid: 415a4f9f369c0e24ab81cb85e256c574, type: 3}
+    normalMap: {fileID: 2800000, guid: f8c20d2ffc2981b448b3e60ba8526f8d, type: 3}
+    emissionMap: {fileID: 2800000, guid: 25f565c1502e87d4f994843142b79fe6, type: 3}
+    baseSize: {x: 6.1, y: 12.2}
+    scaleRange: {x: 0.9, y: 1.25}
+    weight: 0.8
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.75
+    flickerStrength: 0.22
+    swayStrength: 0.12
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: MirrorMaze
+    displayName: mirror maze
+    category: 0
+    baseMap: {fileID: 2800000, guid: d8c2430cb9603d447a3c094de56922fa, type: 3}
+    normalMap: {fileID: 2800000, guid: b030f943f3316924b98860960c818bd4, type: 3}
+    emissionMap: {fileID: 2800000, guid: bf0f78f25fcd9594eb827c3f25f4d44d, type: 3}
+    baseSize: {x: 8.4, y: 8.4}
+    scaleRange: {x: 0.88, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.05
+    flickerStrength: 0.28
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CoffinRideEntrance
+    displayName: coffin ride entrance
+    category: 0
+    baseMap: {fileID: 2800000, guid: 711fb5cfb77fc41489ec2159d5398072, type: 3}
+    normalMap: {fileID: 2800000, guid: ee0de09de29af614f908ee30458909be, type: 3}
+    emissionMap: {fileID: 2800000, guid: 97f0731dfe668654c95ff48387e9c374, type: 3}
+    baseSize: {x: 9.1, y: 9.1}
+    scaleRange: {x: 0.92, y: 1.22}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.78
+    flickerStrength: 0.22
+    swayStrength: 0.07
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: RottenTeacupRide
+    displayName: rotten teacup ride
+    category: 0
+    baseMap: {fileID: 2800000, guid: 286727480304de94f8d30e612b22439f, type: 3}
+    normalMap: {fileID: 2800000, guid: fbfb15d364c25f24aa4bd62a58d7df64, type: 3}
+    emissionMap: {fileID: 2800000, guid: 392d8364c7f02434eacd608d34105f2e, type: 3}
+    baseSize: {x: 6.5, y: 6.5}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.95
+    flickerStrength: 0.28
+    swayStrength: 0.06
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: GiantTicketArch
+    displayName: giant ticket arch
+    category: 0
+    baseMap: {fileID: 2800000, guid: 3260f343cea4d5d4f9eb489fd1701aa1, type: 3}
+    normalMap: {fileID: 2800000, guid: 1181d3f8d417495429f14e11b9bb33aa, type: 3}
+    emissionMap: {fileID: 2800000, guid: efb5f9b605bf89a4795900f60c0afc21, type: 3}
+    baseSize: {x: 10.6, y: 10.6}
+    scaleRange: {x: 0.9, y: 1.22}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.9
+    flickerStrength: 0.32
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: FreakshowWagon
+    displayName: freak show wagon
+    category: 0
+    baseMap: {fileID: 2800000, guid: fd9e6515ad5b15c4ea05d4ea2558bd29, type: 3}
+    normalMap: {fileID: 2800000, guid: 5fca9996200443b438ab48c5408a0547, type: 3}
+    emissionMap: {fileID: 2800000, guid: 7d3df615f8fafb546ba917abe71bd709, type: 3}
+    baseSize: {x: 8, y: 8}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.8
+    flickerStrength: 0.25
+    swayStrength: 0.06
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BoardedHauntedArcade
+    displayName: boarded haunted arcade
+    category: 0
+    baseMap: {fileID: 2800000, guid: f32f522a6ba3d5b4fb83726723fafb97, type: 3}
+    normalMap: {fileID: 2800000, guid: 5d41f5b59c21d204b96c6ff778a86ce4, type: 3}
+    emissionMap: {fileID: 2800000, guid: 949789ade9dac5f4ca17b5938c386412, type: 3}
+    baseSize: {x: 8.7, y: 8.7}
+    scaleRange: {x: 0.9, y: 1.24}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.1
+    flickerStrength: 0.42
+    swayStrength: 0.12
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CollapsedCircusTent
+    displayName: collapsed circus tent
+    category: 0
+    baseMap: {fileID: 2800000, guid: ca9044e851cbea44c82cb7f988e0534f, type: 3}
+    normalMap: {fileID: 2800000, guid: 6f4575f4fb05cfd44b8b4a3abb91fa79, type: 3}
+    emissionMap: {fileID: 2800000, guid: d95936a1849df0a458024f651993a9cf, type: 3}
+    baseSize: {x: 7.8, y: 7.8}
+    scaleRange: {x: 0.9, y: 1.3}
+    weight: 0.8
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.65
+    flickerStrength: 0.18
+    swayStrength: 0.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: RustSlotMachine
+    displayName: rust slot machine
+    category: 1
+    baseMap: {fileID: 2800000, guid: 08668be6325bd094ab2bed3f7452a099, type: 3}
+    normalMap: {fileID: 2800000, guid: efe93d7a4fb7ea34d885117caa66e99b, type: 3}
+    emissionMap: {fileID: 2800000, guid: b0f527c13b32f7a4fa94b9102c238f2c, type: 3}
+    baseSize: {x: 3.3, y: 3.3}
+    scaleRange: {x: 0.9, y: 1.25}
+    weight: 1.2
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.25
+    flickerStrength: 0.48
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: FortuneTellerCabinet
+    displayName: fortune teller cabinet
+    category: 1
+    baseMap: {fileID: 2800000, guid: 6173d2cb7ea091644806134780673399, type: 3}
+    normalMap: {fileID: 2800000, guid: be01d24e35812eb4087030b38d2d0281, type: 3}
+    emissionMap: {fileID: 2800000, guid: e11e5ade14867c44f80e464bf7d9ad83, type: 3}
+    baseSize: {x: 3.9, y: 3.9}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1.1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.55
+    flickerStrength: 0.55
+    swayStrength: 0.06
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CursedClawMachine
+    displayName: cursed claw machine
+    category: 1
+    baseMap: {fileID: 2800000, guid: 5b212b0d0a1583a47843febc10b5bf80, type: 3}
+    normalMap: {fileID: 2800000, guid: dfd644608767c044880f042a0bb10f58, type: 3}
+    emissionMap: {fileID: 2800000, guid: 8bc040268cfeefa4091fe7875ced68c6, type: 3}
+    baseSize: {x: 3.8, y: 3.8}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.05
+    flickerStrength: 0.38
+    swayStrength: 0.04
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: RottenTicketBooth
+    displayName: rotten ticket booth
+    category: 1
+    baseMap: {fileID: 2800000, guid: 2297a57c1e722bb41915158033bb3867, type: 3}
+    normalMap: {fileID: 2800000, guid: 060b2c177bf8b374a9766dcf7c6d7a7a, type: 3}
+    emissionMap: {fileID: 2800000, guid: 607a9e29cb50ad749a81d2fa49df0409, type: 3}
+    baseSize: {x: 3.5, y: 3.5}
+    scaleRange: {x: 0.88, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.85
+    flickerStrength: 0.26
+    swayStrength: 0.04
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CrookedPrizeWheel
+    displayName: crooked prize wheel
+    category: 1
+    baseMap: {fileID: 2800000, guid: 376beb4b92f120f4a9ddec5ed987147b, type: 3}
+    normalMap: {fileID: 2800000, guid: e039b51c892f91143a5a376a317d4e34, type: 3}
+    emissionMap: {fileID: 2800000, guid: cc51b5ddde663634b99a53a6f8a13793, type: 3}
+    baseSize: {x: 3.4, y: 3.4}
+    scaleRange: {x: 0.9, y: 1.22}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.1
+    flickerStrength: 0.42
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: StrengthTester
+    displayName: strength tester
+    category: 1
+    baseMap: {fileID: 2800000, guid: 4611e0e5a7887174d8678a295272c134, type: 3}
+    normalMap: {fileID: 2800000, guid: 8184211e14dd9d0429d648eee5b3dc72, type: 3}
+    emissionMap: {fileID: 2800000, guid: 3901fbb6778c74f4dbfe259cb849deef, type: 3}
+    baseSize: {x: 3.6, y: 3.6}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.95
+    flickerStrength: 0.3
+    swayStrength: 0.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: SkullRouletteTable
+    displayName: skull roulette table
+    category: 1
+    baseMap: {fileID: 2800000, guid: ac0a4ed1321d3164f8ef12b5fb5254a7, type: 3}
+    normalMap: {fileID: 2800000, guid: 0279ca67280375e4293b17f7260eb067, type: 3}
+    emissionMap: {fileID: 2800000, guid: 88f03afd1af58a241b7b283b6251202f, type: 3}
+    baseSize: {x: 3.1, y: 3.1}
+    scaleRange: {x: 0.95, y: 1.25}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.15
+    flickerStrength: 0.38
+    swayStrength: 0.03
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: HauntedVendingMachine
+    displayName: haunted vending machine
+    category: 1
+    baseMap: {fileID: 2800000, guid: 183786016c7ec9041a55b50371e3fc64, type: 3}
+    normalMap: {fileID: 2800000, guid: 4ce6b67c264b21448b8d2ac5f014e576, type: 3}
+    emissionMap: {fileID: 2800000, guid: 9063eb6b05b587f4580a95ace9a45693, type: 3}
+    baseSize: {x: 3.6, y: 3.6}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.2
+    flickerStrength: 0.46
+    swayStrength: 0.04
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CoinPusherCabinet
+    displayName: coin pusher cabinet
+    category: 1
+    baseMap: {fileID: 2800000, guid: 45b176981d882b74c93324c5771ce44c, type: 3}
+    normalMap: {fileID: 2800000, guid: a245ab308afc06043a737af3ca55c8b5, type: 3}
+    emissionMap: {fileID: 2800000, guid: c19187e8e3d2dc047b15eb9d24e3fe23, type: 3}
+    baseSize: {x: 3.2, y: 3.2}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.35
+    flickerStrength: 0.5
+    swayStrength: 0.04
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: ShootingGalleryCounter
+    displayName: shooting gallery counter
+    category: 1
+    baseMap: {fileID: 2800000, guid: 13e38c6dd42472748993913ac3dabb4f, type: 3}
+    normalMap: {fileID: 2800000, guid: 087a14c4167e95f458e0346c20b231aa, type: 3}
+    emissionMap: {fileID: 2800000, guid: bf25d6619f2347b47886dbfe64e91397, type: 3}
+    baseSize: {x: 3, y: 3}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.85
+    flickerStrength: 0.26
+    swayStrength: 0.03
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BrokenPhotobooth
+    displayName: broken photobooth
+    category: 1
+    baseMap: {fileID: 2800000, guid: 5ff46f0512b452b43859fbc6c993218b, type: 3}
+    normalMap: {fileID: 2800000, guid: 75762c5542bbbdc4eaf3e5c14aba6483, type: 3}
+    emissionMap: {fileID: 2800000, guid: 89633208f1f324b439f1287ff0ba35e6, type: 3}
+    baseSize: {x: 3.4, y: 3.4}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.9
+    flickerStrength: 0.3
+    swayStrength: 0.03
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: TeethArcadeCabinet
+    displayName: teeth arcade cabinet
+    category: 1
+    baseMap: {fileID: 2800000, guid: 6d3012aef0023dc46a8cabdb5a05ee13, type: 3}
+    normalMap: {fileID: 2800000, guid: 6d30da8fddfa28a4b96c969869aecded, type: 3}
+    emissionMap: {fileID: 2800000, guid: eeba46f397610c34e87924ed56dfc40d, type: 3}
+    baseSize: {x: 3.6, y: 3.6}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.25
+    flickerStrength: 0.5
+    swayStrength: 0.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: PopcornCoffinCart
+    displayName: popcorn coffin cart
+    category: 1
+    baseMap: {fileID: 2800000, guid: cf1cb7c22c0139744b6547e13f897388, type: 3}
+    normalMap: {fileID: 2800000, guid: 87fd4e98b1858044789ceca35f90547b, type: 3}
+    emissionMap: {fileID: 2800000, guid: 3b54defd5c4ee2a41850f50146021cc8, type: 3}
+    baseSize: {x: 3, y: 3}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.05
+    flickerStrength: 0.34
+    swayStrength: 0.04
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: UglyPrizeShelf
+    displayName: ugly prize shelf
+    category: 1
+    baseMap: {fileID: 2800000, guid: bffa793cacc6daf4c942634f2dee4610, type: 3}
+    normalMap: {fileID: 2800000, guid: ad78f46592fccf142b4d33cc7c180f7a, type: 3}
+    emissionMap: {fileID: 2800000, guid: 8711900d67952ec4eb0b965f3342749e, type: 3}
+    baseSize: {x: 3.1, y: 3.1}
+    scaleRange: {x: 0.9, y: 1.22}
+    weight: 0.95
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.9
+    flickerStrength: 0.25
+    swayStrength: 0.03
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CashierKiosk
+    displayName: cashier kiosk
+    category: 1
+    baseMap: {fileID: 2800000, guid: 0b426218fc819a34c87116a21f11bd38, type: 3}
+    normalMap: {fileID: 2800000, guid: 46ee726eb8d0c0646b7e1cb76e058678, type: 3}
+    emissionMap: {fileID: 2800000, guid: 29c2568a10e1dca40b6d599cf7ac7616, type: 3}
+    baseSize: {x: 3.25, y: 3.25}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.9
+    flickerStrength: 0.28
+    swayStrength: 0.03
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CarnivalGeneratorBox
+    displayName: carnival generator box
+    category: 1
+    baseMap: {fileID: 2800000, guid: 330d39d51edebf840aded0999181e471, type: 3}
+    normalMap: {fileID: 2800000, guid: eb2866d7b87222e41ae95feb49c2371e, type: 3}
+    emissionMap: {fileID: 2800000, guid: dd5ea3791e1af1e4b999399f26760b89, type: 3}
+    baseSize: {x: 2.8, y: 2.8}
+    scaleRange: {x: 0.9, y: 1.22}
+    weight: 0.8
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.85
+    flickerStrength: 0.25
+    swayStrength: 0.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: SkeletalTicketTaker
+    displayName: skeletal ticket taker
+    category: 2
+    baseMap: {fileID: 2800000, guid: 7ba4c96127e83cd41975dfc491ad56a6, type: 3}
+    normalMap: {fileID: 2800000, guid: cf1a9f0ab86c9094188e4ca662654159, type: 3}
+    emissionMap: {fileID: 2800000, guid: 49c048d7f1835bc44bebcc642508a749, type: 3}
+    baseSize: {x: 3.8, y: 3.8}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1.1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1
+    flickerStrength: 0.3
+    swayStrength: 0.22
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: ClownConductor
+    displayName: clown conductor
+    category: 2
+    baseMap: {fileID: 2800000, guid: b2cc21377cb20dc479f341db7d3e8331, type: 3}
+    normalMap: {fileID: 2800000, guid: f80ce3a0468222243b54181fa992c629, type: 3}
+    emissionMap: {fileID: 2800000, guid: 75a4d74809cce534fb1c00233861a288, type: 3}
+    baseSize: {x: 3.5, y: 3.5}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 1.1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.15
+    flickerStrength: 0.4
+    swayStrength: 0.32
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CymbalPuppetMachine
+    displayName: cymbal puppet machine
+    category: 2
+    baseMap: {fileID: 2800000, guid: bb08506a2bb27144eb531a2441d1e79b, type: 3}
+    normalMap: {fileID: 2800000, guid: dac33665b7f531343be3b5f50340e786, type: 3}
+    emissionMap: {fileID: 2800000, guid: 7b6cd742959e0d04fa60dbd15eafb6c0, type: 3}
+    baseSize: {x: 3.2, y: 3.2}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1
+    flickerStrength: 0.36
+    swayStrength: 0.25
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CrackedBallerina
+    displayName: cracked ballerina
+    category: 2
+    baseMap: {fileID: 2800000, guid: 55baa6bc681627249874cd3ed99fc8cd, type: 3}
+    normalMap: {fileID: 2800000, guid: 0124f6b9a931d3c4799624ca85d792a6, type: 3}
+    emissionMap: {fileID: 2800000, guid: 83ac35ec8a664844cac103830e20e493, type: 3}
+    baseSize: {x: 3.4, y: 3.4}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.82
+    flickerStrength: 0.2
+    swayStrength: 0.38
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: OrganGrinderMachine
+    displayName: organ grinder machine
+    category: 2
+    baseMap: {fileID: 2800000, guid: 758567e071392334093950c2d0a61992, type: 3}
+    normalMap: {fileID: 2800000, guid: 1800eb7890064544aa47624e8409b430, type: 3}
+    emissionMap: {fileID: 2800000, guid: d3c46c5ba15d36c40bda4755f742bcb5, type: 3}
+    baseSize: {x: 3.2, y: 3.2}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.95
+    flickerStrength: 0.28
+    swayStrength: 0.18
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: AnimatronicStrongman
+    displayName: animatronic strongman
+    category: 2
+    baseMap: {fileID: 2800000, guid: 2439f570fcc5ec74aa69a97379bcc543, type: 3}
+    normalMap: {fileID: 2800000, guid: 28ca515f28ad8f845b61cac572e5efa3, type: 3}
+    emissionMap: {fileID: 2800000, guid: cb8f4e3203f97be47925fd7ae606ef3c, type: 3}
+    baseSize: {x: 3.25, y: 3.25}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 0.95
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.88
+    flickerStrength: 0.22
+    swayStrength: 0.22
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: ScarecrowRingmaster
+    displayName: ringmaster statue
+    category: 2
+    baseMap: {fileID: 2800000, guid: 7ca6d9e3f87fb0d499c26ae795cf15a8, type: 3}
+    normalMap: {fileID: 2800000, guid: 72af552dab29b0b4f9fdea4f41c73181, type: 3}
+    emissionMap: {fileID: 2800000, guid: 3bb2d83c6f6ba4041ac7a0b5b470c8c5, type: 3}
+    baseSize: {x: 3.8, y: 3.8}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.85
+    flickerStrength: 0.25
+    swayStrength: 0.28
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CursedPortraitStand
+    displayName: cursed portrait stand
+    category: 2
+    baseMap: {fileID: 2800000, guid: d1ef5d1948b2f0541bb7a16e24b5fd45, type: 3}
+    normalMap: {fileID: 2800000, guid: c581f87c2664bba4c9af7f103340a103, type: 3}
+    emissionMap: {fileID: 2800000, guid: e90cb791ed09cf94588dd8ac2fe9e304, type: 3}
+    baseSize: {x: 3.1, y: 3.1}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 0.85
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1
+    flickerStrength: 0.3
+    swayStrength: 0.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: MannequinChoir
+    displayName: mannequin choir
+    category: 2
+    baseMap: {fileID: 2800000, guid: 4ea8b72c31706b749a3a3ef4552f7565, type: 3}
+    normalMap: {fileID: 2800000, guid: d36213814d46ba44b9bf27f161cf6739, type: 3}
+    emissionMap: {fileID: 2800000, guid: 3c015779f9573704c871d118a15d5d6e, type: 3}
+    baseSize: {x: 2.8, y: 2.8}
+    scaleRange: {x: 0.92, y: 1.22}
+    weight: 0.85
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.72
+    flickerStrength: 0.18
+    swayStrength: 0.1
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: JackInBoxHead
+    displayName: jack box head
+    category: 2
+    baseMap: {fileID: 2800000, guid: 56e6f5dbcd2d4864a89a4e859f0b34d6, type: 3}
+    normalMap: {fileID: 2800000, guid: 002634ef4441a4d48a41f428b6d869ae, type: 3}
+    emissionMap: {fileID: 2800000, guid: cdb2dbad237ffab4d8d1df06620cf3c0, type: 3}
+    baseSize: {x: 3, y: 3}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.05
+    flickerStrength: 0.38
+    swayStrength: 0.3
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: PalmReaderHands
+    displayName: palm reader hands
+    category: 2
+    baseMap: {fileID: 2800000, guid: 067ee7a22003ff54e92395e0f438a2fe, type: 3}
+    normalMap: {fileID: 2800000, guid: afd4ba535358d394eb6a728f95c1adcf, type: 3}
+    emissionMap: {fileID: 2800000, guid: 16a11c40b0e8ad841950c8b1f8b7d597, type: 3}
+    baseSize: {x: 2.9, y: 2.9}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.65
+    flickerStrength: 0.55
+    swayStrength: 0.1
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BentBrassRobot
+    displayName: bent brass robot
+    category: 2
+    baseMap: {fileID: 2800000, guid: cd3b8c92f051b0548a36e8ad5c245c3f, type: 3}
+    normalMap: {fileID: 2800000, guid: 7d8cbf5c67606b340a2e173e5dbd7cca, type: 3}
+    emissionMap: {fileID: 2800000, guid: e980ac322033b494e9e29f350ef2f2b7, type: 3}
+    baseSize: {x: 3.3, y: 3.3}
+    scaleRange: {x: 0.9, y: 1.22}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1
+    flickerStrength: 0.32
+    swayStrength: 0.28
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: DollPileShrine
+    displayName: doll pile shrine
+    category: 2
+    baseMap: {fileID: 2800000, guid: 0a761a585a8088841930a6b03b94b14e, type: 3}
+    normalMap: {fileID: 2800000, guid: 1d3991757c6d8194eae92c57b7c7f751, type: 3}
+    emissionMap: {fileID: 2800000, guid: 5e7c4325486679241b73c0cdd827c14f, type: 3}
+    baseSize: {x: 3.1, y: 3.1}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.1
+    flickerStrength: 0.36
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CryingMaskStatue
+    displayName: crying mask statue
+    category: 2
+    baseMap: {fileID: 2800000, guid: de0e8d06c23a8944f81b2449597328c6, type: 3}
+    normalMap: {fileID: 2800000, guid: 4870815f8d8373a4d968ad46c94a8e53, type: 3}
+    emissionMap: {fileID: 2800000, guid: e76e41bdcb8a8ee43adb4905505ec89b, type: 3}
+    baseSize: {x: 3.5, y: 3.5}
+    scaleRange: {x: 0.92, y: 1.18}
+    weight: 0.85
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 0.78
+    flickerStrength: 0.18
+    swayStrength: 0.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: PuppetTheater
+    displayName: puppet theater
+    category: 2
+    baseMap: {fileID: 2800000, guid: 237c9c2a9b28fad49bcb2b0141655948, type: 3}
+    normalMap: {fileID: 2800000, guid: bf16fa4d96f08eb4a8e61f7dbeccbb3f, type: 3}
+    emissionMap: {fileID: 2800000, guid: 21b48506f73476143afd2d2a4ebd0bc3, type: 3}
+    baseSize: {x: 3.35, y: 3.35}
+    scaleRange: {x: 0.9, y: 1.2}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.05
+    flickerStrength: 0.32
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CrackedAngelBulb
+    displayName: cracked angel bulb
+    category: 2
+    baseMap: {fileID: 2800000, guid: 0db6c1c8ad96fbb41a5ccf2a67c01547, type: 3}
+    normalMap: {fileID: 2800000, guid: 1dc8a0bcc0ef61b45a9d9bcdcda7a631, type: 3}
+    emissionMap: {fileID: 2800000, guid: fab1b2f742229d84faac0617aa09f1c8, type: 3}
+    baseSize: {x: 3.25, y: 3.25}
+    scaleRange: {x: 0.9, y: 1.18}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.45
+    flickerStrength: 0.5
+    swayStrength: 0.12
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: EntranceSignFrame
+    displayName: entrance sign frame
+    category: 3
+    baseMap: {fileID: 2800000, guid: 878ef3dd90a27c14bbe054b87b59b933, type: 3}
+    normalMap: {fileID: 2800000, guid: 5373bbb6c91dd724aa785e04aa54e066, type: 3}
+    emissionMap: {fileID: 2800000, guid: e038dcb3c4a0a2841bb596378cccbc2a, type: 3}
+    baseSize: {x: 4.9, y: 4.9}
+    scaleRange: {x: 0.92, y: 1.18}
+    weight: 0.45
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 1
+    groundDecal: 0
+    glowStrength: 1.15
+    flickerStrength: 0.42
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CrookedArrowSign
+    displayName: crooked arrow sign
+    category: 3
+    baseMap: {fileID: 2800000, guid: bfd6333b657901241b5356cd3e242adb, type: 3}
+    normalMap: {fileID: 2800000, guid: 8374f69b512b38a45b4a88e38fee660b, type: 3}
+    emissionMap: {fileID: 2800000, guid: eab91bca30df5414b8b5918f6482a7ff, type: 3}
+    baseSize: {x: 1.4, y: 2.8}
+    scaleRange: {x: 0.82, y: 1.28}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.55
+    flickerStrength: 0.18
+    swayStrength: 0.12
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: DeadLampPost
+    displayName: dead lamp post
+    category: 3
+    baseMap: {fileID: 2800000, guid: 585227b852ea9934e85e1401345de564, type: 3}
+    normalMap: {fileID: 2800000, guid: 2bb2d92c9f96bda4186f7efcb085d380, type: 3}
+    emissionMap: {fileID: 2800000, guid: b5a4c4edf2ca2424099207aa30c7703c, type: 3}
+    baseSize: {x: 1.8, y: 3.6}
+    scaleRange: {x: 0.85, y: 1.25}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 1.2
+    flickerStrength: 0.52
+    swayStrength: 0.14
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BrokenStringLightPole
+    displayName: broken string light pole
+    category: 3
+    baseMap: {fileID: 2800000, guid: 93e612b46fc43e8459bbf5d04ddbd52d, type: 3}
+    normalMap: {fileID: 2800000, guid: 48882741efe6ce947951c50a489eb684, type: 3}
+    emissionMap: {fileID: 2800000, guid: b1ad985a8ae33a3458fae7165e5ff529, type: 3}
+    baseSize: {x: 3.8, y: 3.8}
+    scaleRange: {x: 0.85, y: 1.25}
+    weight: 0.85
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 1.35
+    flickerStrength: 0.56
+    swayStrength: 0.2
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BarbedFenceSegment
+    displayName: barbed fence
+    category: 3
+    baseMap: {fileID: 2800000, guid: b1765460200b3c440b13cc0862983b18, type: 3}
+    normalMap: {fileID: 2800000, guid: 9eec4b7ea33dc364d80cc86e068fda5b, type: 3}
+    emissionMap: {fileID: 2800000, guid: 3c926f8388f40dc4489dcf2e83991dc3, type: 3}
+    baseSize: {x: 2.1, y: 2.1}
+    scaleRange: {x: 0.9, y: 1.12}
+    weight: 0.35
+    billboard: 0
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.25
+    flickerStrength: 0.05
+    swayStrength: 0.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: TornBannerPole
+    displayName: torn banner pole
+    category: 3
+    baseMap: {fileID: 2800000, guid: af1c5fda3eea0ee4ca3dd180d6a08f74, type: 3}
+    normalMap: {fileID: 2800000, guid: 22f55ae8e059c9c42965d47ceff83de0, type: 3}
+    emissionMap: {fileID: 2800000, guid: 14e7036df9f23424c9f67718044e2e34, type: 3}
+    baseSize: {x: 3.2, y: 3.2}
+    scaleRange: {x: 0.82, y: 1.2}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.35
+    flickerStrength: 0.08
+    swayStrength: 0.26
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: TicketTokensPile
+    displayName: ticket tokens pile
+    category: 3
+    baseMap: {fileID: 2800000, guid: fba612971d802154f95c4bc39f8f0a6b, type: 3}
+    normalMap: {fileID: 2800000, guid: 7dc3f445b0e022441a451d7f477dcadb, type: 3}
+    emissionMap: {fileID: 2800000, guid: 82c926708e75f6142b21213bd57e2111, type: 3}
+    baseSize: {x: 1, y: 1}
+    scaleRange: {x: 0.8, y: 1.5}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.45
+    flickerStrength: 0.1
+    swayStrength: 0.02
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: LoudspeakerTower
+    displayName: loudspeaker tower
+    category: 3
+    baseMap: {fileID: 2800000, guid: da0b624f74ff52140a35dfb155b53858, type: 3}
+    normalMap: {fileID: 2800000, guid: 849becfa0941f304d86ebbe969744b74, type: 3}
+    emissionMap: {fileID: 2800000, guid: f7022d60bd94aea45bc36d3966e0e07c, type: 3}
+    baseSize: {x: 3.3, y: 3.3}
+    scaleRange: {x: 0.85, y: 1.25}
+    weight: 0.75
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.65
+    flickerStrength: 0.18
+    swayStrength: 0.16
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: DeadShrubStreamers
+    displayName: dead shrub streamers
+    category: 3
+    baseMap: {fileID: 2800000, guid: 155a5b6efeb40da418d9e3894feaf261, type: 3}
+    normalMap: {fileID: 2800000, guid: 551f195249fc0b440abb6b0398289b49, type: 3}
+    emissionMap: {fileID: 2800000, guid: 6cbb0a3f64005be4bb613782d917c846, type: 3}
+    baseSize: {x: 2.6, y: 2.6}
+    scaleRange: {x: 0.78, y: 1.3}
+    weight: 0.9
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.25
+    flickerStrength: 0.06
+    swayStrength: 0.18
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: WindBentUmbrella
+    displayName: wind bent umbrella
+    category: 3
+    baseMap: {fileID: 2800000, guid: 2d2df214c550bc643bfab36db06570bb, type: 3}
+    normalMap: {fileID: 2800000, guid: 7255ebbde1dca074c9e732e2303547c3, type: 3}
+    emissionMap: {fileID: 2800000, guid: c80972835d1b908409921f1c3ffd5688, type: 3}
+    baseSize: {x: 2.4, y: 2.4}
+    scaleRange: {x: 0.8, y: 1.25}
+    weight: 0.85
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.3
+    flickerStrength: 0.08
+    swayStrength: 0.22
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: TrashBarrel
+    displayName: trash barrel
+    category: 3
+    baseMap: {fileID: 2800000, guid: 0713c4568864c31409ea013c8f13243e, type: 3}
+    normalMap: {fileID: 2800000, guid: af23d21f15ebe95428882820f4c9c292, type: 3}
+    emissionMap: {fileID: 2800000, guid: 7cdf942a9b3255c478b6859276bf6ff8, type: 3}
+    baseSize: {x: 1.5, y: 1.5}
+    scaleRange: {x: 0.82, y: 1.25}
+    weight: 1.2
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.45
+    flickerStrength: 0.12
+    swayStrength: 0.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BrokenBench
+    displayName: broken bench
+    category: 3
+    baseMap: {fileID: 2800000, guid: 6201ad4ac79a3364b85a04279bfb6e14, type: 3}
+    normalMap: {fileID: 2800000, guid: c7a56c62f79f55c45a5e82ffd2d242dd, type: 3}
+    emissionMap: {fileID: 2800000, guid: ab17edbbeb7021b4cabc9bc6816cb4a7, type: 3}
+    baseSize: {x: 1.45, y: 1.45}
+    scaleRange: {x: 0.85, y: 1.25}
+    weight: 1.05
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.2
+    flickerStrength: 0.05
+    swayStrength: 0.02
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: WarningPlacard
+    displayName: warning placard
+    category: 3
+    baseMap: {fileID: 2800000, guid: 0901fb0c03e10604caaf10d4b4ad98db, type: 3}
+    normalMap: {fileID: 2800000, guid: 29e4418ed85de754fa8bf66199dfb0a7, type: 3}
+    emissionMap: {fileID: 2800000, guid: c74edfe24ae39fd45bbec6cb93657c09, type: 3}
+    baseSize: {x: 2, y: 2}
+    scaleRange: {x: 0.8, y: 1.18}
+    weight: 0.85
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.38
+    flickerStrength: 0.08
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: SkullWayfindingPost
+    displayName: wayfinding post
+    category: 3
+    baseMap: {fileID: 2800000, guid: 371ed3bf5612d6140b947c5fd2116ba8, type: 3}
+    normalMap: {fileID: 2800000, guid: ae27218ad041c684e9e9278f960b0ebe, type: 3}
+    emissionMap: {fileID: 2800000, guid: 7009b15424342994fa9d70dd5bd8f3d4, type: 3}
+    baseSize: {x: 2.7, y: 2.7}
+    scaleRange: {x: 0.82, y: 1.2}
+    weight: 0.85
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.45
+    flickerStrength: 0.1
+    swayStrength: 0.1
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CableCoil
+    displayName: buried cable coil
+    category: 3
+    baseMap: {fileID: 2800000, guid: f834d7ed68931a7488bddc5a4c0829ee, type: 3}
+    normalMap: {fileID: 2800000, guid: cdad12db2f24de547959fea5850a2d30, type: 3}
+    emissionMap: {fileID: 2800000, guid: 97784cf005c9a1e4bb87da3d5d53df19, type: 3}
+    baseSize: {x: 1.45, y: 1.45}
+    scaleRange: {x: 0.85, y: 1.25}
+    weight: 1
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.25
+    flickerStrength: 0.05
+    swayStrength: 0.02
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: GeneratorSmokeStack
+    displayName: generator smoke stack
+    category: 3
+    baseMap: {fileID: 2800000, guid: 663696254141755498d62acf4898705e, type: 3}
+    normalMap: {fileID: 2800000, guid: f17308ca15072ee418bbfd4da0bd4c05, type: 3}
+    emissionMap: {fileID: 2800000, guid: d96742915af78da428c2aeadf2a332e8, type: 3}
+    baseSize: {x: 2.3, y: 2.3}
+    scaleRange: {x: 0.82, y: 1.22}
+    weight: 0.75
+    billboard: 1
+    castShadow: 1
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 0
+    glowStrength: 0.65
+    flickerStrength: 0.18
+    swayStrength: 0.08
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CrackedDesertSand
+    displayName: cracked desert sand
+    category: 4
+    baseMap: {fileID: 2800000, guid: d54bf525366835846a9d330b6c4a0f8f, type: 3}
+    normalMap: {fileID: 2800000, guid: 96c2170295fbef943b5f30cb4e937742, type: 3}
+    emissionMap: {fileID: 2800000, guid: fac7e82923ef750439478b68b6ebef20, type: 3}
+    baseSize: {x: 5.2, y: 5.2}
+    scaleRange: {x: 0.85, y: 1.65}
+    weight: 1.25
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.05
+    flickerStrength: 0
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: DustyMidwayPath
+    displayName: dusty midway path
+    category: 4
+    baseMap: {fileID: 2800000, guid: 99f3fa128f423d643ae27b55606fbed2, type: 3}
+    normalMap: {fileID: 2800000, guid: 02361746117463c4893db6fc388be14b, type: 3}
+    emissionMap: {fileID: 2800000, guid: 15570d6856ca38f4e9cac87dc3cdb90e, type: 3}
+    baseSize: {x: 5.8, y: 5.8}
+    scaleRange: {x: 0.85, y: 1.75}
+    weight: 1.25
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.05
+    flickerStrength: 0
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: OilStainedAsphalt
+    displayName: oil stained asphalt
+    category: 4
+    baseMap: {fileID: 2800000, guid: 22ae975f54894854ba9b674e8c78a0c4, type: 3}
+    normalMap: {fileID: 2800000, guid: b7a1d6891f092a5479a4814e71028577, type: 3}
+    emissionMap: {fileID: 2800000, guid: 80d34b621e6380f4dae911191cc17204, type: 3}
+    baseSize: {x: 5.1, y: 5.1}
+    scaleRange: {x: 0.75, y: 1.45}
+    weight: 0.9
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.18
+    flickerStrength: 0.04
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: RottenPlankPatch
+    displayName: rotten plank patch
+    category: 4
+    baseMap: {fileID: 2800000, guid: c18855249c4ca8e41918051f8594a27e, type: 3}
+    normalMap: {fileID: 2800000, guid: 59b97aa460ffd4d44bc1be4611d3695c, type: 3}
+    emissionMap: {fileID: 2800000, guid: bd4ef86f3f9213342adc56b0e96e60bc, type: 3}
+    baseSize: {x: 5, y: 5}
+    scaleRange: {x: 0.8, y: 1.35}
+    weight: 0.9
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.05
+    flickerStrength: 0
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BoneConfetti
+    displayName: bone confetti
+    category: 4
+    baseMap: {fileID: 2800000, guid: 369140367a8deaa44ac004e2316c6d98, type: 3}
+    normalMap: {fileID: 2800000, guid: 584de30f66080ee44ac5cf8f07245019, type: 3}
+    emissionMap: {fileID: 2800000, guid: 4fe295562d1c4dc458eac6bef96aca88, type: 3}
+    baseSize: {x: 4.6, y: 4.6}
+    scaleRange: {x: 0.75, y: 1.25}
+    weight: 0.7
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.35
+    flickerStrength: 0.06
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: TireTracks
+    displayName: tire tracks
+    category: 4
+    baseMap: {fileID: 2800000, guid: ff155decb6d1aae4182c66fa38056c96, type: 3}
+    normalMap: {fileID: 2800000, guid: 17a54fe943646174ebabf012025d66a5, type: 3}
+    emissionMap: {fileID: 2800000, guid: 4e665ed14b325ff44b87cbd12a56ccb1, type: 3}
+    baseSize: {x: 5.4, y: 5.4}
+    scaleRange: {x: 0.8, y: 1.55}
+    weight: 0.9
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.04
+    flickerStrength: 0
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CableTrench
+    displayName: cable trench
+    category: 4
+    baseMap: {fileID: 2800000, guid: e80a0bfc6486a764da1dc61c3ba02b8b, type: 3}
+    normalMap: {fileID: 2800000, guid: c1a9b76a849930548838170fb872670b, type: 3}
+    emissionMap: {fileID: 2800000, guid: bfb46875f85beca4b8d3fd6e6c769174, type: 3}
+    baseSize: {x: 5.2, y: 5.2}
+    scaleRange: {x: 0.75, y: 1.45}
+    weight: 0.8
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.08
+    flickerStrength: 0
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: ChalkCircle
+    displayName: chalk circle
+    category: 4
+    baseMap: {fileID: 2800000, guid: 0efbf5b177ad75749bc749df1d96f2ab, type: 3}
+    normalMap: {fileID: 2800000, guid: 076f0a9d0bb592449b9f366a77819a7a, type: 3}
+    emissionMap: {fileID: 2800000, guid: 06338867ed8d4fa4da65ceeed05440c1, type: 3}
+    baseSize: {x: 5.2, y: 5.2}
+    scaleRange: {x: 0.8, y: 1.35}
+    weight: 0.65
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.42
+    flickerStrength: 0.12
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BlackPuddle
+    displayName: black puddle
+    category: 4
+    baseMap: {fileID: 2800000, guid: b70492c1d6232be48b4ce7821043b171, type: 3}
+    normalMap: {fileID: 2800000, guid: 7faccf22b935f924da9e90d811356046, type: 3}
+    emissionMap: {fileID: 2800000, guid: 8b3bde41bc5d1e84fa0e06a165208f36, type: 3}
+    baseSize: {x: 4.5, y: 4.5}
+    scaleRange: {x: 0.7, y: 1.25}
+    weight: 0.75
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.18
+    flickerStrength: 0.04
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: RustScrapPile
+    displayName: rust scrap pile
+    category: 4
+    baseMap: {fileID: 2800000, guid: 7db6d1271c6b2ab4ab981da238454cc8, type: 3}
+    normalMap: {fileID: 2800000, guid: 246dc253813a2c04ba72e703b3bc7a23, type: 3}
+    emissionMap: {fileID: 2800000, guid: 18b067ef2949f204b9f1744b5d11a474, type: 3}
+    baseSize: {x: 4.4, y: 4.4}
+    scaleRange: {x: 0.7, y: 1.2}
+    weight: 0.55
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.12
+    flickerStrength: 0.03
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: AshScorch
+    displayName: ash scorch
+    category: 4
+    baseMap: {fileID: 2800000, guid: f6d4e38d8d64f274ebe7b9d11d94ee5f, type: 3}
+    normalMap: {fileID: 2800000, guid: 596db6a002e39a24c8e1010adafcd7cc, type: 3}
+    emissionMap: {fileID: 2800000, guid: 592b823801f93c0498be889f20364ceb, type: 3}
+    baseSize: {x: 4.8, y: 4.8}
+    scaleRange: {x: 0.75, y: 1.35}
+    weight: 0.7
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.22
+    flickerStrength: 0.06
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: BrokenTilePatch
+    displayName: broken tile patch
+    category: 4
+    baseMap: {fileID: 2800000, guid: 3c72c1700c65215488e320a2415f36c7, type: 3}
+    normalMap: {fileID: 2800000, guid: aab3147823ddca642a925cb85e5005fe, type: 3}
+    emissionMap: {fileID: 2800000, guid: ee1062156a40f99458850c25f47788b3, type: 3}
+    baseSize: {x: 4.7, y: 4.7}
+    scaleRange: {x: 0.75, y: 1.28}
+    weight: 0.65
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.08
+    flickerStrength: 0
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CarnivalPaintStripe
+    displayName: carnival paint stripe
+    category: 4
+    baseMap: {fileID: 2800000, guid: 9ccb13374cf3ae047998f29845d0a4db, type: 3}
+    normalMap: {fileID: 2800000, guid: 453cac0ecd57e314c97cad32ddd777cf, type: 3}
+    emissionMap: {fileID: 2800000, guid: c411ad4d6de77bc45978738ce528bc35, type: 3}
+    baseSize: {x: 5, y: 5}
+    scaleRange: {x: 0.8, y: 1.5}
+    weight: 0.75
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.15
+    flickerStrength: 0.02
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CollapsedBanner
+    displayName: collapsed banner
+    category: 4
+    baseMap: {fileID: 2800000, guid: 5b6c956f3df2ce94bbd6c730bbb43114, type: 3}
+    normalMap: {fileID: 2800000, guid: 1a7c3ec1526ddf843b492521bb34fd51, type: 3}
+    emissionMap: {fileID: 2800000, guid: 21ff2f36a6fd5594eb5a43aebe817ce0, type: 3}
+    baseSize: {x: 4.7, y: 4.7}
+    scaleRange: {x: 0.75, y: 1.25}
+    weight: 0.7
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.14
+    flickerStrength: 0.02
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: CoinScatter
+    displayName: coin scatter
+    category: 4
+    baseMap: {fileID: 2800000, guid: 768eda34b7fa29b4ab53a55b2a31a2e1, type: 3}
+    normalMap: {fileID: 2800000, guid: d931b7adac5aceb44942501c70d65b0d, type: 3}
+    emissionMap: {fileID: 2800000, guid: 208210ce45018b54ebaca21ae8c82303, type: 3}
+    baseSize: {x: 4, y: 4}
+    scaleRange: {x: 0.7, y: 1.25}
+    weight: 0.55
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.42
+    flickerStrength: 0.08
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}
+  - id: DeadGrassPapers
+    displayName: dead grass papers
+    category: 4
+    baseMap: {fileID: 2800000, guid: 4d584aead6b4044418af7ba1b96f7e79, type: 3}
+    normalMap: {fileID: 2800000, guid: 4315b8567000fe04e9e46bb70b6cccc0, type: 3}
+    emissionMap: {fileID: 2800000, guid: b93094c4bce933448bd8bbbdbbae14ab, type: 3}
+    baseSize: {x: 4.6, y: 4.6}
+    scaleRange: {x: 0.75, y: 1.35}
+    weight: 0.85
+    billboard: 0
+    castShadow: 0
+    receiveShadow: 1
+    interactableCandidate: 0
+    groundDecal: 1
+    glowStrength: 0.08
+    flickerStrength: 0
+    swayStrength: 0
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    emissionColor: {r: 1, g: 1, b: 1, a: 1}
+    rimColor: {r: 1, g: 0.34, b: 0.08, a: 1}

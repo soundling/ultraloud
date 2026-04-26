@@ -39,8 +39,8 @@ MonoBehaviour:
   fuseTime: 0
   localPosition: {x: 0.02, y: -0.04, z: 0.06}
   localEuler: {x: 2, y: 0, z: 0}
-  recoilPosition: {x: 0, y: 0.01, z: -0.095}
-  recoilEuler: {x: 8, y: 1.4, z: 2}
+  recoilPosition: {x: 0, y: 0.012, z: -0.11}
+  recoilEuler: {x: 9.5, y: 1.7, z: 2.35}
   bodyColor: {r: 0.18, g: 0.14, b: 0.11, a: 1}
   accentColor: {r: 0.45, g: 0.36, b: 0.19, a: 1}
   primitiveMuzzleFlashScale: 0.32
@@ -57,6 +57,12 @@ MonoBehaviour:
   bulletTrailEndOffset: 0.08
   bulletTrailMaxSegmentsPerShot: 8
   spriteMapSet: {fileID: 11400000, guid: c12f3dc67776faf4cb044df27e339af8, type: 2}
+  fireAnimationMapSets:
+  - {fileID: 11400000, guid: c0db34df44aceea47a771b928ac88fa8, type: 2}
+  - {fileID: 11400000, guid: 727341cf74bc2384997e1635c088d419, type: 2}
+  - {fileID: 11400000, guid: 897c43a439bd1cd469fdb92c44211243, type: 2}
+  - {fileID: 11400000, guid: e48a5567e11e348499e2b5385f6247dc, type: 2}
+  fireAnimationFrameDuration: 0.032
   spriteVisualLocalPosition: {x: 0.01, y: -0.063, z: 0.06}
   spriteVisualLocalEuler: {x: 0, y: 0, z: -2}
   spriteVisualSize: {x: 1.46, y: 0.82}

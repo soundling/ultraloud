@@ -71,8 +71,8 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
     [SerializeField, Min(0f)] private float bobAmplitude = 0.18f;
     [SerializeField, Min(0f)] private float bobFrequency = 13f;
     [SerializeField, Min(0f)] private float leanDegrees = 13f;
-    [SerializeField] private Color speedRimColor = new(1f, 0.18f, 0.05f, 1f);
-    [SerializeField] private Color wheelieRimColor = new(1f, 0.78f, 0.28f, 1f);
+    [SerializeField] private Color speedRimColor = new(0.9f, 0.84f, 0.68f, 1f);
+    [SerializeField] private Color wheelieRimColor = new(1f, 0.9f, 0.58f, 1f);
     [SerializeField, Min(0f)] private float exhaustTrailInterval = 0.055f;
     [SerializeField] private Color exhaustTrailColor = new(1f, 0.28f, 0.04f, 0.85f);
     [SerializeField] private Color boneDustTrailColor = new(0.76f, 0.7f, 0.55f, 0.58f);
@@ -599,10 +599,10 @@ public sealed class RetroSkeletonMotocrossRider : MonoBehaviour
 
         visualRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetColor(RimColorId, rim);
-        propertyBlock.SetFloat(RimStrengthId, Mathf.Lerp(0.15f, stunt ? 1.35f : 0.72f, speed01));
-        propertyBlock.SetFloat(SpecularStrengthId, Mathf.Lerp(0.2f, 1.15f, speed01));
-        propertyBlock.SetFloat(MacroNormalBendId, Mathf.Lerp(0.72f, stunt ? 1.58f : 1.18f, pulse * speed01));
-        propertyBlock.SetFloat(WrapDiffuseId, Mathf.Lerp(0.18f, 0.38f, speed01));
+        propertyBlock.SetFloat(RimStrengthId, Mathf.Lerp(0.03f, stunt ? 0.26f : 0.16f, speed01));
+        propertyBlock.SetFloat(SpecularStrengthId, Mathf.Lerp(0.03f, 0.1f, speed01));
+        propertyBlock.SetFloat(MacroNormalBendId, Mathf.Lerp(0.45f, stunt ? 0.82f : 0.68f, pulse * speed01));
+        propertyBlock.SetFloat(WrapDiffuseId, Mathf.Lerp(0.3f, 0.38f, speed01));
         visualRenderer.SetPropertyBlock(propertyBlock);
     }
 

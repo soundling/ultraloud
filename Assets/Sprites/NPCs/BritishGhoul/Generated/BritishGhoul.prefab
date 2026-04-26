@@ -114,25 +114,25 @@ MonoBehaviour:
   lightingBasisMode: 2
   baseColorTint: {r: 1, g: 1, b: 1, a: 1}
   alphaCutoff: 0.075
-  normalScale: 1.18
-  detailNormalInfluence: 0.76
-  macroNormalBend: 1.05
-  spriteAngleLightingInfluence: 0.48
+  normalScale: 0.9
+  detailNormalInfluence: 0.48
+  macroNormalBend: 0.55
+  spriteAngleLightingInfluence: 0.28
   twoSidedLighting: 1
   flipBackfacingNormals: 1
-  wrapDiffuse: 0.26
+  wrapDiffuse: 0.34
   ambientTopColor: {r: 0.52, g: 0.56, b: 0.62, a: 1}
   ambientBottomColor: {r: 0.14, g: 0.12, b: 0.1, a: 1}
-  ambientIntensity: 0.94
+  ambientIntensity: 0.92
   includeRenderSettingsAmbient: 1
   renderSettingsAmbientScale: 0.2
-  surfaceRoughness: 0.82
-  specularStrength: 0.04
-  minSpecularPower: 6
-  maxSpecularPower: 18
-  rimColor: {r: 0.55, g: 0.95, b: 0.74, a: 1}
-  rimStrength: 0.16
-  rimPower: 3.6
+  surfaceRoughness: 0.94
+  specularStrength: 0.025
+  minSpecularPower: 8
+  maxSpecularPower: 14
+  rimColor: {r: 0.92, g: 0.86, b: 0.74, a: 1}
+  rimStrength: 0.025
+  rimPower: 4.2
 --- !u!114 &7270032135212091153
 MonoBehaviour:
   m_ObjectHideFlags: 0

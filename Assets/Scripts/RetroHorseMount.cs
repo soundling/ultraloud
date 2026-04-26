@@ -93,7 +93,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     [Header("Effects")]
     [SerializeField, Min(0f)] private float dustTrailInterval = 0.085f;
     [SerializeField] private Color dustTrailColor = new(0.72f, 0.62f, 0.43f, 0.52f);
-    [SerializeField] private Color speedRimColor = new(1f, 0.64f, 0.25f, 1f);
+    [SerializeField] private Color speedRimColor = new(0.9f, 0.84f, 0.68f, 1f);
 
     private readonly HashSet<RetroDamageable> damagedThisPulse = new();
     private readonly List<ObjectState> hiddenPlayerObjects = new();
@@ -713,10 +713,10 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 13.5f + visualPhaseOffset * 1.37f);
         visualRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetColor(RimColorId, speedRimColor);
-        propertyBlock.SetFloat(RimStrengthId, Mathf.Lerp(0.08f, 0.54f + pulse * 0.22f, speed01));
-        propertyBlock.SetFloat(SpecularStrengthId, Mathf.Lerp(0.12f, 0.68f, speed01));
-        propertyBlock.SetFloat(MacroNormalBendId, Mathf.Lerp(0.88f, 1.34f, speed01));
-        propertyBlock.SetFloat(WrapDiffuseId, Mathf.Lerp(0.18f, 0.32f, speed01));
+        propertyBlock.SetFloat(RimStrengthId, Mathf.Lerp(0.02f, 0.16f + pulse * 0.04f, speed01));
+        propertyBlock.SetFloat(SpecularStrengthId, Mathf.Lerp(0.02f, 0.08f, speed01));
+        propertyBlock.SetFloat(MacroNormalBendId, Mathf.Lerp(0.5f, 0.72f, speed01));
+        propertyBlock.SetFloat(WrapDiffuseId, Mathf.Lerp(0.3f, 0.38f, speed01));
         visualRenderer.SetPropertyBlock(propertyBlock);
     }
 

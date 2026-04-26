@@ -256,18 +256,18 @@ public static class RetroHorseBuilder
         serialized.FindProperty("targetRenderer").objectReferenceValue = quadRenderer;
         serialized.FindProperty("lightAnchor").objectReferenceValue = null;
         SetFloat(serialized, "alphaCutoff", 0.08f);
-        SetFloat(serialized, "normalScale", 1.48f);
-        SetFloat(serialized, "detailNormalInfluence", 0.86f);
-        SetFloat(serialized, "macroNormalBend", 1.12f);
-        SetFloat(serialized, "spriteAngleLightingInfluence", 0.58f);
-        SetFloat(serialized, "wrapDiffuse", 0.24f);
-        SetFloat(serialized, "ambientIntensity", 0.82f);
+        SetFloat(serialized, "normalScale", 0.95f);
+        SetFloat(serialized, "detailNormalInfluence", 0.5f);
+        SetFloat(serialized, "macroNormalBend", 0.58f);
+        SetFloat(serialized, "spriteAngleLightingInfluence", 0.32f);
+        SetFloat(serialized, "wrapDiffuse", 0.34f);
+        SetFloat(serialized, "ambientIntensity", 0.9f);
         SetFloat(serialized, "renderSettingsAmbientScale", 0.22f);
-        SetFloat(serialized, "surfaceRoughness", 0.78f);
-        SetFloat(serialized, "specularStrength", 0.25f);
-        SetFloat(serialized, "rimStrength", 0.28f);
-        SetFloat(serialized, "rimPower", 2.9f);
-        SetColor(serialized, "rimColor", new Color(1f, 0.55f, 0.2f, 1f));
+        SetFloat(serialized, "surfaceRoughness", 0.92f);
+        SetFloat(serialized, "specularStrength", 0.04f);
+        SetFloat(serialized, "rimStrength", 0.04f);
+        SetFloat(serialized, "rimPower", 4f);
+        SetColor(serialized, "rimColor", new Color(0.92f, 0.86f, 0.74f, 1f));
         serialized.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(renderer);
     }
@@ -364,7 +364,7 @@ public static class RetroHorseBuilder
         SetFloat(serialized, "impactKnockback", 7.5f);
         SetFloat(serialized, "dustTrailInterval", 0.075f);
         SetColor(serialized, "dustTrailColor", new Color(0.72f, 0.62f, 0.43f, 0.52f));
-        SetColor(serialized, "speedRimColor", new Color(1f, 0.58f, 0.18f, 1f));
+        SetColor(serialized, "speedRimColor", new Color(0.9f, 0.84f, 0.68f, 1f));
         serialized.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(mount);
     }

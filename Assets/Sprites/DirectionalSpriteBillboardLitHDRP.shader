@@ -8,20 +8,20 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
 
         [Header(Shading)]
         _AlphaCutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.08
-        _NormalScale("Normal Strength", Range(0.0, 2.0)) = 1.0
-        _DetailNormalInfluence("Detail Normal Influence", Range(0.0, 1.0)) = 0.55
-        _MacroNormalBend("Macro Normal Bend", Range(0.0, 2.0)) = 0.75
-        _WrapDiffuse("Wrap Diffuse", Range(0.0, 1.0)) = 0.35
+        _NormalScale("Normal Strength", Range(0.0, 2.0)) = 0.9
+        _DetailNormalInfluence("Detail Normal Influence", Range(0.0, 1.0)) = 0.48
+        _MacroNormalBend("Macro Normal Bend", Range(0.0, 2.0)) = 0.55
+        _WrapDiffuse("Wrap Diffuse", Range(0.0, 1.0)) = 0.34
         _AmbientTopColor("Ambient Top Color", Color) = (0.52, 0.56, 0.62, 1)
         _AmbientBottomColor("Ambient Bottom Color", Color) = (0.14, 0.12, 0.10, 1)
         _AmbientIntensity("Ambient Intensity", Range(0.0, 4.0)) = 1.0
-        _SurfaceRoughness("Surface Roughness", Range(0.0, 1.0)) = 0.7
-        _SpecularStrength("Specular Strength", Range(0.0, 4.0)) = 0.45
-        _MinSpecularPower("Min Specular Power", Range(1.0, 32.0)) = 6.0
-        _MaxSpecularPower("Max Specular Power", Range(1.0, 128.0)) = 24.0
+        _SurfaceRoughness("Surface Roughness", Range(0.0, 1.0)) = 0.94
+        _SpecularStrength("Specular Strength", Range(0.0, 4.0)) = 0.025
+        _MinSpecularPower("Min Specular Power", Range(1.0, 32.0)) = 8.0
+        _MaxSpecularPower("Max Specular Power", Range(1.0, 128.0)) = 14.0
         _RimColor("Rim Color", Color) = (1, 1, 1, 1)
-        _RimStrength("Rim Strength", Range(0.0, 4.0)) = 0.18
-        _RimPower("Rim Power", Range(0.5, 8.0)) = 3.0
+        _RimStrength("Rim Strength", Range(0.0, 4.0)) = 0.025
+        _RimPower("Rim Power", Range(0.5, 8.0)) = 4.2
 
         [HideInInspector] _SpriteFlipX("Sprite Flip X", Float) = 1
         [HideInInspector] _UseNormalMap("Use Normal Map", Float) = 0
@@ -169,11 +169,15 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
             normalize(input.tangentToWorld[2].xyz));
     }
 
-    float3 EvaluateLighting(float3 albedo, float3 normalWS, float3 viewWS, float3 hitPositionWS, float2 uv)
+    float3 EvaluateLighting(float3 albedo, float alpha, float3 normalWS, float3 viewWS, float3 hitPositionWS, float2 uv)
     {
         float roughness = saturate(_SurfaceRoughness);
         float3 lighting = lerp(_AmbientBottomColor.rgb, _AmbientTopColor.rgb, saturate(uv.y)) * _AmbientIntensity * albedo;
         float nDotV = saturate(dot(normalWS, viewWS));
+        float spriteCoverage = saturate(alpha * 1.35);
+        float albedoLuma = dot(albedo, float3(0.2126, 0.7152, 0.0722));
+        float edgeTintMask = saturate(albedoLuma * 1.6) * spriteCoverage;
+        float3 specularTint = lerp(float3(0.04, 0.04, 0.04), albedo, 0.35);
 
         [loop]
         for (int lightIndex = 0; lightIndex < 4; lightIndex++)
@@ -231,17 +235,17 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
             float3 halfwayDirection = normalize(lightDirectionWS + viewWS);
             float nDotH = saturate(dot(specularNormalWS, halfwayDirection));
             float specularPower = lerp(_MaxSpecularPower, _MinSpecularPower, roughness);
-            float specular = pow(nDotH, specularPower) * specularNdotL * _SpecularStrength;
+            float specular = pow(nDotH, specularPower) * specularNdotL * _SpecularStrength * spriteCoverage;
             if (wrappedDiffuse <= 0.0 && specular <= 0.0)
             {
                 continue;
             }
 
-            lighting += lightColor * attenuation * (albedo * wrappedDiffuse + specular);
+            lighting += lightColor * attenuation * (albedo * wrappedDiffuse + specularTint * specular);
         }
 
-        float rim = pow(1.0 - nDotV, _RimPower) * _RimStrength;
-        lighting += _RimColor.rgb * rim;
+        float rim = pow(1.0 - nDotV, _RimPower) * _RimStrength * edgeTintMask;
+        lighting += _RimColor.rgb * albedo * rim;
         return lighting;
     }
 
@@ -276,7 +280,7 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
 
         float3 hitPositionWS = GetAbsolutePositionWS(input.positionRWS);
         surfaceData.normalWS = normalWS;
-        surfaceData.color = EvaluateLighting(baseSample.rgb * _BaseColor.rgb, normalWS, viewDirectionWS, hitPositionWS, uv);
+        surfaceData.color = EvaluateLighting(baseSample.rgb * _BaseColor.rgb, alpha, normalWS, viewDirectionWS, hitPositionWS, uv);
     }
 
     ENDHLSL

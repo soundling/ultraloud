@@ -114,11 +114,30 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls: []
+  building: {fileID: 144959656791501045}
+  doorSide: 1
   teleportTarget: {fileID: 6798916679303160732}
+  npcApproachTarget: {fileID: 2298408427833869056}
+  pairedDoor: {fileID: 5196380913191056367}
   alignActorYaw: 1
   clearRigidbodyVelocity: 1
+  allowNpcUse: 1
+  npcUseCooldown: 0.65
   enteredMessage: You step outside.
   enteredMessageDuration: 1.1
+  lockMode: 0
+  locked: 0
+  ownerTeamId:
+  accessCode: 1234
+  requiredKeyResource: {fileID: 0}
+  requiredKeyAmount: 1
+  consumeKeyOnUse: 0
+  rememberCodeUsers: 1
+  allowNpcUseWhenLocked: 1
+  authorizedActors: []
+  authorizedTags: []
+  lockedMessage: Door is locked.
+  unauthorizedMessage: Access denied.
 --- !u!1 &4072495984447109558
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,8 +788,27 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls: []
+  building: {fileID: 144959656791501045}
+  doorSide: 0
   teleportTarget: {fileID: 2298408427833869056}
+  npcApproachTarget: {fileID: 6798916679303160732}
+  pairedDoor: {fileID: 2861510103975058083}
   alignActorYaw: 1
   clearRigidbodyVelocity: 1
+  allowNpcUse: 1
+  npcUseCooldown: 0.65
   enteredMessage: You step inside.
   enteredMessageDuration: 1.1
+  lockMode: 0
+  locked: 0
+  ownerTeamId:
+  accessCode: 1234
+  requiredKeyResource: {fileID: 0}
+  requiredKeyAmount: 1
+  consumeKeyOnUse: 0
+  rememberCodeUsers: 1
+  allowNpcUseWhenLocked: 1
+  authorizedActors: []
+  authorizedTags: []
+  lockedMessage: Door is locked.
+  unauthorizedMessage: Access denied.

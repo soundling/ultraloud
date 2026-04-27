@@ -267,22 +267,37 @@ public sealed class RetroHybridBuildingBuilderWindow : EditorWindow
         outsideSpawn.localScale = Vector3.one;
 
         Transform exteriorDoor = FindOrCreateChild(root, ExteriorDoorObjectName);
-        ConfigureDoorInteraction(
+        RetroBuildingDoorInteractable exteriorDoorInteractable = ConfigureDoorInteraction(
             exteriorDoor,
+            building,
+            RetroBuildingDoorSide.Exterior,
             building.ExteriorDoorColliderLocalCenter,
             building.DoorColliderSize,
             insideSpawn,
+            outsideSpawn,
             "Enter",
             "You step inside.");
 
         Transform interiorDoor = FindOrCreateChild(root, InteriorDoorObjectName);
-        ConfigureDoorInteraction(
+        RetroBuildingDoorInteractable interiorDoorInteractable = ConfigureDoorInteraction(
             interiorDoor,
+            building,
+            RetroBuildingDoorSide.Interior,
             building.InteriorDoorColliderLocalCenter,
             building.DoorColliderSize,
             outsideSpawn,
+            insideSpawn,
             "Exit",
             "You step outside.");
+        if (exteriorDoorInteractable != null && interiorDoorInteractable != null)
+        {
+            SerializedObject exteriorSerialized = new(exteriorDoorInteractable);
+            SetObject(exteriorSerialized, "pairedDoor", interiorDoorInteractable);
+            exteriorSerialized.ApplyModifiedPropertiesWithoutUndo();
+            SerializedObject interiorSerialized = new(interiorDoorInteractable);
+            SetObject(interiorSerialized, "pairedDoor", exteriorDoorInteractable);
+            interiorSerialized.ApplyModifiedPropertiesWithoutUndo();
+        }
 
         EditorUtility.SetDirty(insideSpawn);
         EditorUtility.SetDirty(outsideSpawn);
@@ -526,14 +541,22 @@ public sealed class RetroHybridBuildingBuilderWindow : EditorWindow
         return childObject.transform;
     }
 
-    private static void ConfigureDoorInteraction(
+    private static RetroBuildingDoorInteractable ConfigureDoorInteraction(
         Transform door,
+        RetroHybridBuilding building,
+        RetroBuildingDoorSide doorSide,
         Vector3 localCenter,
         Vector3 colliderSize,
         Transform target,
+        Transform npcApproachTarget,
         string verb,
         string message)
     {
+        if (door == null)
+        {
+            return null;
+        }
+
         door.localPosition = localCenter;
         door.localRotation = Quaternion.identity;
         door.localScale = Vector3.one;
@@ -546,7 +569,14 @@ public sealed class RetroHybridBuildingBuilderWindow : EditorWindow
         RetroBuildingDoorInteractable interactable = GetOrAddComponent<RetroBuildingDoorInteractable>(door.gameObject);
         SerializedObject serializedDoor = new(interactable);
         serializedDoor.Update();
+        SetObject(serializedDoor, "building", building);
+        SetEnum(serializedDoor, "doorSide", (int)doorSide);
         SetObject(serializedDoor, "teleportTarget", target);
+        SetObject(serializedDoor, "npcApproachTarget", npcApproachTarget);
+        SetBool(serializedDoor, "allowNpcUse", true);
+        SetBool(serializedDoor, "allowNpcUseWhenLocked", true);
+        SetEnum(serializedDoor, "lockMode", (int)RetroBuildingDoorLockMode.None);
+        SetBool(serializedDoor, "locked", false);
         SetString(serializedDoor, "interactionName", "settlement house");
         SetString(serializedDoor, "interactionVerb", verb);
         SetFloat(serializedDoor, "interactionMaxDistance", 3.35f);
@@ -557,6 +587,7 @@ public sealed class RetroHybridBuildingBuilderWindow : EditorWindow
         EditorUtility.SetDirty(door);
         EditorUtility.SetDirty(doorCollider);
         EditorUtility.SetDirty(interactable);
+        return interactable;
     }
 
     private static T GetOrAddComponent<T>(GameObject target) where T : Component
@@ -655,6 +686,15 @@ public sealed class RetroHybridBuildingBuilderWindow : EditorWindow
         if (property != null)
         {
             property.intValue = value;
+        }
+    }
+
+    private static void SetEnum(SerializedObject target, string propertyName, int value)
+    {
+        SerializedProperty property = target.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.enumValueIndex = value;
         }
     }
 

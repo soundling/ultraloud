@@ -176,6 +176,7 @@ public sealed class RetroHybridBuilding : MonoBehaviour
     public Quaternion InsideSpawnLocalRotation => Quaternion.Euler(0f, insideSpawnYaw, 0f);
     public Vector3 OutsideSpawnLocalPosition => outsideSpawnLocalPosition;
     public Quaternion OutsideSpawnLocalRotation => Quaternion.Euler(0f, outsideSpawnYaw, 0f);
+    public bool BuildsInterior => buildInterior;
 
     private void Reset()
     {
@@ -444,6 +445,69 @@ public sealed class RetroHybridBuilding : MonoBehaviour
     private static int GetAssetHash(Object asset)
     {
         return asset != null ? asset.GetHashCode() : 0;
+    }
+
+    public bool ContainsInteriorWorldPosition(Vector3 worldPosition, float padding = 0.02f)
+    {
+        if (!buildInterior)
+        {
+            return false;
+        }
+
+        float safePadding = Mathf.Max(0f, padding);
+        Vector3 local = transform.InverseTransformPoint(worldPosition);
+        float halfWidth = Mathf.Max(0.05f, width * 0.5f - interiorInset) + safePadding;
+        float halfDepth = Mathf.Max(0.05f, depth * 0.5f - interiorInset) + safePadding;
+        return local.x >= -halfWidth
+            && local.x <= halfWidth
+            && local.z >= -halfDepth
+            && local.z <= halfDepth
+            && local.y >= -safePadding
+            && local.y <= interiorHeight + safePadding;
+    }
+
+    public Vector3 ClampInteriorWorldPosition(Vector3 worldPosition, float margin = 0.45f)
+    {
+        Vector3 local = transform.InverseTransformPoint(worldPosition);
+        return transform.TransformPoint(ClampInteriorLocalPosition(local, margin));
+    }
+
+    public Vector3 GetRandomInteriorWorldPosition(float margin = 0.45f)
+    {
+        float safeMargin = Mathf.Max(0f, margin);
+        float halfWidth = Mathf.Max(0.08f, width * 0.5f - interiorInset - safeMargin);
+        float halfDepth = Mathf.Max(0.08f, depth * 0.5f - interiorInset - safeMargin);
+        Vector3 local = new(
+            UnityEngine.Random.Range(-halfWidth, halfWidth),
+            Mathf.Max(0.06f, insideSpawnLocalPosition.y),
+            UnityEngine.Random.Range(-halfDepth, halfDepth));
+        return transform.TransformPoint(local);
+    }
+
+    public static RetroHybridBuilding FindInteriorContaining(Vector3 worldPosition, float padding = 0.02f)
+    {
+        RetroHybridBuilding[] buildings = Object.FindObjectsByType<RetroHybridBuilding>(FindObjectsInactive.Exclude);
+        for (int i = 0; i < buildings.Length; i++)
+        {
+            RetroHybridBuilding building = buildings[i];
+            if (building != null && building.ContainsInteriorWorldPosition(worldPosition, padding))
+            {
+                return building;
+            }
+        }
+
+        return null;
+    }
+
+    private Vector3 ClampInteriorLocalPosition(Vector3 localPosition, float margin)
+    {
+        float safeMargin = Mathf.Max(0f, margin);
+        float halfWidth = Mathf.Max(0.08f, width * 0.5f - interiorInset - safeMargin);
+        float halfDepth = Mathf.Max(0.08f, depth * 0.5f - interiorInset - safeMargin);
+        localPosition.x = Mathf.Clamp(localPosition.x, -halfWidth, halfWidth);
+        localPosition.y = Mathf.Clamp(localPosition.y, Mathf.Max(0.04f, insideSpawnLocalPosition.y), Mathf.Max(0.05f, interiorHeight - 0.15f));
+        localPosition.z = Mathf.Clamp(localPosition.z, -halfDepth, halfDepth);
+        return localPosition;
     }
 
     private bool HasGeneratedRoot()

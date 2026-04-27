@@ -90,6 +90,15 @@ public sealed class RetroNpcAgent : MonoBehaviour
     [SerializeField, Min(0.05f)] private float wanderPointTolerance = 0.45f;
     [SerializeField] private Vector2 idleWaitRange = new Vector2(1.25f, 3f);
 
+    [Header("Doors")]
+    [SerializeField] private bool useBuildingDoors = true;
+    [SerializeField] private bool detectStartingInterior = true;
+    [SerializeField, Min(0.25f)] private float doorSearchRadius = 9f;
+    [SerializeField, Min(0.05f)] private float doorUseDistance = 0.8f;
+    [SerializeField, Min(0.05f)] private float doorUseCooldown = 1.2f;
+    [SerializeField, Range(0f, 1f)] private float idleDoorUseChance = 0.16f;
+    [SerializeField, Min(0f)] private float interiorWanderMargin = 0.58f;
+
     [Header("References")]
     [SerializeField] private RetroDamageable damageable;
 
@@ -110,6 +119,10 @@ public sealed class RetroNpcAgent : MonoBehaviour
     private RetroNpcBrainState state = RetroNpcBrainState.Idle;
     private int resolvedAvoidancePriority;
     private bool avoidancePriorityResolved;
+    private RetroHybridBuilding currentBuilding;
+    private RetroBuildingDoorInteractable pendingDoor;
+    private float nextDoorUseTime;
+    private bool navMeshDisabledForInterior;
 
     public RetroNpcBehaviorMode BehaviorMode => behaviorMode;
     public RetroNpcBrainState CurrentState => state;
@@ -128,6 +141,7 @@ public sealed class RetroNpcAgent : MonoBehaviour
         AutoAssignReferences(true);
         homePosition = transform.position;
         provoked = startProvoked;
+        RefreshBuildingMembership(true);
         ConfigureNavMeshAgent();
     }
 
@@ -138,6 +152,7 @@ public sealed class RetroNpcAgent : MonoBehaviour
         provoked = startProvoked;
         hasIdleDestination = false;
         idleUntilTime = Time.time + GetIdleWait();
+        RefreshBuildingMembership(true);
         SubscribeToDamageable();
         SubscribeToGameplayEvents();
         ConfigureNavMeshAgent();
@@ -176,6 +191,10 @@ public sealed class RetroNpcAgent : MonoBehaviour
         wanderPointTolerance = Mathf.Max(0.05f, wanderPointTolerance);
         idleWaitRange.x = Mathf.Max(0f, idleWaitRange.x);
         idleWaitRange.y = Mathf.Max(idleWaitRange.x, idleWaitRange.y);
+        doorSearchRadius = Mathf.Max(0.25f, doorSearchRadius);
+        doorUseDistance = Mathf.Max(0.05f, doorUseDistance);
+        doorUseCooldown = Mathf.Max(0.05f, doorUseCooldown);
+        interiorWanderMargin = Mathf.Max(0f, interiorWanderMargin);
         AutoAssignReferences(false);
         ConfigureNavMeshAgent();
     }
@@ -236,6 +255,7 @@ public sealed class RetroNpcAgent : MonoBehaviour
             return;
         }
 
+        RefreshBuildingMembership(false);
         ResolveTargetForCurrentBehavior();
 
         switch (behaviorMode)
@@ -501,6 +521,16 @@ public sealed class RetroNpcAgent : MonoBehaviour
 
     private void MoveTo(Vector3 destination, float stopDistance)
     {
+        if (TryMoveThroughDoor(destination, stopDistance))
+        {
+            return;
+        }
+
+        MoveToDirect(destination, stopDistance);
+    }
+
+    private void MoveToDirect(Vector3 destination, float stopDistance)
+    {
         currentDestination = destination;
         hasDestination = true;
 
@@ -632,8 +662,232 @@ public sealed class RetroNpcAgent : MonoBehaviour
         }
     }
 
+    public void NotifyTeleportedByDoor(RetroBuildingDoorInteractable door)
+    {
+        pendingDoor = null;
+        hasIdleDestination = false;
+        idleUntilTime = Time.time + GetIdleWait() * 0.35f;
+        nextDoorUseTime = Time.time + doorUseCooldown;
+        SetCurrentBuilding(door != null ? door.ResolveDestinationBuilding() : RetroHybridBuilding.FindInteriorContaining(transform.position, 0.08f));
+        homePosition = transform.position;
+        StopMovement();
+    }
+
+    private bool TryMoveThroughDoor(Vector3 destination, float stopDistance)
+    {
+        if (!useBuildingDoors)
+        {
+            return false;
+        }
+
+        if (pendingDoor != null)
+        {
+            return MoveTowardDoor(pendingDoor);
+        }
+
+        RetroHybridBuilding sourceBuilding = ResolveInteriorBuildingAt(transform.position);
+        RetroHybridBuilding destinationBuilding = ResolveInteriorBuildingAt(destination);
+        if (sourceBuilding == destinationBuilding)
+        {
+            return false;
+        }
+
+        RetroBuildingDoorInteractable routeDoor = null;
+        if (sourceBuilding != null)
+        {
+            routeDoor = FindBestDoor(sourceBuilding, RetroBuildingDoorSide.Interior, destination, true);
+        }
+        else if (destinationBuilding != null)
+        {
+            routeDoor = FindBestDoor(destinationBuilding, RetroBuildingDoorSide.Exterior, destination, true);
+        }
+
+        if (routeDoor == null || !routeDoor.CanNpcUse(gameObject))
+        {
+            return false;
+        }
+
+        pendingDoor = routeDoor;
+        return MoveTowardDoor(routeDoor);
+    }
+
+    private bool MoveTowardDoor(RetroBuildingDoorInteractable door)
+    {
+        if (door == null || !door.CanNpcUse(gameObject))
+        {
+            pendingDoor = null;
+            return false;
+        }
+
+        Vector3 approachPosition = door.NpcApproachPosition;
+        if (HorizontalDistance(transform.position, approachPosition) <= doorUseDistance)
+        {
+            StopMovement();
+            FacePosition(door.transform.position);
+            if (Time.time < nextDoorUseTime)
+            {
+                return true;
+            }
+
+            if (door.TryUseByNpc(gameObject))
+            {
+                return true;
+            }
+
+            pendingDoor = null;
+            nextDoorUseTime = Time.time + doorUseCooldown;
+            return false;
+        }
+
+        MoveToDirect(approachPosition, doorUseDistance);
+        return true;
+    }
+
+    private bool TryPickIdleDoorDestination()
+    {
+        if (!useBuildingDoors
+            || Time.time < nextDoorUseTime
+            || idleDoorUseChance <= 0f
+            || Random.value > idleDoorUseChance)
+        {
+            return false;
+        }
+
+        RetroBuildingDoorInteractable door = IsInsideBuildingInterior()
+            ? FindBestDoor(currentBuilding, RetroBuildingDoorSide.Interior, transform.position, true)
+            : FindBestDoor(null, RetroBuildingDoorSide.Exterior, transform.position, false);
+        if (door == null || !door.CanNpcUse(gameObject))
+        {
+            return false;
+        }
+
+        pendingDoor = door;
+        idleDestination = door.NpcApproachPosition;
+        hasIdleDestination = true;
+        return true;
+    }
+
+    private RetroBuildingDoorInteractable FindBestDoor(
+        RetroHybridBuilding ownerBuilding,
+        RetroBuildingDoorSide side,
+        Vector3 scorePosition,
+        bool allowBeyondSearchRadius)
+    {
+        RetroBuildingDoorInteractable[] doors = Object.FindObjectsByType<RetroBuildingDoorInteractable>(FindObjectsInactive.Exclude);
+        RetroBuildingDoorInteractable bestDoor = null;
+        float bestScore = float.PositiveInfinity;
+        for (int i = 0; i < doors.Length; i++)
+        {
+            RetroBuildingDoorInteractable door = doors[i];
+            if (door == null
+                || door.DoorSide != side
+                || !door.CanNpcUse(gameObject))
+            {
+                continue;
+            }
+
+            if (ownerBuilding != null && door.Building != ownerBuilding)
+            {
+                continue;
+            }
+
+            float approachDistance = HorizontalDistance(transform.position, door.NpcApproachPosition);
+            if (!allowBeyondSearchRadius && approachDistance > doorSearchRadius)
+            {
+                continue;
+            }
+
+            float destinationScore = HorizontalDistance(door.DestinationPosition, scorePosition) * 0.18f;
+            float score = approachDistance + destinationScore;
+            if (score < bestScore)
+            {
+                bestScore = score;
+                bestDoor = door;
+            }
+        }
+
+        return bestDoor;
+    }
+
+    private void RefreshBuildingMembership(bool force)
+    {
+        if (!detectStartingInterior && currentBuilding == null && !force)
+        {
+            return;
+        }
+
+        RetroHybridBuilding containing = ResolveInteriorBuildingAt(transform.position);
+        SetCurrentBuilding(containing);
+        if (force && containing != null)
+        {
+            homePosition = transform.position;
+        }
+    }
+
+    private RetroHybridBuilding ResolveInteriorBuildingAt(Vector3 position)
+    {
+        if (currentBuilding != null && currentBuilding.ContainsInteriorWorldPosition(position, 0.12f))
+        {
+            return currentBuilding;
+        }
+
+        return RetroHybridBuilding.FindInteriorContaining(position, 0.12f);
+    }
+
+    private bool IsInsideBuildingInterior()
+    {
+        return currentBuilding != null && currentBuilding.ContainsInteriorWorldPosition(transform.position, 0.16f);
+    }
+
+    private void SetCurrentBuilding(RetroHybridBuilding building)
+    {
+        if (currentBuilding == building)
+        {
+            ApplyInteriorNavMeshState();
+            return;
+        }
+
+        currentBuilding = building;
+        ApplyInteriorNavMeshState();
+    }
+
+    private void ApplyInteriorNavMeshState()
+    {
+        bool inside = currentBuilding != null;
+        if (inside)
+        {
+            if (navMeshAgent != null && navMeshAgent.enabled)
+            {
+                if (navMeshAgent.isOnNavMesh)
+                {
+                    navMeshAgent.ResetPath();
+                }
+
+                navMeshAgent.enabled = false;
+                navMeshDisabledForInterior = true;
+            }
+
+            return;
+        }
+
+        if (navMeshDisabledForInterior && navMeshAgent != null)
+        {
+            navMeshAgent.enabled = true;
+            navMeshDisabledForInterior = false;
+            ConfigureNavMeshAgent();
+            nextRepathTime = 0f;
+        }
+    }
+
     private RetroNpcNavigationMode ResolveNavigationMode()
     {
+        if (IsInsideBuildingInterior())
+        {
+            return movementBody != null && navigationMode != RetroNpcNavigationMode.Transform
+                ? RetroNpcNavigationMode.Rigidbody
+                : RetroNpcNavigationMode.Transform;
+        }
+
         if (navigationMode == RetroNpcNavigationMode.NavMeshAgent && CanUseNavMeshAgent())
         {
             return RetroNpcNavigationMode.NavMeshAgent;
@@ -667,6 +921,11 @@ public sealed class RetroNpcAgent : MonoBehaviour
 
     private bool CanUseNavMeshAgent()
     {
+        if (navMeshDisabledForInterior || IsInsideBuildingInterior())
+        {
+            return false;
+        }
+
         if (navMeshAgent == null || !navMeshAgent.isActiveAndEnabled)
         {
             return false;
@@ -940,6 +1199,18 @@ public sealed class RetroNpcAgent : MonoBehaviour
 
     private void PickWanderDestination()
     {
+        if (TryPickIdleDoorDestination())
+        {
+            return;
+        }
+
+        if (IsInsideBuildingInterior())
+        {
+            idleDestination = currentBuilding.GetRandomInteriorWorldPosition(interiorWanderMargin);
+            hasIdleDestination = true;
+            return;
+        }
+
         Vector2 offset = Random.insideUnitCircle * wanderRadius;
         idleDestination = homePosition + new Vector3(offset.x, 0f, offset.y);
         if (!horizontalOnly)

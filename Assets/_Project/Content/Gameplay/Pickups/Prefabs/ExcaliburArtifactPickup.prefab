@@ -138,7 +138,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.95, z: 0}
-  m_LocalScale: {x: 1.08, y: 1.08, z: 1.08}
+  m_LocalScale: {x: 0.82, y: 0.82, z: 0.82}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7802000000000000002}
@@ -281,18 +281,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4eaffdf50e40d6c06e6e0bfcb79a8a8a, type: 3}
   - {fileID: 21300000, guid: d1e83ebcaeca3ae9a79ff04c8d8bbde6, type: 3}
   - {fileID: 21300000, guid: 4a5fc2248d8f385b4aa6cfec586439cc, type: 3}
-  frameRate: 40
+  frameRate: 24
   billboardToCamera: 1
   yawOnly: 1
-  bobAmplitude: 0.16
-  bobFrequency: 1.05
-  secondaryBobAmplitude: 0.045
-  secondaryBobFrequency: 2.35
-  rollAmplitude: 2.6
-  rollFrequency: 0.72
-  baseTint: {r: 1, g: 1, b: 1, a: 1}
-  pulseTint: {r: 0.62, g: 0.94, b: 1.45, a: 1}
-  emissionMin: 1.55
-  emissionMax: 4.85
-  rimMin: 0.55
-  rimMax: 1.45
+  bobAmplitude: 0.09
+  bobFrequency: 0.88
+  secondaryBobAmplitude: 0.022
+  secondaryBobFrequency: 1.95
+  rollAmplitude: 1.6
+  rollFrequency: 0.54
+  baseTint: {r: 1, g: 1, b: 1, a: 0.97}
+  pulseTint: {r: 0.78, g: 0.96, b: 1.12, a: 1}
+  tintPulseBlend: 0.2
+  emissionMin: 0.35
+  emissionMax: 1.2
+  artifactGlowMin: 0.14
+  artifactGlowMax: 0.56
+  rimMin: 0.07
+  rimMax: 0.28

@@ -11,14 +11,14 @@ Shader "Ultraloud/Pickups/Artifact Pickup HDRP"
 
         [Header(Artifact Glow)]
         _EmissionColor("Emission Color", Color) = (0.42, 0.65, 1.0, 1.0)
-        _EmissionStrength("Emission Strength", Range(0.0, 8.0)) = 2.4
-        _ArtifactGlowStrength("Artifact Glow Strength", Range(0.0, 8.0)) = 2.4
-        _PulseSpeed("Pulse Speed", Range(0.0, 8.0)) = 2.1
-        _PulseAmount("Pulse Amount", Range(0.0, 1.0)) = 0.42
-        _ScanlineStrength("Rune Scanline Strength", Range(0.0, 2.0)) = 0.28
+        _EmissionStrength("Emission Strength", Range(0.0, 8.0)) = 0.85
+        _ArtifactGlowStrength("Artifact Glow Strength", Range(0.0, 8.0)) = 0.65
+        _PulseSpeed("Pulse Speed", Range(0.0, 8.0)) = 1.35
+        _PulseAmount("Pulse Amount", Range(0.0, 1.0)) = 0.16
+        _ScanlineStrength("Rune Scanline Strength", Range(0.0, 2.0)) = 0.055
         _ScanlineDensity("Rune Scanline Density", Range(4.0, 80.0)) = 34.0
         _RimColor("Rim Color", Color) = (0.38, 0.72, 1.0, 1.0)
-        _RimStrength("Rim Strength", Range(0.0, 4.0)) = 0.9
+        _RimStrength("Rim Strength", Range(0.0, 4.0)) = 0.24
         _RimPower("Rim Power", Range(0.5, 8.0)) = 2.3
 
         [Header(Fake Lighting)]
@@ -26,7 +26,7 @@ Shader "Ultraloud/Pickups/Artifact Pickup HDRP"
         _LightColor("Light Color", Color) = (1.0, 0.86, 0.52, 1.0)
         _LightDirection("Fake Light Direction", Vector) = (0.35, 0.65, 0.45, 0.0)
         _WrapDiffuse("Wrap Diffuse", Range(0.0, 1.0)) = 0.54
-        _SpecularStrength("Specular Strength", Range(0.0, 3.0)) = 0.75
+        _SpecularStrength("Specular Strength", Range(0.0, 3.0)) = 0.42
     }
 
     HLSLINCLUDE
@@ -143,7 +143,7 @@ Shader "Ultraloud/Pickups/Artifact Pickup HDRP"
         float3 lit = albedo * (_AmbientColor.rgb * 0.50 + _LightColor.rgb * wrappedDiffuse * 0.70);
         lit += specular.xxx * _LightColor.rgb;
         lit += _RimColor.rgb * rim * alpha;
-        lit += _EmissionColor.rgb * alpha * (_ArtifactGlowStrength * pulse * (0.18 + edgeGlow * 0.42) + scanline * _EmissionStrength);
+        lit += _EmissionColor.rgb * alpha * (_ArtifactGlowStrength * pulse * (0.05 + edgeGlow * 0.16) + scanline * _EmissionStrength * 0.45);
 
         surfaceData.normalWS = normalWS;
         surfaceData.color = lit;
@@ -166,7 +166,7 @@ Shader "Ultraloud/Pickups/Artifact Pickup HDRP"
             Tags { "LightMode" = "DepthForwardOnly" }
 
             Cull Off
-            ZWrite On
+            ZWrite Off
             ZTest LEqual
             ColorMask 0
 
@@ -186,7 +186,7 @@ Shader "Ultraloud/Pickups/Artifact Pickup HDRP"
             Cull Off
             Blend SrcAlpha OneMinusSrcAlpha
             Blend 1 SrcAlpha OneMinusSrcAlpha
-            ZWrite On
+            ZWrite Off
             ZTest LEqual
 
             HLSLPROGRAM

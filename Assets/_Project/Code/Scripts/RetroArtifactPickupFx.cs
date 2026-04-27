@@ -22,11 +22,14 @@ public sealed class RetroArtifactPickupFx : MonoBehaviour
     [SerializeField, Min(0f)] private float rollAmplitude = 3.5f;
     [SerializeField, Min(0f)] private float rollFrequency = 0.9f;
     [SerializeField] private Color baseTint = Color.white;
-    [SerializeField] private Color pulseTint = new(0.72f, 0.9f, 1.35f, 1f);
-    [SerializeField, Min(0f)] private float emissionMin = 1.25f;
-    [SerializeField, Min(0f)] private float emissionMax = 4.1f;
-    [SerializeField, Min(0f)] private float rimMin = 0.45f;
-    [SerializeField, Min(0f)] private float rimMax = 1.25f;
+    [SerializeField] private Color pulseTint = new(0.82f, 0.94f, 1.06f, 1f);
+    [SerializeField, Range(0f, 1f)] private float tintPulseBlend = 0.24f;
+    [SerializeField, Min(0f)] private float emissionMin = 0.35f;
+    [SerializeField, Min(0f)] private float emissionMax = 1.25f;
+    [SerializeField, Min(0f)] private float artifactGlowMin = 0.18f;
+    [SerializeField, Min(0f)] private float artifactGlowMax = 0.72f;
+    [SerializeField, Min(0f)] private float rimMin = 0.08f;
+    [SerializeField, Min(0f)] private float rimMax = 0.36f;
 
     private Vector3 visualBaseLocalPosition;
     private Quaternion visualBaseLocalRotation;
@@ -62,8 +65,11 @@ public sealed class RetroArtifactPickupFx : MonoBehaviour
         secondaryBobFrequency = Mathf.Max(0f, secondaryBobFrequency);
         rollAmplitude = Mathf.Max(0f, rollAmplitude);
         rollFrequency = Mathf.Max(0f, rollFrequency);
+        tintPulseBlend = Mathf.Clamp01(tintPulseBlend);
         emissionMin = Mathf.Max(0f, emissionMin);
         emissionMax = Mathf.Max(emissionMin, emissionMax);
+        artifactGlowMin = Mathf.Max(0f, artifactGlowMin);
+        artifactGlowMax = Mathf.Max(artifactGlowMin, artifactGlowMax);
         rimMin = Mathf.Max(0f, rimMin);
         rimMax = Mathf.Max(rimMin, rimMax);
         ResolveReferences();
@@ -161,15 +167,16 @@ public sealed class RetroArtifactPickupFx : MonoBehaviour
 
         propertyBlock ??= new MaterialPropertyBlock();
         float pulse = Mathf.InverseLerp(-1f, 1f, Mathf.Sin(time * Mathf.PI * 2f * 1.45f));
-        Color tint = Color.Lerp(baseTint, pulseTint, pulse * 0.42f);
+        Color tint = Color.Lerp(baseTint, pulseTint, pulse * tintPulseBlend);
         float emission = Mathf.Lerp(emissionMin, emissionMax, pulse);
+        float artifactGlow = Mathf.Lerp(artifactGlowMin, artifactGlowMax, pulse);
         float rim = Mathf.Lerp(rimMin, rimMax, pulse);
 
         spriteRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetColor(BaseColorId, tint);
         propertyBlock.SetFloat(EmissionStrengthId, emission);
         propertyBlock.SetFloat(RimStrengthId, rim);
-        propertyBlock.SetFloat(ArtifactGlowStrengthId, emission);
+        propertyBlock.SetFloat(ArtifactGlowStrengthId, artifactGlow);
         spriteRenderer.SetPropertyBlock(propertyBlock);
     }
 }

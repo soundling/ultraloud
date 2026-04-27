@@ -30,23 +30,23 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.035
-    - _ArtifactGlowStrength: 2.4
-    - _CoverageSoftness: 0.025
-    - _EmissionStrength: 2.4
-    - _PulseAmount: 0.42
-    - _PulseSpeed: 2.1
-    - _RimPower: 2.3
-    - _RimStrength: 0.9
+    - _ArtifactGlowStrength: 0.42
+    - _CoverageSoftness: 0.018
+    - _EmissionStrength: 0.72
+    - _PulseAmount: 0.14
+    - _PulseSpeed: 1.35
+    - _RimPower: 2.8
+    - _RimStrength: 0.18
     - _ScanlineDensity: 34
-    - _ScanlineStrength: 0.28
-    - _SpecularStrength: 0.75
+    - _ScanlineStrength: 0.045
+    - _SpecularStrength: 0.38
     - _WrapDiffuse: 0.54
     m_Colors:
     - _AmbientColor: {r: 0.72, g: 0.68, b: 0.62, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.42, g: 0.65, b: 1, a: 1}
+    - _EmissionColor: {r: 0.34, g: 0.58, b: 0.9, a: 1}
     - _LightColor: {r: 1, g: 0.86, b: 0.52, a: 1}
     - _LightDirection: {r: 0.35, g: 0.65, b: 0.45, a: 0}
-    - _RimColor: {r: 0.38, g: 0.72, b: 1, a: 1}
+    - _RimColor: {r: 0.45, g: 0.72, b: 0.95, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1450960945261578257}
   - component: {fileID: 4811007291550736898}
   - component: {fileID: 1335065382686241025}
+  - component: {fileID: 6201000000000000001}
   m_Layer: 0
   m_Name: ApplePickup
   m_TagString: Untagged
@@ -147,3 +148,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RetroBillboardSprite
   targetCamera: {fileID: 0}
   yawOnly: 1
+--- !u!114 &6201000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7569182067001650488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 8
+  destroyOnDeath: 1
+  disableRenderersOnDeath: 1
+  disableCollidersOnDeath: 1
+  destroyDelay: 0.05
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.58, g: 0.02, b: 0.015, a: 0.95}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 8
+  bloodSprayScaleRange: {x: 0.08, y: 0.18}
+  bloodSpraySpeedRange: {x: 1, y: 2.8}
+  deathBloodScaleMultiplier: 1.6
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.18
+  bloodSplatterLifetime: 1
+  bloodSprayLifetime: 0.42
+  ensureShootableFeedback: 1
+  shootableSurfaceKind: 0
+  shootableFeedbackScale: 0.45
+  shootableDeathEffectMultiplier: 1.8

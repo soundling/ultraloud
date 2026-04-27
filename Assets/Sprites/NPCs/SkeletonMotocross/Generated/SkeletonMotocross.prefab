@@ -201,8 +201,8 @@ MonoBehaviour:
   bloodSplatterSprite: {fileID: 0}
   bloodSpraySprite: {fileID: 0}
   bloodColor: {r: 0.72, g: 0.66, b: 0.49, a: 0.88}
-  spawnBloodOnHit: 1
-  spawnBloodOnDeath: 1
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
   bloodSplatterScaleRange: {x: 0.55, y: 0.95}
   bloodDecalCount: 4
   bloodSprayParticleCount: 12
@@ -213,6 +213,10 @@ MonoBehaviour:
   bloodDecalScatterRadius: 0.32
   bloodSplatterLifetime: 1.6
   bloodSprayLifetime: 0.55
+  ensureShootableFeedback: 1
+  shootableSurfaceKind: 5
+  shootableFeedbackScale: 1.05
+  shootableDeathEffectMultiplier: 2.75
 --- !u!114 &4123290624946782891
 MonoBehaviour:
   m_ObjectHideFlags: 0

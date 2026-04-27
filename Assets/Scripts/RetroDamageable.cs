@@ -31,6 +31,11 @@ public sealed class RetroDamageable : MonoBehaviour
     [SerializeField, Min(0f)] private float bloodDecalScatterRadius = 0.32f;
     [SerializeField, Min(0f)] private float bloodSplatterLifetime = 1.6f;
     [SerializeField, Min(0f)] private float bloodSprayLifetime = 0.55f;
+    [Header("Shootable Feedback")]
+    [SerializeField] private bool ensureShootableFeedback = true;
+    [SerializeField] private RetroShootableSurfaceKind shootableSurfaceKind = RetroShootableSurfaceKind.Flesh;
+    [SerializeField, Min(0f)] private float shootableFeedbackScale = 1f;
+    [SerializeField, Min(0f)] private float shootableDeathEffectMultiplier = 2.4f;
 
     private float currentHealth;
     private bool initialized;
@@ -49,12 +54,14 @@ public sealed class RetroDamageable : MonoBehaviour
     private void Awake()
     {
         InitializeHealth();
+        EnsureShootableFeedback();
     }
 
     private void OnEnable()
     {
         InitializeHealth();
         lastDamageSource = null;
+        EnsureShootableFeedback();
     }
 
     private void OnValidate()
@@ -73,6 +80,8 @@ public sealed class RetroDamageable : MonoBehaviour
         bloodDecalScatterRadius = Mathf.Max(0f, bloodDecalScatterRadius);
         bloodSplatterLifetime = Mathf.Max(0f, bloodSplatterLifetime);
         bloodSprayLifetime = Mathf.Max(0f, bloodSprayLifetime);
+        shootableFeedbackScale = Mathf.Max(0f, shootableFeedbackScale);
+        shootableDeathEffectMultiplier = Mathf.Max(0f, shootableDeathEffectMultiplier);
     }
 
     public void ApplyDamage(float damage)
@@ -146,6 +155,24 @@ public sealed class RetroDamageable : MonoBehaviour
 
         currentHealth = maxHealth;
         initialized = true;
+    }
+
+    private void EnsureShootableFeedback()
+    {
+        if (!ensureShootableFeedback)
+        {
+            return;
+        }
+
+        RetroShootableFeedback feedback = GetComponent<RetroShootableFeedback>();
+        if (feedback != null)
+        {
+            feedback.BindDamageable(this);
+            return;
+        }
+
+        feedback = gameObject.AddComponent<RetroShootableFeedback>();
+        feedback.ConfigureRuntime(this, shootableSurfaceKind, null, shootableFeedbackScale, shootableDeathEffectMultiplier);
     }
 
     private Vector3 ResolveFallbackHitPoint()

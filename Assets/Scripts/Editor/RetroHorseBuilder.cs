@@ -170,9 +170,15 @@ public static class RetroHorseBuilder
             DirectionalSpriteBillboardLitRenderer litRenderer = GetOrAdd<DirectionalSpriteBillboardLitRenderer>(root);
             ConfigureLitRenderer(litRenderer, animator, quadRenderer);
 
+            DirectionalSpriteHitMask hitMask = GetOrAdd<DirectionalSpriteHitMask>(root);
+            ConfigureHitMask(hitMask, animator, quadRenderer, quad);
+
             BoxCollider collider = GetOrAdd<BoxCollider>(root);
             collider.center = new Vector3(0f, 1.35f, 0f);
             collider.size = new Vector3(1.95f, 2.7f, 3.25f);
+
+            RetroDamageable damageable = GetOrAdd<RetroDamageable>(root);
+            ConfigureDamageable(damageable);
 
             PrefabUtility.SaveAsPrefabAsset(root, MountedPrefabPath);
         }
@@ -298,9 +304,15 @@ public static class RetroHorseBuilder
         SetBool(serialized, "disableRenderersOnDeath", true);
         SetBool(serialized, "disableCollidersOnDeath", true);
         SetFloat(serialized, "destroyDelay", 0.15f);
+        SetObject(serialized, "bloodSplatterSprite", AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Effects/BloodSplatter_Impact.png"));
+        SetObject(serialized, "bloodSpraySprite", AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Effects/BloodSpray_Droplets.png"));
         SetColor(serialized, "bloodColor", new Color(0.62f, 0.09f, 0.035f, 0.88f));
         SetBool(serialized, "spawnBloodOnHit", true);
         SetBool(serialized, "spawnBloodOnDeath", true);
+        SetBool(serialized, "ensureShootableFeedback", true);
+        SetEnum(serialized, "shootableSurfaceKind", (int)RetroShootableSurfaceKind.Flesh);
+        SetFloat(serialized, "shootableFeedbackScale", 1.05f);
+        SetFloat(serialized, "shootableDeathEffectMultiplier", 2.5f);
         serialized.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(damageable);
     }
@@ -344,6 +356,7 @@ public static class RetroHorseBuilder
         SetString(serialized, "idleClipId", "Idle");
         SetString(serialized, "walkClipId", "Walk");
         SetString(serialized, "gallopClipId", "Gallop");
+        SetFloat(serialized, "maxLookYawOffset", 150f);
         SetFloat(serialized, "walkSpeed", 5.4f);
         SetFloat(serialized, "gallopSpeed", 11.2f);
         SetFloat(serialized, "reverseSpeed", 2.2f);
@@ -511,6 +524,24 @@ public static class RetroHorseBuilder
         if (property != null)
         {
             property.colorValue = value;
+        }
+    }
+
+    private static void SetObject(SerializedObject serialized, string propertyName, Object value)
+    {
+        SerializedProperty property = serialized.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.objectReferenceValue = value;
+        }
+    }
+
+    private static void SetEnum(SerializedObject serialized, string propertyName, int value)
+    {
+        SerializedProperty property = serialized.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.enumValueIndex = value;
         }
     }
 }

@@ -208,6 +208,10 @@ MonoBehaviour:
   bloodDecalScatterRadius: 0.36
   bloodSplatterLifetime: 1.6
   bloodSprayLifetime: 0.6
+  ensureShootableFeedback: 1
+  shootableSurfaceKind: 3
+  shootableFeedbackScale: 1
+  shootableDeathEffectMultiplier: 2.6
 --- !u!114 &4826505066613901847
 MonoBehaviour:
   m_ObjectHideFlags: 0

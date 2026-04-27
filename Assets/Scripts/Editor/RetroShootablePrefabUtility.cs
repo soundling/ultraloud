@@ -22,7 +22,8 @@ public static class RetroShootablePrefabUtility
             destroyOnDeath: false,
             disableRenderersOnDeath: false,
             disableCollidersOnDeath: false,
-            destroyDelay: 0f);
+            destroyDelay: 0f,
+            surfaceKind: RetroShootableSurfaceKind.Stone);
 
         RetroShootableFeedback feedback = GetOrAddSingleComponent<RetroShootableFeedback>(root);
         ConfigureFeedback(
@@ -60,7 +61,8 @@ public static class RetroShootablePrefabUtility
             destroyOnDeath: false,
             disableRenderersOnDeath: false,
             disableCollidersOnDeath: false,
-            destroyDelay: 0f);
+            destroyDelay: 0f,
+            surfaceKind: RetroShootableSurfaceKind.Wood);
 
         RetroShootableFeedback feedback = GetOrAddSingleComponent<RetroShootableFeedback>(root);
         ConfigureFeedback(
@@ -96,7 +98,8 @@ public static class RetroShootablePrefabUtility
             destroyOnDeath: true,
             disableRenderersOnDeath: true,
             disableCollidersOnDeath: true,
-            destroyDelay: 0.15f);
+            destroyDelay: 0.15f,
+            surfaceKind: RetroShootableSurfaceKind.Bird);
 
         RetroShootableFeedback feedback = GetOrAddSingleComponent<RetroShootableFeedback>(root);
         ConfigureFeedback(
@@ -109,6 +112,45 @@ public static class RetroShootablePrefabUtility
             effectScale: 0.75f,
             deathEffectMultiplier: 3f,
             disableFlockAgentOnDeath: true);
+
+        MarkDirty(root, collider, damageable, feedback);
+    }
+
+    public static void ConfigureLifeFountain(GameObject root)
+    {
+        if (root == null)
+        {
+            return;
+        }
+
+        CapsuleCollider collider = GetOrAddSingleComponent<CapsuleCollider>(root);
+        collider.isTrigger = false;
+        collider.direction = 1;
+        collider.center = new Vector3(0f, 1.9f, 0f);
+        collider.radius = 1.15f;
+        collider.height = 3.8f;
+
+        RetroDamageable damageable = GetOrAddSingleComponent<RetroDamageable>(root);
+        ConfigureDamageable(
+            damageable,
+            maxHealth: 420f,
+            destroyOnDeath: false,
+            disableRenderersOnDeath: false,
+            disableCollidersOnDeath: false,
+            destroyDelay: 0f,
+            surfaceKind: RetroShootableSurfaceKind.Stone);
+
+        RetroShootableFeedback feedback = GetOrAddSingleComponent<RetroShootableFeedback>(root);
+        ConfigureFeedback(
+            feedback,
+            damageable,
+            RetroShootableSurfaceKind.Stone,
+            visualKickDistance: 0.015f,
+            visualKickAngle: 1.2f,
+            visualKickReturnSpeed: 18f,
+            effectScale: 1.15f,
+            deathEffectMultiplier: 2.35f,
+            disableFlockAgentOnDeath: false);
 
         MarkDirty(root, collider, damageable, feedback);
     }
@@ -131,7 +173,8 @@ public static class RetroShootablePrefabUtility
         bool destroyOnDeath,
         bool disableRenderersOnDeath,
         bool disableCollidersOnDeath,
-        float destroyDelay)
+        float destroyDelay,
+        RetroShootableSurfaceKind surfaceKind)
     {
         if (damageable == null)
         {
@@ -149,6 +192,10 @@ public static class RetroShootablePrefabUtility
         SetObject(serializedDamageable, "bloodSpraySprite", null);
         SetBool(serializedDamageable, "spawnBloodOnHit", false);
         SetBool(serializedDamageable, "spawnBloodOnDeath", false);
+        SetBool(serializedDamageable, "ensureShootableFeedback", true);
+        SetEnum(serializedDamageable, "shootableSurfaceKind", (int)surfaceKind);
+        SetFloat(serializedDamageable, "shootableFeedbackScale", 1f);
+        SetFloat(serializedDamageable, "shootableDeathEffectMultiplier", 2.4f);
         serializedDamageable.ApplyModifiedPropertiesWithoutUndo();
     }
 

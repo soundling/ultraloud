@@ -26,13 +26,21 @@ public sealed class RetroFlockAgent : MonoBehaviour
     [SerializeField, Min(0.01f)] private float turnResponsiveness = 8f;
     [SerializeField] private Vector3 initialVelocity = new(0f, 0f, 4.5f);
 
+    [Header("Direct Flight")]
+    [SerializeField] private bool useCourseTargets = true;
+    [SerializeField, Min(0f)] private float courseWeight = 1.65f;
+    [SerializeField] private Vector2 courseRetargetInterval = new(3.2f, 6.5f);
+    [SerializeField, Min(0.1f)] private float courseArrivalRadius = 3.2f;
+    [SerializeField, Range(0f, 1f)] private float courseVerticalInfluence = 0.38f;
+    [SerializeField, Range(0f, 1f)] private float courseRandomness = 0.32f;
+
     [Header("Flocking")]
     [SerializeField, Min(0.01f)] private float neighborRadius = 7.5f;
     [SerializeField, Min(0.01f)] private float separationRadius = 2.1f;
     [SerializeField, Min(0f)] private float separationWeight = 2.8f;
     [SerializeField, Min(0f)] private float alignmentWeight = 0.85f;
     [SerializeField, Min(0f)] private float cohesionWeight = 0.72f;
-    [SerializeField, Min(0f)] private float wanderWeight = 0.55f;
+    [SerializeField, Min(0f)] private float wanderWeight = 0.24f;
 
     [Header("Home / Bounds")]
     [SerializeField] private Transform homeAnchor;
@@ -55,9 +63,14 @@ public sealed class RetroFlockAgent : MonoBehaviour
 
     private Vector3 velocity;
     private Vector3 homePosition;
+    private Vector3 courseTarget;
     private float phase;
+    private float nextCourseRetargetTime;
     private double lastUpdateTime;
     private bool hasUpdateTime;
+    private bool hasCourseTarget;
+
+    private static readonly RaycastHit[] ObstacleHits = new RaycastHit[12];
 
     public string GroupId
     {
@@ -74,6 +87,7 @@ public sealed class RetroFlockAgent : MonoBehaviour
         homePosition = transform.position;
         phase = UnityEngine.Random.value * 1000f;
         velocity = initialVelocity.sqrMagnitude > 0.0001f ? transform.TransformDirection(initialVelocity) : transform.forward * minSpeed;
+        hasCourseTarget = false;
     }
 
     private void OnEnable()
@@ -95,6 +109,7 @@ public sealed class RetroFlockAgent : MonoBehaviour
 
         phase = phase == 0f ? UnityEngine.Random.value * 1000f : phase;
         hasUpdateTime = false;
+        hasCourseTarget = false;
     }
 
     private void OnDisable()
@@ -113,6 +128,10 @@ public sealed class RetroFlockAgent : MonoBehaviour
 
         maxForce = Mathf.Max(0.01f, maxForce);
         turnResponsiveness = Mathf.Max(0.01f, turnResponsiveness);
+        courseWeight = Mathf.Max(0f, courseWeight);
+        courseRetargetInterval.x = Mathf.Max(0.1f, courseRetargetInterval.x);
+        courseRetargetInterval.y = Mathf.Max(courseRetargetInterval.x, courseRetargetInterval.y);
+        courseArrivalRadius = Mathf.Max(0.1f, courseArrivalRadius);
         neighborRadius = Mathf.Max(0.01f, neighborRadius);
         separationRadius = Mathf.Clamp(separationRadius, 0.01f, neighborRadius);
         homeRadius = Mathf.Max(0.1f, homeRadius);
@@ -140,11 +159,13 @@ public sealed class RetroFlockAgent : MonoBehaviour
     {
         velocity = ClampVelocity(worldVelocity);
         initialVelocity = transform.InverseTransformDirection(velocity);
+        hasCourseTarget = false;
     }
 
     public void SetHome(Vector3 worldPosition)
     {
         homePosition = worldPosition;
+        hasCourseTarget = false;
     }
 
     public void RandomizePhase(float seed)
@@ -159,7 +180,10 @@ public sealed class RetroFlockAgent : MonoBehaviour
             return;
         }
 
-        Vector3 steering = ComputeFlockingSteering();
+        EnsureCourseTarget();
+
+        Vector3 steering = ComputeCourseSteering();
+        steering += ComputeFlockingSteering();
         steering += ComputeBoundsSteering();
         steering += ComputeHeightSteering();
         steering += ComputeObstacleSteering();
@@ -254,6 +278,24 @@ public sealed class RetroFlockAgent : MonoBehaviour
         return steering;
     }
 
+    private Vector3 ComputeCourseSteering()
+    {
+        if (!useCourseTargets || courseWeight <= 0f)
+        {
+            return Vector3.zero;
+        }
+
+        Vector3 toTarget = courseTarget - transform.position;
+        if (toTarget.magnitude <= courseArrivalRadius || Time.realtimeSinceStartup >= nextCourseRetargetTime)
+        {
+            PickCourseTarget(false);
+            toTarget = courseTarget - transform.position;
+        }
+
+        toTarget.y *= courseVerticalInfluence;
+        return SteerTowards(toTarget) * courseWeight;
+    }
+
     private Vector3 ComputeBoundsSteering()
     {
         if (boundsMode == BoundsMode.None || boundsWeight <= 0f)
@@ -322,7 +364,7 @@ public sealed class RetroFlockAgent : MonoBehaviour
 
         Vector3 origin = transform.position;
         Vector3 forward = velocity.normalized;
-        if (!Physics.Raycast(origin, forward, out RaycastHit hit, obstacleProbeDistance, obstacleMask, QueryTriggerInteraction.Ignore))
+        if (!TryFindObstacle(origin, forward, out RaycastHit hit))
         {
             return Vector3.zero;
         }
@@ -344,7 +386,124 @@ public sealed class RetroFlockAgent : MonoBehaviour
             Mathf.PerlinNoise(t, phase * 0.13f) - 0.5f,
             (Mathf.PerlinNoise(phase * 0.71f, t * 0.83f) - 0.5f) * 0.42f,
             Mathf.PerlinNoise(t * 0.57f, phase * 0.37f) - 0.5f);
-        return SteerTowards(velocity.normalized + noise.normalized * 0.65f) * wanderWeight;
+        Vector3 horizontalNoise = Vector3.ProjectOnPlane(noise, Vector3.up);
+        if (horizontalNoise.sqrMagnitude < 0.0001f)
+        {
+            return Vector3.zero;
+        }
+
+        Vector3 forward = velocity.sqrMagnitude > 0.0001f ? velocity.normalized : transform.forward;
+        Vector3 desired = forward + horizontalNoise.normalized * 0.32f + Vector3.up * Mathf.Clamp(noise.y, -0.18f, 0.18f);
+        return SteerTowards(desired) * wanderWeight;
+    }
+
+    private void EnsureCourseTarget()
+    {
+        if (!useCourseTargets || hasCourseTarget)
+        {
+            return;
+        }
+
+        PickCourseTarget(true);
+    }
+
+    private void PickCourseTarget(bool preferCurrentHeading)
+    {
+        Vector3 home = HomePosition;
+        Vector3 forward = Vector3.ProjectOnPlane(velocity.sqrMagnitude > 0.0001f ? velocity : transform.forward, Vector3.up);
+        if (forward.sqrMagnitude < 0.0001f)
+        {
+            forward = Vector3.forward;
+        }
+
+        forward.Normalize();
+        Vector2 randomCircle = UnityEngine.Random.insideUnitCircle;
+        Vector3 randomDirection = new(randomCircle.x, 0f, randomCircle.y);
+        if (randomDirection.sqrMagnitude < 0.0001f)
+        {
+            randomDirection = Quaternion.Euler(0f, UnityEngine.Random.Range(-45f, 45f), 0f) * forward;
+        }
+
+        randomDirection.Normalize();
+        float randomness = preferCurrentHeading ? Mathf.Min(courseRandomness, 0.18f) : courseRandomness;
+        Vector3 direction = Vector3.Slerp(forward, randomDirection, Mathf.Clamp01(randomness));
+        float distance = ResolveCourseDistance(preferCurrentHeading);
+
+        courseTarget = home + direction * distance;
+        courseTarget.y = ResolveCourseTargetHeight(home, preferCurrentHeading);
+        nextCourseRetargetTime = Time.realtimeSinceStartup + UnityEngine.Random.Range(courseRetargetInterval.x, courseRetargetInterval.y);
+        hasCourseTarget = true;
+    }
+
+    private float ResolveCourseDistance(bool preferCurrentHeading)
+    {
+        if (boundsMode == BoundsMode.Box)
+        {
+            float horizontalExtent = Mathf.Min(boundsHalfExtents.x, boundsHalfExtents.z);
+            return Mathf.Max(courseArrivalRadius * 1.5f, horizontalExtent * (preferCurrentHeading ? 0.78f : UnityEngine.Random.Range(0.45f, 0.82f)));
+        }
+
+        float radius = Mathf.Max(homeRadius, courseArrivalRadius * 2f);
+        return radius * (preferCurrentHeading ? 0.78f : UnityEngine.Random.Range(0.42f, 0.82f));
+    }
+
+    private float ResolveCourseTargetHeight(Vector3 home, bool preferCurrentHeading)
+    {
+        if (!keepWithinHeightBand)
+        {
+            return preferCurrentHeading
+                ? transform.position.y
+                : home.y + UnityEngine.Random.Range(-boundsHalfExtents.y * 0.45f, boundsHalfExtents.y * 0.45f);
+        }
+
+        float min = heightBand.x + 0.75f;
+        float max = Mathf.Max(min, heightBand.y - 0.75f);
+        if (preferCurrentHeading)
+        {
+            return Mathf.Clamp(transform.position.y, min, max);
+        }
+
+        return UnityEngine.Random.Range(min, max);
+    }
+
+    private bool TryFindObstacle(Vector3 origin, Vector3 forward, out RaycastHit bestHit)
+    {
+        bestHit = default;
+        int hitCount = Physics.RaycastNonAlloc(origin, forward, ObstacleHits, obstacleProbeDistance, obstacleMask, QueryTriggerInteraction.Ignore);
+        float bestDistance = float.MaxValue;
+        bool found = false;
+        for (int i = 0; i < hitCount; i++)
+        {
+            RaycastHit candidate = ObstacleHits[i];
+            Collider candidateCollider = candidate.collider;
+            if (candidateCollider == null || ShouldIgnoreObstacle(candidateCollider) || candidate.distance >= bestDistance)
+            {
+                continue;
+            }
+
+            bestHit = candidate;
+            bestDistance = candidate.distance;
+            found = true;
+        }
+
+        return found;
+    }
+
+    private bool ShouldIgnoreObstacle(Collider candidate)
+    {
+        if (candidate == null)
+        {
+            return true;
+        }
+
+        Transform candidateTransform = candidate.transform;
+        if (candidateTransform == transform || candidateTransform.IsChildOf(transform))
+        {
+            return true;
+        }
+
+        RetroFlockAgent otherAgent = candidate.GetComponentInParent<RetroFlockAgent>();
+        return otherAgent != null;
     }
 
     private Vector3 SteerTowards(Vector3 direction)

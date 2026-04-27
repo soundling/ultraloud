@@ -135,26 +135,32 @@ MonoBehaviour:
   maxForce: 9.5
   turnResponsiveness: 8
   initialVelocity: {x: 0, y: 0, z: 4.5}
+  useCourseTargets: 1
+  courseWeight: 1.65
+  courseRetargetInterval: {x: 3.4, y: 6.8}
+  courseArrivalRadius: 3.2
+  courseVerticalInfluence: 0.38
+  courseRandomness: 0.28
   neighborRadius: 7.5
   separationRadius: 2.1
   separationWeight: 2.8
   alignmentWeight: 0.85
   cohesionWeight: 0.72
-  wanderWeight: 0.55
+  wanderWeight: 0.24
   homeAnchor: {fileID: 0}
   boundsMode: 1
   homeRadius: 28
   boundsHalfExtents: {x: 26, y: 8, z: 26}
-  boundsWeight: 2.4
+  boundsWeight: 2
   keepWithinHeightBand: 1
   heightBand: {x: 3, y: 16}
-  heightWeight: 1.4
+  heightWeight: 1.15
   avoidObstacles: 1
   obstacleMask:
     serializedVersion: 2
     m_Bits: 4294967295
   obstacleProbeDistance: 5
-  obstacleWeight: 4
+  obstacleWeight: 3.2
   drawGizmos: 1
 --- !u!114 &631245609304874314
 MonoBehaviour:

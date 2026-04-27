@@ -170,9 +170,15 @@ public static class RetroMotocrossBuilder
             DirectionalSpriteBillboardLitRenderer litRenderer = GetOrAdd<DirectionalSpriteBillboardLitRenderer>(root);
             ConfigureLitRenderer(litRenderer, animator, quadRenderer);
 
+            DirectionalSpriteHitMask hitMask = GetOrAdd<DirectionalSpriteHitMask>(root);
+            ConfigureHitMask(hitMask, animator, quadRenderer, quad);
+
             BoxCollider collider = GetOrAdd<BoxCollider>(root);
             collider.center = new Vector3(0f, 1.25f, 0f);
             collider.size = new Vector3(1.65f, 2.5f, 2.65f);
+
+            RetroDamageable damageable = GetOrAdd<RetroDamageable>(root);
+            ConfigureDamageable(damageable);
 
             PrefabUtility.SaveAsPrefabAsset(root, MountedPrefabPath);
         }
@@ -296,9 +302,15 @@ public static class RetroMotocrossBuilder
         SetBool(serialized, "disableRenderersOnDeath", true);
         SetBool(serialized, "disableCollidersOnDeath", true);
         SetFloat(serialized, "destroyDelay", 0.12f);
+        SetObject(serialized, "bloodSplatterSprite", null);
+        SetObject(serialized, "bloodSpraySprite", null);
         SetColor(serialized, "bloodColor", new Color(0.42f, 0.28f, 0.16f, 0.88f));
-        SetBool(serialized, "spawnBloodOnHit", true);
+        SetBool(serialized, "spawnBloodOnHit", false);
         SetBool(serialized, "spawnBloodOnDeath", false);
+        SetBool(serialized, "ensureShootableFeedback", true);
+        SetEnum(serialized, "shootableSurfaceKind", (int)RetroShootableSurfaceKind.Metal);
+        SetFloat(serialized, "shootableFeedbackScale", 0.95f);
+        SetFloat(serialized, "shootableDeathEffectMultiplier", 2.35f);
         serialized.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(damageable);
     }
@@ -343,6 +355,7 @@ public static class RetroMotocrossBuilder
         SetString(serialized, "idleClipId", "Idle");
         SetString(serialized, "walkClipId", "Ride");
         SetString(serialized, "gallopClipId", "Wheelie");
+        SetFloat(serialized, "maxLookYawOffset", 150f);
         SetFloat(serialized, "walkSpeed", 8.8f);
         SetFloat(serialized, "gallopSpeed", 17.4f);
         SetFloat(serialized, "reverseSpeed", 4.4f);
@@ -510,6 +523,24 @@ public static class RetroMotocrossBuilder
         if (property != null)
         {
             property.colorValue = value;
+        }
+    }
+
+    private static void SetObject(SerializedObject serialized, string propertyName, Object value)
+    {
+        SerializedProperty property = serialized.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.objectReferenceValue = value;
+        }
+    }
+
+    private static void SetEnum(SerializedObject serialized, string propertyName, int value)
+    {
+        SerializedProperty property = serialized.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.enumValueIndex = value;
         }
     }
 }

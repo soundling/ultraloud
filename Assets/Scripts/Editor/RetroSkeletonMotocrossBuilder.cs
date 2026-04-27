@@ -202,9 +202,15 @@ public static class RetroSkeletonMotocrossBuilder
         SetBool(serialized, "disableRenderersOnDeath", true);
         SetBool(serialized, "disableCollidersOnDeath", true);
         SetFloat(serialized, "destroyDelay", 0.15f);
+        SetObject(serialized, "bloodSplatterSprite", null);
+        SetObject(serialized, "bloodSpraySprite", null);
         SetColor(serialized, "bloodColor", new Color(0.72f, 0.66f, 0.49f, 0.88f));
-        SetBool(serialized, "spawnBloodOnHit", true);
-        SetBool(serialized, "spawnBloodOnDeath", true);
+        SetBool(serialized, "spawnBloodOnHit", false);
+        SetBool(serialized, "spawnBloodOnDeath", false);
+        SetBool(serialized, "ensureShootableFeedback", true);
+        SetEnum(serialized, "shootableSurfaceKind", (int)RetroShootableSurfaceKind.Bone);
+        SetFloat(serialized, "shootableFeedbackScale", 1.05f);
+        SetFloat(serialized, "shootableDeathEffectMultiplier", 2.75f);
         serialized.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(damageable);
     }
@@ -308,6 +314,24 @@ public static class RetroSkeletonMotocrossBuilder
         if (property != null)
         {
             property.colorValue = value;
+        }
+    }
+
+    private static void SetObject(SerializedObject serialized, string propertyName, Object value)
+    {
+        SerializedProperty property = serialized.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.objectReferenceValue = value;
+        }
+    }
+
+    private static void SetEnum(SerializedObject serialized, string propertyName, int value)
+    {
+        SerializedProperty property = serialized.FindProperty(propertyName);
+        if (property != null)
+        {
+            property.enumValueIndex = value;
         }
     }
 }

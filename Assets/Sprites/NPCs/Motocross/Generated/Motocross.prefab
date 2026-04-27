@@ -202,7 +202,7 @@ MonoBehaviour:
   bloodSplatterSprite: {fileID: 0}
   bloodSpraySprite: {fileID: 0}
   bloodColor: {r: 0.42, g: 0.28, b: 0.16, a: 0.88}
-  spawnBloodOnHit: 1
+  spawnBloodOnHit: 0
   spawnBloodOnDeath: 0
   bloodSplatterScaleRange: {x: 0.55, y: 0.95}
   bloodDecalCount: 4
@@ -214,6 +214,10 @@ MonoBehaviour:
   bloodDecalScatterRadius: 0.32
   bloodSplatterLifetime: 1.6
   bloodSprayLifetime: 0.55
+  ensureShootableFeedback: 1
+  shootableSurfaceKind: 4
+  shootableFeedbackScale: 0.95
+  shootableDeathEffectMultiplier: 2.35
 --- !u!114 &8151393550940420492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +278,7 @@ MonoBehaviour:
   mouseSensitivity: 0.13
   gamepadLookSpeed: 170
   maxLookPitch: 68
-  maxLookYawOffset: 82
+  maxLookYawOffset: 150
   walkSpeed: 8.8
   gallopSpeed: 17.4
   reverseSpeed: 4.4

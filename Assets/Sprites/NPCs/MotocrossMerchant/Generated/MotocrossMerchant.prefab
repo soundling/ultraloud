@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1992569613301086284}
   - component: {fileID: 3274914926526071995}
   - component: {fileID: 991430520804950357}
+  - component: {fileID: 6102000000000000001}
+  - component: {fileID: 6102000000000000002}
   m_Layer: 0
   m_Name: MotocrossMerchant
   m_TagString: Untagged
@@ -45,7 +47,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
   definition: {fileID: 11400000, guid: 735e9c470ddd36249b63d18b46003946, type: 2}
   initialClipId: Idle
@@ -71,7 +73,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
   animator: {fileID: 1992569613301086284}
   targetRenderer: {fileID: 5211592615369783736}
@@ -126,6 +128,65 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.65, y: 2.5, z: 2.65}
   m_Center: {x: 0, y: 1.25, z: 0}
+--- !u!114 &6102000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252381187267910514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
+  animator: {fileID: 1992569613301086284}
+  visualRenderer: {fileID: 5211592615369783736}
+  hitPlane: {fileID: 3302099379165438782}
+  useAlphaMask: 1
+  useSpritePhysicsShapeFallback: 1
+  acceptWhenMaskUnavailable: 1
+  rejectHitsOutsideQuad: 1
+  alphaThreshold: 0.08
+  edgePaddingPixels: 3
+  drawDebugHits: 0
+  debugDrawDuration: 0.35
+--- !u!114 &6102000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252381187267910514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
+  maxHealth: 135
+  destroyOnDeath: 1
+  disableRenderersOnDeath: 1
+  disableCollidersOnDeath: 1
+  destroyDelay: 0.12
+  bloodSplatterSprite: {fileID: 0}
+  bloodSpraySprite: {fileID: 0}
+  bloodColor: {r: 0.42, g: 0.28, b: 0.16, a: 0.88}
+  spawnBloodOnHit: 0
+  spawnBloodOnDeath: 0
+  bloodSplatterScaleRange: {x: 0.55, y: 0.95}
+  bloodDecalCount: 4
+  bloodSprayParticleCount: 12
+  bloodSprayScaleRange: {x: 0.12, y: 0.26}
+  bloodSpraySpeedRange: {x: 1.4, y: 4.2}
+  deathBloodScaleMultiplier: 2.2
+  bloodSurfaceOffset: 0.018
+  bloodDecalScatterRadius: 0.32
+  bloodSplatterLifetime: 1.6
+  bloodSprayLifetime: 0.55
+  ensureShootableFeedback: 1
+  shootableSurfaceKind: 4
+  shootableFeedbackScale: 0.95
+  shootableDeathEffectMultiplier: 2.35
 --- !u!1 &7065752073135215110
 GameObject:
   m_ObjectHideFlags: 0

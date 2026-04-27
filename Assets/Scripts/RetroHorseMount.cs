@@ -59,7 +59,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     [SerializeField, Min(0.01f)] private float mouseSensitivity = 0.13f;
     [SerializeField, Min(1f)] private float gamepadLookSpeed = 170f;
     [SerializeField, Range(20f, 89f)] private float maxLookPitch = 68f;
-    [SerializeField, Range(0f, 120f)] private float maxLookYawOffset = 82f;
+    [SerializeField, Range(0f, 180f)] private float maxLookYawOffset = 150f;
 
     [Header("Movement")]
     [SerializeField, Min(0f)] private float walkSpeed = 5.4f;
@@ -127,7 +127,6 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
     private float lookPitch;
     private float overlayFrameTimer;
     private int overlayFrameIndex;
-    private bool wasVisualRendererEnabled = true;
     private Vector3 visualBaseLocalPosition;
     private float visualPhaseOffset = -1f;
     private string currentClip;
@@ -364,18 +363,14 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         playerState = CapturePlayerState(actorRoot, controller);
         currentVelocity = Vector3.zero;
         lookYawOffset = 0f;
-        lookPitch = NormalizePitch(controller.ViewCamera.transform.localEulerAngles.x);
+        lookPitch = 0f;
 
         HidePlayerObjectsForRide(playerState);
         DisablePlayerForRide(playerState);
         ResolvePlayerRideActions(actorRoot, controller);
+        HideMountWorldVisualsForPlayer();
+        LockCursorForRide();
         EnsureFirstPersonOverlay(playerState);
-
-        if (visualRenderer != null)
-        {
-            wasVisualRendererEnabled = visualRenderer.enabled;
-            visualRenderer.enabled = false;
-        }
 
         PlayClip(idleClipId, true);
         return true;
@@ -395,13 +390,10 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
         DestroyFirstPersonOverlay();
         RestoreHiddenPlayerObjects();
+        RestoreMountWorldVisualsForPlayer();
+        RestoreRideCursor(playerState);
         ReleasePlayerRideActions();
         RestorePlayerAfterRide(playerState);
-
-        if (visualRenderer != null)
-        {
-            visualRenderer.enabled = wasVisualRendererEnabled;
-        }
 
         playerState = default;
         riderMode = RiderMode.Empty;
@@ -476,14 +468,34 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
             : forward * reverseSpeed;
 
         float turnInput = Mathf.Clamp(moveInput.x, -1f, 1f);
-        float turnAmount = turnInput * turnSpeed * Time.deltaTime * Mathf.Lerp(0.38f, 1f, Mathf.InverseLerp(0f, gallopSpeed, Mathf.Abs(currentVelocity.magnitude)));
+        float currentForwardSpeed = Vector3.Dot(ProjectHorizontal(currentVelocity), transform.forward);
+        float speed01 = Mathf.InverseLerp(0f, Mathf.Max(0.1f, gallopSpeed), Mathf.Abs(currentForwardSpeed));
+        float turnAmount = turnInput * turnSpeed * Time.deltaTime * Mathf.Lerp(0.34f, 1f, speed01);
         if (Mathf.Abs(turnAmount) > 0.001f)
         {
             Quaternion nextRotation = Quaternion.Euler(0f, transform.eulerAngles.y + turnAmount, 0f);
             MoveRotation(nextRotation);
         }
 
-        MoveHorse(transform.forward, targetSpeed, hop ? 0.16f : 0f);
+        MoveMountedPlayerVehicle(targetSpeed, hop ? 0.16f : 0f);
+    }
+
+    private void MoveMountedPlayerVehicle(float targetSpeed, float hopLift)
+    {
+        Vector3 forward = ProjectHorizontal(transform.forward);
+        if (forward.sqrMagnitude < 0.0001f)
+        {
+            forward = Vector3.forward;
+        }
+
+        forward.Normalize();
+        float currentForwardSpeed = Vector3.Dot(ProjectHorizontal(currentVelocity), forward);
+        bool acceleratingSameDirection = Mathf.Abs(targetSpeed) > Mathf.Abs(currentForwardSpeed)
+            && (Mathf.Abs(currentForwardSpeed) < 0.01f || Mathf.Sign(targetSpeed) == Mathf.Sign(currentForwardSpeed));
+        float accel = acceleratingSameDirection ? acceleration : braking;
+        float nextForwardSpeed = Mathf.MoveTowards(currentForwardSpeed, targetSpeed, accel * Time.deltaTime);
+        currentVelocity = forward * nextForwardSpeed;
+        MovePosition(transform.position + currentVelocity * Time.deltaTime + Vector3.up * hopLift);
     }
 
     private void MoveHorse(Vector3 desiredDirection, float targetSpeed, float hopLift)
@@ -973,6 +985,74 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         hiddenPlayerObjects.Clear();
     }
 
+    private void HideMountWorldVisualsForPlayer()
+    {
+        playerState.MountLitRenderers = GetComponentsInChildren<DirectionalSpriteBillboardLitRenderer>(true);
+        playerState.MountLitRendererStates = new bool[playerState.MountLitRenderers.Length];
+        for (int i = 0; i < playerState.MountLitRenderers.Length; i++)
+        {
+            DirectionalSpriteBillboardLitRenderer litRenderer = playerState.MountLitRenderers[i];
+            playerState.MountLitRendererStates[i] = litRenderer != null && litRenderer.enabled;
+            if (litRenderer != null)
+            {
+                litRenderer.enabled = false;
+            }
+        }
+
+        playerState.MountRenderers = GetComponentsInChildren<Renderer>(true);
+        playerState.MountRendererStates = new bool[playerState.MountRenderers.Length];
+        for (int i = 0; i < playerState.MountRenderers.Length; i++)
+        {
+            Renderer renderer = playerState.MountRenderers[i];
+            playerState.MountRendererStates[i] = renderer != null && renderer.enabled;
+            if (renderer != null)
+            {
+                renderer.enabled = false;
+            }
+        }
+    }
+
+    private void RestoreMountWorldVisualsForPlayer()
+    {
+        if (playerState.MountLitRenderers != null)
+        {
+            for (int i = 0; i < playerState.MountLitRenderers.Length; i++)
+            {
+                DirectionalSpriteBillboardLitRenderer litRenderer = playerState.MountLitRenderers[i];
+                if (litRenderer != null && playerState.MountLitRendererStates != null && i < playerState.MountLitRendererStates.Length)
+                {
+                    litRenderer.enabled = playerState.MountLitRendererStates[i];
+                }
+            }
+        }
+
+        if (playerState.MountRenderers != null)
+        {
+            for (int i = 0; i < playerState.MountRenderers.Length; i++)
+            {
+                Renderer renderer = playerState.MountRenderers[i];
+                if (renderer != null && playerState.MountRendererStates != null && i < playerState.MountRendererStates.Length)
+                {
+                    renderer.enabled = playerState.MountRendererStates[i];
+                }
+            }
+        }
+    }
+
+    private void LockCursorForRide()
+    {
+        playerState.PreviousCursorLockState = Cursor.lockState;
+        playerState.PreviousCursorVisible = Cursor.visible;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private static void RestoreRideCursor(PlayerRideState state)
+    {
+        Cursor.lockState = state.PreviousCursorLockState;
+        Cursor.visible = state.PreviousCursorVisible;
+    }
+
     private void ResolvePlayerRideActions(GameObject actor, RetroFpsController controller)
     {
         PlayerInput playerInput = actor.GetComponent<PlayerInput>();
@@ -1024,12 +1104,12 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
     private Vector2 ReadMoveInput()
     {
+        Vector2 move = Vector2.zero;
         if (moveAction != null && moveAction.enabled)
         {
-            return Vector2.ClampMagnitude(moveAction.ReadValue<Vector2>(), 1f);
+            move = moveAction.ReadValue<Vector2>();
         }
 
-        Vector2 move = Vector2.zero;
         if (Keyboard.current != null)
         {
             if (Keyboard.current.wKey.isPressed)
@@ -1060,8 +1140,16 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         {
             Vector2 value = lookAction.ReadValue<Vector2>();
             InputDevice device = lookAction.activeControl != null ? lookAction.activeControl.device : null;
-            gamepadLook = device is Gamepad || device is Joystick;
-            return value;
+            if (device is Gamepad || device is Joystick)
+            {
+                gamepadLook = true;
+                return value;
+            }
+
+            if (value.sqrMagnitude > 0.0001f)
+            {
+                return value;
+            }
         }
 
         if (Mouse.current != null)
@@ -1074,9 +1162,9 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
 
     private bool ReadSprintInput()
     {
-        if (sprintAction != null && sprintAction.enabled)
+        if (sprintAction != null && sprintAction.enabled && sprintAction.IsPressed())
         {
-            return sprintAction.IsPressed();
+            return true;
         }
 
         return Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed;
@@ -1163,8 +1251,8 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         }
 
         GameObject overlay = new("HorseRidingOverlay");
-        overlay.transform.SetParent(state.ViewCamera.transform, false);
-        overlay.transform.localPosition = firstPersonOverlayLocalPosition;
+        overlay.transform.SetParent(transform, false);
+        overlay.transform.localPosition = Vector3.zero;
         overlay.transform.localRotation = Quaternion.identity;
         overlay.transform.localScale = Vector3.one;
 
@@ -1178,6 +1266,7 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         playerState.OverlayObject = overlay;
         playerState.OverlayRenderer = spriteRenderer;
         ApplyFirstPersonOverlaySprite(spriteRenderer, firstPersonRidingFrames[0]);
+        UpdateFirstPersonOverlayPose(0f);
         overlayFrameTimer = 0f;
         overlayFrameIndex = 0;
     }
@@ -1211,9 +1300,32 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
             }
         }
 
-        Transform overlayTransform = playerState.OverlayRenderer.transform;
         float bob = Mathf.Sin(Time.time * cameraBobFrequency) * 0.018f * speed01;
-        overlayTransform.localPosition = firstPersonOverlayLocalPosition + new Vector3(0f, bob, 0f);
+        UpdateFirstPersonOverlayPose(bob);
+    }
+
+    private void UpdateFirstPersonOverlayPose(float bob)
+    {
+        if (playerState.OverlayRenderer == null)
+        {
+            return;
+        }
+
+        Transform cameraTransform = playerState.CameraTransform != null
+            ? playerState.CameraTransform
+            : playerState.ViewCamera != null ? playerState.ViewCamera.transform : null;
+        Transform actorTransform = playerState.ActorTransform;
+        if (cameraTransform == null || actorTransform == null)
+        {
+            return;
+        }
+
+        Quaternion mountViewRotation = actorTransform.rotation * playerState.CameraBaseLocalRotation;
+        Vector3 overlayLocalPosition = firstPersonOverlayLocalPosition + new Vector3(0f, bob, 0f);
+        Transform overlayTransform = playerState.OverlayRenderer.transform;
+        overlayTransform.SetPositionAndRotation(
+            cameraTransform.position + mountViewRotation * overlayLocalPosition,
+            mountViewRotation);
     }
 
     private void ResumeAnimator()
@@ -1552,6 +1664,12 @@ public sealed class RetroHorseMount : RetroInteractableBehaviour
         public Vector3 BodyAngularVelocity;
         public GameObject OverlayObject;
         public SpriteRenderer OverlayRenderer;
+        public Renderer[] MountRenderers;
+        public bool[] MountRendererStates;
+        public DirectionalSpriteBillboardLitRenderer[] MountLitRenderers;
+        public bool[] MountLitRendererStates;
+        public CursorLockMode PreviousCursorLockState;
+        public bool PreviousCursorVisible;
     }
 
     private struct NpcRideState

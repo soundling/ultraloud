@@ -4,9 +4,12 @@ using Random = UnityEngine.Random;
 
 public enum RetroShootableSurfaceKind
 {
-    Wood,
-    Stone,
-    Bird
+    Wood = 0,
+    Stone = 1,
+    Bird = 2,
+    Flesh = 3,
+    Metal = 4,
+    Bone = 5
 }
 
 [DisallowMultipleComponent]
@@ -14,7 +17,7 @@ public enum RetroShootableSurfaceKind
 public sealed class RetroShootableFeedback : MonoBehaviour
 {
     [SerializeField] private RetroDamageable damageable;
-    [SerializeField] private RetroShootableSurfaceKind surfaceKind = RetroShootableSurfaceKind.Wood;
+    [SerializeField] private RetroShootableSurfaceKind surfaceKind = RetroShootableSurfaceKind.Flesh;
     [SerializeField] private bool spawnImpactEffects = true;
     [SerializeField] private bool spawnDeathEffects = true;
     [SerializeField] private bool useImpactFlash = true;
@@ -42,6 +45,7 @@ public sealed class RetroShootableFeedback : MonoBehaviour
     private Vector3 lastHitPoint;
     private Vector3 lastHitNormal = Vector3.up;
     private bool hasLastHit;
+    private bool subscribedToDamageable;
 
     private void Reset()
     {
@@ -58,20 +62,12 @@ public sealed class RetroShootableFeedback : MonoBehaviour
     private void OnEnable()
     {
         ResolveDamageable();
-        if (damageable != null)
-        {
-            damageable.Damaged += HandleDamaged;
-            damageable.Died += HandleDied;
-        }
+        SubscribeToDamageable();
     }
 
     private void OnDisable()
     {
-        if (damageable != null)
-        {
-            damageable.Damaged -= HandleDamaged;
-            damageable.Died -= HandleDied;
-        }
+        UnsubscribeFromDamageable();
     }
 
     private void OnValidate()
@@ -89,12 +85,74 @@ public sealed class RetroShootableFeedback : MonoBehaviour
         UpdateVisualKick(Time.deltaTime);
     }
 
+    public void BindDamageable(RetroDamageable sourceDamageable)
+    {
+        RetroDamageable resolvedDamageable = sourceDamageable != null ? sourceDamageable : GetComponent<RetroDamageable>();
+        if (damageable == resolvedDamageable)
+        {
+            if (isActiveAndEnabled)
+            {
+                SubscribeToDamageable();
+            }
+
+            return;
+        }
+
+        UnsubscribeFromDamageable();
+        damageable = resolvedDamageable;
+        if (isActiveAndEnabled)
+        {
+            SubscribeToDamageable();
+        }
+    }
+
+    public void ConfigureRuntime(
+        RetroDamageable sourceDamageable,
+        RetroShootableSurfaceKind kind,
+        Transform root = null,
+        float scale = 1f,
+        float deathMultiplier = 2.4f)
+    {
+        BindDamageable(sourceDamageable);
+        surfaceKind = kind;
+        visualRoot = root;
+        ApplySurfaceDefaults();
+        effectScale *= Mathf.Max(0f, scale);
+        deathEffectMultiplier *= Mathf.Max(0f, deathMultiplier / 2.4f);
+        CacheVisualRoot();
+    }
+
     private void ResolveDamageable()
     {
         if (damageable == null)
         {
             damageable = GetComponent<RetroDamageable>();
         }
+    }
+
+    private void SubscribeToDamageable()
+    {
+        if (damageable == null || subscribedToDamageable)
+        {
+            return;
+        }
+
+        damageable.Damaged += HandleDamaged;
+        damageable.Died += HandleDied;
+        subscribedToDamageable = true;
+    }
+
+    private void UnsubscribeFromDamageable()
+    {
+        if (damageable == null || !subscribedToDamageable)
+        {
+            subscribedToDamageable = false;
+            return;
+        }
+
+        damageable.Damaged -= HandleDamaged;
+        damageable.Died -= HandleDied;
+        subscribedToDamageable = false;
     }
 
     private void ApplySurfaceDefaults()
@@ -105,6 +163,8 @@ public sealed class RetroShootableFeedback : MonoBehaviour
                 visualKickDistance = 0.018f;
                 visualKickAngle = 1.5f;
                 effectScale = 1.1f;
+                deathEffectMultiplier = 2.2f;
+                disableFlockAgentOnDeath = false;
                 break;
             case RetroShootableSurfaceKind.Bird:
                 visualKickDistance = 0.075f;
@@ -113,10 +173,33 @@ public sealed class RetroShootableFeedback : MonoBehaviour
                 deathEffectMultiplier = 3f;
                 disableFlockAgentOnDeath = true;
                 break;
+            case RetroShootableSurfaceKind.Flesh:
+                visualKickDistance = 0.06f;
+                visualKickAngle = 6.5f;
+                effectScale = 0.9f;
+                deathEffectMultiplier = 2.6f;
+                disableFlockAgentOnDeath = false;
+                break;
+            case RetroShootableSurfaceKind.Metal:
+                visualKickDistance = 0.028f;
+                visualKickAngle = 2.6f;
+                effectScale = 0.92f;
+                deathEffectMultiplier = 2.35f;
+                disableFlockAgentOnDeath = false;
+                break;
+            case RetroShootableSurfaceKind.Bone:
+                visualKickDistance = 0.04f;
+                visualKickAngle = 5f;
+                effectScale = 0.95f;
+                deathEffectMultiplier = 2.8f;
+                disableFlockAgentOnDeath = false;
+                break;
             default:
                 visualKickDistance = 0.05f;
                 visualKickAngle = 4.5f;
                 effectScale = 1f;
+                deathEffectMultiplier = 2.4f;
+                disableFlockAgentOnDeath = false;
                 break;
         }
     }
@@ -257,6 +340,15 @@ public sealed class RetroShootableFeedback : MonoBehaviour
             case RetroShootableSurfaceKind.Bird:
                 SpawnBirdBurst(point, normal, tangent, bitangent, intensity, death);
                 break;
+            case RetroShootableSurfaceKind.Flesh:
+                SpawnFleshBurst(point, normal, tangent, bitangent, intensity, death);
+                break;
+            case RetroShootableSurfaceKind.Metal:
+                SpawnMetalBurst(point, normal, tangent, bitangent, intensity, death);
+                break;
+            case RetroShootableSurfaceKind.Bone:
+                SpawnBoneBurst(point, normal, tangent, bitangent, intensity, death);
+                break;
             default:
                 SpawnWoodBurst(point, normal, tangent, bitangent, intensity, death);
                 break;
@@ -277,6 +369,29 @@ public sealed class RetroShootableFeedback : MonoBehaviour
         SpawnParticles(ShardMesh, point, normal, tangent, bitangent, Mathf.RoundToInt(10 * intensity), new Color(0.28f, 0.27f, 0.24f, 1f), new Color(0.78f, 0.76f, 0.68f, 1f), new Vector2(0.025f, 0.08f), new Vector2(1.8f, 5.8f), 7.2f, 0.72f, false, false);
         SpawnParticles(DecalMesh, point, normal, tangent, bitangent, Mathf.RoundToInt(8 * intensity), new Color(0.38f, 0.36f, 0.31f, 0.42f), new Color(0.72f, 0.68f, 0.58f, 0.25f), new Vector2(0.13f, 0.42f), new Vector2(0.45f, 1.85f), 1.1f, 2.15f, true, true);
         SpawnParticles(QuadMesh, point, normal, tangent, bitangent, Mathf.RoundToInt(3 * intensity), new Color(1f, 0.58f, 0.16f, 0.82f), new Color(1f, 0.92f, 0.5f, 0.65f), new Vector2(0.018f, 0.04f), new Vector2(2.5f, 7.5f), 6.4f, 0.55f, true, false);
+    }
+
+    private void SpawnFleshBurst(Vector3 point, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity, bool death)
+    {
+        SpawnDecal(point, normal, RandomColor(new Color(0.32f, 0.005f, 0.005f, 0.86f), new Color(0.78f, 0.04f, 0.02f, 0.68f)), Random.Range(0.12f, 0.24f) * intensity, death ? 4.8f : 2.8f);
+        SpawnParticles(DecalMesh, point, normal, tangent, bitangent, Mathf.RoundToInt((death ? 14 : 6) * intensity), new Color(0.55f, 0.02f, 0.01f, 0.92f), new Color(1f, 0.07f, 0.025f, 0.78f), new Vector2(0.035f, 0.12f), new Vector2(1.6f, 5.1f), 6.8f, 0.9f, true, false);
+        SpawnParticles(DiamondMesh, point, normal, tangent, bitangent, Mathf.RoundToInt((death ? 8 : 3) * intensity), new Color(0.68f, 0.26f, 0.17f, 0.9f), new Color(0.95f, 0.61f, 0.42f, 0.72f), new Vector2(0.035f, 0.11f), new Vector2(0.9f, 3.2f), 5.8f, 1.2f, true, false);
+    }
+
+    private void SpawnMetalBurst(Vector3 point, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity, bool death)
+    {
+        SpawnDecal(point, normal, RandomColor(new Color(0.025f, 0.022f, 0.02f, 0.72f), new Color(0.18f, 0.16f, 0.13f, 0.48f)), Random.Range(0.1f, 0.2f) * intensity, death ? 4.5f : 2.6f);
+        SpawnParticles(QuadMesh, point, normal, tangent, bitangent, Mathf.RoundToInt((death ? 16 : 7) * intensity), new Color(1f, 0.35f, 0.04f, 0.95f), new Color(1f, 0.92f, 0.48f, 0.78f), new Vector2(0.012f, 0.035f), new Vector2(3.2f, 8.8f), 7f, 0.55f, true, false);
+        SpawnParticles(ShardMesh, point, normal, tangent, bitangent, Mathf.RoundToInt((death ? 12 : 5) * intensity), new Color(0.24f, 0.25f, 0.26f, 1f), new Color(0.78f, 0.78f, 0.72f, 0.95f), new Vector2(0.02f, 0.07f), new Vector2(1.6f, 5.4f), 7.5f, 0.7f, false, false);
+        SpawnParticles(DecalMesh, point, normal, tangent, bitangent, Mathf.RoundToInt(5 * intensity), new Color(0.24f, 0.22f, 0.2f, 0.34f), new Color(0.54f, 0.49f, 0.42f, 0.24f), new Vector2(0.12f, 0.32f), new Vector2(0.4f, 1.55f), 1.05f, 2.3f, true, true);
+    }
+
+    private void SpawnBoneBurst(Vector3 point, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity, bool death)
+    {
+        SpawnDecal(point, normal, RandomColor(new Color(0.28f, 0.24f, 0.18f, 0.62f), new Color(0.68f, 0.61f, 0.44f, 0.44f)), Random.Range(0.12f, 0.23f) * intensity, death ? 4.8f : 3.2f);
+        SpawnParticles(ShardMesh, point, normal, tangent, bitangent, Mathf.RoundToInt((death ? 14 : 7) * intensity), new Color(0.62f, 0.56f, 0.42f, 0.96f), new Color(0.96f, 0.9f, 0.68f, 0.9f), new Vector2(0.025f, 0.085f), new Vector2(1.8f, 5.9f), 7.2f, 0.78f, false, false);
+        SpawnParticles(DecalMesh, point, normal, tangent, bitangent, Mathf.RoundToInt((death ? 9 : 4) * intensity), new Color(0.5f, 0.015f, 0.008f, 0.72f), new Color(0.9f, 0.06f, 0.025f, 0.58f), new Vector2(0.028f, 0.09f), new Vector2(1.2f, 4.2f), 6.4f, 1f, true, false);
+        SpawnParticles(DiamondMesh, point, normal, tangent, bitangent, Mathf.RoundToInt(5 * intensity), new Color(0.74f, 0.66f, 0.48f, 0.34f), new Color(0.9f, 0.82f, 0.62f, 0.22f), new Vector2(0.12f, 0.32f), new Vector2(0.35f, 1.65f), 1.15f, 2.25f, true, true);
     }
 
     private void SpawnBirdBurst(Vector3 point, Vector3 normal, Vector3 tangent, Vector3 bitangent, float intensity, bool death)
@@ -350,6 +465,9 @@ public sealed class RetroShootableFeedback : MonoBehaviour
         {
             RetroShootableSurfaceKind.Stone => new Color(1f, 0.68f, 0.28f, 0.62f),
             RetroShootableSurfaceKind.Bird => new Color(0.95f, 0.08f, 0.035f, 0.72f),
+            RetroShootableSurfaceKind.Flesh => new Color(1f, 0.08f, 0.035f, 0.68f),
+            RetroShootableSurfaceKind.Metal => new Color(1f, 0.75f, 0.24f, 0.7f),
+            RetroShootableSurfaceKind.Bone => new Color(1f, 0.82f, 0.52f, 0.64f),
             _ => new Color(0.92f, 0.55f, 0.22f, 0.58f)
         };
     }

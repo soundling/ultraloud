@@ -137,6 +137,8 @@ public sealed class RetroLifeFountainBuilderWindow : EditorWindow
             return;
         }
 
+        RetroShootablePrefabUtility.ConfigureLifeFountain(fountain);
+
         foreach (DirectionalSpriteAnimator animator in fountain.GetComponentsInChildren<DirectionalSpriteAnimator>(true))
         {
             animator.RefreshNow();

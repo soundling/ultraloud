@@ -19,7 +19,8 @@ public static class RetroPlayerRigSetupTool
         "Assets/_Project/Content/Gameplay/Weapons/Definitions/Pistol.asset",
         "Assets/_Project/Content/Gameplay/Weapons/Definitions/Rifle.asset",
         "Assets/_Project/Content/Gameplay/Weapons/Definitions/Shotgun.asset",
-        "Assets/_Project/Content/Gameplay/Weapons/Definitions/GrenadeLauncher.asset"
+        "Assets/_Project/Content/Gameplay/Weapons/Definitions/GrenadeLauncher.asset",
+        "Assets/_Project/Content/Gameplay/Weapons/Definitions/RocketLauncher.asset"
     };
 
     private static readonly string[] MuzzleFlashSpritePaths =
@@ -27,7 +28,8 @@ public static class RetroPlayerRigSetupTool
         "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_Pistol.png",
         "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_Rifle.png",
         "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_Shotgun.png",
-        "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_GrenadeLauncher.png"
+        "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_GrenadeLauncher.png",
+        "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_RocketLauncher.png"
     };
 
     private static readonly string[] WeaponViewmodelMapSetPaths =
@@ -35,7 +37,8 @@ public static class RetroPlayerRigSetupTool
         "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/PistolViewmodelMapSet.asset",
         "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/RifleViewmodelMapSet.asset",
         "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/ShotgunViewmodelMapSet.asset",
-        "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/GrenadeLauncherViewmodelMapSet.asset"
+        "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/GrenadeLauncherViewmodelMapSet.asset",
+        "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/RocketLauncherViewmodelMapSet.asset"
     };
 
     private static readonly Vector2[] MuzzleFlashSpriteSizes =
@@ -43,11 +46,13 @@ public static class RetroPlayerRigSetupTool
         new(0.38f, 0.28f),
         new(0.62f, 0.24f),
         new(0.82f, 0.48f),
-        new(0.78f, 0.56f)
+        new(0.78f, 0.56f),
+        new(0.86f, 0.58f)
     };
 
     private static readonly Vector3[] SpriteMuzzleLocalOffsets =
     {
+        new(0.055f, 0f, 0f),
         new(0.055f, 0f, 0f),
         new(0.055f, 0f, 0f),
         new(0.055f, 0f, 0f),

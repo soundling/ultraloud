@@ -16,19 +16,27 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
     private SphereCollider cachedCollider;
     private Renderer cachedRenderer;
     private Material runtimeMaterial;
+    private GameObject source;
     private float damage;
     private float explosionRadius;
     private float explosionForce;
     private float impactDamage;
     private float detonateTime;
+    private float trailInterval;
+    private float trailWidth;
+    private float trailDuration;
+    private float nextTrailTime;
     private LayerMask collisionMask;
     private Color effectColor;
+    private Vector3 previousTrailPosition;
+    private bool alignVisualToVelocity;
     private bool exploded;
 
     public void ConfigureVisual(string objectName, Color color, float scale)
     {
         EnsureCachedReferences();
-        gameObject.name = string.IsNullOrWhiteSpace(objectName) ? "Grenade Projectile" : objectName;
+        string visualName = string.IsNullOrWhiteSpace(objectName) ? "Grenade Projectile" : objectName;
+        gameObject.name = visualName;
         transform.localScale = Vector3.one * Mathf.Max(0.01f, scale);
 
         if (cachedRenderer == null)
@@ -38,12 +46,12 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
 
         if (runtimeMaterial == null)
         {
-            runtimeMaterial = CreateRuntimeMaterial("Grenade Projectile", color, true);
+            runtimeMaterial = CreateRuntimeMaterial($"{visualName} Material", color, true);
             cachedRenderer.sharedMaterial = runtimeMaterial;
         }
         else
         {
-            runtimeMaterial.name = "Grenade Projectile";
+            runtimeMaterial.name = $"{visualName} Material";
             ApplyRuntimeMaterialColor(runtimeMaterial, color, true);
         }
 
@@ -61,22 +69,34 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
         float fuseTime,
         float impactDamage,
         LayerMask collisionMask,
-        Color effectColor)
+        Color effectColor,
+        bool useGravity = true,
+        bool alignVisualToVelocity = false,
+        float trailInterval = 0f,
+        float trailWidth = 0f,
+        float trailDuration = 0f)
     {
         EnsureCachedReferences();
         RestoreIgnoredCollisions();
         damagedTargets.Clear();
         exploded = false;
+        source = owner != null ? owner : gameObject;
         this.damage = damage;
         this.explosionRadius = explosionRadius;
         this.explosionForce = explosionForce;
         this.impactDamage = impactDamage;
         this.collisionMask = collisionMask;
         this.effectColor = effectColor;
+        this.alignVisualToVelocity = alignVisualToVelocity;
+        this.trailInterval = Mathf.Max(0f, trailInterval);
+        this.trailWidth = Mathf.Max(0f, trailWidth);
+        this.trailDuration = Mathf.Max(0f, trailDuration);
+        previousTrailPosition = transform.position;
+        nextTrailTime = Time.time + this.trailInterval;
         detonateTime = Time.time + Mathf.Max(0f, fuseTime);
         cachedCollider.radius = 0.5f;
         cachedCollider.enabled = true;
-        cachedBody.useGravity = true;
+        cachedBody.useGravity = useGravity;
         cachedBody.isKinematic = false;
         cachedBody.detectCollisions = true;
         cachedBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
@@ -88,6 +108,7 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
         cachedBody.velocity = velocity;
 #endif
         cachedBody.angularVelocity = Random.onUnitSphere * 10f;
+        AlignToVelocityIfNeeded();
 
         TrackIgnoredOwnerCollisions(owner);
     }
@@ -114,7 +135,12 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
     {
         RestoreIgnoredCollisions();
         damagedTargets.Clear();
+        source = null;
         exploded = true;
+        alignVisualToVelocity = false;
+        trailInterval = 0f;
+        trailWidth = 0f;
+        trailDuration = 0f;
         if (cachedBody != null)
         {
 #if UNITY_6000_0_OR_NEWER
@@ -142,6 +168,7 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
         RestoreIgnoredCollisions();
         DestroyRuntimeMaterial(runtimeMaterial);
         runtimeMaterial = null;
+        source = null;
         this.pooledObject = null;
     }
 
@@ -209,7 +236,15 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
 
     private void Update()
     {
-        if (!exploded && Time.time >= detonateTime)
+        if (exploded)
+        {
+            return;
+        }
+
+        AlignToVelocityIfNeeded();
+        SpawnProjectileTrailIfNeeded();
+
+        if (Time.time >= detonateTime)
         {
             Explode(transform.position);
         }
@@ -239,7 +274,7 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
             RetroDamageable directDamageable = collision.collider.GetComponentInParent<RetroDamageable>();
             if (directDamageable != null)
             {
-                directDamageable.ApplyDamage(impactDamage, explosionPoint, explosionNormal);
+                directDamageable.ApplyDamage(impactDamage, explosionPoint, explosionNormal, source);
             }
             else
             {
@@ -283,7 +318,7 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
                     Vector3 hitNormal = (closestPoint - explosionPoint).sqrMagnitude > 0.0001f
                         ? (closestPoint - explosionPoint).normalized
                         : Vector3.up;
-                    damageable.ApplyDamage(damage * falloff, closestPoint, hitNormal);
+                    damageable.ApplyDamage(damage * falloff, closestPoint, hitNormal, source);
                 }
             }
             else
@@ -298,8 +333,57 @@ public sealed class RetroGrenadeProjectile : MonoBehaviour, IRetroPoolLifecycle
         }
 
         SpawnExplosionFlash(explosionPoint);
-        RetroGameContext.Events.Publish(new RetroExplosionEvent(gameObject, explosionPoint, explosionRadius, damage, effectColor));
+        RetroGameContext.Events.Publish(new RetroExplosionEvent(source != null ? source : gameObject, explosionPoint, explosionRadius, damage, effectColor));
         ReturnOrDestroy();
+    }
+
+    private void AlignToVelocityIfNeeded()
+    {
+        if (!alignVisualToVelocity || cachedBody == null)
+        {
+            return;
+        }
+
+        Vector3 velocity = CurrentVelocity;
+        if (velocity.sqrMagnitude <= 0.0001f)
+        {
+            return;
+        }
+
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, velocity.normalized);
+    }
+
+    private void SpawnProjectileTrailIfNeeded()
+    {
+        if (trailInterval <= 0f || trailWidth <= 0f || trailDuration <= 0f || Time.time < nextTrailTime)
+        {
+            return;
+        }
+
+        Vector3 currentPosition = transform.position;
+        if ((currentPosition - previousTrailPosition).sqrMagnitude <= 0.0001f)
+        {
+            nextTrailTime = Time.time + trailInterval;
+            return;
+        }
+
+        Color trailColor = effectColor;
+        trailColor.a = Mathf.Min(trailColor.a, 0.42f);
+        RetroGameContext.Vfx.SpawnBulletTrail(gameObject.name, previousTrailPosition, currentPosition, trailColor, trailWidth, trailDuration);
+        previousTrailPosition = currentPosition;
+        nextTrailTime = Time.time + trailInterval;
+    }
+
+    private Vector3 CurrentVelocity
+    {
+        get
+        {
+#if UNITY_6000_0_OR_NEWER
+            return cachedBody != null ? cachedBody.linearVelocity : Vector3.zero;
+#else
+            return cachedBody != null ? cachedBody.velocity : Vector3.zero;
+#endif
+        }
     }
 
     private void SpawnExplosionFlash(Vector3 explosionPoint)

@@ -3,7 +3,8 @@ using UnityEngine;
 public enum RetroWeaponKind
 {
     Hitscan,
-    GrenadeLauncher
+    GrenadeLauncher,
+    RocketLauncher
 }
 
 public enum RetroFireMode

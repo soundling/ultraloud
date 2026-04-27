@@ -44,7 +44,15 @@ public sealed class RetroWeaponFireAnimationBuilderWindow : EditorWindow
             0.034f,
             new Vector3(0f, 0.018f, -0.145f),
             new Vector3(12f, 2.45f, 3f),
-            new Color(1f, 0.62f, 0.13f, 1f))
+            new Color(1f, 0.62f, 0.13f, 1f)),
+        new WeaponFireAnimationSpec(
+            "RocketLauncher",
+            "Assets/_Project/Content/Gameplay/Weapons/Definitions/RocketLauncher.asset",
+            "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/RocketLauncherViewmodelMapSet.asset",
+            0.034f,
+            new Vector3(0f, 0.02f, -0.155f),
+            new Vector3(13f, 2.6f, 3.2f),
+            new Color(1f, 0.48f, 0.12f, 1f))
     };
 
     private Vector2 scroll;

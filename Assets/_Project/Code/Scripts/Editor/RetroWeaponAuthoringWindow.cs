@@ -13,7 +13,8 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         "Assets/_Project/Content/Gameplay/Weapons/Definitions/Pistol.asset",
         "Assets/_Project/Content/Gameplay/Weapons/Definitions/Rifle.asset",
         "Assets/_Project/Content/Gameplay/Weapons/Definitions/Shotgun.asset",
-        "Assets/_Project/Content/Gameplay/Weapons/Definitions/GrenadeLauncher.asset"
+        "Assets/_Project/Content/Gameplay/Weapons/Definitions/GrenadeLauncher.asset",
+        "Assets/_Project/Content/Gameplay/Weapons/Definitions/RocketLauncher.asset"
     };
 
     private static readonly string[] MuzzleFlashSpritePaths =
@@ -21,7 +22,8 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_Pistol.png",
         "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_Rifle.png",
         "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_Shotgun.png",
-        "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_GrenadeLauncher.png"
+        "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_GrenadeLauncher.png",
+        "Assets/_Project/Art/Sprites/Weapons/MuzzleFlash_RocketLauncher.png"
     };
 
     private static readonly string[] WeaponViewmodelMapSetPaths =
@@ -29,7 +31,8 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
         "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/PistolViewmodelMapSet.asset",
         "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/RifleViewmodelMapSet.asset",
         "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/ShotgunViewmodelMapSet.asset",
-        "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/GrenadeLauncherViewmodelMapSet.asset"
+        "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/GrenadeLauncherViewmodelMapSet.asset",
+        "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/RocketLauncherViewmodelMapSet.asset"
     };
 
     private static readonly string[][] WeaponFireAnimationMapSetPaths =
@@ -61,6 +64,13 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
             "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/FireAnimation/GrenadeLauncher/GrenadeLauncherFireFrame01.asset",
             "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/FireAnimation/GrenadeLauncher/GrenadeLauncherFireFrame02.asset",
             "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/FireAnimation/GrenadeLauncher/GrenadeLauncherFireFrame03.asset"
+        },
+        new[]
+        {
+            "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/FireAnimation/RocketLauncher/RocketLauncherFireFrame00.asset",
+            "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/FireAnimation/RocketLauncher/RocketLauncherFireFrame01.asset",
+            "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/FireAnimation/RocketLauncher/RocketLauncherFireFrame02.asset",
+            "Assets/_Project/Content/Gameplay/Weapons/ViewmodelMapSets/FireAnimation/RocketLauncher/RocketLauncherFireFrame03.asset"
         }
     };
 
@@ -465,18 +475,18 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
             EditorGUILayout.HelpBox("Bullet trail segments are lower than pellet count. Some pellets will not draw trails, which is fine for performance but worth authoring intentionally.", MessageType.Info);
         }
 
-        if (definition.kind == RetroWeaponKind.GrenadeLauncher)
+        if (definition.kind == RetroWeaponKind.GrenadeLauncher || definition.kind == RetroWeaponKind.RocketLauncher)
         {
             if (definition.projectileSpeed <= 0f)
             {
                 warningCount++;
-                EditorGUILayout.HelpBox("Projectile Speed is zero, so grenade launch velocity will collapse to player movement.", MessageType.Warning);
+                EditorGUILayout.HelpBox("Projectile Speed is zero, so launch velocity will collapse to player movement.", MessageType.Warning);
             }
 
             if (definition.explosionRadius <= 0f)
             {
                 warningCount++;
-                EditorGUILayout.HelpBox("Explosion Radius is zero. Grenades will not produce area damage.", MessageType.Warning);
+                EditorGUILayout.HelpBox("Explosion Radius is zero. Projectiles will not produce area damage.", MessageType.Warning);
             }
         }
 
@@ -649,8 +659,15 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
             case 2:
                 ApplyPreset(definition, "Shotgun", RetroWeaponKind.Hitscan, RetroFireMode.SemiAuto, 8, 40, 40, 1.95f, 0.82f, 11f, 60f, 8, 4.4f, 35f, 0f, 0f, 0f, 0f, new Vector3(0.02f, -0.04f, 0.06f), new Vector3(2f, 0f, 0f), new Vector3(0f, 0.01f, -0.095f), new Vector3(8f, 1.4f, 2f), new Color(0.18f, 0.14f, 0.11f), new Color(0.45f, 0.36f, 0.19f), 0.32f, new Vector3(0.01f, -0.06f, 0.06f), new Vector3(0f, 0f, -2f), new Vector2(1.45f, 0.82f), new Vector3(0f, -0.01f, 0.72f), new Vector3(0.055f, 0f, 0f), muzzleSprite, new Vector2(0.82f, 0.48f), defaultMapSet);
                 break;
-            default:
+            case 3:
                 ApplyPreset(definition, "Grenade Launcher", RetroWeaponKind.GrenadeLauncher, RetroFireMode.SemiAuto, 1, 10, 10, 2f, 0.9f, 95f, 120f, 1, 0.4f, 15f, 28f, 5.5f, 850f, 2.5f, new Vector3(0.05f, -0.05f, 0.08f), new Vector3(2f, 0f, 0f), new Vector3(0f, 0.015f, -0.12f), new Vector3(10f, 2f, 2.5f), new Color(0.14f, 0.16f, 0.13f), new Color(0.4f, 0.55f, 0.24f), 0.36f, new Vector3(0.02f, -0.055f, 0.06f), new Vector3(0f, 0f, -1f), new Vector2(1.25f, 0.86f), new Vector3(0f, 0f, 0.75f), new Vector3(0.055f, 0f, 0f), muzzleSprite, new Vector2(0.78f, 0.56f), defaultMapSet);
+                break;
+            default:
+                ApplyPreset(definition, "Rocket Launcher", RetroWeaponKind.RocketLauncher, RetroFireMode.SemiAuto, 4, 20, 20, 1.6f, 0.78f, 92f, 115f, 1, 0.18f, 20f, 42f, 4.3f, 980f, 2.75f, new Vector3(0.06f, -0.045f, 0.1f), new Vector3(2f, 0f, 0f), new Vector3(0f, 0.02f, -0.155f), new Vector3(13f, 2.6f, 3.2f), new Color(0.28f, 0.11f, 0.08f), new Color(1f, 0.52f, 0.16f), 0.42f, new Vector3(0.035f, -0.07f, 0.07f), new Vector3(0f, 0f, -1.2f), new Vector2(1.34f, 0.9f), new Vector3(0f, 0.01f, 0.78f), new Vector3(0.055f, 0f, 0f), muzzleSprite, new Vector2(0.86f, 0.58f), defaultMapSet);
+                definition.baseTintMultiplier = new Color(1.06f, 0.92f, 0.88f, 1f);
+                definition.emissiveTintMultiplier = new Color(1.25f, 0.9f, 0.68f, 1f);
+                definition.weaponBodyTint = 0.35f;
+                definition.weaponAccentTint = 0.55f;
                 break;
         }
 
@@ -689,6 +706,7 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
             1 => 0.018f,
             2 => 0.032f,
             3 => 0.034f,
+            4 => 0.034f,
             _ => 0.024f
         };
     }
@@ -719,6 +737,14 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
                 definition.bulletTrailWidth = 0.035f;
                 definition.bulletTrailDuration = 0.12f;
                 definition.bulletTrailStartOffset = 0.06f;
+                definition.bulletTrailEndOffset = 0f;
+                definition.bulletTrailMaxSegmentsPerShot = 1;
+                break;
+            case 4:
+                definition.bulletTrailColor = new Color(1f, 0.52f, 0.16f, 0.68f);
+                definition.bulletTrailWidth = 0.045f;
+                definition.bulletTrailDuration = 0.16f;
+                definition.bulletTrailStartOffset = 0.04f;
                 definition.bulletTrailEndOffset = 0f;
                 definition.bulletTrailMaxSegmentsPerShot = 1;
                 break;
@@ -762,6 +788,15 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
                 definition.maxSpreadAngle = 0.7f;
                 definition.spreadRecoverySpeed = 4f;
                 definition.movementSpreadPenalty = 0.15f;
+                break;
+            case 4:
+                definition.dryFireCooldown = 0.26f;
+                definition.dryFireKickPosition = new Vector3(0f, 0.001f, -0.02f);
+                definition.dryFireKickEuler = new Vector3(2f, 0.22f, 0.3f);
+                definition.spreadBloomPerShot = 0.02f;
+                definition.maxSpreadAngle = 0.32f;
+                definition.spreadRecoverySpeed = 5f;
+                definition.movementSpreadPenalty = 0.1f;
                 break;
             default:
                 definition.spreadBloomPerShot = 0.18f;
@@ -857,6 +892,7 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
             1 => "Rifle",
             2 => "Shotgun",
             3 => "Grenade Launcher",
+            4 => "Rocket Launcher",
             _ => $"Weapon {slot + 1}"
         };
     }

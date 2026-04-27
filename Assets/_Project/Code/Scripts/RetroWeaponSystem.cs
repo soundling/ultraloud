@@ -166,6 +166,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     private Transform spriteViewModelTransform;
     private Transform spriteMuzzle;
     private RetroComponentPool<RetroGrenadeProjectile> grenadeProjectilePool;
+    private RetroComponentPool<RetroGrenadeProjectile> rocketProjectilePool;
     private FirstPersonSpriteVolumeMapSet defaultSpriteMapSet;
     private bool usingSpriteVolumeViewModel;
     private bool ownsActionMap;
@@ -342,7 +343,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
         else
         {
-            weapons = new WeaponRuntime[4];
+            weapons = new WeaponRuntime[5];
             for (int i = 0; i < weapons.Length; i++)
             {
                 weapons[i] = BuildDefaultWeaponRuntime(i);
@@ -566,6 +567,41 @@ public sealed class RetroWeaponSystem : MonoBehaviour
                 BulletTrailEndOffset = 0f,
                 BulletTrailMaxSegmentsPerShot = 1
             },
+            4 => new WeaponRuntime
+            {
+                Name = "Rocket Launcher",
+                Kind = RetroWeaponKind.RocketLauncher,
+                FireMode = RetroFireMode.SemiAuto,
+                MagazineSize = 4,
+                AmmoInMagazine = 4,
+                ReserveAmmo = 20,
+                MaxReserveAmmo = 20,
+                ReloadDuration = 1.6f,
+                FireInterval = 0.78f,
+                Damage = 92f,
+                Range = 115f,
+                Pellets = 1,
+                SpreadAngle = 0.18f,
+                ProjectileSpeed = 42f,
+                ExplosionRadius = 4.3f,
+                ExplosionForce = 980f,
+                FuseTime = 2.75f,
+                ImpactForce = defaultImpactForce,
+                LocalPosition = new Vector3(0.06f, -0.045f, 0.1f),
+                LocalEuler = new Vector3(2f, 0f, 0f),
+                RecoilPosition = new Vector3(0f, 0.02f, -0.155f),
+                RecoilEuler = new Vector3(13f, 2.6f, 3.2f),
+                BodyColor = new Color(0.28f, 0.11f, 0.08f),
+                AccentColor = new Color(1f, 0.52f, 0.16f),
+                MuzzleFlashScale = 0.42f,
+                BulletTrailEnabled = true,
+                BulletTrailColor = new Color(1f, 0.52f, 0.16f, 0.68f),
+                BulletTrailWidth = 0.045f,
+                BulletTrailDuration = 0.16f,
+                BulletTrailStartOffset = 0.04f,
+                BulletTrailEndOffset = 0f,
+                BulletTrailMaxSegmentsPerShot = 1
+            },
             _ => new WeaponRuntime
             {
                 Name = $"Weapon {index + 1}",
@@ -638,6 +674,15 @@ public sealed class RetroWeaponSystem : MonoBehaviour
                 weapon.DryFireCooldown = 0.24f;
                 weapon.DryFireKickPosition = new Vector3(0f, 0.001f, -0.018f);
                 weapon.DryFireKickEuler = new Vector3(1.8f, 0.2f, 0.25f);
+                break;
+            case 4:
+                weapon.SpreadBloomPerShot = 0.02f;
+                weapon.MaxSpreadAngle = 0.32f;
+                weapon.SpreadRecoverySpeed = 5f;
+                weapon.MovementSpreadPenalty = 0.1f;
+                weapon.DryFireCooldown = 0.26f;
+                weapon.DryFireKickPosition = new Vector3(0f, 0.001f, -0.02f);
+                weapon.DryFireKickEuler = new Vector3(2f, 0.22f, 0.3f);
                 break;
             default:
                 weapon.SpreadBloomPerShot = 0.18f;
@@ -851,6 +896,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             1 => new Vector3(0.02f, -0.05f, 0.04f),
             2 => new Vector3(0.01f, -0.06f, 0.06f),
             3 => new Vector3(0.02f, -0.055f, 0.06f),
+            4 => new Vector3(0.035f, -0.07f, 0.07f),
             _ => Vector3.zero
         };
     }
@@ -868,6 +914,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             1 => new Vector3(0f, 0f, -1.5f),
             2 => new Vector3(0f, 0f, -2f),
             3 => new Vector3(0f, 0f, -1f),
+            4 => new Vector3(0f, 0f, -1.2f),
             _ => Vector3.zero
         };
     }
@@ -885,6 +932,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             1 => new Vector2(1.35f, 0.78f),
             2 => new Vector2(1.45f, 0.82f),
             3 => new Vector2(1.25f, 0.86f),
+            4 => new Vector2(1.34f, 0.9f),
             _ => new Vector2(1.2f, 0.9f)
         };
     }
@@ -902,6 +950,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             1 => new Vector3(0f, -0.02f, 0.78f),
             2 => new Vector3(0f, -0.01f, 0.72f),
             3 => new Vector3(0f, 0f, 0.75f),
+            4 => new Vector3(0f, 0.01f, 0.78f),
             _ => new Vector3(0f, 0f, 0.55f)
         };
     }
@@ -945,6 +994,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             1 => new Vector2(0.62f, 0.24f),
             2 => new Vector2(0.82f, 0.48f),
             3 => new Vector2(0.78f, 0.56f),
+            4 => new Vector2(0.86f, 0.58f),
             _ => new Vector2(0.46f, 0.3f)
         };
     }
@@ -1247,6 +1297,9 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             case RetroWeaponKind.GrenadeLauncher:
                 FireGrenadeLauncher(weapon);
                 break;
+            case RetroWeaponKind.RocketLauncher:
+                FireRocketLauncher(weapon);
+                break;
         }
 
         AddSpreadBloom(weapon);
@@ -1458,6 +1511,48 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             effectColor: weapon.AccentColor);
     }
 
+    private void FireRocketLauncher(WeaponRuntime weapon)
+    {
+        Vector3 origin = weapon.Muzzle != null ? weapon.Muzzle.position : viewCamera.transform.position + viewCamera.transform.forward * 0.65f;
+        Vector3 launchDirection = GetSpreadDirection(ResolveCurrentSpreadAngle(weapon));
+        Vector3 launchVelocity = launchDirection * weapon.ProjectileSpeed + CurrentPlanarVelocity * 0.12f;
+        EnsureRocketProjectilePool();
+        RetroGrenadeProjectile projectile = rocketProjectilePool?.Rent(origin, Quaternion.identity);
+        if (projectile == null)
+        {
+            return;
+        }
+
+        projectile.ConfigureVisual($"{weapon.Name} Rocket", weapon.AccentColor, 0.14f);
+
+        Vector3 trailDirection = launchVelocity.sqrMagnitude > 0.0001f ? launchVelocity.normalized : launchDirection;
+        SpawnBulletTrail(
+            weapon,
+            ResolveBulletTrailStart(weapon, trailDirection),
+            origin + trailDirection * Mathf.Max(2.5f, weapon.ProjectileSpeed * 0.16f),
+            trailDirection);
+
+        float maxFlightTime = weapon.FuseTime > 0f
+            ? weapon.FuseTime
+            : weapon.Range / Mathf.Max(0.01f, weapon.ProjectileSpeed);
+
+        projectile.Initialize(
+            owner: gameObject,
+            velocity: launchVelocity,
+            damage: weapon.Damage,
+            explosionRadius: weapon.ExplosionRadius,
+            explosionForce: weapon.ExplosionForce,
+            fuseTime: maxFlightTime,
+            impactDamage: 0f,
+            collisionMask: hitMask,
+            effectColor: weapon.AccentColor,
+            useGravity: false,
+            alignVisualToVelocity: true,
+            trailInterval: 0.025f,
+            trailWidth: Mathf.Max(0.018f, weapon.BulletTrailWidth * 0.55f),
+            trailDuration: Mathf.Max(0.12f, weapon.BulletTrailDuration));
+    }
+
     private void EnsureGrenadeProjectilePool()
     {
         if (grenadeProjectilePool != null && grenadeProjectilePool.IsValid)
@@ -1468,6 +1563,19 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         grenadeProjectilePool = RetroPoolService.Shared.GetOrCreateComponentPool(
             "RetroWeaponSystem.GrenadeProjectile",
             CreateGrenadeProjectile,
+            new RetroPoolSettings(prewarmCount: 4, maxInactiveCount: 24));
+    }
+
+    private void EnsureRocketProjectilePool()
+    {
+        if (rocketProjectilePool != null && rocketProjectilePool.IsValid)
+        {
+            return;
+        }
+
+        rocketProjectilePool = RetroPoolService.Shared.GetOrCreateComponentPool(
+            "RetroWeaponSystem.RocketProjectile",
+            CreateRocketProjectile,
             new RetroPoolSettings(prewarmCount: 4, maxInactiveCount: 24));
     }
 
@@ -1502,6 +1610,52 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         }
 
         grenade.SetActive(false);
+        return projectile;
+    }
+
+    private RetroGrenadeProjectile CreateRocketProjectile(Transform parent)
+    {
+        GameObject rocket = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        rocket.name = "Rocket Projectile";
+        rocket.transform.SetParent(parent, false);
+        rocket.layer = gameObject.layer;
+
+        Collider primitiveCollider = rocket.GetComponent<Collider>();
+        if (primitiveCollider != null)
+        {
+            primitiveCollider.enabled = false;
+            Destroy(primitiveCollider);
+        }
+
+        if (rocket.GetComponent<SphereCollider>() == null)
+        {
+            rocket.AddComponent<SphereCollider>();
+        }
+
+        Rigidbody rocketBody = rocket.GetComponent<Rigidbody>();
+        if (rocketBody == null)
+        {
+            rocketBody = rocket.AddComponent<Rigidbody>();
+        }
+
+        rocketBody.useGravity = false;
+        rocketBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        rocketBody.interpolation = RigidbodyInterpolation.Interpolate;
+
+        Renderer renderer = rocket.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.shadowCastingMode = ShadowCastingMode.On;
+            renderer.receiveShadows = true;
+        }
+
+        RetroGrenadeProjectile projectile = rocket.GetComponent<RetroGrenadeProjectile>();
+        if (projectile == null)
+        {
+            projectile = rocket.AddComponent<RetroGrenadeProjectile>();
+        }
+
+        rocket.SetActive(false);
         return projectile;
     }
 
@@ -1991,6 +2145,13 @@ public sealed class RetroWeaponSystem : MonoBehaviour
                 CreateWeaponPart(root.transform, PrimitiveType.Cylinder, new Vector3(0f, 0f, 0.46f), new Vector3(0.055f, 0.24f, 0.055f), new Vector3(90f, 0f, 0f), accentMaterial);
                 CreateWeaponPart(root.transform, PrimitiveType.Cylinder, new Vector3(0f, -0.1f, 0.2f), new Vector3(0.07f, 0.05f, 0.07f), Vector3.zero, bodyMaterial);
                 break;
+            case 4:
+                CreateWeaponPart(root.transform, PrimitiveType.Cylinder, new Vector3(0f, -0.01f, 0.36f), new Vector3(0.075f, 0.34f, 0.075f), new Vector3(90f, 0f, 0f), bodyMaterial);
+                CreateWeaponPart(root.transform, PrimitiveType.Cylinder, new Vector3(0f, -0.01f, 0.71f), new Vector3(0.095f, 0.07f, 0.095f), new Vector3(90f, 0f, 0f), accentMaterial);
+                CreateWeaponPart(root.transform, PrimitiveType.Cube, new Vector3(-0.02f, -0.085f, 0.18f), new Vector3(0.08f, 0.18f, 0.1f), new Vector3(14f, 0f, -14f), bodyMaterial);
+                CreateWeaponPart(root.transform, PrimitiveType.Cube, new Vector3(0.035f, 0.065f, 0.2f), new Vector3(0.055f, 0.05f, 0.16f), Vector3.zero, accentMaterial);
+                CreateWeaponPart(root.transform, PrimitiveType.Cube, new Vector3(0f, -0.13f, 0.42f), new Vector3(0.1f, 0.045f, 0.24f), Vector3.zero, bodyMaterial);
+                break;
         }
 
         GameObject muzzle = new GameObject("Muzzle");
@@ -2000,6 +2161,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             0 => new Vector3(0f, 0.01f, 0.34f),
             1 => new Vector3(0f, -0.02f, 0.8f),
             2 => new Vector3(0f, -0.01f, 0.72f),
+            4 => new Vector3(0f, -0.01f, 0.84f),
             _ => new Vector3(0f, 0f, 0.75f)
         };
         weapon.Muzzle = muzzle.transform;
@@ -2233,7 +2395,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
 
         GUI.Label(new Rect(28f, Screen.height - 98f, 320f, 24f), $"Weapon: {CurrentWeapon.Name}");
         GUI.Label(new Rect(28f, Screen.height - 74f, 380f, 24f), $"Ammo: {CurrentWeapon.AmmoInMagazine} / {CurrentWeapon.ReserveAmmo}   Spread: {CurrentSpreadAngle:0.0}");
-        GUI.Label(new Rect(28f, Screen.height - 50f, 390f, 24f), isReloading ? "Reloading..." : "LMB Fire  |  R Reload  |  Mouse Wheel / 1-4 Switch");
+        GUI.Label(new Rect(28f, Screen.height - 50f, 390f, 24f), isReloading ? "Reloading..." : "LMB Fire  |  R Reload  |  Mouse Wheel / Number Keys Switch");
 #endif
     }
 

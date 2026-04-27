@@ -189,6 +189,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43f83b99a3dc4c42a7c5e32d389fdb6c, type: 2}
   - {fileID: 11400000, guid: c3099fded4b24d91a09f0d4a4c6e8715, type: 2}
   - {fileID: 11400000, guid: f51aa2dc9f77472e9c48cf453fd1f042, type: 2}
+  - {fileID: 11400000, guid: 1073b49bebad444e9121da427748ec67, type: 2}
   useSpriteVolumeViewModel: 1
   weaponSpriteViews:
   - mapSet: {fileID: 11400000, guid: 9f929fc9415971540913dabb791443b2, type: 2}
@@ -227,18 +228,30 @@ MonoBehaviour:
     emissiveTintMultiplier: {r: 1, g: 1, b: 1, a: 1}
     weaponBodyTint: 0
     weaponAccentTint: 0.35
+  - mapSet: {fileID: 11400000, guid: 919db502e6e94488929b865b0eeaaa84, type: 2}
+    visualLocalPosition: {x: 0.035, y: -0.07, z: 0.07}
+    visualLocalEuler: {x: 0, y: 0, z: -1.2}
+    visualSize: {x: 1.34, y: 0.9}
+    muzzleLocalPosition: {x: 0, y: 0.01, z: 0.78}
+    baseTintMultiplier: {r: 1.06, g: 0.92, b: 0.88, a: 1}
+    emissiveTintMultiplier: {r: 1.25, g: 0.9, b: 0.68, a: 1}
+    weaponBodyTint: 0.35
+    weaponAccentTint: 0.55
   muzzleFlashSprites:
   - {fileID: 21300000, guid: 871bc7d0c2fd4c70970dd1caee115c04, type: 3}
   - {fileID: 21300000, guid: ab5bc9395e834f65a29736e936465a44, type: 3}
   - {fileID: 21300000, guid: 12b894c207064fd6b3b5d9b503fdc3de, type: 3}
   - {fileID: 21300000, guid: 350fe2e753784266a204e0a54780cf81, type: 3}
+  - {fileID: 21300000, guid: ecef0c4c057042c5a4415dcba3fcb612, type: 3}
   muzzleFlashSpriteSizes:
   - {x: 0.38, y: 0.28}
   - {x: 0.62, y: 0.24}
   - {x: 0.82, y: 0.48}
   - {x: 0.78, y: 0.56}
+  - {x: 0.86, y: 0.58}
   spriteMuzzleFlashDuration: 0.055
   spriteMuzzleLocalOffsets:
+  - {x: 0.055, y: 0, z: 0}
   - {x: 0.055, y: 0, z: 0}
   - {x: 0.055, y: 0, z: 0}
   - {x: 0.055, y: 0, z: 0}

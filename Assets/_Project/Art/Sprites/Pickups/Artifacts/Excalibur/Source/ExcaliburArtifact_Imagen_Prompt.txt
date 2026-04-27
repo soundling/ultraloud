@@ -1,0 +1,11 @@
+Use case: stylized-concept
+Asset type: Unity game pickup source sprite for a special artifact, portrait orientation
+Primary request: create a magical Excalibur artifact pickup: an ornate legendary sword collectible, original design inspired by Arthurian myth but not tied to any modern franchise.
+Scene/backdrop: perfectly flat solid #00ff00 chroma-key background for background removal.
+Subject: a vertical silver longsword floating upright, broad polished blade, gold crossguard with blue gemstones, leather-wrapped grip, faceted crystal pommel, subtle engraved runes on blade, cyan-white magical aura close to the silhouette, a few small sparkling motes attached to the artifact glow.
+Style/medium: high-detail painterly game sprite source art, Quake-era pickup silhouette but modern polished pixel-friendly rendering, crisp edges, readable at small size.
+Composition/framing: centered full object, front-facing, vertical sword from pommel to tip visible, generous padding on all sides, no cropped blade, no ground or stone base.
+Lighting/mood: dramatic studio lighting on the sword only, bright metal highlights, cool holy magical glow.
+Color palette: silver steel, antique gold, royal blue gems, white/cyan magical accents; do not use green in the subject.
+Materials/textures: reflective scratched steel, ornate carved gold, blue crystal, dark leather grip.
+Constraints: background must be one uniform #00ff00 color with no gradients, texture, floor, shadow, reflection, text, logo, watermark, UI, or extra props.

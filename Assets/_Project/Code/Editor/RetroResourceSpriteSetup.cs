@@ -144,7 +144,7 @@ public static class RetroResourceSpriteSetup
         GameObject root = GameObject.Find("Resource Pickups");
         int childCount = root != null ? root.transform.childCount : 0;
         int sceneInvalid = 0;
-        if (root == null || childCount != 23)
+        if (root == null || childCount != 25)
         {
             sceneInvalid++;
         }
@@ -152,8 +152,14 @@ public static class RetroResourceSpriteSetup
         {
             for (int i = 0; i < root.transform.childCount; i++)
             {
-                SpriteRenderer renderer = root.transform.GetChild(i).GetComponentInChildren<SpriteRenderer>(true);
-                if (renderer == null || renderer.sharedMaterial == null || renderer.sharedMaterial.shader == null || renderer.sharedMaterial.shader.name != "Ultraloud/Resources/Sprite Glow HDRP")
+                Transform child = root.transform.GetChild(i);
+                SpriteRenderer renderer = child.GetComponentInChildren<SpriteRenderer>(true);
+                bool isArtifactPickup = child.name.StartsWith("MonaLisaArtifact", System.StringComparison.Ordinal)
+                    || child.name.StartsWith("ExcaliburArtifact", System.StringComparison.Ordinal);
+                string expectedShaderName = isArtifactPickup
+                    ? "Ultraloud/Pickups/Artifact Pickup HDRP"
+                    : "Ultraloud/Resources/Sprite Glow HDRP";
+                if (renderer == null || renderer.sharedMaterial == null || renderer.sharedMaterial.shader == null || renderer.sharedMaterial.shader.name != expectedShaderName)
                 {
                     sceneInvalid++;
                 }

@@ -254,7 +254,7 @@ PlayerSettings:
   shaderPrecisionModel: 0
   clonedFromGUID: c71a6e77368cc6048998f34f4bbe2b86
   templatePackageId: com.unity.template.hdrp-blank@17.0.7
-  templateDefaultScene: Assets/OutdoorsScene.unity
+  templateDefaultScene: Assets/_Project/Scenes/Outdoor/OutdoorsScene.unity
   useCustomMainManifest: 0
   useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 0

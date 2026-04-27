@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d85f9634ac49bc48bc3ef4b8c219b92, type: 3}
+  m_Name: FlyPest
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteDefinition
+  defaultClipId: Fly
+  clips:
+  - clipId: Fly
+    loop: 1
+    framesPerSecond: 18
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: eafff2591b14b0048d22f0d68ca3e7b2, type: 3}
+      - {fileID: 21300000, guid: 96c539b169edea6a8a9b027934e3c4c8, type: 3}
+      - {fileID: 21300000, guid: 5a08fbcecbe1a5aea47dac13dfe0eaa9, type: 3}
+      - {fileID: 21300000, guid: 0344c5e933f5f3710b826ecc3549c45e, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 3f2a213331d065a6fcff88da09fbf192, type: 3}
+      - {fileID: 2800000, guid: 079308f63065a6e4a5f1ced5c15db104, type: 3}
+      - {fileID: 2800000, guid: 918ea437d3824fcda731352b6bfbb660, type: 3}
+      - {fileID: 2800000, guid: 7fff730da2f7579b95fe57bc6edc047d, type: 3}
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 2519afe79d70dc0bce60ee8e7b19104c, type: 3}
+      - {fileID: 21300000, guid: 2a238981b29f9f3baba1997d5e933168, type: 3}
+      - {fileID: 21300000, guid: da9bd19d31eb9e289643dc957d813fd2, type: 3}
+      - {fileID: 21300000, guid: 1050119bf4533eb9bf1af81d0210a5a0, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 5836b166a9f263da062ad994e7ee2ca6, type: 3}
+      - {fileID: 2800000, guid: ea5140b9bf81a109eec58160620aaec1, type: 3}
+      - {fileID: 2800000, guid: ef9174b682adc11213e72a234777fb91, type: 3}
+      - {fileID: 2800000, guid: 76e26aa7e97e8458d431df8548dc5145, type: 3}
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 488ae051cd34ffd41dbe4769211738db, type: 3}
+      - {fileID: 21300000, guid: 6a86fff142348ebd516bbed59b7ed54e, type: 3}
+      - {fileID: 21300000, guid: cde5cf77e33ace0430262c07996b4cc7, type: 3}
+      - {fileID: 21300000, guid: 5f41705b4b0400620f541eb5caadd545, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 314389b237fe75ed37b8185c04e37d65, type: 3}
+      - {fileID: 2800000, guid: db2ca6a86721c6bb9852377552eaca6a, type: 3}
+      - {fileID: 2800000, guid: 882a22ba3704172d1875219446bde475, type: 3}
+      - {fileID: 2800000, guid: b9819f414a90ff86b3530b1cc79c1428, type: 3}
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 44307a21f61ed5459a87b1e0a21cc4ba, type: 3}
+      - {fileID: 21300000, guid: 5c3dd8a5ec7b432c8921c74144fc7090, type: 3}
+      - {fileID: 21300000, guid: bc83fc5ae95d3615e2ffd919ab15ea5f, type: 3}
+      - {fileID: 21300000, guid: 615020a53a41bcab1632919ec6cac0a1, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 729892f1d0b4c9071f8014913a43028c, type: 3}
+      - {fileID: 2800000, guid: 243eb78a9319a6f1b2abdf7b33f600d9, type: 3}
+      - {fileID: 2800000, guid: 0164aab2678b7d4d3bc1da6deb24d440, type: 3}
+      - {fileID: 2800000, guid: 5c1968735c1db3658b2dd7593c0fcecf, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: bdbc9536b835ff358571a052294e7345, type: 3}
+      - {fileID: 21300000, guid: 40b5c913433f8b302d11d991b32b2230, type: 3}
+      - {fileID: 21300000, guid: b9ea1cc4b2ad38362b20fb9a028caaa1, type: 3}
+      - {fileID: 21300000, guid: cdeeef11b410484397e1375f3536c25e, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 50b6be653f5ad30716db8c092641f969, type: 3}
+      - {fileID: 2800000, guid: 200eb7082d4541a085c66a0afec38b76, type: 3}
+      - {fileID: 2800000, guid: f75e730457d7eb51baacfba0650cfbeb, type: 3}
+      - {fileID: 2800000, guid: db9556974c93c734f41b6f2d0f50d614, type: 3}

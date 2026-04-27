@@ -70,6 +70,11 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     public bool CurrentFlipX => currentFlipX;
     public bool IsPlaying => isPlaying;
     public Transform FacingReferenceTransform => facingReference != null ? facingReference : transform;
+    public float AnimationSpeed
+    {
+        get => animationSpeed;
+        set => animationSpeed = Mathf.Max(0f, value);
+    }
 
     private void Reset()
     {
@@ -174,6 +179,29 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
         {
             isPlaying = true;
         }
+    }
+
+    public void SetNormalizedClipPhase(float normalizedPhase)
+    {
+        DirectionalSpriteClip clip = currentClip;
+        if (clip == null && definition != null)
+        {
+            clip = definition.GetDefaultClip();
+            currentClip = clip;
+        }
+
+        if (clip == null)
+        {
+            clipTime = 0f;
+            RefreshVisual();
+            return;
+        }
+
+        int frameCount = Mathf.Max(1, clip.GetMaxFrameCount());
+        float framesPerSecond = clip.framesPerSecond > 0f ? clip.framesPerSecond : 1f;
+        float duration = frameCount / framesPerSecond;
+        clipTime = Mathf.Repeat(normalizedPhase, 1f) * duration;
+        RefreshVisual();
     }
 
     public void RefreshNow()

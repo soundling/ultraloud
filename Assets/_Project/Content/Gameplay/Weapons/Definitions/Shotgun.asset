@@ -62,7 +62,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 727341cf74bc2384997e1635c088d419, type: 2}
   - {fileID: 11400000, guid: 897c43a439bd1cd469fdb92c44211243, type: 2}
   - {fileID: 11400000, guid: e48a5567e11e348499e2b5385f6247dc, type: 2}
-  fireAnimationFrameDuration: 0.032
+  fireAnimationFrameDuration: 0.052
   spriteVisualLocalPosition: {x: 0.01, y: -0.063, z: 0.06}
   spriteVisualLocalEuler: {x: 0, y: 0, z: -2}
   spriteVisualSize: {x: 1.46, y: 0.82}

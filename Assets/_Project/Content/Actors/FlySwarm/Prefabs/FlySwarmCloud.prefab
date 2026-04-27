@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5335900274618790402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8600251618527226890}
+  - component: {fileID: 4648418989671413121}
+  m_Layer: 0
+  m_Name: FlySwarmCloud
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8600251618527226890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335900274618790402}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4648418989671413121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335900274618790402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5b0a7e164bb2b458e9968379e3a29a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RetroFlySwarm
+  agentPrefab: {fileID: 5201689020950081785, guid: 56be07fc7972b374787010bf38da0dd5, type: 3}
+  count: 50
+  spawnOnStart: 1
+  clearOnDisable: 1
+  groupId: PestFlies
+  spawnRadius: 3.4
+  speedRange: {x: 6.8, y: 12}
+  scaleRange: {x: 0.78, y: 1.16}
+  seed: 88431
+  preferTaggedTarget: 1
+  preferredTargetTag: Player
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  targetSearchRadius: 34
+  targetRefreshInterval: 0.42
+  cloudMoveSpeed: 8.75
+  cloudAcceleration: 18
+  targetHoverHeight: 1.35
+  attackOrbitRadius: 1.55
+  orbitSpeed: 2.4
+  idleDriftRadius: 2.7
+  idleDriftSpeed: 0.58
+  biteRadius: 0.42
+  biteDamage: 1.15
+  biteInterval: 0.34
+  drawGizmos: 1

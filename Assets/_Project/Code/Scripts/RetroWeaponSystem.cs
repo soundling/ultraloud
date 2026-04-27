@@ -95,6 +95,8 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     }
 
     private const int HitscanHitBufferSize = 64;
+    private const float DefaultSpriteFireAnimationFrameDuration = 0.024f;
+    private const float MaxSpriteFireAnimationFireIntervalFraction = 0.86f;
     private static readonly RaycastHit[] HitscanHitBuffer = new RaycastHit[HitscanHitBufferSize];
 
     [Header("References")]
@@ -130,7 +132,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
     [SerializeField] private WeaponSpriteView[] weaponSpriteViews = Array.Empty<WeaponSpriteView>();
     [SerializeField] private Sprite[] muzzleFlashSprites = Array.Empty<Sprite>();
     [SerializeField] private Vector2[] muzzleFlashSpriteSizes = Array.Empty<Vector2>();
-    [SerializeField, Min(0.005f)] private float spriteFireAnimationFrameDuration = 0.024f;
+    [SerializeField, Min(0.005f)] private float spriteFireAnimationFrameDuration = DefaultSpriteFireAnimationFrameDuration;
     [SerializeField, Min(0.01f)] private float spriteMuzzleFlashDuration = 0.055f;
     [SerializeField] private Vector3[] spriteMuzzleLocalOffsets =
     {
@@ -1751,8 +1753,8 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         spriteFireAnimationWeapon = weapon;
         spriteFireAnimationFrameIndex = 0;
 
-        float frameDuration = ResolveSpriteFireAnimationFrameDuration(weapon);
         int frameCount = ResolveSpriteFireAnimationFrameCount(weapon);
+        float frameDuration = ResolveSpriteFireAnimationFrameDuration(weapon, frameCount);
         spriteFireAnimationNextFrameTime = Time.time + frameDuration;
         spriteFireAnimationEndTime = Time.time + frameDuration * Mathf.Max(1, frameCount);
         ApplySpriteFireAnimationFrame(weapon, spriteFireAnimationFrameIndex);
@@ -1788,7 +1790,7 @@ public sealed class RetroWeaponSystem : MonoBehaviour
             return;
         }
 
-        float frameDuration = ResolveSpriteFireAnimationFrameDuration(spriteFireAnimationWeapon);
+        float frameDuration = ResolveSpriteFireAnimationFrameDuration(spriteFireAnimationWeapon, frameCount);
         while (Time.time >= spriteFireAnimationNextFrameTime && spriteFireAnimationFrameIndex < frameCount - 1)
         {
             spriteFireAnimationFrameIndex++;
@@ -1840,9 +1842,18 @@ public sealed class RetroWeaponSystem : MonoBehaviour
         return HasAnyMapSet(weapon?.FireAnimationMapSets) ? weapon.FireAnimationMapSets.Length : 0;
     }
 
-    private static float ResolveSpriteFireAnimationFrameDuration(WeaponRuntime weapon)
+    private static float ResolveSpriteFireAnimationFrameDuration(WeaponRuntime weapon, int frameCount)
     {
-        return Mathf.Max(0.005f, weapon != null ? weapon.FireAnimationFrameDuration : 0.024f);
+        if (weapon == null)
+        {
+            return DefaultSpriteFireAnimationFrameDuration;
+        }
+
+        float authoredFrameDuration = Mathf.Max(0.005f, weapon.FireAnimationFrameDuration);
+        int safeFrameCount = Mathf.Max(1, frameCount);
+        float maxAnimationDuration = Mathf.Max(0.005f, weapon.FireInterval * MaxSpriteFireAnimationFireIntervalFraction);
+        float maxFrameDuration = maxAnimationDuration / safeFrameCount;
+        return Mathf.Min(authoredFrameDuration, maxFrameDuration);
     }
 
     private void UpdateMuzzleFlashState()

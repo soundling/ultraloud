@@ -703,11 +703,11 @@ public sealed class RetroWeaponAuthoringWindow : EditorWindow
     {
         return slot switch
         {
-            1 => 0.018f,
-            2 => 0.032f,
-            3 => 0.034f,
-            4 => 0.034f,
-            _ => 0.024f
+            1 => 0.016f,
+            2 => 0.052f,
+            3 => 0.056f,
+            4 => 0.052f,
+            _ => 0.025f
         };
     }
 

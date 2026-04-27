@@ -67,6 +67,8 @@ public sealed class RetroFlockAgent : MonoBehaviour
     private float phase;
     private float nextCourseRetargetTime;
     private double lastUpdateTime;
+    private bool hasHomePosition;
+    private bool hasExplicitHome;
     private bool hasUpdateTime;
     private bool hasCourseTarget;
 
@@ -80,14 +82,42 @@ public sealed class RetroFlockAgent : MonoBehaviour
 
     public Vector3 Velocity => velocity;
 
-    public Vector3 HomePosition => homeAnchor != null ? homeAnchor.position : homePosition;
+    public Transform HomeAnchor
+    {
+        get => homeAnchor;
+        set
+        {
+            if (homeAnchor == value)
+            {
+                return;
+            }
+
+            homeAnchor = value;
+            if (homeAnchor == null && !hasHomePosition)
+            {
+                homePosition = transform.position;
+                hasHomePosition = true;
+            }
+
+            hasCourseTarget = false;
+        }
+    }
+
+    public Vector3 HomePosition => homeAnchor != null ? homeAnchor.position : hasHomePosition ? homePosition : transform.position;
 
     private void Reset()
     {
         homePosition = transform.position;
+        hasHomePosition = true;
+        hasExplicitHome = false;
         phase = UnityEngine.Random.value * 1000f;
-        velocity = initialVelocity.sqrMagnitude > 0.0001f ? transform.TransformDirection(initialVelocity) : transform.forward * minSpeed;
+        velocity = ResolveInitialVelocity();
         hasCourseTarget = false;
+    }
+
+    private void Awake()
+    {
+        InitializeFlightState(true);
     }
 
     private void OnEnable()
@@ -97,19 +127,27 @@ public sealed class RetroFlockAgent : MonoBehaviour
             Agents.Add(this);
         }
 
-        if (homePosition == Vector3.zero)
+        InitializeFlightState(false);
+        hasUpdateTime = false;
+    }
+
+    private void Start()
+    {
+        if (!Application.isPlaying)
+        {
+            return;
+        }
+
+        if (homeAnchor == null && !hasExplicitHome)
         {
             homePosition = transform.position;
+            hasHomePosition = true;
         }
 
-        if (velocity.sqrMagnitude < 0.0001f)
-        {
-            velocity = initialVelocity.sqrMagnitude > 0.0001f ? transform.TransformDirection(initialVelocity) : transform.forward * minSpeed;
-        }
-
-        phase = phase == 0f ? UnityEngine.Random.value * 1000f : phase;
-        hasUpdateTime = false;
-        hasCourseTarget = false;
+        InitializeFlightState(true);
+        Step(Mathf.Clamp(Time.deltaTime > 0f ? Time.deltaTime : 0.016f, 0.001f, 0.033f));
+        lastUpdateTime = Time.realtimeSinceStartupAsDouble;
+        hasUpdateTime = true;
     }
 
     private void OnDisable()
@@ -164,8 +202,23 @@ public sealed class RetroFlockAgent : MonoBehaviour
 
     public void SetHome(Vector3 worldPosition)
     {
+        SetHomeInternal(worldPosition, resetCourseTarget: true);
+    }
+
+    public void MoveHome(Vector3 worldPosition)
+    {
+        SetHomeInternal(worldPosition, resetCourseTarget: false);
+    }
+
+    private void SetHomeInternal(Vector3 worldPosition, bool resetCourseTarget)
+    {
         homePosition = worldPosition;
-        hasCourseTarget = false;
+        hasHomePosition = true;
+        hasExplicitHome = true;
+        if (resetCourseTarget)
+        {
+            hasCourseTarget = false;
+        }
     }
 
     public void RandomizePhase(float seed)
@@ -199,6 +252,30 @@ public sealed class RetroFlockAgent : MonoBehaviour
             float rotationBlend = 1f - Mathf.Exp(-turnResponsiveness * deltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationBlend);
         }
+    }
+
+    private void InitializeFlightState(bool resetCourseTarget)
+    {
+        if (homeAnchor == null && !hasHomePosition)
+        {
+            homePosition = transform.position;
+            hasHomePosition = true;
+        }
+
+        velocity = velocity.sqrMagnitude > 0.0001f ? ClampVelocity(velocity) : ResolveInitialVelocity();
+        phase = phase == 0f ? UnityEngine.Random.value * 1000f : phase;
+        if (resetCourseTarget)
+        {
+            hasCourseTarget = false;
+        }
+    }
+
+    private Vector3 ResolveInitialVelocity()
+    {
+        Vector3 candidate = initialVelocity.sqrMagnitude > 0.0001f
+            ? transform.TransformDirection(initialVelocity)
+            : transform.forward * Mathf.Max(minSpeed, 0.01f);
+        return ClampVelocity(candidate);
     }
 
     private float ResolveDeltaTime()

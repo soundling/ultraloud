@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d44b2cc5faa4b07a3257eb15cce74eb, type: 3}
+  m_Name: KillerRabbitGoreProfile
+  m_EditorClassIdentifier: Assembly-CSharp::RetroGoreProfile
+  baseAtlas: {fileID: 2800000, guid: 486f369214974871b9e43575894b524c, type: 3}
+  normalAtlas: {fileID: 2800000, guid: 2ece9889ac97439cb6397833be908ff2, type: 3}
+  packedMasksAtlas: {fileID: 2800000, guid: 5c6efa4801e941a386a856df180c6bf1, type: 3}
+  emissionAtlas: {fileID: 2800000, guid: 7ce58ec627d0430f8bba4a230837996f, type: 3}
+  atlasColumns: 4
+  atlasRows: 4
+  frameCount: 16
+  damageWindow: 0.72
+  clusterWindow: 0.12
+  minimumRecentDamage: 26
+  minimumClusterDamage: 18
+  minimumClusterHits: 1
+  highSingleHitDamage: 34
+  gibCooldown: 0.02
+  bloodPuffCount: 36
+  streakCount: 34
+  spriteChunkCount: 20
+  boneSpriteCount: 8
+  decalCount: 24
+  puffSizeRange: {x: 0.46, y: 1.28}
+  streakSizeRange: {x: 0.42, y: 1.72}
+  chunkSizeRange: {x: 0.18, y: 0.62}
+  decalSizeRange: {x: 0.78, y: 3.2}
+  spriteLifetimeRange: {x: 0.5, y: 1.35}
+  decalLifetimeRange: {x: 9, y: 22}
+  meshChunkCount: 18
+  meshChunkSizeRange: {x: 0.045, y: 0.18}
+  meshChunkLifetimeRange: {x: 2.4, y: 5.8}
+  meatChunkColor: {r: 0.54, g: 0.008, b: 0.012, a: 1}
+  skinChunkColor: {r: 0.94, g: 0.86, b: 0.78, a: 1}
+  boneChunkColor: {r: 0.96, g: 0.86, b: 0.64, a: 1}
+  radialSpeedRange: {x: 5.8, y: 18}
+  upwardSpeedRange: {x: 1.1, y: 7.5}
+  gravityRange: {x: 8, y: 18}
+  forwardBias: 0.86
+  intensityScale: 1.45
+  spawnRadius: 0.22
+  screenFlashRadius: 1.2

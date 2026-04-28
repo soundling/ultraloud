@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 3393213877454287673}
   - component: {fileID: 7193178051228020220}
   - component: {fileID: 208746695939058205}
+  - component: {fileID: 6579840630704583489}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
   definition: {fileID: 11400000, guid: 97bcc241e6c1755448cc2f7e5e8c2173, type: 2}
   initialClipId: Idle
@@ -108,7 +109,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
   animator: {fileID: 2551637955867247087}
   targetRenderer: {fileID: 1660845858964520164}
@@ -152,7 +153,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
   animator: {fileID: 2551637955867247087}
   visualRenderer: {fileID: 1660845858964520164}
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
   maxHealth: 180
   destroyOnDeath: 1
@@ -248,7 +249,7 @@ MonoBehaviour:
   ensureShootableFeedback: 1
   shootableSurfaceKind: 3
   shootableFeedbackScale: 1.05
-  shootableDeathEffectMultiplier: 2.5
+  shootableDeathEffectMultiplier: 0.2
 --- !u!114 &208746695939058205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +260,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59ea268eee034fd4288f6e3ccb8757b3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::RetroHorseMount
   interactionEnabled: 1
   interactionName: Horse
@@ -267,7 +268,7 @@ MonoBehaviour:
   interactionMaxDistance: 4.5
   interactionPriority: 35
   interactionCue: {fileID: 0}
-  interactionMessage: 
+  interactionMessage:
   interactionMessageDuration: 1.6
   onFocused:
     m_PersistentCalls:
@@ -341,6 +342,32 @@ MonoBehaviour:
   dustTrailInterval: 0.075
   dustTrailColor: {r: 0.72, g: 0.62, b: 0.43, a: 0.52}
   speedRimColor: {r: 0.9, g: 0.84, b: 0.68, a: 1}
+--- !u!114 &6579840630704583489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204272916077150142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac547ac71ef4cbfb27470907463f5de, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RetroGibOnDeath
+  damageable: {fileID: 7193178051228020220}
+  goreProfile: {fileID: 11400000, guid: 65e7b685ce3843359abe93b81f4e6966, type: 2}
+  alwaysGibOnDeath: 1
+  useProfileThresholds: 1
+  damageWindow: 0.9
+  clusterWindow: 0.18
+  minimumRecentDamage: 72
+  minimumClusterDamage: 48
+  minimumClusterHits: 4
+  highSingleHitDamage: 80
+  spawnAtRendererCenter: 1
+  localCenterOffset: {x: 0, y: 0.48, z: 0}
+  intensityMultiplier: 1.35
+  debugDecision: 0
 --- !u!1 &3255768098525180902
 GameObject:
   m_ObjectHideFlags: 0

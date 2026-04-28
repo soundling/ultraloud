@@ -29,6 +29,8 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
     private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
     private static readonly int BaseMapId = Shader.PropertyToID("_BaseMap");
     private static readonly int NormalMapId = Shader.PropertyToID("_NormalMap");
+    private static readonly int PackedMasksId = Shader.PropertyToID("_PackedMasks");
+    private static readonly int EmissionMapId = Shader.PropertyToID("_EmissionMap");
     private static readonly int AlphaCutoffId = Shader.PropertyToID("_AlphaCutoff");
     private static readonly int NormalScaleId = Shader.PropertyToID("_NormalScale");
     private static readonly int DetailNormalInfluenceId = Shader.PropertyToID("_DetailNormalInfluence");
@@ -44,8 +46,16 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
     private static readonly int RimColorId = Shader.PropertyToID("_RimColor");
     private static readonly int RimStrengthId = Shader.PropertyToID("_RimStrength");
     private static readonly int RimPowerId = Shader.PropertyToID("_RimPower");
+    private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
+    private static readonly int EmissionStrengthId = Shader.PropertyToID("_EmissionStrength");
+    private static readonly int WetSpecularBoostId = Shader.PropertyToID("_WetSpecularBoost");
+    private static readonly int BloodPulseStrengthId = Shader.PropertyToID("_BloodPulseStrength");
+    private static readonly int SurfaceCrawlStrengthId = Shader.PropertyToID("_SurfaceCrawlStrength");
+    private static readonly int SurfaceCrawlSpeedId = Shader.PropertyToID("_SurfaceCrawlSpeed");
     private static readonly int SpriteFlipXId = Shader.PropertyToID("_SpriteFlipX");
     private static readonly int UseNormalMapId = Shader.PropertyToID("_UseNormalMap");
+    private static readonly int UsePackedMasksId = Shader.PropertyToID("_UsePackedMasks");
+    private static readonly int UseEmissionMapId = Shader.PropertyToID("_UseEmissionMap");
     private static readonly int TwoSidedLightingId = Shader.PropertyToID("_TwoSidedLighting");
     private static readonly int FlipBackfacingNormalsId = Shader.PropertyToID("_FlipBackfacingNormals");
     private static readonly int UseCustomLightingBasisId = Shader.PropertyToID("_UseCustomLightingBasis");
@@ -95,6 +105,12 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
     [SerializeField] private Color rimColor = Color.white;
     [SerializeField, Range(0f, 4f)] private float rimStrength = 0.025f;
     [SerializeField, Range(0.5f, 8f)] private float rimPower = 4.2f;
+    [SerializeField] private Color emissionColor = new(1f, 0.23f, 0.08f, 1f);
+    [SerializeField, Range(0f, 6f)] private float emissionStrength;
+    [SerializeField, Range(0f, 2f)] private float wetSpecularBoost;
+    [SerializeField, Range(0f, 2f)] private float bloodPulseStrength;
+    [SerializeField, Range(0f, 0.04f)] private float surfaceCrawlStrength;
+    [SerializeField, Range(0f, 8f)] private float surfaceCrawlSpeed = 1.2f;
 
     private readonly Vector4[] manualLightPositions = new Vector4[MaxShaderLights];
     private readonly Vector4[] manualLightDirections = new Vector4[MaxShaderLights];
@@ -151,6 +167,11 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
         spriteAngleLightingInfluence = Mathf.Clamp01(spriteAngleLightingInfluence);
         rimStrength = Mathf.Max(0f, rimStrength);
         rimPower = Mathf.Max(0.5f, rimPower);
+        emissionStrength = Mathf.Max(0f, emissionStrength);
+        wetSpecularBoost = Mathf.Max(0f, wetSpecularBoost);
+        bloodPulseStrength = Mathf.Max(0f, bloodPulseStrength);
+        surfaceCrawlStrength = Mathf.Max(0f, surfaceCrawlStrength);
+        surfaceCrawlSpeed = Mathf.Max(0f, surfaceCrawlSpeed);
 
         AutoAssignReferences();
         if (!isActiveAndEnabled)
@@ -204,6 +225,8 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
         Sprite sprite = animator.CurrentSprite;
         Texture baseTexture = sprite != null ? sprite.texture : null;
         Texture normalTexture = animator.CurrentNormalMap;
+        Texture packedMasksTexture = animator.CurrentPackedMasksMap;
+        Texture emissionTexture = animator.CurrentEmissionMap;
 
         if (baseTexture == null)
         {
@@ -219,6 +242,16 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
             propertyBlock.SetTexture(NormalMapId, normalTexture);
         }
 
+        if (packedMasksTexture != null)
+        {
+            propertyBlock.SetTexture(PackedMasksId, packedMasksTexture);
+        }
+
+        if (emissionTexture != null)
+        {
+            propertyBlock.SetTexture(EmissionMapId, emissionTexture);
+        }
+
         propertyBlock.SetColor(BaseColorId, baseColorTint);
         propertyBlock.SetFloat(AlphaCutoffId, alphaCutoff);
         propertyBlock.SetFloat(NormalScaleId, normalScale);
@@ -232,8 +265,16 @@ public sealed class DirectionalSpriteBillboardLitRenderer : MonoBehaviour
         propertyBlock.SetColor(RimColorId, rimColor);
         propertyBlock.SetFloat(RimStrengthId, rimStrength);
         propertyBlock.SetFloat(RimPowerId, rimPower);
+        propertyBlock.SetColor(EmissionColorId, emissionColor);
+        propertyBlock.SetFloat(EmissionStrengthId, emissionStrength);
+        propertyBlock.SetFloat(WetSpecularBoostId, wetSpecularBoost);
+        propertyBlock.SetFloat(BloodPulseStrengthId, bloodPulseStrength);
+        propertyBlock.SetFloat(SurfaceCrawlStrengthId, surfaceCrawlStrength);
+        propertyBlock.SetFloat(SurfaceCrawlSpeedId, surfaceCrawlSpeed);
         propertyBlock.SetFloat(SpriteFlipXId, animator.CurrentFlipX ? -1f : 1f);
         propertyBlock.SetFloat(UseNormalMapId, normalTexture != null ? 1f : 0f);
+        propertyBlock.SetFloat(UsePackedMasksId, packedMasksTexture != null ? 1f : 0f);
+        propertyBlock.SetFloat(UseEmissionMapId, emissionTexture != null ? 1f : 0f);
         propertyBlock.SetFloat(TwoSidedLightingId, twoSidedLighting ? 1f : 0f);
         propertyBlock.SetFloat(FlipBackfacingNormalsId, flipBackfacingNormals ? 1f : 0f);
 

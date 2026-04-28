@@ -44,6 +44,8 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     private DirectionalSpriteAngleSet currentAngle;
     private Sprite currentSprite;
     private Texture2D currentNormalMap;
+    private Texture2D currentPackedMasksMap;
+    private Texture2D currentEmissionMap;
     private int currentFrameIndex;
     private bool currentFlipX;
     private float clipTime;
@@ -66,6 +68,8 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
     public DirectionalSpriteAngleSet CurrentAngle => currentAngle;
     public Sprite CurrentSprite => currentSprite;
     public Texture2D CurrentNormalMap => currentNormalMap;
+    public Texture2D CurrentPackedMasksMap => currentPackedMasksMap;
+    public Texture2D CurrentEmissionMap => currentEmissionMap;
     public int CurrentFrameIndex => currentFrameIndex;
     public bool CurrentFlipX => currentFlipX;
     public bool IsPlaying => isPlaying;
@@ -338,6 +342,8 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
         currentFrameIndex = GetCurrentFrameIndex(selection.angle);
         currentSprite = selection.angle.GetFrame(currentFrameIndex);
         currentNormalMap = selection.angle.GetNormalFrame(currentFrameIndex);
+        currentPackedMasksMap = selection.angle.GetPackedMasksFrame(currentFrameIndex);
+        currentEmissionMap = selection.angle.GetEmissionFrame(currentFrameIndex);
 
         if (spriteRenderer != null)
         {
@@ -484,6 +490,8 @@ public sealed class DirectionalSpriteAnimator : MonoBehaviour
         currentAngle = null;
         currentSprite = null;
         currentNormalMap = null;
+        currentPackedMasksMap = null;
+        currentEmissionMap = null;
         currentFrameIndex = 0;
         currentFlipX = false;
     }

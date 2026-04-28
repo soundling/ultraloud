@@ -10,6 +10,7 @@ public sealed class RetroGibOnDeath : MonoBehaviour
     [SerializeField] private RetroGoreProfile goreProfile;
 
     [Header("Trigger Override")]
+    [SerializeField] private bool alwaysGibOnDeath;
     [SerializeField] private bool useProfileThresholds = true;
     [SerializeField, Min(0.02f)] private float damageWindow = 0.9f;
     [SerializeField, Min(0.02f)] private float clusterWindow = 0.18f;
@@ -82,6 +83,8 @@ public sealed class RetroGibOnDeath : MonoBehaviour
         goreProfile = profile;
     }
 
+    public bool CanSpawnGore => enabled && goreProfile != null;
+
     private void AutoAssignReferences()
     {
         if (damageable == null)
@@ -149,7 +152,12 @@ public sealed class RetroGibOnDeath : MonoBehaviour
             return;
         }
 
-        if (!EvaluateGibDecision(out float intensity, out float recentDamage, out float bestClusterDamage, out int bestClusterHits, out float bestSingleHit))
+        float intensity;
+        if (alwaysGibOnDeath)
+        {
+            intensity = ResolveAlwaysGibIntensity();
+        }
+        else if (!EvaluateGibDecision(out intensity, out float recentDamage, out float bestClusterDamage, out int bestClusterHits, out float bestSingleHit))
         {
             if (debugDecision)
             {
@@ -170,6 +178,30 @@ public sealed class RetroGibOnDeath : MonoBehaviour
         lastGibTime = Time.time;
         GameObject damageSource = damageable != null ? damageable.LastDamageSource : null;
         RetroGoreSystem.SpawnGoreBurst(goreProfile, spawnCenter, hitPoint, hitNormal, transform, intensity * intensityMultiplier, damageSource);
+    }
+
+    private float ResolveAlwaysGibIntensity()
+    {
+        float now = Time.time;
+        float recentDamage = 0f;
+        float resolvedDamageWindow = ResolveDamageWindow();
+
+        for (int i = 0; i < sampleCount; i++)
+        {
+            DamageSample sample = samples[i];
+            if (now - sample.Time <= resolvedDamageWindow)
+            {
+                recentDamage += sample.Amount;
+            }
+        }
+
+        if (recentDamage <= 0f && damageable != null)
+        {
+            recentDamage = damageable.MaxHealth;
+        }
+
+        float thresholdBase = Mathf.Max(1f, ResolveMinimumRecentDamage());
+        return Mathf.Clamp(recentDamage / thresholdBase, 0.85f, 2.15f);
     }
 
     private void AddSample(DamageSample sample)

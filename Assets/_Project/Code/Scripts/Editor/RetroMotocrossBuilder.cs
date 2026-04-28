@@ -179,6 +179,7 @@ public static class RetroMotocrossBuilder
 
             RetroDamageable damageable = GetOrAdd<RetroDamageable>(root);
             ConfigureDamageable(damageable);
+            RetroGorePrefabRepair.ConfigurePrefabGore(root, damageable, RetroShootableSurfaceKind.Flesh, 1f, 1.35f, new Vector3(0f, 0.44f, 0f), true);
 
             PrefabUtility.SaveAsPrefabAsset(root, MountedPrefabPath);
         }
@@ -200,6 +201,12 @@ public static class RetroMotocrossBuilder
         try
         {
             RetroHorseNpcRider rider = GetOrAdd<RetroHorseNpcRider>(root);
+            RetroDamageable damageable = root.GetComponent<RetroDamageable>();
+            if (damageable != null)
+            {
+                RetroGorePrefabRepair.ConfigurePrefabGore(root, damageable, RetroShootableSurfaceKind.Flesh, 0.9f, 1.35f, new Vector3(0f, 0.42f, 0f), true);
+            }
+
             SerializedObject serialized = new(rider);
             SetBool(serialized, "preferMountDefaultMountedDefinition", true);
             SetFloat(serialized, "searchRadius", 26f);

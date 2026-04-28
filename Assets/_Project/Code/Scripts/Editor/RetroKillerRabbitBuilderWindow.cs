@@ -356,6 +356,7 @@ public sealed class RetroKillerRabbitBuilderWindow : EditorWindow
         SerializedObject serialized = new(gib);
         serialized.FindProperty("damageable").objectReferenceValue = damageable;
         serialized.FindProperty("goreProfile").objectReferenceValue = goreProfile;
+        SetBool(serialized, "alwaysGibOnDeath", true);
         SetBool(serialized, "useProfileThresholds", true);
         SetVector3(serialized, "localCenterOffset", new Vector3(0f, 0.34f, 0f));
         SetFloat(serialized, "intensityMultiplier", 1.35f);

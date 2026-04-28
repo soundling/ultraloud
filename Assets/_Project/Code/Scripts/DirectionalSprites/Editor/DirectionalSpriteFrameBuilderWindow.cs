@@ -350,6 +350,24 @@ internal static class DirectionalSpriteFrameBuilder
                         throw new InvalidOperationException($"'{assetPath}' was parsed as a normal frame but is not imported as a Texture2D.");
                     }
                     break;
+
+                case DiscoveredLayerKind.PackedMasks:
+                    EnsureAuxiliaryFrameImport(assetPath, linear: true);
+                    pair.packedMasks = AssetDatabase.LoadAssetAtPath<Texture2D>(assetPath);
+                    if (pair.packedMasks == null)
+                    {
+                        throw new InvalidOperationException($"'{assetPath}' was parsed as a packed masks frame but is not imported as a Texture2D.");
+                    }
+                    break;
+
+                case DiscoveredLayerKind.Emission:
+                    EnsureAuxiliaryFrameImport(assetPath, linear: false);
+                    pair.emission = AssetDatabase.LoadAssetAtPath<Texture2D>(assetPath);
+                    if (pair.emission == null)
+                    {
+                        throw new InvalidOperationException($"'{assetPath}' was parsed as an emission frame but is not imported as a Texture2D.");
+                    }
+                    break;
             }
         }
 
@@ -440,6 +458,45 @@ internal static class DirectionalSpriteFrameBuilder
         }
     }
 
+    private static void EnsureAuxiliaryFrameImport(string assetPath, bool linear)
+    {
+        if (AssetImporter.GetAtPath(assetPath) is not TextureImporter importer)
+        {
+            return;
+        }
+
+        bool changed = false;
+        if (importer.textureType != TextureImporterType.Default)
+        {
+            importer.textureType = TextureImporterType.Default;
+            changed = true;
+        }
+
+        if (importer.mipmapEnabled)
+        {
+            importer.mipmapEnabled = false;
+            changed = true;
+        }
+
+        bool srgb = !linear;
+        if (importer.sRGBTexture != srgb)
+        {
+            importer.sRGBTexture = srgb;
+            changed = true;
+        }
+
+        if (importer.wrapMode != TextureWrapMode.Clamp)
+        {
+            importer.wrapMode = TextureWrapMode.Clamp;
+            changed = true;
+        }
+
+        if (changed)
+        {
+            importer.SaveAndReimport();
+        }
+    }
+
     private static DirectionalSpriteDefinition CreateOrUpdateDefinition(List<DiscoveredFramePair> discoveredPairs, string outputFolder, string assetName)
     {
         string safeAssetName = SanitizePathToken(assetName);
@@ -495,13 +552,36 @@ internal static class DirectionalSpriteFrameBuilder
             symmetry = symmetry,
             flipX = false,
             frames = new List<Sprite>(pairs.Count),
-            normalFrames = new List<Texture2D>(pairs.Count)
+            normalFrames = new List<Texture2D>(pairs.Count),
+            packedMaskFrames = new List<Texture2D>(),
+            emissionFrames = new List<Texture2D>()
         };
+
+        bool hasPackedMasks = pairs.Any(static pair => pair.packedMasks != null);
+        bool hasEmission = pairs.Any(static pair => pair.emission != null);
+        if (hasPackedMasks)
+        {
+            angle.packedMaskFrames = new List<Texture2D>(pairs.Count);
+        }
+
+        if (hasEmission)
+        {
+            angle.emissionFrames = new List<Texture2D>(pairs.Count);
+        }
 
         foreach (DiscoveredFramePair pair in pairs.OrderBy(static pair => GetFrameSortKey(pair.frameKey)).ThenBy(static pair => pair.frameKey, StringComparer.OrdinalIgnoreCase))
         {
             angle.frames.Add(pair.albedo);
             angle.normalFrames.Add(pair.normal);
+            if (hasPackedMasks)
+            {
+                angle.packedMaskFrames.Add(pair.packedMasks);
+            }
+
+            if (hasEmission)
+            {
+                angle.emissionFrames.Add(pair.emission);
+            }
         }
 
         return angle;
@@ -830,6 +910,20 @@ internal static class DirectionalSpriteFrameBuilder
                 layerKind = folderKind == "albedo" ? DiscoveredLayerKind.Albedo : DiscoveredLayerKind.Normal;
                 return true;
             }
+
+            if (folderKind == "packedmasks" || folderKind == "packedmask" || folderKind == "masks" || folderKind == "mask")
+            {
+                frameKey = fileName;
+                layerKind = DiscoveredLayerKind.PackedMasks;
+                return true;
+            }
+
+            if (folderKind == "emission" || folderKind == "emissive" || folderKind == "emit")
+            {
+                frameKey = fileName;
+                layerKind = DiscoveredLayerKind.Emission;
+                return true;
+            }
         }
 
         int separatorIndex = fileName.LastIndexOf('_');
@@ -839,14 +933,29 @@ internal static class DirectionalSpriteFrameBuilder
         }
 
         string suffix = NormalizeToken(fileName[(separatorIndex + 1)..]);
-        if (suffix != "albedo" && suffix != "normal")
-        {
-            return false;
-        }
-
         frameKey = fileName[..separatorIndex];
-        layerKind = suffix == "albedo" ? DiscoveredLayerKind.Albedo : DiscoveredLayerKind.Normal;
-        return true;
+        switch (suffix)
+        {
+            case "albedo":
+                layerKind = DiscoveredLayerKind.Albedo;
+                return true;
+            case "normal":
+                layerKind = DiscoveredLayerKind.Normal;
+                return true;
+            case "packedmasks":
+            case "packedmask":
+            case "masks":
+            case "mask":
+                layerKind = DiscoveredLayerKind.PackedMasks;
+                return true;
+            case "emission":
+            case "emissive":
+            case "emit":
+                layerKind = DiscoveredLayerKind.Emission;
+                return true;
+            default:
+                return false;
+        }
     }
 
     private static bool IsSupportedImageFile(string absoluteFilePath)
@@ -955,12 +1064,16 @@ internal static class DirectionalSpriteFrameBuilder
         public string frameKey;
         public Sprite albedo;
         public Texture2D normal;
+        public Texture2D packedMasks;
+        public Texture2D emission;
     }
 
     private enum DiscoveredLayerKind
     {
         Albedo = 0,
-        Normal = 1
+        Normal = 1,
+        PackedMasks = 2,
+        Emission = 3
     }
 }
 

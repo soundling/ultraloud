@@ -134,6 +134,7 @@ public static class RetroHorseBuilder
 
             RetroDamageable damageable = GetOrAdd<RetroDamageable>(root);
             ConfigureDamageable(damageable);
+            RetroGorePrefabRepair.ConfigurePrefabGore(root, damageable, RetroShootableSurfaceKind.Flesh, 1.05f, 1.35f, new Vector3(0f, 0.48f, 0f), true);
 
             Transform seat = EnsureChild(root.transform, "SeatAnchor", new Vector3(0f, 1.62f, -0.08f));
             Transform dismount = EnsureChild(root.transform, "DismountAnchor", new Vector3(1.55f, 0.08f, -0.2f));
@@ -179,6 +180,7 @@ public static class RetroHorseBuilder
 
             RetroDamageable damageable = GetOrAdd<RetroDamageable>(root);
             ConfigureDamageable(damageable);
+            RetroGorePrefabRepair.ConfigurePrefabGore(root, damageable, RetroShootableSurfaceKind.Flesh, 1.08f, 1.45f, new Vector3(0f, 0.5f, 0f), true);
 
             PrefabUtility.SaveAsPrefabAsset(root, MountedPrefabPath);
         }
@@ -200,6 +202,12 @@ public static class RetroHorseBuilder
         try
         {
             RetroHorseNpcRider rider = GetOrAdd<RetroHorseNpcRider>(root);
+            RetroDamageable damageable = root.GetComponent<RetroDamageable>();
+            if (damageable != null)
+            {
+                RetroGorePrefabRepair.ConfigurePrefabGore(root, damageable, RetroShootableSurfaceKind.Flesh, 0.9f, 1.35f, new Vector3(0f, 0.42f, 0f), true);
+            }
+
             SerializedObject serialized = new(rider);
             serialized.FindProperty("mountedHorseDefinition").objectReferenceValue = mountedDefinition;
             SetBool(serialized, "preferMountDefaultMountedDefinition", true);

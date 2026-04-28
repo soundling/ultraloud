@@ -220,6 +220,8 @@ public static class RetroSkeletonMotocrossBuilder
         SerializedObject serialized = new(gib);
         serialized.FindProperty("damageable").objectReferenceValue = damageable;
         serialized.FindProperty("goreProfile").objectReferenceValue = AssetDatabase.LoadAssetAtPath<RetroGoreProfile>("Assets/_Project/Art/Sprites/Effects/Gore/PigGoreProfile.asset");
+        SetBool(serialized, "alwaysGibOnDeath", true);
+        SetBool(serialized, "useProfileThresholds", true);
         SetFloat(serialized, "intensityMultiplier", 0.74f);
         SetFloat(serialized, "minimumRecentDamage", 60f);
         SetFloat(serialized, "highSingleHitDamage", 76f);

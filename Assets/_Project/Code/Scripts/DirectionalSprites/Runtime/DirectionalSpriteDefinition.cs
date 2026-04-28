@@ -130,6 +130,8 @@ public sealed class DirectionalSpriteAngleSet
     public bool flipX;
     public List<Sprite> frames = new();
     public List<Texture2D> normalFrames = new();
+    public List<Texture2D> packedMaskFrames = new();
+    public List<Texture2D> emissionFrames = new();
 
     public int FrameCount => frames != null ? frames.Count : 0;
 
@@ -155,6 +157,16 @@ public sealed class DirectionalSpriteAngleSet
     public Texture2D GetNormalFrame(int index)
     {
         return GetTextureFrame(normalFrames, index);
+    }
+
+    public Texture2D GetPackedMasksFrame(int index)
+    {
+        return GetTextureFrame(packedMaskFrames, index);
+    }
+
+    public Texture2D GetEmissionFrame(int index)
+    {
+        return GetTextureFrame(emissionFrames, index);
     }
 
     private static Texture2D GetTextureFrame(List<Texture2D> source, int index)

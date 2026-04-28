@@ -1,0 +1,247 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3018440929517247351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7342222891106326591}
+  - component: {fileID: 2464877587906502025}
+  - component: {fileID: 1359010938694102267}
+  m_Layer: 0
+  m_Name: Quad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7342222891106326591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018440929517247351}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.9236999, z: 0}
+  m_LocalScale: {x: 11.136, y: 8.9175, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2830966199702983051}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2464877587906502025
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018440929517247351}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1359010938694102267
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018440929517247351}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5247559348052616737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2830966199702983051}
+  - component: {fileID: 2339378771411045208}
+  - component: {fileID: 8236990500400537532}
+  - component: {fileID: 7164874738869381603}
+  - component: {fileID: 6128876500495426475}
+  m_Layer: 0
+  m_Name: ButcherBossSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2830966199702983051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247559348052616737}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.4909805, z: 0, w: 0.8711706}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7342222891106326591}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2339378771411045208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247559348052616737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
+  definition: {fileID: 11400000, guid: 1823811ea67755f46b4ba49d47b5cac2, type: 2}
+  initialClipId: Idle
+  playOnEnable: 1
+  useUnscaledTime: 0
+  animationSpeed: 1
+  freezeInitialClipInEditMode: 0
+  spriteRenderer: {fileID: 0}
+  billboardRoot: {fileID: 7342222891106326591}
+  facingReference: {fileID: 2830966199702983051}
+  targetCamera: {fileID: 0}
+  viewAngleSource: 0
+  billboardMode: 1
+  billboardEulerOffset: {x: 0, y: 0, z: 0}
+  logicalFacingOffset: 0
+--- !u!114 &8236990500400537532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247559348052616737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
+  animator: {fileID: 2339378771411045208}
+  targetRenderer: {fileID: 1359010938694102267}
+  lightReferenceMode: 0
+  lightAnchor: {fileID: 0}
+  refreshLightsInEditor: 1
+  maxLights: 4
+  lightRefreshInterval: 0.15
+  directionalLightScale: 0.00001
+  punctualLightScale: 0.01
+  maxNormalizedLightIntensity: 1.5
+  lightingBasisMode: 2
+  baseColorTint: {r: 1, g: 1, b: 1, a: 1}
+  alphaCutoff: 0.06
+  normalScale: 1.05
+  detailNormalInfluence: 0.68
+  macroNormalBend: 0.72
+  spriteAngleLightingInfluence: 0.28
+  twoSidedLighting: 1
+  flipBackfacingNormals: 1
+  wrapDiffuse: 0.5
+  ambientTopColor: {r: 0.52, g: 0.56, b: 0.62, a: 1}
+  ambientBottomColor: {r: 0.14, g: 0.12, b: 0.1, a: 1}
+  ambientIntensity: 1.02
+  includeRenderSettingsAmbient: 1
+  renderSettingsAmbientScale: 0.22
+  surfaceRoughness: 0.82
+  specularStrength: 0.12
+  minSpecularPower: 7
+  maxSpecularPower: 20
+  rimColor: {r: 1, g: 0.82, b: 0.68, a: 1}
+  rimStrength: 0.06
+  rimPower: 3.1
+  emissionColor: {r: 1, g: 0.22, b: 0.06, a: 1}
+  emissionStrength: 0.7
+  wetSpecularBoost: 0.95
+  bloodPulseStrength: 0.18
+  surfaceCrawlStrength: 0.0045
+  surfaceCrawlSpeed: 1.35
+--- !u!114 &7164874738869381603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247559348052616737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13199b9dc2b44059ae420f6b8f0a6b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteLocomotion
+  animator: {fileID: 2339378771411045208}
+  movementBody: {fileID: 0}
+  movementReference: {fileID: 2830966199702983051}
+  idleClipId: Idle
+  walkClipId: Walk
+  horizontalOnly: 1
+  walkThreshold: 0.04
+  speedSmoothing: 12
+--- !u!114 &6128876500495426475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247559348052616737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
+  animator: {fileID: 2339378771411045208}
+  visualRenderer: {fileID: 1359010938694102267}
+  hitPlane: {fileID: 7342222891106326591}
+  useAlphaMask: 1
+  useSpritePhysicsShapeFallback: 1
+  acceptWhenMaskUnavailable: 1
+  rejectHitsOutsideQuad: 1
+  alphaThreshold: 0.08
+  edgePaddingPixels: 3
+  drawDebugHits: 0
+  debugDrawDuration: 0.35

@@ -1,0 +1,636 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d85f9634ac49bc48bc3ef4b8c219b92, type: 3}
+  m_Name: ButcherBossSprite
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteDefinition
+  defaultClipId: Idle
+  clips:
+  - clipId: Idle
+    loop: 1
+    framesPerSecond: 5.5
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 1ef5d3294051b454a8e02050a0edf59f, type: 3}
+      - {fileID: 21300000, guid: 1dd3a41b4f65f4b4fab7fd251cd95ad7, type: 3}
+      - {fileID: 21300000, guid: c1e4fe256a6097e4f8a8c60076cbf2ee, type: 3}
+      - {fileID: 21300000, guid: c2c7e9d2552ed1a4f972df5b56cd3d2f, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: af704f3cfce0dda4ea3132d41aececca, type: 3}
+      - {fileID: 2800000, guid: 7c22918ea9157c443a87556618cfe4d7, type: 3}
+      - {fileID: 2800000, guid: dcee8557f74bea74a8e83810cce756f4, type: 3}
+      - {fileID: 2800000, guid: cbdd146138705fc4ea224769b4e1e4b6, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: fd6c58ca83838d24a8fec7af870018b3, type: 3}
+      - {fileID: 2800000, guid: 3a882c8cbd60c3743baefbade7dc79be, type: 3}
+      - {fileID: 2800000, guid: a52b7933bc047224bbc6c35563f63623, type: 3}
+      - {fileID: 2800000, guid: 852a7aac402ec8742b341dec64ecdd5c, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 066d861b4b273824997bd73666a9457f, type: 3}
+      - {fileID: 2800000, guid: a8198e120a5360d41bc18e4cdf7a12e9, type: 3}
+      - {fileID: 2800000, guid: d9a47584b402bec4f87a339aadb7d739, type: 3}
+      - {fileID: 2800000, guid: 9ea89c991f6706b4ea0b6110d332d680, type: 3}
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 67620e7c408e7b841922b865eeae88ac, type: 3}
+      - {fileID: 21300000, guid: 39d3a098694cf524b84d0a15938eeadd, type: 3}
+      - {fileID: 21300000, guid: fa7caee37f340c64fb378b039f58ba61, type: 3}
+      - {fileID: 21300000, guid: 4bc4e3e8f9021774981b9be0e0709bdd, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: aa40a3445d442ed449c9c645f55c8b78, type: 3}
+      - {fileID: 2800000, guid: 23ddc55dbcdeda343a442daffaada0ed, type: 3}
+      - {fileID: 2800000, guid: 19e21116b1512c547809fe3b265a7a8b, type: 3}
+      - {fileID: 2800000, guid: 2e99fdc6976bb304da9d59c054bf127f, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 7a07027afea09754cae415c492bc0b23, type: 3}
+      - {fileID: 2800000, guid: 186272641251be14297361cfd152bb8c, type: 3}
+      - {fileID: 2800000, guid: fc3e7bc04159c6049a1dbd90c6cc0c51, type: 3}
+      - {fileID: 2800000, guid: 6b360cc4d93520445a08800b7e9d8674, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 6ef21a61c7ce9f849b1b2cc8a5f93711, type: 3}
+      - {fileID: 2800000, guid: 71c8927dd50b3ab4eb15b806eb244083, type: 3}
+      - {fileID: 2800000, guid: 045f18894e8c09746bc940be119490fb, type: 3}
+      - {fileID: 2800000, guid: c96ca8e7e9059db43857ab634064612f, type: 3}
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 90ca72b2da8ad76448d9dcf8ef2802aa, type: 3}
+      - {fileID: 21300000, guid: 1f935811bc090ea4fa1f2d4a96da1623, type: 3}
+      - {fileID: 21300000, guid: 45f3b836bcfa33b45b718573a3ac4380, type: 3}
+      - {fileID: 21300000, guid: 2f97ded3b111e754e98cb5d79db043bf, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 8625eab09119f9a43822cb768d561272, type: 3}
+      - {fileID: 2800000, guid: ac8936c42b9210542be4e0a223f6940c, type: 3}
+      - {fileID: 2800000, guid: c0851eea77e049e4a9d82c489de27bfd, type: 3}
+      - {fileID: 2800000, guid: 6a5cf528961a2b642913419627ab0ea7, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 7346944afc92faa43a5b141318d9db7c, type: 3}
+      - {fileID: 2800000, guid: 38560b6ab777ab440a0fe99560a64168, type: 3}
+      - {fileID: 2800000, guid: 340e43daf29578b4496ce7889ef33b7f, type: 3}
+      - {fileID: 2800000, guid: 9bc3c9e2faaa7304683cbf11d9272f2f, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: dc8f794c20b6e0244869cc19461648c1, type: 3}
+      - {fileID: 2800000, guid: 30197f2d5bc60c14f912470f855ff157, type: 3}
+      - {fileID: 2800000, guid: de16eb25603d7a14cb1479b479dba980, type: 3}
+      - {fileID: 2800000, guid: e464dd2577a87eb49b6deda0ee581cf8, type: 3}
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 83274aaa6d3903e40b27ee4426fc72ce, type: 3}
+      - {fileID: 21300000, guid: d43a00f66564af644a6c52a2c4dc71f7, type: 3}
+      - {fileID: 21300000, guid: 14b3cf1ddf5458949aa674daa3f6b97a, type: 3}
+      - {fileID: 21300000, guid: 7a1de9f13f2aadf498a3e445ef184ffb, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 6b0a8d2d98da79b4d955e7178bd54852, type: 3}
+      - {fileID: 2800000, guid: a19364c3f3f56774c9cbb81e19afb09a, type: 3}
+      - {fileID: 2800000, guid: 28cc4a142696ce649a20fbecea74c450, type: 3}
+      - {fileID: 2800000, guid: 1065703a1a8590340bb2b74f86d67fe9, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 155d2fc92eba9bd41b454f42108da3bc, type: 3}
+      - {fileID: 2800000, guid: 7a6a3b946bb58d34988765615a81afb2, type: 3}
+      - {fileID: 2800000, guid: 84421ace82657aa4ea9294832271c81c, type: 3}
+      - {fileID: 2800000, guid: 78b33c6367ffc58438c8482e03cddd8a, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: ee829f3630916374bbdbddabcc2f7409, type: 3}
+      - {fileID: 2800000, guid: 298f6001dcbd20a4caf2ab08f4f2b7e3, type: 3}
+      - {fileID: 2800000, guid: d33c41d66ecf7e54391a0faed0a17dd1, type: 3}
+      - {fileID: 2800000, guid: 3016a74564166ad45ae1507322299102, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 476ff86ed6ecdc24ea4525018392bc5e, type: 3}
+      - {fileID: 21300000, guid: acd9066735b797243967c6e2663e547e, type: 3}
+      - {fileID: 21300000, guid: 74d4f80e7e1892148822dccd697bb3e1, type: 3}
+      - {fileID: 21300000, guid: 117421c6e6ed5cc4baf5d23e7ae7c889, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 909863a8da3328c4baaf9a19f2f184d1, type: 3}
+      - {fileID: 2800000, guid: 8c93b476315911841a4f5e38f6149ca1, type: 3}
+      - {fileID: 2800000, guid: 984c689997cf5674b9fda97abfffb725, type: 3}
+      - {fileID: 2800000, guid: 9bb0b0064c1e2d742b607312921b88b4, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 05428b7818ccc134d8f4892859418f04, type: 3}
+      - {fileID: 2800000, guid: a1700e3056e953a4f8886ea64fe399b1, type: 3}
+      - {fileID: 2800000, guid: 078923509eab63f4c88c02ab92076c28, type: 3}
+      - {fileID: 2800000, guid: fdac088238289394d9e449691ac9a55c, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 2ebdf799d36d91c4c92ec5c508eaeab5, type: 3}
+      - {fileID: 2800000, guid: 7a86d02f839de514f9ccab2dfa71b025, type: 3}
+      - {fileID: 2800000, guid: f8a739de798976741ba4426b6af1cb6a, type: 3}
+      - {fileID: 2800000, guid: 5e405bcc358d63f47b85f3e7e51b5558, type: 3}
+  - clipId: Walk
+    loop: 1
+    framesPerSecond: 8.5
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 720b786b4547e6b4e934a8f392b5dceb, type: 3}
+      - {fileID: 21300000, guid: 70fa5b4be26167e44ab23a5d10ba03c2, type: 3}
+      - {fileID: 21300000, guid: 1160ca7867efcdf4ea0dd1840da6e9ad, type: 3}
+      - {fileID: 21300000, guid: 07453389934521849be6baa10ac21f4f, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 05e21571be4aa1f41bfd7eb6be6652ad, type: 3}
+      - {fileID: 2800000, guid: 1f7dc6e374d891f4bafd9bce1ec345cb, type: 3}
+      - {fileID: 2800000, guid: cb77b9f3217585b48b7958f8ac1b15e6, type: 3}
+      - {fileID: 2800000, guid: 5fe47d39a5b5d0d4791002f5f234128a, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: ab5b0a140df43b3459153e8c8ba4b3c4, type: 3}
+      - {fileID: 2800000, guid: 126057a73a2c35f46aaffb1d80d48bb7, type: 3}
+      - {fileID: 2800000, guid: 70099d1eacb58c648a4327bf3722f634, type: 3}
+      - {fileID: 2800000, guid: a2574cd4dc8495a4d85154250a242ba9, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 4e0e540ceaa0ec14d92fb1788d0380f4, type: 3}
+      - {fileID: 2800000, guid: fceabf9cb853b7141a6b4c4a4f8d7aa8, type: 3}
+      - {fileID: 2800000, guid: e8e7f5fe78723674ab2b054ee302dbb8, type: 3}
+      - {fileID: 2800000, guid: 6bbd571262f497d418e441f9340c8651, type: 3}
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: b37881d5a45552345adb51fc06bec53e, type: 3}
+      - {fileID: 21300000, guid: c4764c4f920d7334d90400eda24a9798, type: 3}
+      - {fileID: 21300000, guid: c7706362a7cbc604e94d418708da8f71, type: 3}
+      - {fileID: 21300000, guid: 0ddb65043cac0814fa742690e59ae830, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: c9477b79d9c378e4d95f528221851c61, type: 3}
+      - {fileID: 2800000, guid: 7783d0ee3fadc90479c870b88fa3f9a0, type: 3}
+      - {fileID: 2800000, guid: f821dbaee044e70429fc79de242f261a, type: 3}
+      - {fileID: 2800000, guid: e3103fe6a1640c144ab76f3655735fb4, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 2bd75f1f4b15ecc4ea351db7a542a459, type: 3}
+      - {fileID: 2800000, guid: 012dff8999b87d34d8b0d502f06c0987, type: 3}
+      - {fileID: 2800000, guid: c23af78d1236f61459473ec68fc965a9, type: 3}
+      - {fileID: 2800000, guid: 03cac3ca614e8b14296bcb3229004bb9, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: cf3527820b35146489c21464dd009181, type: 3}
+      - {fileID: 2800000, guid: ee00bdf7178cb8b4b9ff1b9cb6f6c614, type: 3}
+      - {fileID: 2800000, guid: 45911067bd9eb204092db9244179bc78, type: 3}
+      - {fileID: 2800000, guid: 0a7d430caa61cfc42bc5d5b92cb143af, type: 3}
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 9ee85d50291c4f94ea3f1a4d483ae74c, type: 3}
+      - {fileID: 21300000, guid: 376a266b666fdd04eaf9ce8f508a5e09, type: 3}
+      - {fileID: 21300000, guid: 71209e8cd5808cf46baa40b264efb189, type: 3}
+      - {fileID: 21300000, guid: 82b75b89126e5ac4ba2a7f5cd29fde73, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 9ef07655693b769498183b7f3cd0367e, type: 3}
+      - {fileID: 2800000, guid: e073b2baca695884d956a6161980add2, type: 3}
+      - {fileID: 2800000, guid: 37727ee78c7a17240885e7a0e17430a2, type: 3}
+      - {fileID: 2800000, guid: 9c16b832965554b4280ab604ed46a229, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 042d1e32e9e4bdb48b544d1be35e1ecf, type: 3}
+      - {fileID: 2800000, guid: c7579822f0c2a9c47bd1c630e338981c, type: 3}
+      - {fileID: 2800000, guid: 00a5a3aae4755924dba477e636aec73f, type: 3}
+      - {fileID: 2800000, guid: 7f500c589479ccf4ba97e4e779c90f3f, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: c60ffd726622e94498d353da82eecf27, type: 3}
+      - {fileID: 2800000, guid: 2b5925111244d5949860bda6f453a31f, type: 3}
+      - {fileID: 2800000, guid: c8aa5a424e192524e85ee6c32010257c, type: 3}
+      - {fileID: 2800000, guid: 6a7e435f1532a2744baabcc3e6b393ec, type: 3}
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 769bc20511284fe48bcb8a1210bfdca7, type: 3}
+      - {fileID: 21300000, guid: c3603e75be3b9fc408db09f547fa399e, type: 3}
+      - {fileID: 21300000, guid: e993caf045001d241a81c735af2474b6, type: 3}
+      - {fileID: 21300000, guid: a0455c7ee898ddd4ca4032714e2255fc, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 2ffcbcad0309b48498247d630a5fb21d, type: 3}
+      - {fileID: 2800000, guid: b9f8e57b66dfcab4b92c6a3c736c9fc3, type: 3}
+      - {fileID: 2800000, guid: 0d3d5ca09ab0cc741bae541e95e4b521, type: 3}
+      - {fileID: 2800000, guid: 34dc4735bef622540be34ce73153a0e6, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: ddcea0dba8ec2e640a6c70153faa0b5b, type: 3}
+      - {fileID: 2800000, guid: 5f88b5240288d194197c2b682e99a266, type: 3}
+      - {fileID: 2800000, guid: be9b3f442b984dc4098a549eec52fdaa, type: 3}
+      - {fileID: 2800000, guid: 8a20a9c4d3cbace40ac9c7fef41971c7, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: d8d0f3cf4e1d99d49adaf3e78ace4f86, type: 3}
+      - {fileID: 2800000, guid: a211ec97482cdcc4982065933deef519, type: 3}
+      - {fileID: 2800000, guid: 349d67b6fdbb46a42bd5c6e95f13b21a, type: 3}
+      - {fileID: 2800000, guid: a16141be9ecab554982a754935e44688, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: cd6ef5fb623a2624e986e53de8d2868e, type: 3}
+      - {fileID: 21300000, guid: 92e9d3982e4592e4cba39b51201f66d1, type: 3}
+      - {fileID: 21300000, guid: 2731fdcc8e918a6449ddba2176038a6c, type: 3}
+      - {fileID: 21300000, guid: 9700f865139ddb549a31c1b542ed8a0b, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: e5653dfc5b21a88429f373aedeabe6b8, type: 3}
+      - {fileID: 2800000, guid: fcad3c8d1c6933c40aa13e19de992da8, type: 3}
+      - {fileID: 2800000, guid: b46e345730855c14d91a393b32fa8f96, type: 3}
+      - {fileID: 2800000, guid: 5492217aa06c75b44aed88999856789e, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: c1d53e95511d2184998db9217b7bd3e7, type: 3}
+      - {fileID: 2800000, guid: 26d674c42492273428a0ef987bb587c0, type: 3}
+      - {fileID: 2800000, guid: 8b7b8148f2ee1484e93e6d6bf2dd0562, type: 3}
+      - {fileID: 2800000, guid: 1ff1b040dcc2cb046a02aef25cd18b6a, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: cff15a89023655f4da71d7496c0df44b, type: 3}
+      - {fileID: 2800000, guid: 229818c146e844c4995ed12c40c59f82, type: 3}
+      - {fileID: 2800000, guid: 09e1088d2f95d7747a940df39c3f8d0c, type: 3}
+      - {fileID: 2800000, guid: 101a9cbb8de8df54690a03fbec2fec86, type: 3}
+  - clipId: Cleaver
+    loop: 0
+    framesPerSecond: 12
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: a48ff37a173a268478789aa94e67141c, type: 3}
+      - {fileID: 21300000, guid: 219945b4fc4a883448dc33653beb6ba5, type: 3}
+      - {fileID: 21300000, guid: a6810efb73178f24b9d9c939e0eb34c4, type: 3}
+      - {fileID: 21300000, guid: 6eaff17cf022d2142b3801f73c1e89c3, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: cbc22502cae6a8448953e13fe305c8b1, type: 3}
+      - {fileID: 2800000, guid: a2f00b4178227fe42a94cf5577fa4a0e, type: 3}
+      - {fileID: 2800000, guid: b1f88471feec97d4181e4c3cae9cdc6c, type: 3}
+      - {fileID: 2800000, guid: ce2c1f9372825ff4ba8620918f401e6b, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 631a11a2bbfecbb4b8d7e34f46276768, type: 3}
+      - {fileID: 2800000, guid: f0a1dbe6dba6d1e439b054364caf2332, type: 3}
+      - {fileID: 2800000, guid: 2fe164d3e2e93704cb6bc242ddbdba4d, type: 3}
+      - {fileID: 2800000, guid: c70e3ce23765dd047b328edbaef0f64b, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: a56db279ed1800d4dac4bff1fd7df8e7, type: 3}
+      - {fileID: 2800000, guid: be6d25ac7273ffa4192e4ad76a07e513, type: 3}
+      - {fileID: 2800000, guid: b8c0bb6a57566cc4b9b71f1e1ee74ea5, type: 3}
+      - {fileID: 2800000, guid: 1c3ffe67c5a0b2249ae96842f1441150, type: 3}
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: ea2df8cc0dc92cc4ab09f2a5b8477da2, type: 3}
+      - {fileID: 21300000, guid: 5efd67308f01cdc4bb57e54eb9a7d93e, type: 3}
+      - {fileID: 21300000, guid: a5d968a68cbc31f4ebf427e14ffc7db2, type: 3}
+      - {fileID: 21300000, guid: 74a8f39dd28451b4db9786ffd8a4d0d8, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 20743f973380ca94cb21725a06f826d6, type: 3}
+      - {fileID: 2800000, guid: 46bc179e9d38e064bbd1fda0f4cf4824, type: 3}
+      - {fileID: 2800000, guid: b19a71551e437564b80d813dd1226a57, type: 3}
+      - {fileID: 2800000, guid: 16d9ae37e6329e14aa0360cb80a86f22, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 199bf284d2f381543a93a280ad8e5736, type: 3}
+      - {fileID: 2800000, guid: 54909c01167ab664a84c237705c71af3, type: 3}
+      - {fileID: 2800000, guid: db0e1908252cb944f86c6b1e366fb018, type: 3}
+      - {fileID: 2800000, guid: 8e8450670d32fa4409034e82e5803c85, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 1675dba3eed18404996f8172820523bc, type: 3}
+      - {fileID: 2800000, guid: 61c798ec531b81e43b32abd2939cac1e, type: 3}
+      - {fileID: 2800000, guid: 01f3f3bcabde2d24f99c023a5b1e63f0, type: 3}
+      - {fileID: 2800000, guid: 804a3da16bd359846a0a0166f9ea1dea, type: 3}
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: f1205da2819f8ee4e88dc7bb9fac0cd4, type: 3}
+      - {fileID: 21300000, guid: 9ef558cc3e6514847a2162f091e97e2d, type: 3}
+      - {fileID: 21300000, guid: fb7bb7fa9d06c5b4890a9373645b13d4, type: 3}
+      - {fileID: 21300000, guid: 507e9b47da94c1940ade4f4b2e7c9885, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 643a62f14e5adaa4dbacdd4f95f08ebb, type: 3}
+      - {fileID: 2800000, guid: c4e1f162e4c35004aa1b81bb3729f7fb, type: 3}
+      - {fileID: 2800000, guid: fc21f8a659fcc9844b83ecf986064cfe, type: 3}
+      - {fileID: 2800000, guid: 00b9127401e9b80419541721d9c044b7, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 22ef782021f729149a2ccbc0649bf505, type: 3}
+      - {fileID: 2800000, guid: 2cb343606207d1342b55201ed34376da, type: 3}
+      - {fileID: 2800000, guid: c4eebb2d8f37f3743af7feeff4d554e5, type: 3}
+      - {fileID: 2800000, guid: d462ef74d241ffa4ca3ba737c0043879, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: acaa1228a8e5e61478be73407ad9705b, type: 3}
+      - {fileID: 2800000, guid: 5c0112621ce59064ab14cf56967594ed, type: 3}
+      - {fileID: 2800000, guid: 091dfa01064bbf341a6182769ec53135, type: 3}
+      - {fileID: 2800000, guid: 0f799f80ca328f84791065a8f71f07fc, type: 3}
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 8233fa16e3404ea4e9b2b60ab774ccfb, type: 3}
+      - {fileID: 21300000, guid: d383b3ee6ce697a40be34c46c701113d, type: 3}
+      - {fileID: 21300000, guid: 0c3cdb13c23f8c244b0527eb2130363a, type: 3}
+      - {fileID: 21300000, guid: fb328173c2fb645438e7860ce5d6e7d2, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 69c519e6b7c9711459d71a6be29e8395, type: 3}
+      - {fileID: 2800000, guid: 5d7ad61bde1dfb74097d087bdc9b3ce2, type: 3}
+      - {fileID: 2800000, guid: d01c9a1ff46b44142b38e70ff5beae3f, type: 3}
+      - {fileID: 2800000, guid: e3c317eebf3b3c746ada34cd494071a0, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 426a27e2adf41ea4f84b81932031abf8, type: 3}
+      - {fileID: 2800000, guid: 3db6d9dd851ec1548a2a31c2e6fc4c1d, type: 3}
+      - {fileID: 2800000, guid: 298a1e7c4ff6df64bad23262a21eef0b, type: 3}
+      - {fileID: 2800000, guid: 546b1f19a1f0c7e4892f54979e8d7f35, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 5cbc343e6ab5aec4c9a35465c055b3fa, type: 3}
+      - {fileID: 2800000, guid: 7595b9000ff20c442a6c0ad9d7718b79, type: 3}
+      - {fileID: 2800000, guid: 848645ef7162a1b42b0461d02871e3ca, type: 3}
+      - {fileID: 2800000, guid: cc84d0a0b2c71204198c01770ecb1eb8, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: b0a0a1fda7b66d740a8427fe1d8b2e7c, type: 3}
+      - {fileID: 21300000, guid: 69f730ba97f2d98498e5b5552b37247a, type: 3}
+      - {fileID: 21300000, guid: 346e532058a853d4590b945a964b9683, type: 3}
+      - {fileID: 21300000, guid: b8d776e86302d4b4c90ae43a3c3528ea, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 11f709dbb17958642b26df5b0c5fbc27, type: 3}
+      - {fileID: 2800000, guid: 3dd6b48a6739eaa4daef710d4bd6bd37, type: 3}
+      - {fileID: 2800000, guid: a5c784805fd9bf14ca6dc4612448f51e, type: 3}
+      - {fileID: 2800000, guid: ef341af7b90e51d41972ab51ecce3321, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: da5daa9246258b44eaeb36a6f68dc65c, type: 3}
+      - {fileID: 2800000, guid: 0ac258400c282474b8164b8d1fe45e14, type: 3}
+      - {fileID: 2800000, guid: 2e03d9312bd4eea47b1cbe7a0669e5d9, type: 3}
+      - {fileID: 2800000, guid: 2d273b936acdb064fae75b046a3e73f4, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 6f9a642cd00b465498bead3a178bb42d, type: 3}
+      - {fileID: 2800000, guid: 0dcfd068bee4bf040b6bd177c8ffee3a, type: 3}
+      - {fileID: 2800000, guid: 60dc89e57241a4147a86e186256c210f, type: 3}
+      - {fileID: 2800000, guid: 809e98552e889ee468f8cba3e06abead, type: 3}
+  - clipId: Roar
+    loop: 0
+    framesPerSecond: 8
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 30f16946b22c110478585a535d074eb9, type: 3}
+      - {fileID: 21300000, guid: d649d298d6b90254fb1eb2528ec1969e, type: 3}
+      - {fileID: 21300000, guid: 8fde7cd71bdee3d4fb676976997fb73d, type: 3}
+      - {fileID: 21300000, guid: 6ee5187458f25c14a9da10cf1ac32b88, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: bc1613e9cf8ba244b9a7c304ca9139b6, type: 3}
+      - {fileID: 2800000, guid: 408494cf1ab84b84982543af2dcf3d8b, type: 3}
+      - {fileID: 2800000, guid: cd698fa3bcb128c4fa33d7741d3b289c, type: 3}
+      - {fileID: 2800000, guid: 70f077254e0def346854394d8ad57f8e, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 797f7f3b884e68f458feaefd6b62a023, type: 3}
+      - {fileID: 2800000, guid: 1c742888d97f31440a55038e198fe8a9, type: 3}
+      - {fileID: 2800000, guid: 8ce843212038ca64b95004cbae877429, type: 3}
+      - {fileID: 2800000, guid: a34b4a4cbf9458d458e8bc797634a6a4, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 7e11fb2a4cd6149479dfd9be6d583e87, type: 3}
+      - {fileID: 2800000, guid: dcbddc41756ca10479e32dac048220dd, type: 3}
+      - {fileID: 2800000, guid: d710c9acb7cee3349b77b98e697d3193, type: 3}
+      - {fileID: 2800000, guid: 7e46a1aed5b04854ab3403274a2e7f39, type: 3}
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 5732dcfe0c593324f94818c0c2c694a4, type: 3}
+      - {fileID: 21300000, guid: ec8870724f7ce154592c0d5b7dbeca7f, type: 3}
+      - {fileID: 21300000, guid: 60f734cb048c8e64688a18e819872ddd, type: 3}
+      - {fileID: 21300000, guid: 12fef241046968e43b0fa4facef76106, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: cbfd93036b7838e42910e7061c3a66e9, type: 3}
+      - {fileID: 2800000, guid: a1f7ca1595ff1104b9cad577a653c463, type: 3}
+      - {fileID: 2800000, guid: 5fc37b836b0c16146806a3464cfa6436, type: 3}
+      - {fileID: 2800000, guid: dda3c555f81cd96438ab4b43eb15ae65, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 43403d7c249807748a951a3ccd3c9133, type: 3}
+      - {fileID: 2800000, guid: 106882305ad14a749b2672ca83b8b7f7, type: 3}
+      - {fileID: 2800000, guid: fa758398c5f788e4f86acbc7f815f222, type: 3}
+      - {fileID: 2800000, guid: f97d6ac72c56b6049bcf5aa53ea32a72, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: be53d7cc83852814f845b8fade6ad041, type: 3}
+      - {fileID: 2800000, guid: b30efc1b35798204dadb9a328400a8ea, type: 3}
+      - {fileID: 2800000, guid: 24de66ab48f11d14bb43e60482d62fe9, type: 3}
+      - {fileID: 2800000, guid: ccabe8739dd6b224ab43a672d439a8d6, type: 3}
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 69a032551bfc7234fac868bda314a7fc, type: 3}
+      - {fileID: 21300000, guid: f79b7e05a619b0d4da01483b652b5404, type: 3}
+      - {fileID: 21300000, guid: 3a3fc41f69feb364186af7c5270c5b21, type: 3}
+      - {fileID: 21300000, guid: bbab6ccd2e293b047be2e3f7abe34fb8, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 5195dc0eedd9e19409e344367541124c, type: 3}
+      - {fileID: 2800000, guid: a7c8ff775e198a044ae3065d3ee5e144, type: 3}
+      - {fileID: 2800000, guid: e9530a39b45e493488e0bfee9be8694b, type: 3}
+      - {fileID: 2800000, guid: de79eb82e96e9d24f8b8e0364677b9d1, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 7c6143832bcf0df458c12dc873c76dde, type: 3}
+      - {fileID: 2800000, guid: 5af00720f7849234b8c573b66465c56a, type: 3}
+      - {fileID: 2800000, guid: b5f020c34d65a054bbd546b7e550518e, type: 3}
+      - {fileID: 2800000, guid: 4282baa6970edca4ca837c6f19401dca, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 21f1711116e36ed4bb1fada71f6fce6c, type: 3}
+      - {fileID: 2800000, guid: 3076eb2b49341424ea19933a9d83f018, type: 3}
+      - {fileID: 2800000, guid: 8dbf35074d87d2f4a9a3f29c88b88f25, type: 3}
+      - {fileID: 2800000, guid: 792a85628bdff6f468ae4dc1ace12fa7, type: 3}
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: c154816fc5a18ea4c84be22596b45935, type: 3}
+      - {fileID: 21300000, guid: 19672f26b398bae46b15e87f0bdf86d1, type: 3}
+      - {fileID: 21300000, guid: ca9db60bf377bfe4aa3913cf9afb9377, type: 3}
+      - {fileID: 21300000, guid: 2c1d29b000d346d4a934ca48f2576eea, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 6e29121dae34f8347848beb53bff088d, type: 3}
+      - {fileID: 2800000, guid: 103341d63d069c646a6034df2cdba198, type: 3}
+      - {fileID: 2800000, guid: 399aa3a5d4d3bae4f98c96eb0f70077a, type: 3}
+      - {fileID: 2800000, guid: c100d0f6de28d1748acb1f0b86850ffe, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: e1883e45adc61364caaa5b874458d8cf, type: 3}
+      - {fileID: 2800000, guid: 4350b00a9152af3479455f0887fb4628, type: 3}
+      - {fileID: 2800000, guid: c7bd381b1985dc44c8fdfe90d1694e87, type: 3}
+      - {fileID: 2800000, guid: 05011a15f701a7842945f05719f44a29, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 79ae95055c68b224e82b989cce104742, type: 3}
+      - {fileID: 2800000, guid: a09c29b6353d60d4d9f3b0bcc901ed81, type: 3}
+      - {fileID: 2800000, guid: ae58fe1cef4e7c0408c5881b00226adf, type: 3}
+      - {fileID: 2800000, guid: 224be51fa74f9c54cae105dfb66f5b12, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 27dd34e3f53833640b3106bb692e4048, type: 3}
+      - {fileID: 21300000, guid: a71dd7cd11571fa48bc6cd3512697a7b, type: 3}
+      - {fileID: 21300000, guid: 20885b27d111f7548b45f7192cc1c1a3, type: 3}
+      - {fileID: 21300000, guid: 6dee206351ba31d418dc2eb7e27123bc, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: fabeb8b2e4cccd3409cc64dac25403c2, type: 3}
+      - {fileID: 2800000, guid: 721a03cdf0c744c4980838bdf54a1e3e, type: 3}
+      - {fileID: 2800000, guid: 7fa6a64fe0b93144fa56cbadbe41934f, type: 3}
+      - {fileID: 2800000, guid: f5bf48d46b82dcc4b80fa6569d821c77, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: e071d8deb17cfdb4d84f072e0cc5ed8f, type: 3}
+      - {fileID: 2800000, guid: 9f42be8678e7fe445a0854f71c88a0df, type: 3}
+      - {fileID: 2800000, guid: 677569962dc3b7f4da785cefd9d8af9f, type: 3}
+      - {fileID: 2800000, guid: 8464d79b9648d5049bc5889522d9f258, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: baaddc8945e0f0f4691a5b83db09f895, type: 3}
+      - {fileID: 2800000, guid: c02af8a6b7453d54d9d0edb87cc5f33f, type: 3}
+      - {fileID: 2800000, guid: 61049023ae820f54e92f87d1b6359d4c, type: 3}
+      - {fileID: 2800000, guid: 9e3990f9edce0804090018373795e094, type: 3}
+  - clipId: Slam
+    loop: 0
+    framesPerSecond: 10.5
+    angles:
+    - label: Front
+      yawDegrees: 0
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: ebd0439c55c960947a97bbfc20671e8b, type: 3}
+      - {fileID: 21300000, guid: 8a1fec5ef26555c4e835c2788c47b75f, type: 3}
+      - {fileID: 21300000, guid: c747e62b1078a764d894ca08f917ac33, type: 3}
+      - {fileID: 21300000, guid: 7afa4ed81b4b9d243b47cddbb64b576a, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 734f5f9d7fb325044a0702637abc4a8e, type: 3}
+      - {fileID: 2800000, guid: 5c0e4a7152e4a2d47b7473bd5a6b2acc, type: 3}
+      - {fileID: 2800000, guid: 25bd703e06327b34487d926e3d1860a2, type: 3}
+      - {fileID: 2800000, guid: 881c49adeeaed9b44b3bdcd7786c45e1, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: edb6e87e23ca8914f82f0db39c4e07ed, type: 3}
+      - {fileID: 2800000, guid: 23ad192a9f29fc74b918884bbff68150, type: 3}
+      - {fileID: 2800000, guid: 6b7b7f4852d8ee0409ed540011525c3e, type: 3}
+      - {fileID: 2800000, guid: f3ccb72ebb12d114581c02e5aba21fb9, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: afebd710b12883c4c8b8677490827595, type: 3}
+      - {fileID: 2800000, guid: 26cb6f2eb017afc45ad0364451018a2d, type: 3}
+      - {fileID: 2800000, guid: f3b4be0dc77c5f34ab79084c6f9ad099, type: 3}
+      - {fileID: 2800000, guid: 16bbf7834e4c45e49aa10ce4a311bcde, type: 3}
+    - label: FrontRight
+      yawDegrees: 45
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: b09d2b94e6b7100469bb25943d9433ba, type: 3}
+      - {fileID: 21300000, guid: 33dd05dcb351fcd429d090ddfdc2a32e, type: 3}
+      - {fileID: 21300000, guid: 8af49bbaabd46cb439275730050b807d, type: 3}
+      - {fileID: 21300000, guid: 1e344cc64e519a04ba809be0e6bd2ec1, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 7e87eb688283c5b49b38f27885d947fe, type: 3}
+      - {fileID: 2800000, guid: 32721de34ec434042b37998342feacf3, type: 3}
+      - {fileID: 2800000, guid: 29f334d5ed5375c4c95d98e41aaa43b4, type: 3}
+      - {fileID: 2800000, guid: c3ab9e35ae4ab984ba94e9dab392d2f5, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: a1050ab0664135f4f810fe04dce57079, type: 3}
+      - {fileID: 2800000, guid: a37ec6d1d44f802408d467cf2c97aa6e, type: 3}
+      - {fileID: 2800000, guid: 31b9f090f11e97b4aacb2797c0c72dd5, type: 3}
+      - {fileID: 2800000, guid: 35ea144b3dffc614ba4b4a22a6f36793, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 7cdb6ae91992d3e40b35509cf28e7424, type: 3}
+      - {fileID: 2800000, guid: 1d45572d895bdd541869746bfe2d6d0f, type: 3}
+      - {fileID: 2800000, guid: 0d7e7c14de2c57e49a1cb7201a1c274b, type: 3}
+      - {fileID: 2800000, guid: ca7e77b1812d53d4fb9d6a6437d43ea6, type: 3}
+    - label: Right
+      yawDegrees: 90
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: f3f185d081a58834ebec15f238343e04, type: 3}
+      - {fileID: 21300000, guid: 42eccd50df1c1cd4bba12d2c36c4d08e, type: 3}
+      - {fileID: 21300000, guid: a2443fbff5e14b14793ccd1550ff7324, type: 3}
+      - {fileID: 21300000, guid: 655fe9fbeae4c6b4fad879f1630c43c2, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: d19b29a4cc664e9419bc30749d4393cc, type: 3}
+      - {fileID: 2800000, guid: cda8908339e2823439b435422c41c729, type: 3}
+      - {fileID: 2800000, guid: ddabecec498683645922095b51ec453a, type: 3}
+      - {fileID: 2800000, guid: b6da0beb671e6154688fc4504a8fc7c1, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 9e91c1b2b1ba1a44183b6800fe3bce92, type: 3}
+      - {fileID: 2800000, guid: 07391e1992108b2428be175b6f5cfd2b, type: 3}
+      - {fileID: 2800000, guid: 9af8a1589f23c034383e230592e639fb, type: 3}
+      - {fileID: 2800000, guid: 9b46ae17df3f36f4a9c96779eb2209da, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 4748bc7a852c0fc4caddbdbd5033e62f, type: 3}
+      - {fileID: 2800000, guid: 55da6d55148ea614591a2be9b20ad0e8, type: 3}
+      - {fileID: 2800000, guid: e7ce3c5d2f1db1d4b905bdf26d88892f, type: 3}
+      - {fileID: 2800000, guid: abd88527946a40f4f87f7aee917ad905, type: 3}
+    - label: BackRight
+      yawDegrees: 135
+      symmetry: 1
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: ab2342d9b35930543a790248db2ffe2f, type: 3}
+      - {fileID: 21300000, guid: c6465ed71aab0674a82f2c26f545da32, type: 3}
+      - {fileID: 21300000, guid: f85a46f6e95a45e4492183de955f851b, type: 3}
+      - {fileID: 21300000, guid: f515b840c067ff04592a9ce3d6659b88, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 257c6097a876e1942804ef153755e86a, type: 3}
+      - {fileID: 2800000, guid: 70c124be722fc9e4cb375ac3e5f128ef, type: 3}
+      - {fileID: 2800000, guid: 4eb87f1735f287f40ab58dbb4c863bd3, type: 3}
+      - {fileID: 2800000, guid: 7159677f1d6bc8345ba110d54264b93a, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 03cb9e59aa1c92642bce3e9b58ad6a31, type: 3}
+      - {fileID: 2800000, guid: 62194dff97638f340b356c45a29ad456, type: 3}
+      - {fileID: 2800000, guid: 6fa63ef3127ae85478f170df54328f6e, type: 3}
+      - {fileID: 2800000, guid: caf3063e213e40e469d0376aebc61b13, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 852c55eef7ddd994484d7a267be59f34, type: 3}
+      - {fileID: 2800000, guid: 600e3c4bc8004604f87bd32db4024bd2, type: 3}
+      - {fileID: 2800000, guid: b9ee9b385f617e945b3aaff4c0cbd637, type: 3}
+      - {fileID: 2800000, guid: c4a610c9fb1c91547a1d1bc230b661b3, type: 3}
+    - label: Back
+      yawDegrees: 180
+      symmetry: 0
+      flipX: 0
+      frames:
+      - {fileID: 21300000, guid: 7fdcd4d2113fcf44887485ec4dfcf7f0, type: 3}
+      - {fileID: 21300000, guid: e73e4ba13a443cc4ab2cc0e4f7da72fb, type: 3}
+      - {fileID: 21300000, guid: 8478f1dea5946744daca6a1e40ac89bc, type: 3}
+      - {fileID: 21300000, guid: e6db4c436166aae4a946d2312e6c694c, type: 3}
+      normalFrames:
+      - {fileID: 2800000, guid: 96fd7ecd43f64eb408245db6fa3ad251, type: 3}
+      - {fileID: 2800000, guid: 638bbcecf0422664db78597b0fca9f52, type: 3}
+      - {fileID: 2800000, guid: 6cd3177420952ce41a40af76641ee5dd, type: 3}
+      - {fileID: 2800000, guid: 06b69d774ec264c4c9dba76bb72a4d04, type: 3}
+      packedMaskFrames:
+      - {fileID: 2800000, guid: 87626691bd963f64991e13d768f62db9, type: 3}
+      - {fileID: 2800000, guid: b0a5ab6c57929774b8e0d95d468fe3e2, type: 3}
+      - {fileID: 2800000, guid: 9bf72a3614ead934192a83dce8768127, type: 3}
+      - {fileID: 2800000, guid: f286aac0a9365b0498722b9ddba2b136, type: 3}
+      emissionFrames:
+      - {fileID: 2800000, guid: 92736258eaa49274da733dbc34b186e5, type: 3}
+      - {fileID: 2800000, guid: 316d5b9c32cbc3e40a0c7a6de17b78d2, type: 3}
+      - {fileID: 2800000, guid: f0e80ddacf1e2bc46908b1a77a7c2e35, type: 3}
+      - {fileID: 2800000, guid: d90e519fe7f7a7845aaf0b8efa9b02e8, type: 3}

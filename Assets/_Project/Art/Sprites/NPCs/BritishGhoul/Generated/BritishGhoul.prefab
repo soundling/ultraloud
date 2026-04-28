@@ -74,13 +74,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f351ba2ba14d5204d89a4c711ae6e292, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteAnimator
   definition: {fileID: 11400000, guid: 3189782ca808bcb4a9e965c2748a0f7d, type: 2}
   initialClipId: Idle
   playOnEnable: 1
   useUnscaledTime: 0
   animationSpeed: 1
+  freezeInitialClipInEditMode: 0
   spriteRenderer: {fileID: 0}
   billboardRoot: {fileID: 6966380484585622265}
   facingReference: {fileID: 4799395536685289405}
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f63cb37e00d422092d88d927f729dd6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteBillboardLitRenderer
   animator: {fileID: 6614622743562036661}
   targetRenderer: {fileID: 5199166239023155866}
@@ -143,7 +144,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a1f9a9ed8fb421a8b83d76cc8b604f1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteHitMask
   animator: {fileID: 6614622743562036661}
   visualRenderer: {fileID: 5199166239023155866}
@@ -166,7 +167,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13199b9dc2b44059ae420f6b8f0a6b13, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DirectionalSpriteLocomotion
   animator: {fileID: 6614622743562036661}
   movementBody: {fileID: 0}
@@ -186,7 +187,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfe3fb06b24a4c27820f2f770e71d21a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::RetroDamageable
   maxHealth: 95
   destroyOnDeath: 1
@@ -211,7 +212,7 @@ MonoBehaviour:
   ensureShootableFeedback: 1
   shootableSurfaceKind: 3
   shootableFeedbackScale: 1
-  shootableDeathEffectMultiplier: 2.6
+  shootableDeathEffectMultiplier: 0.2
 --- !u!114 &2816623453420787140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,10 +223,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aac547ac71ef4cbfb27470907463f5de, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::RetroGibOnDeath
   damageable: {fileID: 6060690159561368907}
   goreProfile: {fileID: 11400000, guid: 65e7b685ce3843359abe93b81f4e6966, type: 2}
+  alwaysGibOnDeath: 1
   useProfileThresholds: 1
   damageWindow: 0.9
   clusterWindow: 0.18
@@ -235,7 +237,7 @@ MonoBehaviour:
   highSingleHitDamage: 80
   spawnAtRendererCenter: 1
   localCenterOffset: {x: 0, y: 0.45, z: 0}
-  intensityMultiplier: 0.92
+  intensityMultiplier: 1.45
   debugDecision: 0
 --- !u!114 &2058820001700326662
 MonoBehaviour:
@@ -247,7 +249,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6146816490b742aeb0d1ce80d4677be4, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::RetroNpcAgent
   behaviorMode: 1
   idleMode: 1
@@ -276,6 +278,13 @@ MonoBehaviour:
   stoppingDistance: 1.35
   repathInterval: 0.18
   horizontalOnly: 1
+  autoCreateNavMeshAgent: 1
+  navAgentRadius: 0.42
+  navAgentHeight: 1.8
+  obstacleAvoidance: 4
+  avoidancePriority: 50
+  staggerAvoidancePriority: 1
+  avoidancePrioritySpread: 20
   attackRange: 2.05
   attackDamage: 13
   attackCooldown: 0.82
@@ -286,6 +295,13 @@ MonoBehaviour:
   wanderRadius: 5.5
   wanderPointTolerance: 0.45
   idleWaitRange: {x: 0.35, y: 1.25}
+  useBuildingDoors: 1
+  detectStartingInterior: 1
+  doorSearchRadius: 9
+  doorUseDistance: 0.8
+  doorUseCooldown: 1.2
+  idleDoorUseChance: 0.16
+  interiorWanderMargin: 0.58
   damageable: {fileID: 6060690159561368907}
 --- !u!114 &4293353590299475156
 MonoBehaviour:
@@ -297,7 +313,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b45a791d3291e7d4a8bc5e3b8317a913, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::RetroHeyMateShouter
   shoutCue: {fileID: 11400000, guid: a61680dc99fb33945858cdf7d008a403, type: 2}
   damageable: {fileID: 6060690159561368907}

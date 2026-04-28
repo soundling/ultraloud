@@ -5,6 +5,8 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
         _NormalMap("Normal Map", 2D) = "bump" {}
+        _PackedMasks("Packed Masks", 2D) = "black" {}
+        _EmissionMap("Emission Map", 2D) = "black" {}
 
         [Header(Shading)]
         _AlphaCutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.08
@@ -22,9 +24,17 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
         _RimColor("Rim Color", Color) = (1, 1, 1, 1)
         _RimStrength("Rim Strength", Range(0.0, 4.0)) = 0.025
         _RimPower("Rim Power", Range(0.5, 8.0)) = 4.2
+        _EmissionColor("Emission Color", Color) = (1.0, 0.23, 0.08, 1.0)
+        _EmissionStrength("Emission Strength", Range(0.0, 6.0)) = 0.0
+        _WetSpecularBoost("Wet Specular Boost", Range(0.0, 2.0)) = 0.0
+        _BloodPulseStrength("Blood Pulse Strength", Range(0.0, 2.0)) = 0.0
+        _SurfaceCrawlStrength("Surface Crawl Strength", Range(0.0, 0.04)) = 0.0
+        _SurfaceCrawlSpeed("Surface Crawl Speed", Range(0.0, 8.0)) = 1.2
 
         [HideInInspector] _SpriteFlipX("Sprite Flip X", Float) = 1
         [HideInInspector] _UseNormalMap("Use Normal Map", Float) = 0
+        [HideInInspector] _UsePackedMasks("Use Packed Masks", Float) = 0
+        [HideInInspector] _UseEmissionMap("Use Emission Map", Float) = 0
         [HideInInspector] _TwoSidedLighting("Two Sided Lighting", Float) = 1
         [HideInInspector] _FlipBackfacingNormals("Flip Backfacing Normals", Float) = 1
         [HideInInspector] _UseCustomLightingBasis("Use Custom Lighting Basis", Float) = 0
@@ -59,14 +69,21 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
     SAMPLER(sampler_BaseMap);
     TEXTURE2D(_NormalMap);
     SAMPLER(sampler_NormalMap);
+    TEXTURE2D(_PackedMasks);
+    SAMPLER(sampler_PackedMasks);
+    TEXTURE2D(_EmissionMap);
+    SAMPLER(sampler_EmissionMap);
 
     CBUFFER_START(UnityPerMaterial)
     float4 _BaseColor;
     float4 _AmbientTopColor;
     float4 _AmbientBottomColor;
     float4 _RimColor;
+    float4 _EmissionColor;
     float4 _BaseMap_ST;
     float4 _NormalMap_ST;
+    float4 _PackedMasks_ST;
+    float4 _EmissionMap_ST;
     float _AlphaCutoff;
     float _NormalScale;
     float _DetailNormalInfluence;
@@ -79,8 +96,15 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
     float _MaxSpecularPower;
     float _RimStrength;
     float _RimPower;
+    float _EmissionStrength;
+    float _WetSpecularBoost;
+    float _BloodPulseStrength;
+    float _SurfaceCrawlStrength;
+    float _SurfaceCrawlSpeed;
     float _SpriteFlipX;
     float _UseNormalMap;
+    float _UsePackedMasks;
+    float _UseEmissionMap;
     float _TwoSidedLighting;
     float _FlipBackfacingNormals;
     float _UseCustomLightingBasis;
@@ -109,6 +133,42 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
     float4 SampleBase(float2 uv)
     {
         return SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, TRANSFORM_TEX(uv, _BaseMap));
+    }
+
+    float4 SamplePackedMasks(float2 spriteUv)
+    {
+        if (_UsePackedMasks < 0.5)
+        {
+            return float4(0.0, 0.0, 0.0, 0.0);
+        }
+
+        return SAMPLE_TEXTURE2D(_PackedMasks, sampler_PackedMasks, TRANSFORM_TEX(spriteUv, _PackedMasks));
+    }
+
+    float2 ApplySurfaceCrawl(float2 spriteUv, float4 masks)
+    {
+        if (_UsePackedMasks < 0.5 || _SurfaceCrawlStrength <= 0.0001 || _SurfaceCrawlSpeed <= 0.0001)
+        {
+            return spriteUv;
+        }
+
+        float pulsePhase = _Time.y * _SurfaceCrawlSpeed + masks.g * 6.28318 + spriteUv.y * 3.75;
+        float crawlMask = saturate(masks.a + masks.g * 0.35);
+        float crawlAmount = crawlMask * _SurfaceCrawlStrength;
+        float2 crawlDirection = normalize(float2(sin(pulsePhase), cos(pulsePhase * 1.37)) + float2(0.001, 0.001));
+        return saturate(spriteUv + crawlDirection * crawlAmount);
+    }
+
+    float3 SampleEmission(float2 spriteUv, float4 masks)
+    {
+        if (_UseEmissionMap < 0.5 || _EmissionStrength <= 0.0001)
+        {
+            return 0.0;
+        }
+
+        float3 emission = SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, TRANSFORM_TEX(spriteUv, _EmissionMap)).rgb;
+        float pulse = 0.75 + 0.25 * sin(_Time.y * 4.8 + masks.g * 8.0 + spriteUv.y * 2.0);
+        return emission * _EmissionColor.rgb * _EmissionStrength * pulse;
     }
 
     float3 UnpackSpriteNormal(float4 packedNormal, float scaleValue)
@@ -153,6 +213,12 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
         return alpha;
     }
 
+    float ComputeEffectCoverage(float alpha)
+    {
+        float coverage = saturate((alpha - _AlphaCutoff) / max(1.0 - _AlphaCutoff, 0.0001));
+        return smoothstep(0.18, 0.82, coverage);
+    }
+
     float3x3 ResolveLightingBasis(FragInputs input)
     {
         if (_UseCustomLightingBasis > 0.5)
@@ -169,12 +235,15 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
             normalize(input.tangentToWorld[2].xyz));
     }
 
-    float3 EvaluateLighting(float3 albedo, float alpha, float3 normalWS, float3 viewWS, float3 hitPositionWS, float2 uv)
+    float3 EvaluateLighting(float3 albedo, float alpha, float3 normalWS, float3 viewWS, float3 hitPositionWS, float2 uv, float4 masks, float3 emission)
     {
+        float wetMask = _UsePackedMasks > 0.5 ? saturate(masks.r) : 0.0;
+        float pulseMask = _UsePackedMasks > 0.5 ? saturate(masks.g) : 0.0;
+        float grimeMask = _UsePackedMasks > 0.5 ? saturate(masks.b) : 0.0;
         float roughness = saturate(_SurfaceRoughness);
         float3 lighting = lerp(_AmbientBottomColor.rgb, _AmbientTopColor.rgb, saturate(uv.y)) * _AmbientIntensity * albedo;
         float nDotV = saturate(dot(normalWS, viewWS));
-        float spriteCoverage = saturate(alpha * 1.35);
+        float spriteCoverage = ComputeEffectCoverage(alpha);
         float albedoLuma = dot(albedo, float3(0.2126, 0.7152, 0.0722));
         float edgeTintMask = saturate(albedoLuma * 1.6) * spriteCoverage;
         float3 specularTint = lerp(float3(0.04, 0.04, 0.04), albedo, 0.35);
@@ -235,7 +304,7 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
             float3 halfwayDirection = normalize(lightDirectionWS + viewWS);
             float nDotH = saturate(dot(specularNormalWS, halfwayDirection));
             float specularPower = lerp(_MaxSpecularPower, _MinSpecularPower, roughness);
-            float specular = pow(nDotH, specularPower) * specularNdotL * _SpecularStrength * spriteCoverage;
+            float specular = pow(nDotH, specularPower) * specularNdotL * _SpecularStrength * (1.0 + wetMask * _WetSpecularBoost) * spriteCoverage;
             if (wrappedDiffuse <= 0.0 && specular <= 0.0)
             {
                 continue;
@@ -246,6 +315,11 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
 
         float rim = pow(1.0 - nDotV, _RimPower) * _RimStrength * edgeTintMask;
         lighting += _RimColor.rgb * albedo * rim;
+        lighting *= lerp(1.0, 0.58, grimeMask);
+
+        float bloodPulse = 0.5 + 0.5 * sin(_Time.y * 5.6 + pulseMask * 6.28318);
+        lighting += float3(0.72, 0.035, 0.012) * pulseMask * bloodPulse * _BloodPulseStrength * spriteCoverage;
+        lighting += emission * spriteCoverage;
         return lighting;
     }
 
@@ -258,7 +332,9 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
     {
         float2 uv = input.texCoord0.xy;
         float2 spriteUv = ResolveSpriteUV(uv);
-        float4 baseSample = SampleBase(spriteUv);
+        float4 masks = SamplePackedMasks(spriteUv);
+        float2 shadedUv = ApplySurfaceCrawl(spriteUv, masks);
+        float4 baseSample = SampleBase(shadedUv);
         float alpha = ComputeAlpha(baseSample.a * _BaseColor.a);
 
         ZERO_BUILTIN_INITIALIZE(builtinData);
@@ -280,7 +356,8 @@ Shader "Ultraloud/Directional Sprites/Billboard Lit HDRP"
 
         float3 hitPositionWS = GetAbsolutePositionWS(input.positionRWS);
         surfaceData.normalWS = normalWS;
-        surfaceData.color = EvaluateLighting(baseSample.rgb * _BaseColor.rgb, alpha, normalWS, viewDirectionWS, hitPositionWS, uv);
+        float3 emission = SampleEmission(shadedUv, masks);
+        surfaceData.color = EvaluateLighting(baseSample.rgb * _BaseColor.rgb, alpha, normalWS, viewDirectionWS, hitPositionWS, uv, masks, emission);
     }
 
     ENDHLSL

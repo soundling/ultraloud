@@ -235,9 +235,20 @@ public sealed class RetroShootableFeedback : MonoBehaviour
             return;
         }
 
+        if (HasGibDeathEffect())
+        {
+            return;
+        }
+
         Vector3 point = hasLastHit ? lastHitPoint : ResolveFallbackEffectPoint();
         Vector3 normal = hasLastHit ? lastHitNormal : Vector3.up;
         SpawnSurfaceBurst(point, normal, damageable != null ? damageable.MaxHealth : 50f, true);
+    }
+
+    private bool HasGibDeathEffect()
+    {
+        RetroGibOnDeath gib = GetComponent<RetroGibOnDeath>();
+        return gib != null && gib.CanSpawnGore;
     }
 
     private Vector3 ResolveFallbackEffectPoint()

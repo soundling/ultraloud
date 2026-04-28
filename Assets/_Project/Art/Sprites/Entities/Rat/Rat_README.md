@@ -12,8 +12,9 @@ Image-generated raster source sheets only. This pack intentionally contains no p
 
 ## Import Notes
 
-- Chroma key: flat magenta `#ff00ff`.
-- Intended angle order per sheet: `Front`, `FrontRight`, `Right`, `BackRight`, `Back`.
+- Sheet layout: 6 columns by 3 rows.
+- Chroma key: flat green `#00ff00`.
+- Intended angle order per sheet: `Front`, `Right`, `Back`.
 - Intended action timing: read columns left-to-right as animation beats for that row.
 - Preserve the rat as a small, low silhouette. Keep the belly/paw baseline stable between clips.
 - Unity-generated frames/maps, if present, are import artifacts derived from these Imagen sheets.

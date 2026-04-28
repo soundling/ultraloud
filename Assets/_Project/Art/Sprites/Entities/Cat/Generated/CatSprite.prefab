@@ -26,9 +26,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772106021912327439}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.43992996, z: 0}
-  m_LocalScale: {x: 1.4848, y: 1.1889999, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.731786, z: 0}
+  m_LocalScale: {x: 1.9778, y: 1.9778, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8836051565018850412}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 3557609142189295065}
   - component: {fileID: 8415673743937005727}
   - component: {fileID: 6642821343900271171}
-  - component: {fileID: 4487495521440056501}
+  - component: {fileID: 4584124954484155310}
   m_Layer: 0
   m_Name: CatSprite
   m_TagString: Untagged
@@ -118,7 +118,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991401753824437902}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.4909805, z: 0, w: 0.8711706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -222,7 +222,7 @@ MonoBehaviour:
   horizontalOnly: 1
   walkThreshold: 0.04
   speedSmoothing: 12
---- !u!114 &4487495521440056501
+--- !u!114 &4584124954484155310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

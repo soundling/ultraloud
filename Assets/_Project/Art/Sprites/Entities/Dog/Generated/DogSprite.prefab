@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1649236528081640444}
   - component: {fileID: 3785648728124633354}
   - component: {fileID: 592115821836094642}
-  - component: {fileID: 6892612420983251390}
+  - component: {fileID: 1001333211654086022}
   m_Layer: 0
   m_Name: DogSprite
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863727076236732100}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.4909805, z: 0, w: 0.8711706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   horizontalOnly: 1
   walkThreshold: 0.04
   speedSmoothing: 12
---- !u!114 &6892612420983251390
+--- !u!114 &1001333211654086022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,9 +181,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477497793088294033}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.63878, z: 0}
-  m_LocalScale: {x: 2.0992, y: 1.681, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.062556, z: 0}
+  m_LocalScale: {x: 2.7962, y: 2.7962, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 935850498700423911}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7478494115113729649}
   - component: {fileID: 4990973172065386773}
   - component: {fileID: 4325952219812032281}
-  - component: {fileID: 1451444643809840862}
+  - component: {fileID: 311252293830855322}
   m_Layer: 0
   m_Name: RatSprite
   m_TagString: Untagged
@@ -132,7 +132,7 @@ MonoBehaviour:
   horizontalOnly: 1
   walkThreshold: 0.04
   speedSmoothing: 12
---- !u!114 &1451444643809840862
+--- !u!114 &311252293830855322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,8 +182,8 @@ Transform:
   m_GameObject: {fileID: 2257981992589419198}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.38375998, z: 0}
-  m_LocalScale: {x: 1.2287999, y: 0.98399997, z: 1}
+  m_LocalPosition: {x: 0, y: 0.63835204, z: 0}
+  m_LocalScale: {x: 1.6368, y: 1.6368, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3188956201731371743}

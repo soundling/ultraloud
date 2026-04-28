@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 public static class RetroImagenEntityImportBatch
 {
     private const int DefaultColumns = 8;
-    private const int Rows = 5;
+    private const int DefaultRows = 5;
     private const float PixelsPerUnit = 100f;
     private const double AutoImportPollIntervalSeconds = 1.0;
     private const string AutoRunRequestPath = "ProjectSettings/RetroImagenEntityImport.request";
@@ -56,6 +56,54 @@ public static class RetroImagenEntityImportBatch
         ImportCatDogButcherAndAbomination(selectAsset: false);
     }
 
+    [MenuItem("Tools/Ultraloud/Entities/Import Imagen Entity Sprites/Import Cat Only")]
+    public static void ImportCatMenu()
+    {
+        ImportCat(selectAsset: true);
+    }
+
+    [MenuItem("Tools/Ultraloud/Entities/Import Imagen Entity Sprites/Import Cat Only No Select")]
+    public static void ImportCatNoSelectMenu()
+    {
+        ImportCat(selectAsset: false);
+    }
+
+    [MenuItem("Tools/Ultraloud/Entities/Import Imagen Entity Sprites/Import Dog Only")]
+    public static void ImportDogMenu()
+    {
+        ImportDog(selectAsset: true);
+    }
+
+    [MenuItem("Tools/Ultraloud/Entities/Import Imagen Entity Sprites/Import Dog Only No Select")]
+    public static void ImportDogNoSelectMenu()
+    {
+        ImportDog(selectAsset: false);
+    }
+
+    [MenuItem("Tools/Ultraloud/Entities/Import Imagen Entity Sprites/Import Rat Only")]
+    public static void ImportRatMenu()
+    {
+        ImportRat(selectAsset: true);
+    }
+
+    [MenuItem("Tools/Ultraloud/Entities/Import Imagen Entity Sprites/Import Rat Only No Select")]
+    public static void ImportRatNoSelectMenu()
+    {
+        ImportRat(selectAsset: false);
+    }
+
+    [MenuItem("Tools/Ultraloud/Entities/Import Imagen Entity Sprites/Import Mawtick Only")]
+    public static void ImportMawtickMenu()
+    {
+        ImportMawtick(selectAsset: true);
+    }
+
+    [MenuItem("Tools/Ultraloud/Entities/Import Imagen Entity Sprites/Import Mawtick Only No Select")]
+    public static void ImportMawtickNoSelectMenu()
+    {
+        ImportMawtick(selectAsset: false);
+    }
+
     public static void ImportAllFromCommandLine()
     {
         try
@@ -98,6 +146,62 @@ public static class RetroImagenEntityImportBatch
         }
     }
 
+    public static void ImportCatFromCommandLine()
+    {
+        try
+        {
+            ImportCat(selectAsset: false);
+            EditorApplication.Exit(0);
+        }
+        catch (Exception exception)
+        {
+            Debug.LogException(exception);
+            EditorApplication.Exit(1);
+        }
+    }
+
+    public static void ImportDogFromCommandLine()
+    {
+        try
+        {
+            ImportDog(selectAsset: false);
+            EditorApplication.Exit(0);
+        }
+        catch (Exception exception)
+        {
+            Debug.LogException(exception);
+            EditorApplication.Exit(1);
+        }
+    }
+
+    public static void ImportRatFromCommandLine()
+    {
+        try
+        {
+            ImportRat(selectAsset: false);
+            EditorApplication.Exit(0);
+        }
+        catch (Exception exception)
+        {
+            Debug.LogException(exception);
+            EditorApplication.Exit(1);
+        }
+    }
+
+    public static void ImportMawtickFromCommandLine()
+    {
+        try
+        {
+            ImportMawtick(selectAsset: false);
+            EditorApplication.Exit(0);
+        }
+        catch (Exception exception)
+        {
+            Debug.LogException(exception);
+            EditorApplication.Exit(1);
+        }
+    }
+
     private static void TryRunPendingAutoImport()
     {
         string requestPath = Path.GetFullPath(AutoRunRequestPath);
@@ -116,17 +220,49 @@ public static class RetroImagenEntityImportBatch
         bool bossesOnly = request.IndexOf("butcher", StringComparison.OrdinalIgnoreCase) >= 0
             || request.IndexOf("abomination", StringComparison.OrdinalIgnoreCase) >= 0
             || request.IndexOf("boss", StringComparison.OrdinalIgnoreCase) >= 0;
+        bool catOnly = request.IndexOf("cat", StringComparison.OrdinalIgnoreCase) >= 0
+            && request.IndexOf("only", StringComparison.OrdinalIgnoreCase) >= 0;
+        bool dogOnly = request.IndexOf("dog", StringComparison.OrdinalIgnoreCase) >= 0
+            && request.IndexOf("only", StringComparison.OrdinalIgnoreCase) >= 0;
+        bool ratOnly = request.IndexOf("rat", StringComparison.OrdinalIgnoreCase) >= 0
+            && request.IndexOf("only", StringComparison.OrdinalIgnoreCase) >= 0;
+        bool mawtickOnly = request.IndexOf("mawtick", StringComparison.OrdinalIgnoreCase) >= 0
+            && request.IndexOf("only", StringComparison.OrdinalIgnoreCase) >= 0;
         bool catDogBosses = bossesOnly
             && (request.IndexOf("cat", StringComparison.OrdinalIgnoreCase) >= 0
                 || request.IndexOf("dog", StringComparison.OrdinalIgnoreCase) >= 0);
 
-        Debug.Log(catDogBosses
+        Debug.Log(catOnly
+            ? "Retro Imagen entity import request detected. Importing Cat."
+            : dogOnly
+            ? "Retro Imagen entity import request detected. Importing Dog."
+            : ratOnly
+            ? "Retro Imagen entity import request detected. Importing Rat."
+            : mawtickOnly
+            ? "Retro Imagen entity import request detected. Importing Mawtick."
+            : catDogBosses
             ? "Retro Imagen entity import request detected. Importing Cat, Dog, ButcherBoss, and AbominationMonster."
             : bossesOnly
             ? "Retro Imagen entity import request detected. Importing ButcherBoss and AbominationMonster."
-            : "Retro Imagen entity import request detected. Importing Rat, Dog, Cat, ButcherBoss, and AbominationMonster.");
+            : "Retro Imagen entity import request detected. Importing Mawtick, Rat, Dog, Cat, ButcherBoss, and AbominationMonster.");
         File.Delete(requestPath);
-        if (catDogBosses)
+        if (catOnly)
+        {
+            ImportCat(selectAsset: false);
+        }
+        else if (dogOnly)
+        {
+            ImportDog(selectAsset: false);
+        }
+        else if (ratOnly)
+        {
+            ImportRat(selectAsset: false);
+        }
+        else if (mawtickOnly)
+        {
+            ImportMawtick(selectAsset: false);
+        }
+        else if (catDogBosses)
         {
             ImportCatDogButcherAndAbomination(selectAsset: false);
         }
@@ -159,7 +295,7 @@ public static class RetroImagenEntityImportBatch
 
     private static void ImportAll(bool selectAsset)
     {
-        ImportSpecs(selectAsset, null, "Rat, Dog, Cat, ButcherBoss, and AbominationMonster");
+        ImportSpecs(selectAsset, null, "Mawtick, Rat, Dog, Cat, ButcherBoss, and AbominationMonster");
     }
 
     private static void ImportButcherAndAbomination(bool selectAsset)
@@ -176,6 +312,38 @@ public static class RetroImagenEntityImportBatch
             selectAsset,
             static spec => IsNamed(spec, "Cat", "Dog", "ButcherBoss", "AbominationMonster"),
             "Cat, Dog, ButcherBoss, and AbominationMonster");
+    }
+
+    private static void ImportCat(bool selectAsset)
+    {
+        ImportSpecs(
+            selectAsset,
+            static spec => IsNamed(spec, "Cat"),
+            "Cat");
+    }
+
+    private static void ImportDog(bool selectAsset)
+    {
+        ImportSpecs(
+            selectAsset,
+            static spec => IsNamed(spec, "Dog"),
+            "Dog");
+    }
+
+    private static void ImportRat(bool selectAsset)
+    {
+        ImportSpecs(
+            selectAsset,
+            static spec => IsNamed(spec, "Rat"),
+            "Rat");
+    }
+
+    private static void ImportMawtick(bool selectAsset)
+    {
+        ImportSpecs(
+            selectAsset,
+            static spec => IsNamed(spec, "Mawtick"),
+            "Mawtick");
     }
 
     private static bool IsNamed(EntityImportSpec spec, params string[] names)
@@ -271,13 +439,20 @@ public static class RetroImagenEntityImportBatch
 
         try
         {
-            for (int row = 0; row < Rows; row++)
+            AngleSpec[] sheetAngles = spec.GetSheetAngles();
+            List<ComponentBounds>[] rowComponents = spec.UseComponentAlignedCells
+                ? DetectRowComponents(sheet, spec)
+                : null;
+            for (int row = 0; row < spec.SheetRows; row++)
             {
-                AngleSpec angle = Angles[row];
+                AngleSpec angle = sheetAngles[row];
                 for (int column = 0; column < spec.SheetColumns; column++)
                 {
-                    RectInt rect = ResolveCell(sheet.width, sheet.height, spec.SheetColumns, column, row);
-                    Color[] albedoPixels = BuildAlbedoPixels(sheet.GetPixels(rect.x, rect.y, rect.width, rect.height), rect.width, rect.height);
+                    RectInt rect = ResolveCell(sheet.width, sheet.height, spec.SheetColumns, spec.SheetRows, column, row);
+                    Color[] sourcePixels = spec.UseComponentAlignedCells
+                        ? BuildComponentAlignedCell(sheet, spec, rowComponents[row], row, column, rect.width, rect.height)
+                        : sheet.GetPixels(rect.x, rect.y, rect.width, rect.height);
+                    Color[] albedoPixels = BuildAlbedoPixels(sourcePixels, rect.width, rect.height, spec);
                     string frameKey = column.ToString("D2");
                     string clipAngleRoot = $"{framesRoot}/{clip.Id}/{angle.Label}";
 
@@ -325,33 +500,218 @@ public static class RetroImagenEntityImportBatch
         }
     }
 
-    private static RectInt ResolveCell(int width, int height, int columns, int column, int row)
+    private static RectInt ResolveCell(int width, int height, int columns, int rows, int column, int row)
     {
         int xMin = Mathf.RoundToInt(column * width / (float)columns);
         int xMax = Mathf.RoundToInt((column + 1) * width / (float)columns);
-        int topMin = Mathf.RoundToInt(row * height / (float)Rows);
-        int topMax = Mathf.RoundToInt((row + 1) * height / (float)Rows);
+        int topMin = Mathf.RoundToInt(row * height / (float)rows);
+        int topMax = Mathf.RoundToInt((row + 1) * height / (float)rows);
         int cellHeight = Mathf.Max(1, topMax - topMin);
         int y = height - topMax;
         return new RectInt(xMin, y, Mathf.Max(1, xMax - xMin), cellHeight);
     }
 
-    private static Color[] BuildAlbedoPixels(Color[] source, int width, int height)
+    private static RectInt ResolveRow(int width, int height, int rows, int row)
     {
+        int topMin = Mathf.RoundToInt(row * height / (float)rows);
+        int topMax = Mathf.RoundToInt((row + 1) * height / (float)rows);
+        int y = height - topMax;
+        return new RectInt(0, y, width, Mathf.Max(1, topMax - topMin));
+    }
+
+    private static List<ComponentBounds>[] DetectRowComponents(Texture2D sheet, EntityImportSpec spec)
+    {
+        List<ComponentBounds>[] rows = new List<ComponentBounds>[spec.SheetRows];
+        for (int row = 0; row < spec.SheetRows; row++)
+        {
+            RectInt rowRect = ResolveRow(sheet.width, sheet.height, spec.SheetRows, row);
+            Color[] pixels = sheet.GetPixels(rowRect.x, rowRect.y, rowRect.width, rowRect.height);
+            List<ComponentBounds> components = DetectOpaqueComponents(pixels, rowRect.width, rowRect.height, spec.ChromaKey);
+            components.Sort((left, right) => right.Pixels.CompareTo(left.Pixels));
+            if (components.Count > spec.SheetColumns)
+            {
+                components.RemoveRange(spec.SheetColumns, components.Count - spec.SheetColumns);
+            }
+
+            components.Sort((left, right) => left.CenterX.CompareTo(right.CenterX));
+            rows[row] = components;
+        }
+
+        return rows;
+    }
+
+    private static List<ComponentBounds> DetectOpaqueComponents(Color[] pixels, int width, int height, ChromaKeyKind chromaKey)
+    {
+        int minComponentPixels = Mathf.Clamp((width * height) / 3000, 80, 240);
+        bool[] visited = new bool[pixels.Length];
+        int[] queue = new int[pixels.Length];
+        List<ComponentBounds> components = new();
+
+        for (int start = 0; start < pixels.Length; start++)
+        {
+            if (visited[start] || IsChroma(pixels[start], chromaKey))
+            {
+                continue;
+            }
+
+            int head = 0;
+            int tail = 0;
+            int minX = width;
+            int maxX = 0;
+            int minY = height;
+            int maxY = 0;
+            visited[start] = true;
+            queue[tail++] = start;
+
+            while (head < tail)
+            {
+                int index = queue[head++];
+                int x = index % width;
+                int y = index / width;
+                minX = Mathf.Min(minX, x);
+                maxX = Mathf.Max(maxX, x);
+                minY = Mathf.Min(minY, y);
+                maxY = Mathf.Max(maxY, y);
+
+                for (int yOffset = -1; yOffset <= 1; yOffset++)
+                {
+                    int neighborY = y + yOffset;
+                    if (neighborY < 0 || neighborY >= height)
+                    {
+                        continue;
+                    }
+
+                    for (int xOffset = -1; xOffset <= 1; xOffset++)
+                    {
+                        if (xOffset == 0 && yOffset == 0)
+                        {
+                            continue;
+                        }
+
+                        int neighborX = x + xOffset;
+                        if (neighborX < 0 || neighborX >= width)
+                        {
+                            continue;
+                        }
+
+                        int neighborIndex = neighborY * width + neighborX;
+                        if (visited[neighborIndex] || IsChroma(pixels[neighborIndex], chromaKey))
+                        {
+                            continue;
+                        }
+
+                        visited[neighborIndex] = true;
+                        queue[tail++] = neighborIndex;
+                    }
+                }
+            }
+
+            if (tail < minComponentPixels)
+            {
+                continue;
+            }
+
+            components.Add(new ComponentBounds(new RectInt(minX, minY, maxX - minX + 1, maxY - minY + 1), tail));
+        }
+
+        return components;
+    }
+
+    private static Color[] BuildComponentAlignedCell(Texture2D sheet, EntityImportSpec spec, List<ComponentBounds> components, int row, int column, int width, int height)
+    {
+        if (components == null || column >= components.Count)
+        {
+            Debug.LogWarning($"{spec.Name} row {row} has {components?.Count ?? 0} detected components; falling back to strict cell {column}.");
+            RectInt fallback = ResolveCell(sheet.width, sheet.height, spec.SheetColumns, spec.SheetRows, column, row);
+            return sheet.GetPixels(fallback.x, fallback.y, fallback.width, fallback.height);
+        }
+
+        RectInt rowRect = ResolveRow(sheet.width, sheet.height, spec.SheetRows, row);
+        RectInt bounds = ExpandWithin(components[column].Rect, rowRect.width, rowRect.height, 8);
+        Color[] crop = sheet.GetPixels(rowRect.x + bounds.x, rowRect.y + bounds.y, bounds.width, bounds.height);
+        Color[] output = new Color[width * height];
+        Color key = spec.ChromaKey == ChromaKeyKind.Green
+            ? new Color(0f, 1f, 0f, 1f)
+            : new Color(1f, 0f, 1f, 1f);
+
+        for (int i = 0; i < output.Length; i++)
+        {
+            output[i] = key;
+        }
+
+        float maxWidth = width * 0.9f;
+        float maxHeight = height * 0.9f;
+        float scale = Mathf.Min(1f, Mathf.Min(maxWidth / bounds.width, maxHeight / bounds.height));
+        int drawWidth = Mathf.Max(1, Mathf.RoundToInt(bounds.width * scale));
+        int drawHeight = Mathf.Max(1, Mathf.RoundToInt(bounds.height * scale));
+        int startX = Mathf.Clamp(Mathf.RoundToInt((width - drawWidth) * 0.5f), 0, width - 1);
+        int startY = Mathf.Clamp(Mathf.RoundToInt((height - drawHeight) * 0.5f), 0, height - 1);
+
+        for (int y = 0; y < drawHeight; y++)
+        {
+            int targetY = startY + y;
+            if (targetY < 0 || targetY >= height)
+            {
+                continue;
+            }
+
+            for (int x = 0; x < drawWidth; x++)
+            {
+                int targetX = startX + x;
+                if (targetX < 0 || targetX >= width)
+                {
+                    continue;
+                }
+
+                float sourceX = (x + 0.5f) / scale - 0.5f;
+                float sourceY = (y + 0.5f) / scale - 0.5f;
+                output[targetY * width + targetX] = BilinearSample(crop, bounds.width, bounds.height, sourceX, sourceY);
+            }
+        }
+
+        return output;
+    }
+
+    private static RectInt ExpandWithin(RectInt rect, int width, int height, int padding)
+    {
+        int xMin = Mathf.Max(0, rect.xMin - padding);
+        int xMax = Mathf.Min(width, rect.xMax + padding);
+        int yMin = Mathf.Max(0, rect.yMin - padding);
+        int yMax = Mathf.Min(height, rect.yMax + padding);
+        return new RectInt(xMin, yMin, Mathf.Max(1, xMax - xMin), Mathf.Max(1, yMax - yMin));
+    }
+
+    private static Color BilinearSample(Color[] pixels, int width, int height, float x, float y)
+    {
+        x = Mathf.Clamp(x, 0f, width - 1f);
+        y = Mathf.Clamp(y, 0f, height - 1f);
+        int x0 = Mathf.FloorToInt(x);
+        int y0 = Mathf.FloorToInt(y);
+        int x1 = Mathf.Min(width - 1, x0 + 1);
+        int y1 = Mathf.Min(height - 1, y0 + 1);
+        float tx = x - x0;
+        float ty = y - y0;
+        Color bottom = Color.Lerp(pixels[y0 * width + x0], pixels[y0 * width + x1], tx);
+        Color top = Color.Lerp(pixels[y1 * width + x0], pixels[y1 * width + x1], tx);
+        return Color.Lerp(bottom, top, ty);
+    }
+
+    private static Color[] BuildAlbedoPixels(Color[] source, int width, int height, EntityImportSpec spec)
+    {
+        ChromaKeyKind chromaKey = spec.ChromaKey;
         Color[] output = new Color[source.Length];
         bool[] transparent = new bool[source.Length];
 
         for (int i = 0; i < source.Length; i++)
         {
             Color color = source[i];
-            if (IsChroma(color))
+            if (IsChroma(color, chromaKey))
             {
                 output[i] = new Color(0f, 0f, 0f, 0f);
                 transparent[i] = true;
                 continue;
             }
 
-            color = SuppressMagentaSpill(color, 0.45f);
             color.a = 1f;
             output[i] = color;
         }
@@ -367,13 +727,14 @@ public static class RetroImagenEntityImportBatch
                     continue;
                 }
 
-                float fringe = ChromaFringeScore(output[index]);
-                if (fringe < 0.08f)
+                float fringe = ChromaFringeScore(output[index], chromaKey);
+                if (fringe < ChromaTransparentCutoff(chromaKey, firstPass: true))
                 {
                     continue;
                 }
 
-                if (HasTransparentNeighbor(transparent, width, height, x, y, fringe > 0.25f ? 5 : 3))
+                int neighborRadius = ResolveChromaNeighborRadius(fringe, chromaKey);
+                if (HasTransparentNeighbor(transparent, width, height, x, y, neighborRadius))
                 {
                     fringeTransparent[index] = true;
                 }
@@ -391,7 +752,8 @@ public static class RetroImagenEntityImportBatch
             output[i] = new Color(0f, 0f, 0f, 0f);
         }
 
-        for (int pass = 0; pass < 5; pass++)
+        int fringePassCount = chromaKey == ChromaKeyKind.Green ? 8 : 5;
+        for (int pass = 0; pass < fringePassCount; pass++)
         {
             bool changed = false;
             Array.Clear(fringeTransparent, 0, fringeTransparent.Length);
@@ -406,13 +768,14 @@ public static class RetroImagenEntityImportBatch
                         continue;
                     }
 
-                    float fringe = ChromaFringeScore(output[index]);
-                    if (fringe < 0.12f)
+                    float fringe = ChromaFringeScore(output[index], chromaKey);
+                    if (fringe < ChromaTransparentCutoff(chromaKey, firstPass: false))
                     {
                         continue;
                     }
 
-                    if (HasTransparentNeighbor(transparent, width, height, x, y, fringe > 0.25f ? 5 : 3))
+                    int neighborRadius = ResolveChromaNeighborRadius(fringe, chromaKey);
+                    if (HasTransparentNeighbor(transparent, width, height, x, y, neighborRadius))
                     {
                         fringeTransparent[index] = true;
                     }
@@ -437,7 +800,7 @@ public static class RetroImagenEntityImportBatch
             }
         }
 
-        RemoveSmallDetachedComponents(output, transparent, width, height);
+        RemoveSmallDetachedComponents(output, transparent, width, height, spec.KeepLargestOpaqueComponent);
 
         for (int y = 0; y < height; y++)
         {
@@ -449,27 +812,32 @@ public static class RetroImagenEntityImportBatch
                     continue;
                 }
 
-                float fringe = ChromaFringeScore(output[index]);
+                float fringe = ChromaFringeScore(output[index], chromaKey);
                 if (fringe <= 0.025f || !HasTransparentNeighbor(transparent, width, height, x, y, 3))
                 {
                     continue;
                 }
 
-                output[index] = SuppressMagentaSpill(output[index], Mathf.Lerp(0.48f, 0.9f, fringe));
+                output[index] = SuppressChromaSpill(output[index], chromaKey, Mathf.Lerp(0.48f, 0.9f, fringe));
                 output[index].a = 1f;
             }
         }
 
-        FeatherOpaqueEdges(output, transparent, width, height);
+        RemoveResidualChromaEdgePixels(output, transparent, width, height, chromaKey);
+        FeatherOpaqueEdges(output, transparent, width, height, chromaKey);
         DilateTransparentRgb(output, transparent, width, height);
         return output;
     }
 
-    private static void RemoveSmallDetachedComponents(Color[] pixels, bool[] transparent, int width, int height)
+    private static void RemoveSmallDetachedComponents(Color[] pixels, bool[] transparent, int width, int height, bool keepLargestComponent)
     {
         int minComponentPixels = Mathf.Clamp((width * height) / 1800, 18, 90);
         bool[] visited = new bool[pixels.Length];
         int[] queue = new int[pixels.Length];
+        int[] componentIds = keepLargestComponent ? new int[pixels.Length] : null;
+        List<int> componentSizes = keepLargestComponent ? new List<int>() : null;
+        int largestComponentId = -1;
+        int largestComponentPixels = 0;
 
         for (int start = 0; start < pixels.Length; start++)
         {
@@ -522,6 +890,24 @@ public static class RetroImagenEntityImportBatch
                 }
             }
 
+            if (keepLargestComponent)
+            {
+                int componentId = componentSizes.Count;
+                componentSizes.Add(tail);
+                if (tail > largestComponentPixels)
+                {
+                    largestComponentPixels = tail;
+                    largestComponentId = componentId;
+                }
+
+                for (int i = 0; i < tail; i++)
+                {
+                    componentIds[queue[i]] = componentId;
+                }
+
+                continue;
+            }
+
             if (tail >= minComponentPixels)
             {
                 continue;
@@ -534,9 +920,103 @@ public static class RetroImagenEntityImportBatch
                 pixels[index] = new Color(0f, 0f, 0f, 0f);
             }
         }
+
+        if (!keepLargestComponent || largestComponentId < 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            if (transparent[i])
+            {
+                continue;
+            }
+
+            int componentId = componentIds[i];
+            if (componentId == largestComponentId && componentSizes[componentId] >= minComponentPixels)
+            {
+                continue;
+            }
+
+            transparent[i] = true;
+            pixels[i] = new Color(0f, 0f, 0f, 0f);
+        }
     }
 
-    private static float ChromaFringeScore(Color color)
+    private static void RemoveResidualChromaEdgePixels(Color[] pixels, bool[] transparent, int width, int height, ChromaKeyKind chromaKey)
+    {
+        if (chromaKey != ChromaKeyKind.Green)
+        {
+            return;
+        }
+
+        bool[] remove = new bool[pixels.Length];
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                int index = y * width + x;
+                if (transparent[index])
+                {
+                    continue;
+                }
+
+                float fringe = ChromaFringeScore(pixels[index], chromaKey);
+                if (fringe <= 0.012f)
+                {
+                    continue;
+                }
+
+                int nearTransparent = CountTransparentNeighbors(transparent, width, height, x, y, 1);
+                int wideTransparent = CountTransparentNeighbors(transparent, width, height, x, y, 2);
+                if ((nearTransparent > 0 && fringe > 0.03f) || (wideTransparent >= 7 && fringe > 0.015f))
+                {
+                    remove[index] = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < remove.Length; i++)
+        {
+            if (!remove[i])
+            {
+                continue;
+            }
+
+            transparent[i] = true;
+            pixels[i] = new Color(0f, 0f, 0f, 0f);
+        }
+    }
+
+    private static float ChromaFringeScore(Color color, ChromaKeyKind chromaKey)
+    {
+        return chromaKey == ChromaKeyKind.Green
+            ? GreenFringeScore(color)
+            : MagentaFringeScore(color);
+    }
+
+    private static float ChromaTransparentCutoff(ChromaKeyKind chromaKey, bool firstPass)
+    {
+        if (chromaKey == ChromaKeyKind.Green)
+        {
+            return firstPass ? 0.018f : 0.025f;
+        }
+
+        return firstPass ? 0.08f : 0.12f;
+    }
+
+    private static int ResolveChromaNeighborRadius(float fringe, ChromaKeyKind chromaKey)
+    {
+        if (chromaKey == ChromaKeyKind.Green)
+        {
+            return fringe > 0.07f ? 5 : 2;
+        }
+
+        return fringe > 0.25f ? 5 : 3;
+    }
+
+    private static float MagentaFringeScore(Color color)
     {
         float purpleFloor = Mathf.Min(color.r, color.b);
         float magentaBias = purpleFloor - color.g;
@@ -552,6 +1032,42 @@ public static class RetroImagenEntityImportBatch
         return Mathf.Clamp01(Mathf.Max(brightFringe, darkFringe));
     }
 
+    private static float GreenFringeScore(Color color)
+    {
+        float sideFloor = Mathf.Max(color.r, color.b);
+        float greenBias = color.g - sideFloor;
+        float sideBalance = 1f - Mathf.Clamp01(Mathf.Abs(color.r - color.b) * 2.2f);
+        float sideSuppression = color.g > sideFloor * 1.12f ? 1f : 0f;
+        float level = Mathf.Clamp01((color.g - 0.08f) * 4.2f);
+        float bias = Mathf.Clamp01((greenBias - 0.035f) * 5.5f);
+        float brightFringe = level * bias * Mathf.Lerp(0.5f, 1f, sideBalance) * sideSuppression;
+        float darkLevel = Mathf.Clamp01((color.g - 0.035f) * 11f);
+        float darkBias = Mathf.Clamp01((greenBias - 0.015f) * 10f);
+        float darkFringe = darkLevel * darkBias * Mathf.Lerp(0.6f, 1f, sideBalance) * sideSuppression;
+        float luma = color.r * 0.2126f + color.g * 0.7152f + color.b * 0.0722f;
+        float oliveBias = color.g - Mathf.Min(color.r, color.b);
+        float oliveDominance = color.g > color.r && color.g > color.b ? 1f : 0f;
+        float darkOlive = oliveDominance
+            * Mathf.Clamp01((oliveBias - 0.006f) * 12f)
+            * Mathf.Clamp01((color.g - 0.015f) * 12f)
+            * Mathf.Clamp01((0.55f - luma) * 2.25f);
+        float yellowFloor = Mathf.Min(color.r, color.g);
+        float yellowBias = yellowFloor - color.b;
+        float yellowBalance = 1f - Mathf.Clamp01(Mathf.Abs(color.r - color.g) * 2.8f);
+        float yellowGreenMatte = Mathf.Clamp01((yellowFloor - 0.1f) * 3.2f)
+            * Mathf.Clamp01((yellowBias - 0.035f) * 4.5f)
+            * Mathf.Lerp(0.32f, 1f, yellowBalance)
+            * Mathf.Clamp01((0.78f - luma) * 1.7f);
+        return Mathf.Clamp01(Mathf.Max(Mathf.Max(Mathf.Max(brightFringe, darkFringe), darkOlive), yellowGreenMatte));
+    }
+
+    private static Color SuppressChromaSpill(Color color, ChromaKeyKind chromaKey, float strength)
+    {
+        return chromaKey == ChromaKeyKind.Green
+            ? SuppressGreenSpill(color, strength)
+            : SuppressMagentaSpill(color, strength);
+    }
+
     private static Color SuppressMagentaSpill(Color color, float strength)
     {
         float magentaBias = Mathf.Max(0f, Mathf.Min(color.r, color.b) - color.g);
@@ -564,6 +1080,21 @@ public static class RetroImagenEntityImportBatch
         float targetBlue = Mathf.Min(color.b, Mathf.Lerp(color.g, color.r, 0.28f));
         color.r = Mathf.Lerp(color.r, Mathf.Max(color.g, color.r - magentaBias * 0.7f), correction * 0.42f);
         color.b = Mathf.Lerp(color.b, targetBlue, correction);
+        return color;
+    }
+
+    private static Color SuppressGreenSpill(Color color, float strength)
+    {
+        float sideFloor = Mathf.Max(color.r, color.b);
+        float greenBias = Mathf.Max(0f, color.g - sideFloor);
+        if (greenBias <= 0.015f)
+        {
+            return color;
+        }
+
+        float correction = Mathf.Clamp01(strength) * Mathf.Clamp01((greenBias - 0.015f) * 4.5f);
+        float targetGreen = Mathf.Lerp(sideFloor, color.r * 0.58f + color.b * 0.42f, 0.4f);
+        color.g = Mathf.Lerp(color.g, targetGreen, correction);
         return color;
     }
 
@@ -589,7 +1120,7 @@ public static class RetroImagenEntityImportBatch
         return false;
     }
 
-    private static void FeatherOpaqueEdges(Color[] pixels, bool[] transparent, int width, int height)
+    private static void FeatherOpaqueEdges(Color[] pixels, bool[] transparent, int width, int height, ChromaKeyKind chromaKey)
     {
         float[] alpha = new float[pixels.Length];
         for (int i = 0; i < alpha.Length; i++)
@@ -620,7 +1151,7 @@ public static class RetroImagenEntityImportBatch
                 float feather = Mathf.SmoothStep(0.12f, 0.74f, edgeExposure);
                 float targetAlpha = Mathf.Lerp(1f, 0.38f, feather);
 
-                float fringe = ChromaFringeScore(pixels[index]);
+                float fringe = ChromaFringeScore(pixels[index], chromaKey);
                 if (fringe > 0.02f)
                 {
                     targetAlpha = Mathf.Min(targetAlpha, Mathf.Lerp(0.62f, 0.24f, Mathf.Clamp01(fringe)));
@@ -816,7 +1347,14 @@ public static class RetroImagenEntityImportBatch
         return emission;
     }
 
-    private static bool IsChroma(Color color)
+    private static bool IsChroma(Color color, ChromaKeyKind chromaKey)
+    {
+        return chromaKey == ChromaKeyKind.Green
+            ? IsGreenChroma(color)
+            : IsMagentaChroma(color);
+    }
+
+    private static bool IsMagentaChroma(Color color)
     {
         return color.r > 0.52f
             && color.b > 0.52f
@@ -824,6 +1362,15 @@ public static class RetroImagenEntityImportBatch
             && color.r - color.g > 0.18f
             && color.b - color.g > 0.16f
             && Mathf.Abs(color.r - color.b) < 0.42f;
+    }
+
+    private static bool IsGreenChroma(Color color)
+    {
+        return color.g > 0.5f
+            && color.r < 0.5f
+            && color.b < 0.5f
+            && color.g - color.r > 0.16f
+            && color.g - color.b > 0.16f;
     }
 
     private static void WriteTexture(string assetPath, int width, int height, Color[] pixels, TextureImporterType type, bool srgb, Vector2 pivot)
@@ -1263,6 +1810,12 @@ public static class RetroImagenEntityImportBatch
         {
             new EntityImportSpec("Rat", 0.48f, "Scurry", false)
             {
+                SheetColumns = 6,
+                SheetRows = 3,
+                SheetAngleLabels = new[] { "Front", "Right", "Back" },
+                ChromaKey = ChromaKeyKind.Green,
+                KeepLargestOpaqueComponent = true,
+                UseComponentAlignedCells = true,
                 Clips = new[]
                 {
                     new ClipSpec("Idle", true, 7f),
@@ -1284,8 +1837,58 @@ public static class RetroImagenEntityImportBatch
                 ShootableDeathEffectMultiplier = 1.35f,
                 GibIntensityMultiplier = 0.45f
             },
+            new EntityImportSpec("Mawtick", 0.68f, "Skitter", false)
+            {
+                SheetColumns = 6,
+                SheetRows = 3,
+                SheetAngleLabels = new[] { "Front", "Right", "Back" },
+                ChromaKey = ChromaKeyKind.Green,
+                KeepLargestOpaqueComponent = true,
+                UseComponentAlignedCells = true,
+                Clips = new[]
+                {
+                    new ClipSpec("Idle", true, 6.5f),
+                    new ClipSpec("Skitter", true, 12.5f),
+                    new ClipSpec("Leap", false, 13f),
+                    new ClipSpec("Gnash", false, 13.5f),
+                    new ClipSpec("Screech", false, 8f)
+                },
+                SpritePivot = new Vector2(0.5f, 0.12f),
+                BoxSize = new Vector3(1.28f, 0.82f, 0.86f),
+                ColliderCenter = new Vector3(0f, 0.41f, 0f),
+                MaxHealth = 64f,
+                AlphaCutoff = 0.07f,
+                NormalScale = 1.03f,
+                DetailNormalInfluence = 0.62f,
+                MacroNormalBend = 0.58f,
+                WrapDiffuse = 0.44f,
+                SurfaceRoughness = 0.78f,
+                SpecularStrength = 0.1f,
+                MinSpecularPower = 6f,
+                MaxSpecularPower = 18f,
+                WetSpecularBoost = 0.86f,
+                BloodPulseStrength = 0.09f,
+                SurfaceCrawlStrength = 0.004f,
+                SurfaceCrawlSpeed = 1.65f,
+                EmissionStrength = 0.82f,
+                EmissionMaskStrength = 1.12f,
+                RedEmissionStrength = 0.24f,
+                RimStrength = 0.028f,
+                RimPower = 3.4f,
+                RimColor = new Color(0.82f, 0.94f, 1f, 1f),
+                EmissionColor = new Color(1f, 0.34f, 0.08f, 1f),
+                ShootableFeedbackScale = 0.72f,
+                ShootableDeathEffectMultiplier = 1.65f,
+                GibIntensityMultiplier = 0.65f
+            },
             new EntityImportSpec("Dog", 0.82f, "Trot", true)
             {
+                SheetColumns = 6,
+                SheetRows = 3,
+                SheetAngleLabels = new[] { "Front", "Right", "Back" },
+                ChromaKey = ChromaKeyKind.Green,
+                KeepLargestOpaqueComponent = true,
+                UseComponentAlignedCells = true,
                 Clips = new[]
                 {
                     new ClipSpec("Idle", true, 6f),
@@ -1311,6 +1914,11 @@ public static class RetroImagenEntityImportBatch
             },
             new EntityImportSpec("Cat", 0.58f, "Stalk", false)
             {
+                SheetColumns = 6,
+                SheetRows = 3,
+                SheetAngleLabels = new[] { "Front", "Right", "Back" },
+                ChromaKey = ChromaKeyKind.Green,
+                KeepLargestOpaqueComponent = true,
                 Clips = new[]
                 {
                     new ClipSpec("Idle", true, 7f),
@@ -1430,6 +2038,25 @@ public static class RetroImagenEntityImportBatch
         public readonly float YawDegrees;
     }
 
+    private enum ChromaKeyKind
+    {
+        Magenta,
+        Green
+    }
+
+    private readonly struct ComponentBounds
+    {
+        public ComponentBounds(RectInt rect, int pixels)
+        {
+            Rect = rect;
+            Pixels = pixels;
+        }
+
+        public RectInt Rect { get; }
+        public int Pixels { get; }
+        public float CenterX => Rect.x + Rect.width * 0.5f;
+    }
+
     private sealed class ClipSpec
     {
         public ClipSpec(string id, bool loop, float framesPerSecond)
@@ -1464,6 +2091,11 @@ public static class RetroImagenEntityImportBatch
         public string ArtRoot => $"Assets/_Project/Art/Sprites/Entities/{Name}";
         public ClipSpec[] Clips;
         public int SheetColumns = DefaultColumns;
+        public int SheetRows = DefaultRows;
+        public string[] SheetAngleLabels;
+        public ChromaKeyKind ChromaKey = ChromaKeyKind.Magenta;
+        public bool KeepLargestOpaqueComponent;
+        public bool UseComponentAlignedCells;
         public bool AddLocomotion = true;
         public bool UseCapsuleCollider;
         public float WorldScaleMultiplier;
@@ -1522,6 +2154,52 @@ public static class RetroImagenEntityImportBatch
             }
 
             return null;
+        }
+
+        public AngleSpec[] GetSheetAngles()
+        {
+            if (SheetRows <= 0)
+            {
+                throw new InvalidOperationException($"{Name} must declare at least one sheet row.");
+            }
+
+            if (SheetAngleLabels == null || SheetAngleLabels.Length == 0)
+            {
+                if (SheetRows > Angles.Length)
+                {
+                    throw new InvalidOperationException($"{Name} requests {SheetRows} sheet rows, but only {Angles.Length} default angles are configured.");
+                }
+
+                AngleSpec[] defaults = new AngleSpec[SheetRows];
+                Array.Copy(Angles, defaults, SheetRows);
+                return defaults;
+            }
+
+            if (SheetAngleLabels.Length != SheetRows)
+            {
+                throw new InvalidOperationException($"{Name} declares {SheetRows} sheet rows but {SheetAngleLabels.Length} sheet angle labels.");
+            }
+
+            AngleSpec[] resolved = new AngleSpec[SheetRows];
+            for (int i = 0; i < SheetAngleLabels.Length; i++)
+            {
+                resolved[i] = ResolveSheetAngle(SheetAngleLabels[i]);
+            }
+
+            return resolved;
+        }
+
+        private static AngleSpec ResolveSheetAngle(string label)
+        {
+            for (int i = 0; i < Angles.Length; i++)
+            {
+                if (string.Equals(Angles[i].Label, label, StringComparison.OrdinalIgnoreCase))
+                {
+                    return Angles[i];
+                }
+            }
+
+            throw new InvalidOperationException($"Unsupported sheet angle label '{label}'.");
         }
     }
 
